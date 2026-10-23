@@ -1,0 +1,29 @@
+# Optional journald-logged deploy path. The instance name is the full commit SHA:
+#   sudo systemctl start homelab-deploy@<FULL_40_HEX_SHA>.service
+#   journalctl -u 'homelab-deploy@*' -n 100
+# Install: sudo install -m 644 deploy/systemd/homelab-deploy@.service /etc/systemd/system/
+#          set User= below to <vm-user>, then: sudo systemctl daemon-reload
+[Unit]
+Description=Homelab SHA-locked deployment of %i
+Wants=network-online.target
+After=network-online.target k3s.service
+ConditionPathExists=/etc/homelab/deploy.env
+
+[Service]
+Type=oneshot
+User=VM_USER
+Group=VM_USER
+Environment=HOMELAB_DEPLOY_ENV=/etc/homelab/deploy.env
+ExecStart=/opt/homelab/repo/deploy/scripts/deploy-from-github.sh %i
+TimeoutStartSec=20min
+# Hardening: the script only needs its state, releases and the repo.
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/opt/homelab
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
