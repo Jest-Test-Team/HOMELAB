@@ -42,10 +42,12 @@ block="$(mktemp)"
 cfg="$HOME/.ssh/config"
 new="$(mktemp)"
 if [ -f "$cfg" ]; then
-  awk '/^# BEGIN homelab/ {skip=1} !skip {print} /^# END homelab/ {skip=0}' "$cfg" > "$new"
+  # Drop our old block and the blank lines that followed it.
+  awk '/^# BEGIN homelab/ {skip=1; next} /^# END homelab/ {skip=0; lead=1; next}
+       skip {next} lead && /^[[:space:]]*$/ {next} {lead=0; print}' "$cfg" > "$new"
 fi
 # Host blocks above ours could shadow it; ours goes first.
-{ cat "$block"; echo; cat "$new"; } > "$new.full"
+{ cat "$block"; if [ -s "$new" ]; then echo; cat "$new"; fi; } > "$new.full"
 rm -f "$new" "$block"
 if [ -f "$cfg" ] && cmp -s "$cfg" "$new.full"; then
   pass "$cfg already up to date"; rm -f "$new.full"

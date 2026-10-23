@@ -781,7 +781,7 @@ Raw logs are kept locally in `docs/evidence/` (git-ignored by operator choice, s
 | GUEST-01 | **PASS** 2026-10-23T12:14Z (VM) | aarch64, 4 vCPU, 5382 MiB visible (6144 MiB configured), `vda` 80 GiB after host resize; root LV grown to 76 GiB. **Ubuntu 26.10, not 24.04 LTS** (see VM findings) |
 | NET-01 | **PASS** 2026-10-23T12:12Z (VM) | GitHub DNS + TLS, ghcr.io reachable; UTM Shared mode, DHCP 192.168.64.4 |
 | SSH-01 | BLOCKED | needs Bridged mode; otherwise N/A (report separately from SSH-02) |
-| SSH-02 | BLOCKED | Tailscale installed in the VM (1.104.2) but the operator has not approved the login yet; Mac Tailscale app stopped. Key login works today over Shared-mode 192.168.64.4 |
+| SSH-02 | **PASS** 2026-10-23T13:21Z | `ssh utm-homelab` over Tailscale 100.75.144.61 (via DERP hkg, no direct path yet). Host key checked equal to the one already trusted on 192.168.64.4 before adding it. Deploy dry run over Tailscale passed |
 | SSH-03 | BLOCKED / UNVERIFIED | must be tested from a different network (`docs/access.md`, WAN acceptance) |
 | SSH-04 | BLOCKED | key login verified; `14-guest-harden-ssh.sh --yes` needs the operator at the UTM console |
 | GIT-01 | **PASS** 2026-10-23T12:17Z (VM), **changed method** | the org has deploy keys disabled (`deploy_keys_enabled_for_repositories: false`), so `/opt/homelab/repo` is an anonymous read-only HTTPS clone of the public repo (`20-guest-github-identity.sh --https`). No credential stored |
@@ -824,11 +824,11 @@ Raw logs are kept locally in `docs/evidence/` (git-ignored by operator choice, s
 10. **AppArmor (Ubuntu 26.10):** with `allowPrivilegeEscalation: false`, the kernel stacks containerd's profile with the parent's (`cri-containerd.apparmor.d//&unconfined`). The stock profile only allows signals to `peer=cri-containerd.apparmor.d`, so processes in one container could not signal each other: PostgreSQL hung forever (SIGURG latch wakeups denied), Go binaries such as `gosu` spun at 100% CPU. Fixed by `deploy/apparmor/cri-containerd.apparmor.d` (containerd's template plus one peer rule), installed by `21-guest-k3s.sh` before k3s; confinement stays in enforce mode.
 11. **k3s kubectl ignored `~/.kube/config`** and read the root-only `/etc/rancher/k3s/k3s.yaml`. `21-guest-k3s.sh` now exports `KUBECONFIG` at the top of `~/.bashrc`, and `deploy.env` sets `KUBECTL="kubectl --kubeconfig=…"`.
 12. **First deploy with `--migrate` could not work:** backup and the migrate Job ran before anything was applied, so `postgres-0` did not exist. `deploy-from-github.sh` now, when no postgres StatefulSet exists, skips the backup and applies everything except the app Deployments, waits for the databases, then migrates. The interrupted first init (defect 10) had left no `homelab` database; it was created with the entrypoint's own `CREATE DATABASE`.
-13. `local_migrate` script bugs found on the real host/VM: qcow2 size read from the child file node (4 GiB instead of 64), `growpart` given the partition instead of the disk, growpart failures hidden.
+13. `local_migrate` script bugs found on the real host/VM: qcow2 size read from the child file node (4 GiB instead of 64), `growpart` given the partition instead of the disk, growpart failures hidden, and `13-devmac-ssh-config.sh` adding a blank line to `~/.ssh/config` on every run.
 
 ### VM findings (2026-10-23, first real VM run)
 
-- **The guest is Ubuntu 26.10 (kernel 7.3, AppArmor 6.0 alpha), not 24.04 LTS.** Everything below was fixed for it, but 26.10 is supported for 9 months only. Reinstalling 24.04 LTS is the conservative option; the `local_migrate` scripts make the guest steps repeatable.
+- **The guest is Ubuntu 26.10 (kernel 7.3, AppArmor 6.0 alpha), not 24.04 LTS.** Operator decision 2026-10-23: **stay on 26.10.** It is supported for about 9 months, so plan an upgrade to the next release (or a 24.04/26.04 LTS rebuild with the `local_migrate` scripts) before end of support, and recheck the AppArmor fix after each kernel or containerd upgrade.
 - **Guest disk vanished once (2026-10-23T12:26:34Z).** Every virtio write and then read failed, ext4 aborted its journal and remounted read-only. On the host no process had the qcow2 open any more, while `/Volumes/HOMELAB` stayed mounted and writable, and the macOS log shows no USB or APFS error. Root cause unknown. Recovery: force-stop, `qemu-img check` (clean), APFS clone, boot; journal replay left the root fs clean. Watch for recurrence with `preflight-guest.sh` (kernel I/O errors) and `preflight-host.sh`.
 - **USB write throughput ~32 MB/s** (2 GiB io-test with the VM running); fsync'd 4 KiB writes in the guest ~4 ms each.
 - Backups go to `/opt/homelab/backups` for now: same physical HDD, not failure protection.
@@ -837,10 +837,10 @@ Raw logs are kept locally in `docs/evidence/` (git-ignored by operator choice, s
 
 Done 2026-10-23: P0 host (power, io-test, 80 GiB disk, utmctl), guest bootstrap, P2 (HTTPS), P3 k3s + Secrets, P5 first deploy, BOOT-01.
 
-1. The first-deploy fix is pushed (`a44a73c`) and `/opt/homelab/repo` is fast-forwarded to it. Still to commit and push: `deploy/apparmor/`, the AppArmor step in `21-guest-k3s.sh`, and these docs; then `git -C /opt/homelab/repo pull --ff-only` in the VM.
-2. Approve the VM's Tailscale login, start Tailscale on the Mac, then `13-devmac-ssh-config.sh --user dennis --host <tailscale-ip> --yes` (SSH-02).
+1. Pushed through `f865771`; `/opt/homelab/repo` is fast-forwarded to it. Commit the `13-devmac-ssh-config.sh` fix.
+2. Done: Tailscale approved, SSH-02 passes.
 3. With the UTM console logged in: `14-guest-harden-ssh.sh --yes`, then `15-devmac-verify-ssh.sh` (SSH-04); later `--wan` off-LAN (SSH-03).
-4. Decide: stay on Ubuntu 26.10 or reinstall 24.04 LTS (VM findings).
+4. Done: staying on Ubuntu 26.10 (VM findings); calendar the end-of-support upgrade.
 5. Off-device `BACKUP_DIR`; DEPLOY-02 rollback on the VM; HOST-01; SEC-01.
 
 ### Remaining risks
