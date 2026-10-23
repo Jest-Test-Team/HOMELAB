@@ -42,8 +42,11 @@ ruleset() {
 # Managed by 23-guest-nodeport-firewall.sh. Accept-policy table: it only drops
 # the dashboard NodePort on interfaces other than ${TS_IFACE}.
 table inet homelab_mgmt {
-  chain input {
-    type filter hook input priority filter; policy accept;
+  # prerouting at raw priority runs BEFORE conntrack/DNAT, so NodePort packets
+  # (which kube-proxy DNATs and forwards, never delivering them to INPUT) are
+  # still matchable by their original dport here.
+  chain prerouting {
+    type filter hook prerouting priority raw; policy accept;
     iifname "${TS_IFACE}" tcp dport ${NODEPORT} accept
     iifname "lo" tcp dport ${NODEPORT} accept
     tcp dport ${NODEPORT} drop

@@ -794,8 +794,8 @@ Raw logs are kept locally in `docs/evidence/` (git-ignored by operator choice, s
 | DATA-01 | **PASS** VM (Ubuntu 26.10, kernel 7.3, k3s v1.36.5) 2026-10-23 | row survived `postgres-0` restart (`smoke-test.sh --persistence`) |
 | DATA-02 | **PASS** VM (Ubuntu 26.10, kernel 7.3, k3s v1.36.5) 2026-10-23 | AOF key survived `redis-0` restart |
 | NETPOL | **PASS** VM (Ubuntu 26.10, kernel 7.3, k3s v1.36.5) 2026-10-23 | non-client pod denied to postgres, db-client allowed |
-| DASH-01 | BUILT, not yet deployed | `crates/dashboard` (kube-rs, read-only SA) + Next.js static export; `cargo clippy`/tests green, frontend builds, kustomize renders 25 objects. Deploy with the next release; reach it at `http://<tailscale-ip>:30300` |
-| DASH-02 | BUILT | NodePort 30300 restricted to `tailscale0` by `23-guest-nodeport-firewall.sh`; verify `curl 192.168.64.4:30300` is refused |
+| DASH-01 | **RUNNING** 2026-10-23T14:39Z (VM) | `crates/dashboard` pod Ready; `/api/status` returns real data (1 node, all 6 workloads 1/1, PVCs Bound, api/mcp health 200, no RBAC errors); frontend served at `http://100.75.144.61:30300`. Image built locally and imported into k3s (`homelab-dashboard:local`, imagePullPolicy Never) pending the first CI/GHCR build |
+| DASH-02 | **PASS** 2026-10-23T14:41Z (VM) | NodePort 30300: 200 via Tailscale (100.75.144.61), HTTP 000 (blocked) via the Shared NIC (192.168.64.4). nftables prerouting-raw rule (NodePort packets are DNAT-forwarded, so they are dropped before DNAT, not in INPUT) |
 | LAB-01 | SCRIPTED | isolated lab net + Kali VM on the external drive (`lab/scripts`, `lab/terraform`); needs the Kali arm64 ISO |
 | LAB-02 | SCRIPTED | guest config via `lab/ansible` (static lab IPs, nftables, tools); macOS pf anchor (`lab/macos`) |
 | LAB-03 | GATE | `verify-lab-isolation.sh`: Kali reaches only 30080/30081, nothing else (LAN/Mac/Tailscale/internet blocked). Must pass before testing |
