@@ -54,8 +54,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - run: shellcheck -x deploy/scripts/*.sh
-      - run: bash -n deploy/scripts/*.sh
+      - run: shellcheck -x deploy/scripts/*.sh deploy/scripts/local_migrate/*.sh lab/scripts/*.sh lab/macos/*.sh lab/tests/*.sh
+      - run: bash -n deploy/scripts/*.sh deploy/scripts/local_migrate/*.sh lab/scripts/*.sh lab/macos/*.sh lab/tests/*.sh
 
   manifests:
     runs-on: ubuntu-24.04
@@ -70,3 +70,44 @@ jobs:
         run: |
           if grep -nE 'image: [^@]+:latest' /tmp/rendered.yaml; then echo "floating :latest tag"; exit 1; fi
           if grep -nE '^\s*(password|token|POSTGRES_PASSWORD|MCP_AUTH_TOKEN):\s*\S' /tmp/rendered.yaml; then echo "literal secret"; exit 1; fi
+
+  frontend:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: "22.20.0"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: npm run lint
+      - run: npm run build
+
+  lab:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Terraform fmt + validate
+        working-directory: lab/terraform
+        run: |
+          terraform fmt -check
+          terraform init -backend=false -input=false
+          terraform validate
+      - name: Ansible syntax + lint (best-effort)
+        working-directory: lab/ansible
+        run: |
+          pipx install ansible-core >/dev/null 2>&1 || pip install --user ansible-core
+          ansible-galaxy collection install -r requirements.yml
+          ansible-playbook site.yml --syntax-check
+          pipx install ansible-lint >/dev/null 2>&1 || pip install --user ansible-lint
+          ansible-lint || true

@@ -1,0 +1,52 @@
+# Read-only status dashboard. Unlike api/mcp/worker it DOES mount a
+# ServiceAccount token (it reads the Kubernetes API); the token is scoped to
+# get/list/watch by dashboard-sa-rbac.yaml.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard
+  labels: {app.kubernetes.io/name: dashboard}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {app.kubernetes.io/name: dashboard}
+  template:
+    metadata:
+      labels: {app.kubernetes.io/name: dashboard}
+    spec:
+      serviceAccountName: homelab-dashboard
+      automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 15
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: dashboard
+          image: homelab-dashboard
+          ports:
+            - {name: http, containerPort: 3000}
+          env:
+            - {name: RUST_LOG, value: info}
+            - {name: BIND_ADDR, value: "0.0.0.0:3000"}
+            - {name: WATCH_NAMESPACE, value: homelab}
+          startupProbe:
+            httpGet: {path: /healthz, port: http}
+            periodSeconds: 2
+            failureThreshold: 15
+          livenessProbe:
+            httpGet: {path: /healthz, port: http}
+            periodSeconds: 10
+          readinessProbe:
+            httpGet: {path: /healthz, port: http}
+            periodSeconds: 10
+          resources:
+            requests: {cpu: 20m, memory: 64Mi}
+            limits: {memory: 192Mi}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]

@@ -1,0 +1,56 @@
+# Read-only identity for the status dashboard. The only workload that talks to
+# the Kubernetes API: get/list/watch, never write. Namespaced Role for the
+# homelab objects, plus a minimal cluster-scoped read for Nodes.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: homelab-dashboard
+automountServiceAccountToken: false
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: homelab-dashboard-read
+rules:
+  - apiGroups: [""]
+    resources: [pods, services, persistentvolumeclaims, events, endpoints]
+    verbs: [get, list, watch]
+  - apiGroups: [apps]
+    resources: [deployments, statefulsets, replicasets]
+    verbs: [get, list, watch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: homelab-dashboard-read
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: homelab-dashboard-read
+subjects:
+  - kind: ServiceAccount
+    name: homelab-dashboard
+    namespace: homelab
+---
+# Nodes are cluster-scoped; this is the one cluster-wide read the dashboard needs.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: homelab-dashboard-nodes-read
+rules:
+  - apiGroups: [""]
+    resources: [nodes]
+    verbs: [get, list]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: homelab-dashboard-nodes-read
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: homelab-dashboard-nodes-read
+subjects:
+  - kind: ServiceAccount
+    name: homelab-dashboard
+    namespace: homelab

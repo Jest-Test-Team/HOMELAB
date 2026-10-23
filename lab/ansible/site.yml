@@ -1,0 +1,15 @@
+---
+# Configure the lab. Run AFTER both VMs exist and have their NICs:
+#   ansible-playbook site.yml
+# Then gate on lab/scripts/verify-lab-isolation.sh (run on the Ubuntu VM).
+- name: Ubuntu lab-side networking and firewall
+  hosts: ubuntu_lab
+  become: true
+  roles:
+    - ubuntu-lab
+
+- name: Kali tools, static lab IP, and egress lockdown
+  hosts: kali
+  become: true
+  roles:
+    - kali

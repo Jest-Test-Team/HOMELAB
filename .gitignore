@@ -24,3 +24,18 @@ docs/evidence/private/
 deploy/k8s/release/
 /docs/evidence
 env.local
+
+# Frontend build output (built in Docker/CI, never committed).
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# Terraform local state / plugins.
+lab/terraform/.terraform/
+lab/terraform/.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+
+# Python bytecode
+__pycache__/
+*.pyc

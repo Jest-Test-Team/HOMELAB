@@ -794,6 +794,12 @@ Raw logs are kept locally in `docs/evidence/` (git-ignored by operator choice, s
 | DATA-01 | **PASS** VM (Ubuntu 26.10, kernel 7.3, k3s v1.36.5) 2026-10-23 | row survived `postgres-0` restart (`smoke-test.sh --persistence`) |
 | DATA-02 | **PASS** VM (Ubuntu 26.10, kernel 7.3, k3s v1.36.5) 2026-10-23 | AOF key survived `redis-0` restart |
 | NETPOL | **PASS** VM (Ubuntu 26.10, kernel 7.3, k3s v1.36.5) 2026-10-23 | non-client pod denied to postgres, db-client allowed |
+| DASH-01 | BUILT, not yet deployed | `crates/dashboard` (kube-rs, read-only SA) + Next.js static export; `cargo clippy`/tests green, frontend builds, kustomize renders 25 objects. Deploy with the next release; reach it at `http://<tailscale-ip>:30300` |
+| DASH-02 | BUILT | NodePort 30300 restricted to `tailscale0` by `23-guest-nodeport-firewall.sh`; verify `curl 192.168.64.4:30300` is refused |
+| LAB-01 | SCRIPTED | isolated lab net + Kali VM on the external drive (`lab/scripts`, `lab/terraform`); needs the Kali arm64 ISO |
+| LAB-02 | SCRIPTED | guest config via `lab/ansible` (static lab IPs, nftables, tools); macOS pf anchor (`lab/macos`) |
+| LAB-03 | GATE | `verify-lab-isolation.sh`: Kali reaches only 30080/30081, nothing else (LAN/Mac/Tailscale/internet blocked). Must pass before testing |
+| LAB-04 | SCRIPTED | Phase-1 tests (`lab/tests`): nmap exposure, k8s segmentation, rate limit, MCP auth, ZAP baseline; evidence to the external drive |
 | DEPLOY-01 | **PASS** 2026-10-23T12:47Z (VM) | `1c9b1ed8a282` deployed with `--migrate`: backup → migrate Job → digest-pinned apply → imageIDs match → smoke `--expect-sha`. Needed the first-deploy data-tier fix (defect 12) |
 | DEPLOY-02 | PASS (local harness) | A → B → `--rollback` → A; broken release C auto-restored to A's exact digests; PVC UIDs unchanged; off-branch / short / malformed SHAs and a concurrent deploy refused |
 | BOOT-01 | **PASS** 2026-10-23T12:50Z (VM) | after `systemctl reboot`: SSH, k3s and all pods back unattended, AppArmor fix still active, smoke test 0 fail. Tailscale part pending login |

@@ -8,6 +8,7 @@
 | k3s API :6443 | guest localhost / node IP only | not forwarded; used via SSH or the guest's `~/.kube/config` |
 | PostgreSQL / Redis | in-cluster, labelled clients only | ClusterIP (headless), NetworkPolicy, passwords from Secrets |
 | API / MCP HTTP | in-cluster (namespace) | ClusterIP, NetworkPolicy; MCP also needs a bearer token |
+| Dashboard HTTP :30300 | tailnet only | NodePort, but a guest nftables rule (`23-guest-nodeport-firewall.sh`) drops it on every interface except `tailscale0`; read-only, no secrets |
 | Router | nothing | **no port forwards**; WAN access is Tailscale only |
 
 SEC-01 (outside-in scan) must be run from a host off the LAN: `nmap -Pn -p 22,5432,6379,6443,80,443 <public IP>` should show everything filtered or closed.
@@ -21,6 +22,7 @@ SEC-01 (outside-in scan) must be run from a host off the LAN: `nmap -Pn -p 22,54
 | GHCR pull PAT (private packages only) | `read:packages` | guest `~/.config/homelab/ghcr.env` (0600) + `ghcr-pull` Secret |
 | CI publish | ephemeral `GITHUB_TOKEN`, `packages: write` in `publish-arm64` only | GitHub |
 | App secrets | DB/Redis passwords, MCP token | guest `/etc/homelab/secrets/*.env` (root 0600) → K8s Secrets |
+| Dashboard ServiceAccount | **read-only** (`get/list/watch`) on namespace objects + nodes | `homelab-dashboard` SA, scoped Role/ClusterRole (`dashboard-sa-rbac.yaml`) |
 
 The deploy key and the login key are different keys. None of the above is committed. `.gitignore` blocks common key, kubeconfig and `.env` names. The CI `manifests` job fails on literal secrets or `:latest` images.
 
@@ -41,6 +43,19 @@ The deploy key and the login key are different keys. None of the above is commit
 - NetworkPolicy: default-deny ingress, plus PostgreSQL/Redis only from labelled clients and HTTP only from within the namespace. Enforcement comes from k3s's embedded kube-router controller. `smoke-test.sh` proves a deny on every run. Egress is unrestricted in v1.
 - The MCP server refuses to start with a token shorter than 32 bytes, compares tokens in constant time, and validates `Host` against an allowlist.
 - Logs are JSON. HTTP spans record the path only (no query strings). Database URLs are logged with passwords redacted. Tokens are never logged.
+
+## Attack lab (lab/)
+
+The optional Kali lab is a **separate, isolated L2 segment** (`10.66.6.0/24`,
+static, no gateway). Kali reaches only the authorized test surface on the Ubuntu
+lab IP (`api` 30080, `mcp` 30081) and nothing else — not the home LAN, the macOS
+host, Tailscale, or the internet. Three enforcement layers: Ubuntu nftables (lab
+ingress allowlist + no forwarding to management), Kali nftables (default-drop
+egress to the target only), and a macOS pf anchor. `verify-lab-isolation.sh` is
+the acceptance gate and must pass before any testing; the `api-mcp-lab`
+NodePorts and their NetworkPolicy are opt-in (`lab/k8s/`), applied only while
+the lab runs. Deliberately vulnerable targets are out of scope until isolation
+is proven. See `lab/README.md` and `lab/ROE.md`.
 
 ## Accepted risks / known gaps
 

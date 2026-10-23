@@ -1,0 +1,10 @@
+---
+- name: apply netplan
+  ansible.builtin.command: netplan apply
+  changed_when: true
+
+- name: reload lab nftables
+  ansible.builtin.systemd:
+    name: homelab-lab-fw.service
+    state: reloaded
+    daemon_reload: true

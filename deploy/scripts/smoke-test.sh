@@ -77,7 +77,7 @@ if "${KC[@]}" get nodes --no-headers 2>/dev/null | awk '$2=="Ready"' | grep -q .
 else
   fail "K3S-01 no Ready node"
 fi
-for d in deploy/api deploy/mcp deploy/worker sts/postgres sts/redis; do
+for d in deploy/api deploy/mcp deploy/worker deploy/dashboard sts/postgres sts/redis; do
   if k rollout status "$d" --timeout=120s >/dev/null 2>&1; then pass "rollout $d"; else fail "rollout $d not complete"; fi
 done
 bound="$(k get pvc -o json | jq -r '[.items[] | select(.status.phase=="Bound")] | length')"

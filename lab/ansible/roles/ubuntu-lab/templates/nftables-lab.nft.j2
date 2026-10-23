@@ -1,0 +1,18 @@
+# Managed by lab/ansible (ubuntu-lab). Confines the lab interface ({{ lab_if }}).
+# Input policy stays accept (management NIC untouched); this table DROPS all lab
+# ingress except the authorized test ports from Kali, and drops any forwarding
+# between the lab and the rest of the host.
+table inet homelab_lab {
+  chain input {
+    type filter hook input priority filter; policy accept;
+    iifname "{{ lab_if }}" ct state established,related accept
+    iifname "{{ lab_if }}" ip saddr {{ lab_kali_ip }} tcp dport { {{ api_lab_port }}, {{ mcp_lab_port }} } accept
+    iifname "{{ lab_if }}" ip protocol icmp accept
+    iifname "{{ lab_if }}" drop
+  }
+  chain forward {
+    type filter hook forward priority filter; policy accept;
+    iifname "{{ lab_if }}" drop
+    oifname "{{ lab_if }}" drop
+  }
+}
