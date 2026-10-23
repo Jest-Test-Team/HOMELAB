@@ -33,6 +33,8 @@ See `docs/access.md`. Summary: key installed → test key login → Tailscale on
 
 ## P2: GitHub pull identity (guest)
 
+If the organization has deploy keys disabled, use the public repo over anonymous HTTPS instead: `local_migrate/20-guest-github-identity.sh --https --backup-dir DIR --yes` (sets `ALLOWED_REMOTE=https://github.com/<OWNER>/<REPO>.git`). The steps below are the deploy-key path.
+
 ```bash
 ssh-keygen -t ed25519 -a 100 -f ~/.ssh/github_homelab_ro -C 'utm-homelab-repo-readonly' -N ''
 cat ~/.ssh/github_homelab_ro.pub     # operator adds as a READ-ONLY deploy key
@@ -79,6 +81,8 @@ install -m 600 /dev/null ~/.config/homelab/ghcr.env
 ```
 
 ## P3: k3s (guest)
+
+Ubuntu 26.10 note: install `deploy/apparmor/cri-containerd.apparmor.d` into `/etc/apparmor.d/` **before** k3s (`local_migrate/21-guest-k3s.sh` does this), otherwise PostgreSQL hangs; and export `KUBECONFIG=~/.kube/config`, because k3s's kubectl otherwise reads the root-only `/etc/rancher/k3s/k3s.yaml`. See `implementation.md` §14, defects 10 and 11.
 
 ```bash
 ./deploy/scripts/preflight-guest.sh --k3s

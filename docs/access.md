@@ -8,17 +8,17 @@ Fill these in from read-only commands. Do not guess. Tailscale `100.x` addresses
 
 | Item | Value | Source command |
 |---|---|---|
-| VM login user (`<vm-user>`) | _TBD_ | `id -un` (guest) |
+| VM login user (`<vm-user>`) | `dennis` (hostname `home-lab`) | `id -un` (guest) |
 | UTM network mode | Shared (QEMU backend, virtio-net, MAC ce:5a:f7:93:93:16) | UTM → VM settings → Network |
 | VM LAN IPv4 (Bridged only) | _TBD_ / N/A | `ip -4 -br addr` (guest); DHCP reservation on router |
-| VM Shared-mode IPv4 | 192.168.64.5 (DHCP lease from the host, 2026-10-23) | `ip -4 -br addr` (guest) |
+| VM Shared-mode IPv4 | 192.168.64.4 (DHCP; was .5 on one boot, so not stable) | `ip -4 -br addr` (guest) |
 | Tailscale hostname | `utm-homelab` | `tailscale status` |
 | Tailscale IPv4 / MagicDNS | _TBD_ | `tailscale ip -4` (guest) |
 | Dev Mac SSH key | `~/.ssh/homelab_utm_ed25519` | `ssh-keygen -lf ~/.ssh/homelab_utm_ed25519.pub` |
-| Key fingerprint | _TBD_ | as above |
+| Key fingerprint | `SHA256:Llp6O7Om0PjPMM07ctg1VT0ka7ejFf3Q8JlUgN+XaA8` (no passphrase yet: add one with `ssh-keygen -p`) | as above |
 | GitHub repo | `Jest-Test-Team/HOMELAB` (public) | `git remote -v` on the dev Mac, as configured by the operator |
 | Container registry | `ghcr.io/jest-test-team/homelab-{api,mcp,worker}` (public, anonymous pull verified 2026-10-23) | `publish-arm64` runs |
-| VM deploy key fingerprint | _TBD_ | `ssh-keygen -lf ~/.ssh/github_homelab_ro.pub` (guest) |
+| VM deploy key fingerprint | N/A: org has deploy keys disabled; VM pulls anonymously over HTTPS (unused key `SHA256:z/3wqii0Gvog/5RFo+n4ZCZqt/9aDz8y0OgiMptKleI` left in the guest) | `ssh-keygen -lf ~/.ssh/github_homelab_ro.pub` (guest) |
 
 ## Paths
 

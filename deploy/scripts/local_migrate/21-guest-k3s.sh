@@ -26,6 +26,26 @@ S="$SCRIPTS_DIR"; [ -x /opt/homelab/repo/deploy/scripts/install-k3s.sh ] && S=/o
 
 "$S/preflight-guest.sh" --k3s || true
 
+# AppArmor: on kernels that stack the container profile (Ubuntu 26.10), the
+# stock containerd profile blocks signals between processes in one container,
+# which hangs PostgreSQL. Load the fixed profile before k3s creates containers.
+# Details in deploy/apparmor/cri-containerd.apparmor.d.
+AA_SRC="$REPO_ROOT/deploy/apparmor/cri-containerd.apparmor.d"
+[ -f /opt/homelab/repo/deploy/apparmor/cri-containerd.apparmor.d ] && AA_SRC=/opt/homelab/repo/deploy/apparmor/cri-containerd.apparmor.d
+AA_DST=/etc/apparmor.d/cri-containerd.apparmor.d
+if [ ! -d /sys/kernel/security/apparmor ]; then
+  info "AppArmor not enabled; skipping the containerd profile"
+elif sudo cmp -s "$AA_SRC" "$AA_DST"; then
+  pass "AppArmor profile $AA_DST installed"
+elif [ "$YES" -eq 1 ]; then
+  sudo apparmor_parser -Q -K "$AA_SRC" || die "AppArmor profile $AA_SRC does not parse"
+  sudo install -m 644 -o root -g root "$AA_SRC" "$AA_DST"
+  sudo apparmor_parser -r -W "$AA_DST"
+  pass "AppArmor profile $AA_DST installed and loaded (running containers updated)"
+else
+  info "would install AppArmor profile $AA_DST (rerun with --yes)"
+fi
+
 if systemctl is-active --quiet k3s 2>/dev/null; then
   pass "k3s already running: $(k3s --version | head -1)"
 elif [ "$YES" -eq 1 ]; then

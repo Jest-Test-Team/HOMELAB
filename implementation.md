@@ -778,25 +778,25 @@ Raw logs are kept locally in `docs/evidence/` (git-ignored by operator choice, s
 | STOR-01 | **PASS** 2026-10-23T07:50Z (host) | `/Volumes/HOMELAB` mounted, APFS, Protocol USB, Device Location External; 931 GiB, 924 GiB free. Host: Apple M1, 16 GB, macOS 26.5.2 |
 | STOR-02 | **PASS** 2026-10-23T07:50Z (host) | 1 bundle under `/Volumes/HOMELAB/VMs/`. Disk `A78D7532-….qcow2`, 4.2 GB allocated; virtual size not yet known (first run misread qcow2, fixed) |
 | STOR-03 | **PASS** 2026-10-23T11:54Z (host) | `--io-test 2048`: checksum stable across re-read; write+hash 64 s (~32 MB/s, VM running), re-read 67 s. No kernel/disk-arbitration storage errors in 2h. USB link speed not detected. SMART: UNKNOWN (USB-SATA bridge) |
-| GUEST-01 | BLOCKED | `deploy/scripts/preflight-guest.sh` in the VM |
-| NET-01 | BLOCKED | `preflight-guest.sh` |
+| GUEST-01 | **PASS** 2026-10-23T12:14Z (VM) | aarch64, 4 vCPU, 5382 MiB visible (6144 MiB configured), `vda` 80 GiB after host resize; root LV grown to 76 GiB. **Ubuntu 26.10, not 24.04 LTS** (see VM findings) |
+| NET-01 | **PASS** 2026-10-23T12:12Z (VM) | GitHub DNS + TLS, ghcr.io reachable; UTM Shared mode, DHCP 192.168.64.4 |
 | SSH-01 | BLOCKED | needs Bridged mode; otherwise N/A (report separately from SSH-02) |
-| SSH-02 | BLOCKED | `docs/access.md` §5 |
+| SSH-02 | BLOCKED | Tailscale installed in the VM (1.104.2) but the operator has not approved the login yet; Mac Tailscale app stopped. Key login works today over Shared-mode 192.168.64.4 |
 | SSH-03 | BLOCKED / UNVERIFIED | must be tested from a different network (`docs/access.md`, WAN acceptance) |
-| SSH-04 | BLOCKED | `configure-ssh.sh apply` then the denied-login checks in `docs/access.md` |
-| GIT-01 | BLOCKED | read-only deploy key (`docs/runbook.md` P2); operator must add the key on GitHub |
+| SSH-04 | BLOCKED | key login verified; `14-guest-harden-ssh.sh --yes` needs the operator at the UTM console |
+| GIT-01 | **PASS** 2026-10-23T12:17Z (VM), **changed method** | the org has deploy keys disabled (`deploy_keys_enabled_for_repositories: false`), so `/opt/homelab/repo` is an anonymous read-only HTTPS clone of the public repo (`20-guest-github-identity.sh --https`). No credential stored |
 | CI-01 | **PASS** 2026-10-23T07:25Z | Actions: `ci` success on `90b2d02` and `a3f073a`; `publish-arm64` success, `skipped` when `ci` was cancelled (gate works). `sha-a3f073aed8c3…` digests: api `sha256:31617f08…af8f`, mcp `sha256:b05eabc2…9627`, worker `sha256:407aa824…a68a`; index contains `linux/arm64` + attestations |
-| K3S-01 | PASS (local k3s) / BLOCKED (VM) | Ready node on k3s v1.36.5 in Docker; VM: `install-k3s.sh` |
-| K3S-02 | PASS (local k3s) / BLOCKED (VM) | `postgres-data` 10Gi + `redis-data` 2Gi Bound on local-path |
-| APP-01 | PASS (local k3s) | `/health/ready` 200 `{"postgres":"ok","redis":"ok"}` |
-| APP-02 | PASS (local k3s + tests) | MCP 401 without token; `echo` tool via bearer token; Host allowlist rejects foreign Host (test) |
-| APP-03 | PASS (local k3s + tests) | idempotent enqueue, processed once; crashed-worker lease recovery (`worker_pg.rs`) |
-| DATA-01 | PASS (local k3s) | marker row survived `postgres-0` restart |
-| DATA-02 | PASS (local k3s) | AOF key survived `redis-0` restart |
-| NETPOL | PASS (local k3s) | non-client pod denied to `postgres:5432`, labelled client allowed |
-| DEPLOY-01 | PASS (local harness) | SHA A deployed with `--migrate`: backup → migrate Job → digest-pinned apply → pods' imageIDs match → smoke `--expect-sha` |
+| K3S-01 | **PASS** VM (Ubuntu 26.10, kernel 7.3, k3s v1.36.5) 2026-10-23 | node `home-lab` Ready; secrets encryption at rest enabled (AES-CBC) before any app Secret existed |
+| K3S-02 | **PASS** VM (Ubuntu 26.10, kernel 7.3, k3s v1.36.5) 2026-10-23 | `postgres-data` 10Gi + `redis-data` 2Gi Bound on local-path |
+| APP-01 | **PASS** VM (Ubuntu 26.10, kernel 7.3, k3s v1.36.5) 2026-10-23 | `/health/ready` 200 `{"postgres":"ok","redis":"ok"}` |
+| APP-02 | **PASS** VM (Ubuntu 26.10, kernel 7.3, k3s v1.36.5) 2026-10-23 | MCP 401 without token; authorised tool call succeeded |
+| APP-03 | **PASS** VM (Ubuntu 26.10, kernel 7.3, k3s v1.36.5) 2026-10-23 | idempotent enqueue, worker processed job |
+| DATA-01 | **PASS** VM (Ubuntu 26.10, kernel 7.3, k3s v1.36.5) 2026-10-23 | row survived `postgres-0` restart (`smoke-test.sh --persistence`) |
+| DATA-02 | **PASS** VM (Ubuntu 26.10, kernel 7.3, k3s v1.36.5) 2026-10-23 | AOF key survived `redis-0` restart |
+| NETPOL | **PASS** VM (Ubuntu 26.10, kernel 7.3, k3s v1.36.5) 2026-10-23 | non-client pod denied to postgres, db-client allowed |
+| DEPLOY-01 | **PASS** 2026-10-23T12:47Z (VM) | `1c9b1ed8a282` deployed with `--migrate`: backup → migrate Job → digest-pinned apply → imageIDs match → smoke `--expect-sha`. Needed the first-deploy data-tier fix (defect 12) |
 | DEPLOY-02 | PASS (local harness) | A → B → `--rollback` → A; broken release C auto-restored to A's exact digests; PVC UIDs unchanged; off-branch / short / malformed SHAs and a concurrent deploy refused |
-| BOOT-01 | BLOCKED | reboot the VM, then `preflight-guest.sh --k3s` + `smoke-test.sh` |
+| BOOT-01 | **PASS** 2026-10-23T12:50Z (VM) | after `systemctl reboot`: SSH, k3s and all pods back unattended, AppArmor fix still active, smoke test 0 fail. Tailscale part pending login |
 | HOST-01 | BLOCKED | `docs/runbook.md`, Host restart |
 | SEC-01 | BLOCKED | outside-in `nmap` from off-LAN (`docs/security.md`) |
 | Rust quality | PASS 2026-10-23 | `cargo fmt --check`, `clippy -D warnings`, 31 tests incl. real PostgreSQL/Redis |
@@ -821,13 +821,27 @@ Raw logs are kept locally in `docs/evidence/` (git-ignored by operator choice, s
 9. `preflight-host.sh` (from the first real host run): read qcow2 apparent size as capacity; matched any 480 Mb/s USB device instead of the dock; flagged app-level SQLite "disk I/O error" lines as storage faults. Now: qcow2 header parse, per-disk USB speed via the APFS physical store, kernel/diskarbitrationd-only log filter, plus UTM backend/CPU/memory and AC-power checks.
 8. The runbook's first secrets procedure could not work as written (unprivileged `cd` into a root-only 0700 dir). Rewritten, and executed against a temp dir.
 
+10. **AppArmor (Ubuntu 26.10):** with `allowPrivilegeEscalation: false`, the kernel stacks containerd's profile with the parent's (`cri-containerd.apparmor.d//&unconfined`). The stock profile only allows signals to `peer=cri-containerd.apparmor.d`, so processes in one container could not signal each other: PostgreSQL hung forever (SIGURG latch wakeups denied), Go binaries such as `gosu` spun at 100% CPU. Fixed by `deploy/apparmor/cri-containerd.apparmor.d` (containerd's template plus one peer rule), installed by `21-guest-k3s.sh` before k3s; confinement stays in enforce mode.
+11. **k3s kubectl ignored `~/.kube/config`** and read the root-only `/etc/rancher/k3s/k3s.yaml`. `21-guest-k3s.sh` now exports `KUBECONFIG` at the top of `~/.bashrc`, and `deploy.env` sets `KUBECTL="kubectl --kubeconfig=…"`.
+12. **First deploy with `--migrate` could not work:** backup and the migrate Job ran before anything was applied, so `postgres-0` did not exist. `deploy-from-github.sh` now, when no postgres StatefulSet exists, skips the backup and applies everything except the app Deployments, waits for the databases, then migrates. The interrupted first init (defect 10) had left no `homelab` database; it was created with the entrypoint's own `CREATE DATABASE`.
+13. `local_migrate` script bugs found on the real host/VM: qcow2 size read from the child file node (4 GiB instead of 64), `growpart` given the partition instead of the disk, growpart failures hidden.
+
+### VM findings (2026-10-23, first real VM run)
+
+- **The guest is Ubuntu 26.10 (kernel 7.3, AppArmor 6.0 alpha), not 24.04 LTS.** Everything below was fixed for it, but 26.10 is supported for 9 months only. Reinstalling 24.04 LTS is the conservative option; the `local_migrate` scripts make the guest steps repeatable.
+- **Guest disk vanished once (2026-10-23T12:26:34Z).** Every virtio write and then read failed, ext4 aborted its journal and remounted read-only. On the host no process had the qcow2 open any more, while `/Volumes/HOMELAB` stayed mounted and writable, and the macOS log shows no USB or APFS error. Root cause unknown. Recovery: force-stop, `qemu-img check` (clean), APFS clone, boot; journal replay left the root fs clean. Watch for recurrence with `preflight-guest.sh` (kernel I/O errors) and `preflight-host.sh`.
+- **USB write throughput ~32 MB/s** (2 GiB io-test with the VM running); fsync'd 4 KiB writes in the guest ~4 ms each.
+- Backups go to `/opt/homelab/backups` for now: same physical HDD, not failure protection.
+
 ### Operator next steps (in order)
 
-1. On the M1 Pro host: `preflight-host.sh` (+ `--io-test`), then move the bundle into `VMs/` if needed (P0).
-2. In the VM: `preflight-guest.sh`, then keys, Tailscale and `configure-ssh.sh` per `docs/access.md` (P1). Record values in `docs/access.md`.
-3. Add the VM's read-only deploy key on GitHub; clone to `/opt/homelab/repo`; create `/etc/homelab/deploy.env` (P2).
-4. `install-k3s.sh --version v1.36.5+k3s1 --yes`; create the Secrets (P3, runbook).
-5. `deploy-from-github.sh --migrate <SHA>` with a SHA whose `publish-arm64` run succeeded (P5), then `smoke-test.sh --persistence` and the BLOCKED gates above (P6).
+Done 2026-10-23: P0 host (power, io-test, 80 GiB disk, utmctl), guest bootstrap, P2 (HTTPS), P3 k3s + Secrets, P5 first deploy, BOOT-01.
+
+1. The first-deploy fix is pushed (`a44a73c`) and `/opt/homelab/repo` is fast-forwarded to it. Still to commit and push: `deploy/apparmor/`, the AppArmor step in `21-guest-k3s.sh`, and these docs; then `git -C /opt/homelab/repo pull --ff-only` in the VM.
+2. Approve the VM's Tailscale login, start Tailscale on the Mac, then `13-devmac-ssh-config.sh --user dennis --host <tailscale-ip> --yes` (SSH-02).
+3. With the UTM console logged in: `14-guest-harden-ssh.sh --yes`, then `15-devmac-verify-ssh.sh` (SSH-04); later `--wan` off-LAN (SSH-03).
+4. Decide: stay on Ubuntu 26.10 or reinstall 24.04 LTS (VM findings).
+5. Off-device `BACKUP_DIR`; DEPLOY-02 rollback on the VM; HOST-01; SEC-01.
 
 ### Remaining risks
 
