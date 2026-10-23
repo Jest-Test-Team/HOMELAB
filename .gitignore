@@ -23,3 +23,4 @@ docs/evidence/private/
 # Generated per deploy by deploy-from-github.sh.
 deploy/k8s/release/
 /docs/evidence
+env.local
