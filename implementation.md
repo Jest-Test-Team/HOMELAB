@@ -775,9 +775,9 @@ Raw logs are kept locally in `docs/evidence/` (git-ignored by operator choice, s
 
 | ID | Status | Evidence / next step |
 |---|---|---|
-| STOR-01 | BLOCKED | run `deploy/scripts/preflight-host.sh` on the M1 Pro host |
-| STOR-02 | BLOCKED | same script (bundle location + virtual disk size) |
-| STOR-03 | BLOCKED | `preflight-host.sh --io-test 2048`; SMART recorded as UNKNOWN |
+| STOR-01 | **PASS** 2026-10-23T07:50Z (host) | `/Volumes/HOMELAB` mounted, APFS, Protocol USB, Device Location External; 931 GiB, 924 GiB free. Host: Apple M1, 16 GB, macOS 26.5.2 |
+| STOR-02 | **PASS** 2026-10-23T07:50Z (host) | 1 bundle under `/Volumes/HOMELAB/VMs/`. Disk `A78D7532-….qcow2`, 4.2 GB allocated; virtual size not yet known (first run misread qcow2, fixed) |
+| STOR-03 | RERUN NEEDED | first run: FAIL was a false positive (`com.apple.geod` SQLite messages); USB-2 warning was not specific to the dock. Both checks fixed; rerun `preflight-host.sh --io-test 2048`. SMART: UNKNOWN |
 | GUEST-01 | BLOCKED | `deploy/scripts/preflight-guest.sh` in the VM |
 | NET-01 | BLOCKED | `preflight-guest.sh` |
 | SSH-01 | BLOCKED | needs Bridged mode; otherwise N/A (report separately from SSH-02) |
@@ -802,6 +802,13 @@ Raw logs are kept locally in `docs/evidence/` (git-ignored by operator choice, s
 | Rust quality | PASS 2026-10-23 | `cargo fmt --check`, `clippy -D warnings`, 31 tests incl. real PostgreSQL/Redis |
 | Scripts / workflows | PASS | `shellcheck -x` clean; `actionlint` clean |
 
+### Host findings (operator run of preflight-host.sh, 2026-10-23T07:50Z)
+
+- **The VM disk is qcow2, so the VM almost certainly uses UTM's QEMU backend, not Apple Virtualization** (which uses raw `.img`). The plan assumes Apple Virtualization (§0, §4.1). QEMU works for the plan, but UTM's Bridged/Shared network options differ by backend; the rerun prints `Backend` from `config.plist`.
+- **4.2 GB allocated** in the VM disk suggests Ubuntu may not be installed yet, or is a minimal install. Confirm at the console (`cat /etc/os-release`).
+- **Host power settings are unsuitable for an always-on VM:** on AC power `sleep 1`, `disksleep 10`, `lowpowermode 1`. Operator action: `sudo pmset -c sleep 0 disksleep 0 lowpowermode 0` (display sleep can stay).
+- **`utmctl` returned OSStatus -1743:** the terminal app lacks Automation permission for UTM (System Settings > Privacy & Security > Automation), or it was run over SSH.
+
 ### Defects found and fixed while verifying
 
 1. `smoke-test.sh` leaked `kubectl port-forward` processes (subshell PID capture, plus `$!` of a shell function). The leaked processes inherited and **held the deploy lock**, blocking later deploys.
@@ -811,6 +818,7 @@ Raw logs are kept locally in `docs/evidence/` (git-ignored by operator choice, s
 5. Kustomize rejects absolute resource paths, so the release kustomization is generated inside the release worktree (`deploy/k8s/release/`, git-ignored).
 6. CI guard used `! grep` under `set -e`, which never fails a step (found by actionlint).
 7. macOS bash 3.2 empty-array expansion under `set -u` (`preflight-host.sh`).
+9. `preflight-host.sh` (from the first real host run): read qcow2 apparent size as capacity; matched any 480 Mb/s USB device instead of the dock; flagged app-level SQLite "disk I/O error" lines as storage faults. Now: qcow2 header parse, per-disk USB speed via the APFS physical store, kernel/diskarbitrationd-only log filter, plus UTM backend/CPU/memory and AC-power checks.
 8. The runbook's first secrets procedure could not work as written (unprivileged `cd` into a root-only 0700 dir). Rewritten, and executed against a temp dir.
 
 ### Operator next steps (in order)
