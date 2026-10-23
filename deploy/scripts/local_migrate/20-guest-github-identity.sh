@@ -3,6 +3,11 @@
 #
 #   20-guest-github-identity.sh                               # report
 #   20-guest-github-identity.sh --backup-dir DIR --yes        # set everything up
+#   20-guest-github-identity.sh --https --backup-dir DIR --yes
+#
+# --https clones the PUBLIC repo anonymously over HTTPS instead of using a
+# deploy key (needed when the organization has deploy keys disabled). No
+# credential is stored; it stops working if the repo is made private.
 #
 # Steps: ~/.ssh/github_homelab_ro key -> ~/.ssh/config "github-homelab" ->
 # GitHub host key checked against the published fingerprint -> wait until you
@@ -17,11 +22,13 @@ set -Eeuo pipefail
 . "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/_common.sh"
 
 BACKUP_DIR="/mnt/offdevice-backup/homelab"
+HTTPS=0
 while [ $# -gt 0 ]; do
   case "$1" in
     --backup-dir) BACKUP_DIR="${2:?}"; shift 2 ;;
+    --https) HTTPS=1; shift ;;
     --yes) YES=1; shift ;;
-    -h|--help) sed -n '2,14p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,19p' "$0"; exit 0 ;;
     *) die "unknown argument: $1" ;;
   esac
 done
@@ -31,7 +38,15 @@ need_cmd git; need_cmd ssh-keygen
 
 KEY="$HOME/.ssh/github_homelab_ro"
 REMOTE="git@github-homelab:${REPO_SLUG}.git"
+[ "$HTTPS" -eq 0 ] || REMOTE="https://github.com/${REPO_SLUG}.git"
 REPO=/opt/homelab/repo
+
+if [ "$HTTPS" -eq 1 ]; then
+  info "HTTPS mode: anonymous read-only clone of $REMOTE, no deploy key"
+  [ "$YES" -eq 1 ] || { info "rerun with --https --backup-dir DIR --yes to continue"; finish; exit; }
+  git ls-remote --heads "$REMOTE" main >/dev/null 2>&1 || die "cannot read $REMOTE anonymously; is the repo still public?"
+  pass "GIT-01 anonymous HTTPS read of $REMOTE works"
+else
 
 # 1. Deploy key
 if [ -f "$KEY" ]; then
@@ -84,6 +99,8 @@ else
   pass "GIT-01 deploy key accepted by GitHub"
 fi
 
+fi  # HTTPS=0
+
 # 5. Directories and checkout
 sudo mkdir -p /opt/homelab/releases /opt/homelab/state /opt/homelab/backups
 sudo chown "$USER:$USER" /opt/homelab /opt/homelab/releases /opt/homelab/state /opt/homelab/backups
@@ -101,6 +118,7 @@ sudo install -d -m 755 /etc/homelab
 sudo install -d -m 700 -o root -g root /etc/homelab/secrets
 env_tmp="$(mktemp)"
 sed -e "s|^BACKUP_DIR=.*|BACKUP_DIR=${BACKUP_DIR}|" \
+    -e "s|^ALLOWED_REMOTE=.*|ALLOWED_REMOTE=${REMOTE}|" \
     -e "s|<vm-user>|${USER}|g" \
     "$REPO/deploy/deploy.env.example" > "$env_tmp"
 if [ -f /etc/homelab/deploy.env ]; then
@@ -122,5 +140,5 @@ if [ -d "$BACKUP_DIR" ] && [ -w "$BACKUP_DIR" ]; then
 else
   warn "BACKUP_DIR $BACKUP_DIR does not exist or is not writable; mount off-device storage there before deploying with --migrate"
 fi
-info "record the deploy key fingerprint in docs/access.md"
+[ "$HTTPS" -eq 1 ] || info "record the deploy key fingerprint in docs/access.md"
 finish

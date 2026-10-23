@@ -56,12 +56,19 @@ grow_root() {
   else
     part="$src"
   fi
-  disk="/dev/$(lsblk -no PKNAME "$part" | head -1)"
+  disk="/dev/$(lsblk -dno PKNAME "$part")"
   partnum="$(cat "/sys/class/block/$(basename "$part")/partition")"
   info "root: $src ($fstype) on partition $part = $disk #$partnum"
   confirm "growpart $disk $partnum, then extend ${pv:+PV/LV and }the $fstype filesystem" || return 0
   # growpart exits 1 with NOCHANGE when the partition already fills the disk.
-  sudo growpart "$disk" "$partnum" || info "growpart: no change"
+  local gp
+  if gp="$(sudo growpart "$disk" "$partnum" 2>&1)"; then
+    pass "growpart: $gp"
+  elif printf '%s' "$gp" | grep -q NOCHANGE; then
+    info "growpart: partition already fills the disk"
+  else
+    die "growpart failed: $gp"
+  fi
   if [ -n "${pv:-}" ]; then
     sudo pvresize "$pv"
     sudo lvextend -r -l +100%FREE "$src" || info "lvextend: no free extents"

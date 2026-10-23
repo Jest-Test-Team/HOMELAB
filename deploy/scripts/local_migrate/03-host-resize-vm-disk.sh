@@ -8,7 +8,7 @@
 # Before resizing it takes an APFS clone of the image (instant, no extra space
 # until blocks change) next to the original: <image>.pre-resize-<UTC>.
 # Grow only; shrinking is refused. Afterwards boot the VM and run
-# 11-guest-bootstrap.sh --grow-root --yes so Ubuntu uses the new space.
+# 10-guest-bootstrap.sh --grow-root --yes so Ubuntu uses the new space.
 # Needs qemu-img (brew install qemu).
 set -Eeuo pipefail
 # shellcheck source=deploy/scripts/local_migrate/_common.sh
@@ -52,7 +52,10 @@ if [ -x "$UTMCTL" ]; then
   esac
 fi
 
-cur_bytes="$(qemu-img info --output=json -- "$img" | awk -F'[:,]' '/"virtual-size"/ {gsub(/ /,"",$2); print $2; exit}')"
+# Top-level "virtual size" only: newer qemu-img also lists the child file
+# node, indented, whose size is the allocated bytes, not the guest capacity.
+virtual_bytes() { qemu-img info -- "$img" | sed -n 's/^virtual size: .*(\([0-9]*\) bytes).*/\1/p' | head -1; }
+cur_bytes="$(virtual_bytes)"
 [ -n "$cur_bytes" ] || die "could not read the virtual size of $img"
 cur_gib=$((cur_bytes / 1024 / 1024 / 1024))
 info "$(basename "$img"): virtual ${cur_gib} GiB, target ${SIZE_GIB} GiB"
@@ -70,9 +73,9 @@ if confirm "clone $(basename "$img") and resize it to ${SIZE_GIB} GiB"; then
   cp -c -- "$img" "$backup" || die "APFS clone failed; not resizing"
   pass "backup clone: $backup"
   qemu-img resize -- "$img" "${SIZE_GIB}G"
-  new_bytes="$(qemu-img info --output=json -- "$img" | awk -F'[:,]' '/"virtual-size"/ {gsub(/ /,"",$2); print $2; exit}')"
+  new_bytes="$(virtual_bytes)"
   [ "$((new_bytes / 1024 / 1024 / 1024))" -eq "$SIZE_GIB" ] || die "resize did not reach ${SIZE_GIB} GiB"
   pass "disk is now ${SIZE_GIB} GiB"
-  info "next: boot the VM, run 11-guest-bootstrap.sh --grow-root --yes; delete the clone once Ubuntu boots cleanly"
+  info "next: boot the VM, run 10-guest-bootstrap.sh --grow-root --yes; delete the clone once Ubuntu boots cleanly"
 fi
 finish

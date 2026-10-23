@@ -777,7 +777,7 @@ Raw logs are kept locally in `docs/evidence/` (git-ignored by operator choice, s
 |---|---|---|
 | STOR-01 | **PASS** 2026-10-23T07:50Z (host) | `/Volumes/HOMELAB` mounted, APFS, Protocol USB, Device Location External; 931 GiB, 924 GiB free. Host: Apple M1, 16 GB, macOS 26.5.2 |
 | STOR-02 | **PASS** 2026-10-23T07:50Z (host) | 1 bundle under `/Volumes/HOMELAB/VMs/`. Disk `A78D7532-….qcow2`, 4.2 GB allocated; virtual size not yet known (first run misread qcow2, fixed) |
-| STOR-03 | RERUN NEEDED | first run: FAIL was a false positive (`com.apple.geod` SQLite messages); USB-2 warning was not specific to the dock. Both checks fixed; rerun `preflight-host.sh --io-test 2048`. SMART: UNKNOWN |
+| STOR-03 | **PASS** 2026-10-23T11:54Z (host) | `--io-test 2048`: checksum stable across re-read; write+hash 64 s (~32 MB/s, VM running), re-read 67 s. No kernel/disk-arbitration storage errors in 2h. USB link speed not detected. SMART: UNKNOWN (USB-SATA bridge) |
 | GUEST-01 | BLOCKED | `deploy/scripts/preflight-guest.sh` in the VM |
 | NET-01 | BLOCKED | `preflight-guest.sh` |
 | SSH-01 | BLOCKED | needs Bridged mode; otherwise N/A (report separately from SSH-02) |

@@ -9,9 +9,9 @@ Fill these in from read-only commands. Do not guess. Tailscale `100.x` addresses
 | Item | Value | Source command |
 |---|---|---|
 | VM login user (`<vm-user>`) | _TBD_ | `id -un` (guest) |
-| UTM network mode | _TBD_ (Shared / Bridged) | UTM → VM settings → Network |
+| UTM network mode | Shared (QEMU backend, virtio-net, MAC ce:5a:f7:93:93:16) | UTM → VM settings → Network |
 | VM LAN IPv4 (Bridged only) | _TBD_ / N/A | `ip -4 -br addr` (guest); DHCP reservation on router |
-| VM Shared-mode IPv4 | _TBD_ | `ip -4 -br addr` (guest) |
+| VM Shared-mode IPv4 | 192.168.64.5 (DHCP lease from the host, 2026-10-23) | `ip -4 -br addr` (guest) |
 | Tailscale hostname | `utm-homelab` | `tailscale status` |
 | Tailscale IPv4 / MagicDNS | _TBD_ | `tailscale ip -4` (guest) |
 | Dev Mac SSH key | `~/.ssh/homelab_utm_ed25519` | `ssh-keygen -lf ~/.ssh/homelab_utm_ed25519.pub` |

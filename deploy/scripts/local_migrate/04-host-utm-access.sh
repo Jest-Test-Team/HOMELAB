@@ -3,13 +3,16 @@
 #
 #   04-host-utm-access.sh          # test utmctl; open the Automation pane if denied
 #
-# macOS only lets a person grant Automation permission, so this script opens
-# System Settings and retests. Run it from the Mac's desktop session, not SSH.
+# utmctl alone never makes macOS show the Automation prompt, so UTM does not
+# appear in System Settings and utmctl fails with OSStatus -1743. A plain
+# AppleScript query to UTM does show the prompt; approve it once and utmctl
+# works. If that is not enough, the script opens System Settings and retests.
+# Run it from the Mac's desktop session, not SSH.
 set -Eeuo pipefail
 # shellcheck source=deploy/scripts/local_migrate/_common.sh
 . "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/_common.sh"
 
-case "${1:-}" in -h|--help) sed -n '2,6p' "$0"; exit 0 ;; esac
+case "${1:-}" in -h|--help) sed -n '2,9p' "$0"; exit 0 ;; esac
 on_macos host
 
 UTMCTL=/Applications/UTM.app/Contents/MacOS/utmctl
@@ -24,7 +27,15 @@ if ! printf '%s' "$out" | grep -q -- '-1743'; then
   finish; exit
 fi
 
-warn "utmctl denied (OSStatus -1743)"
+warn "utmctl denied (OSStatus -1743); asking macOS for permission through AppleScript"
+info "approve the 'wants access to control UTM' prompt if one appears"
+osascript -e 'tell application "UTM" to get name of every virtual machine' >/dev/null 2>&1 || true
+out="$(try || true)"
+if ! printf '%s' "$out" | grep -q -- '-1743'; then
+  printf '%s\n' "$out"
+  pass "utmctl works"
+  finish; exit
+fi
 info "opening System Settings > Privacy & Security > Automation."
 info "Enable 'UTM' under your terminal app (Terminal, iTerm, VS Code...)."
 info "If your terminal is not listed yet, accept the prompt macOS shows on the next utmctl call."
