@@ -7,7 +7,8 @@
 # Flow: lock -> preflight -> fetch allowlisted remote/branch -> verify the SHA is
 # on that branch -> detached release worktree (the main checkout and its local
 # changes are untouched) -> resolve image digests for sha-<SHA> -> render
-# manifests pinned by digest -> [backup + migrate Job] -> apply -> rollout ->
+# manifests pinned by digest -> [backup (or, first deploy, data tier) + migrate
+# Job] -> apply -> rollout ->
 # smoke test -> record. On rollout/smoke failure: `kubectl rollout undo` of the
 # app Deployments. PVCs and databases are never deleted.
 #
@@ -233,9 +234,23 @@ fi
 
 # --- 7. optional explicit migration (after backup) ----------------------------------------------
 if [ "$MIGRATE" -eq 1 ]; then
-  STAGE="backup"
-  # 9>&- : children must not inherit (and outlive us holding) the deploy lock.
-  "$SCRIPT_DIR/backup-databases.sh" 9>&-
+  if k get statefulset postgres >/dev/null 2>&1; then
+    STAGE="backup"
+    # 9>&- : children must not inherit (and outlive us holding) the deploy lock.
+    "$SCRIPT_DIR/backup-databases.sh" 9>&-
+  else
+    # First deploy: there is no database to back up, and the migrate Job needs
+    # PostgreSQL, the ServiceAccount and the NetworkPolicy to exist. Apply
+    # everything except the app workloads (`notin` also matches unlabelled
+    # objects), then wait for the databases.
+    STAGE="data-tier"
+    info "first deploy: no postgres StatefulSet yet, nothing to back up; starting the data tier"
+    "${KC[@]}" apply -f "$RENDERED" -l 'app.kubernetes.io/name notin (api,mcp,worker)' >/dev/null
+    for sts in postgres redis; do
+      k rollout status "statefulset/$sts" --timeout="$ROLLOUT_TIMEOUT" >/dev/null
+    done
+    pass "data tier ready (postgres, redis)"
+  fi
   STAGE="migrate"
   api_image="$(jq -r .api <<< "$IMAGES_JSON")"
   job="migrate-$SHORT"

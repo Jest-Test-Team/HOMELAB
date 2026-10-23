@@ -23,6 +23,7 @@ while [ $# -gt 0 ]; do
 done
 on_guest
 need_cmd kubectl; need_cmd jq
+export KUBECONFIG="${KUBECONFIG:-$HOME/.kube/config}"
 D=/etc/homelab/secrets
 NAMES=(postgres redis app mcp)
 REPO=/opt/homelab/repo; [ -d "$REPO" ] || REPO="$REPO_ROOT"

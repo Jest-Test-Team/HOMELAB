@@ -19,6 +19,9 @@ while [ $# -gt 0 ]; do
 done
 on_guest
 [ "$(id -u)" -ne 0 ] || die "run as your normal VM user, not root"
+# k3s's bundled kubectl prefers the root-only /etc/rancher/k3s/k3s.yaml unless
+# KUBECONFIG is set, so point it at the user copy here and in ~/.bashrc.
+export KUBECONFIG="$HOME/.kube/config"
 S="$SCRIPTS_DIR"; [ -x /opt/homelab/repo/deploy/scripts/install-k3s.sh ] && S=/opt/homelab/repo/deploy/scripts
 
 "$S/preflight-guest.sh" --k3s || true
@@ -41,6 +44,18 @@ else
   pass "installed ~/.kube/config (0600; makes $USER cluster-admin, see docs/security.md)"
 fi
 
+# shellcheck disable=SC2016  # literal: expanded later by bash
+line='export KUBECONFIG="$HOME/.kube/config"  # homelab: k3s kubectl'
+if grep -qF "$line" "$HOME/.bashrc" 2>/dev/null; then
+  pass "$HOME/.bashrc exports KUBECONFIG"
+else
+  # Top of the file: Ubuntu's .bashrc returns early for non-interactive shells,
+  # and ssh-run commands still read it before that check.
+  { printf '%s\n' "$line"; cat "$HOME/.bashrc" 2>/dev/null; } > "$HOME/.bashrc.homelab.tmp"
+  mv "$HOME/.bashrc.homelab.tmp" "$HOME/.bashrc"
+  pass "added KUBECONFIG to the top of ~/.bashrc"
+fi
+
 for i in $(seq 1 30); do
   kubectl get nodes 2>/dev/null | grep -q ' Ready ' && break
   [ "$i" -eq 30 ] && fail "K3S-01 node not Ready after 150s"
@@ -51,11 +66,34 @@ show kubectl get sc
 kubectl get nodes | grep -q ' Ready ' && pass "K3S-01 node Ready"
 kubectl get sc local-path >/dev/null 2>&1 && pass "local-path StorageClass present" || fail "no local-path StorageClass"
 
-enc="$(sudo k3s secrets-encrypt status 2>&1 || true)"
+enc_status() { sudo k3s secrets-encrypt status 2>&1 || true; }
+enc="$(enc_status)"
 if printf '%s' "$enc" | grep -qi 'Encryption Status: Enabled'; then
   pass "secrets encryption at rest enabled"
 else
-  warn "secrets encryption at rest is not enabled; see the k3s --secrets-encrypt docs before 22-guest-secrets.sh"
+  # Enable before any Secret exists, so nothing needs re-encrypting.
+  n="$(kubectl get secrets -A --no-headers 2>/dev/null | wc -l | tr -d ' ')"
+  info "secrets encryption disabled; $n Secret(s) in the cluster"
+  if grep -q '^secrets-encryption:' /etc/rancher/k3s/config.yaml 2>/dev/null; then
+    warn "config.yaml already sets secrets-encryption but status is not Enabled; check: sudo journalctl -u k3s"
+  else
+    printf 'secrets-encryption: true\n' | sudo tee -a /etc/rancher/k3s/config.yaml >/dev/null
+    # 0644: k3s kubectl reads this file too, and it holds no secret here.
+    sudo chmod 644 /etc/rancher/k3s/config.yaml
+    info "restarting k3s with secrets-encryption: true"
+    sudo systemctl restart k3s
+    for i in $(seq 1 30); do
+      kubectl get nodes 2>/dev/null | grep -q ' Ready ' && enc_status | grep -qi 'Encryption Status: Enabled' && break
+      sleep 5
+    done
+    [ "$n" -eq 0 ] || sudo k3s secrets-encrypt reencrypt --force --skip || warn "reencrypt of existing Secrets failed"
+    enc="$(enc_status)"
+    if printf '%s' "$enc" | grep -qi 'Encryption Status: Enabled'; then
+      pass "secrets encryption at rest enabled"
+    else
+      fail "secrets encryption still not enabled"
+    fi
+  fi
   printf '%s\n' "$enc"
 fi
 finish

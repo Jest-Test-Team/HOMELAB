@@ -119,6 +119,7 @@ sudo install -d -m 700 -o root -g root /etc/homelab/secrets
 env_tmp="$(mktemp)"
 sed -e "s|^BACKUP_DIR=.*|BACKUP_DIR=${BACKUP_DIR}|" \
     -e "s|^ALLOWED_REMOTE=.*|ALLOWED_REMOTE=${REMOTE}|" \
+    -e "s|^KUBECTL=.*|KUBECTL=\"kubectl --kubeconfig=${HOME}/.kube/config\"  # k3s kubectl ignores ~/.kube/config otherwise|" \
     -e "s|<vm-user>|${USER}|g" \
     "$REPO/deploy/deploy.env.example" > "$env_tmp"
 if [ -f /etc/homelab/deploy.env ]; then
