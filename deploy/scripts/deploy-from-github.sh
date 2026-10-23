@@ -234,7 +234,8 @@ fi
 # --- 7. optional explicit migration (after backup) ----------------------------------------------
 if [ "$MIGRATE" -eq 1 ]; then
   STAGE="backup"
-  "$SCRIPT_DIR/backup-databases.sh"
+  # 9>&- : children must not inherit (and outlive us holding) the deploy lock.
+  "$SCRIPT_DIR/backup-databases.sh" 9>&-
   STAGE="migrate"
   api_image="$(jq -r .api <<< "$IMAGES_JSON")"
   job="migrate-$SHORT"
@@ -254,11 +255,20 @@ STAGE="apply"
 "${KC[@]}" apply -f "$RENDERED" >/dev/null
 pass "applied manifests"
 
+# Prefer re-applying the previous successful release's rendered, digest-pinned
+# manifest: `rollout undo` would also flip Deployments this release did not
+# change to their *older* ReplicaSet. Undo is only the first-deploy fallback.
 rollback() {
-  warn "rolling back application Deployments (PVCs and data untouched)"
-  for d in "${DEPLOYMENTS[@]}"; do
-    k rollout undo "$d" >/dev/null 2>&1 || warn "no previous revision for $d"
-  done
+  local d prev="$STATE_DIR/rendered-${PREV_SHA:-none}.yaml"
+  if [ -n "${PREV_SHA:-}" ] && [ -f "$prev" ]; then
+    warn "restoring previous release $PREV_SHA from $prev (PVCs and data untouched)"
+    "${KC[@]}" apply -f "$prev" >/dev/null
+  else
+    warn "no previous rendered release; using kubectl rollout undo (PVCs and data untouched)"
+    for d in "${DEPLOYMENTS[@]}"; do
+      k rollout undo "$d" >/dev/null 2>&1 || warn "no previous revision for $d"
+    done
+  fi
   for d in "${DEPLOYMENTS[@]}"; do
     k rollout status "$d" --timeout="$ROLLOUT_TIMEOUT" >/dev/null 2>&1 || warn "$d did not settle after undo"
   done
@@ -285,7 +295,7 @@ done
 pass "running pods match resolved digests"
 
 STAGE="smoke"
-if ! "$SCRIPT_DIR/smoke-test.sh" --expect-sha "$SHA"; then
+if ! "$SCRIPT_DIR/smoke-test.sh" --expect-sha "$SHA" 9>&-; then
   rollback
   RESULT="failed-rolled-back"
   die "smoke test failed"

@@ -53,15 +53,18 @@ cleanup() {
 }
 trap cleanup EXIT
 
-# Start a port-forward on a free local port; prints the port.
+# Start a port-forward on a free local port and set PF_PORT. Must not run in a
+# subshell ($(...)), or the PID never reaches PF_PIDS and the forward leaks.
+PF_PORT=""
 port_forward() {
-  local target="$1" remote="$2" port pid
-  port="$(( (RANDOM % 20000) + 30000 ))"
-  k port-forward "$target" "$port:$remote" >/dev/null 2>&1 &
+  local target="$1" remote="$2" pid
+  PF_PORT="$(( (RANDOM % 20000) + 30000 ))"
+  # Call kubectl directly (not the k function) so $! is kubectl itself.
+  "${KC[@]}" -n "$NS" port-forward "$target" "$PF_PORT:$remote" >/dev/null 2>&1 &
   pid=$!
   PF_PIDS+=("$pid")
   for _ in $(seq 1 50); do
-    if curl -s -o /dev/null "http://127.0.0.1:$port/health/live"; then echo "$port"; return 0; fi
+    curl -s -o /dev/null "http://127.0.0.1:$PF_PORT/health/live" && return 0
     kill -0 "$pid" 2>/dev/null || break
     sleep 0.2
   done
@@ -81,8 +84,8 @@ bound="$(k get pvc -o json | jq -r '[.items[] | select(.status.phase=="Bound")] 
 [ "$bound" -ge 2 ] && pass "K3S-02 $bound PVC(s) Bound" || fail "K3S-02 only $bound PVC(s) Bound"
 
 # --- APP-01 API -----------------------------------------------------------------
-if api_port="$(port_forward svc/api 80)"; then
-  api="http://127.0.0.1:$api_port"
+if port_forward svc/api 80; then
+  api="http://127.0.0.1:$PF_PORT"
   ready="$(curl -s -w ' %{http_code}' "$api/health/ready" || true)"
   [ "${ready##* }" = 200 ] && pass "APP-01 /health/ready 200 ${ready% *}" || fail "APP-01 /health/ready: $ready"
   version="$(curl -fsS "$api/api/v1/version" || echo '{}')"
@@ -115,8 +118,8 @@ else
 fi
 
 # --- APP-02 MCP ------------------------------------------------------------------
-if mcp_port="$(port_forward svc/mcp 80)"; then
-  mcp="http://127.0.0.1:$mcp_port/mcp"
+if port_forward svc/mcp 80; then
+  mcp="http://127.0.0.1:$PF_PORT/mcp"
   token="$(k get secret homelab-mcp -o jsonpath='{.data.MCP_AUTH_TOKEN}' | base64 -d)"
   mcp_call() {
     # Header passed via curl config on stdin so the token never hits argv.
