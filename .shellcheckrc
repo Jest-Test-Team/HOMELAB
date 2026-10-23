@@ -1,0 +1,3 @@
+# `cond && pass || fail` is intentional: pass/info never fail.
+disable=SC2015
+external-sources=true
