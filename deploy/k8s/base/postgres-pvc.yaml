@@ -1,0 +1,14 @@
+# Standalone PVC (not volumeClaimTemplates) so it is explicit, survives
+# StatefulSet deletion, and is never removed by any script in this repo.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data
+  annotations:
+    helm.sh/resource-policy: keep
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 10Gi

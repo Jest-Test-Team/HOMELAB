@@ -1,0 +1,58 @@
+# Ingress isolation for the homelab namespace. Enforced by k3s's embedded
+# kube-router policy controller (on unless --disable-network-policy).
+# smoke-test.sh verifies that a non-client pod really cannot reach PostgreSQL.
+# Egress is not restricted in v1 (pods need DNS and GHCR is pulled by the node).
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+spec:
+  podSelector: {}
+  policyTypes: [Ingress]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: postgres-from-db-clients
+spec:
+  podSelector:
+    matchLabels: {app.kubernetes.io/name: postgres}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels: {homelab.io/db-client: "true"}
+      ports:
+        - {protocol: TCP, port: 5432}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: redis-from-redis-clients
+spec:
+  podSelector:
+    matchLabels: {app.kubernetes.io/name: redis}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels: {homelab.io/redis-client: "true"}
+      ports:
+        - {protocol: TCP, port: 6379}
+---
+# HTTP services: reachable from pods in this namespace only (e.g. smoke tests).
+# Admin access uses `kubectl port-forward`, which goes through the kubelet.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: http-from-namespace
+spec:
+  podSelector:
+    matchExpressions:
+      - {key: app.kubernetes.io/name, operator: In, values: [api, mcp]}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - podSelector: {}
+      ports:
+        - {protocol: TCP, port: 8080}

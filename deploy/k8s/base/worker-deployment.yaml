@@ -1,0 +1,55 @@
+# No Service: the worker only exposes probe endpoints on 8081.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  labels: {app.kubernetes.io/name: worker}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {app.kubernetes.io/name: worker}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: worker
+        homelab.io/db-client: "true"
+        homelab.io/redis-client: "true"
+    spec:
+      serviceAccountName: homelab-app
+      automountServiceAccountToken: false
+      # Jobs are bounded to ~10 s; the lease covers anything killed after this.
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: worker
+          image: homelab-worker
+          ports:
+            - {name: health, containerPort: 8081}
+          env:
+            - {name: RUST_LOG, value: info}
+            - {name: HEALTH_BIND, value: "0.0.0.0:8081"}
+          envFrom:
+            - secretRef: {name: homelab-app}
+          startupProbe:
+            httpGet: {path: /health/live, port: health}
+            periodSeconds: 2
+            failureThreshold: 15
+          livenessProbe:
+            httpGet: {path: /health/live, port: health}
+            periodSeconds: 15
+          readinessProbe:
+            httpGet: {path: /health/ready, port: health}
+            periodSeconds: 10
+          resources:
+            requests: {cpu: 20m, memory: 64Mi}
+            limits: {memory: 256Mi}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]

@@ -1,0 +1,18 @@
+# UTM guest overlay. OWNER and the tag are placeholders: deploy-from-github.sh
+# renders a release kustomization on top of this one that pins every Rust
+# image to ghcr.io/<REGISTRY_OWNER>/homelab-<svc>@sha256:<digest> for the
+# approved commit. Applying this overlay directly is not a supported deploy.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+images:
+  - name: homelab-api
+    newName: ghcr.io/OWNER/homelab-api
+    newTag: sha-0000000000000000000000000000000000000000
+  - name: homelab-mcp
+    newName: ghcr.io/OWNER/homelab-mcp
+    newTag: sha-0000000000000000000000000000000000000000
+  - name: homelab-worker
+    newName: ghcr.io/OWNER/homelab-worker
+    newTag: sha-0000000000000000000000000000000000000000
