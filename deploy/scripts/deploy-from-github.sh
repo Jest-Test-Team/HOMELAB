@@ -17,7 +17,7 @@
 #
 # Config: /etc/homelab/deploy.env (override with HOMELAB_DEPLOY_ENV). See
 # docs/runbook.md for keys. Registry credentials (private GHCR only):
-# /etc/homelab/secrets/ghcr.env with GHCR_USER and GHCR_TOKEN (read-only PAT).
+# ~/.config/homelab/ghcr.env (0600) with GHCR_USER and GHCR_TOKEN (read-only PAT).
 set -Eeuo pipefail
 umask 027
 
@@ -39,7 +39,7 @@ fi
 : "${REGISTRY:=ghcr.io}"
 : "${REGISTRY_API:=https://$REGISTRY}"
 : "${REGISTRY_OWNER:?set REGISTRY_OWNER (lowercase GitHub owner) in $CONFIG}"
-: "${GHCR_CREDENTIALS:=/etc/homelab/secrets/ghcr.env}"
+: "${GHCR_CREDENTIALS:=$HOME/.config/homelab/ghcr.env}"
 : "${NAMESPACE:=homelab}"
 : "${MIN_FREE_GIB:=5}"
 : "${ROLLOUT_TIMEOUT:=180s}"

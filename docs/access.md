@@ -16,7 +16,8 @@ Fill these in from read-only commands. Do not guess. Tailscale `100.x` addresses
 | Tailscale IPv4 / MagicDNS | _TBD_ | `tailscale ip -4` (guest) |
 | Dev Mac SSH key | `~/.ssh/homelab_utm_ed25519` | `ssh-keygen -lf ~/.ssh/homelab_utm_ed25519.pub` |
 | Key fingerprint | _TBD_ | as above |
-| GitHub repo | _TBD_ `<OWNER>/<REPO>` | operator input |
+| GitHub repo | `Jest-Test-Team/HOMELAB` (public) | `git remote -v` on the dev Mac, as configured by the operator |
+| Container registry | `ghcr.io/jest-test-team/homelab-{api,mcp,worker}` (public, anonymous pull verified 2026-10-23) | `publish-arm64` runs |
 | VM deploy key fingerprint | _TBD_ | `ssh-keygen -lf ~/.ssh/github_homelab_ro.pub` (guest) |
 
 ## Paths

@@ -176,9 +176,22 @@ SQL
   k exec redis-0 -- redis-cli SET "smoke:$marker" 1 >/dev/null
   k exec redis-0 -- redis-cli BGREWRITEAOF >/dev/null || true
   sleep 2
-  k delete pod postgres-0 redis-0 --wait=true >/dev/null
-  k rollout status sts/postgres --timeout=180s >/dev/null && k rollout status sts/redis --timeout=120s >/dev/null
-  k wait --for=condition=Ready pod/postgres-0 pod/redis-0 --timeout=120s >/dev/null
+  # Delete without --wait (it can hang watching a name the StatefulSet
+  # recreates); instead wait for pods with NEW UIDs to become Ready.
+  uids="$(k get pod postgres-0 redis-0 -o jsonpath='{.items[*].metadata.uid}')"
+  k delete pod postgres-0 redis-0 --wait=false >/dev/null
+  restarted=0
+  for _ in $(seq 1 90); do
+    now="$(k get pod postgres-0 redis-0 -o jsonpath='{.items[*].metadata.uid}' 2>/dev/null || true)"
+    ready="$(k get pod postgres-0 redis-0 -o jsonpath='{range .items[*]}{.status.conditions[?(@.type=="Ready")].status}{" "}{end}' 2>/dev/null || true)"
+    fresh=1
+    for u in $uids; do [[ " $now " == *" $u "* ]] && fresh=0; done
+    if [ "$fresh" -eq 1 ] && [ "$ready" = "True True " ]; then
+      restarted=1; break
+    fi
+    sleep 2
+  done
+  [ "$restarted" -eq 1 ] || die "postgres-0/redis-0 did not come back Ready within 180 s"
   got="$(pg <<< "SELECT count(*) FROM smoke_persist WHERE marker = '$marker';")"
   [ "$got" = 1 ] && pass "DATA-01 PostgreSQL row survived pod restart" || fail "DATA-01 row missing after restart"
   rgot="$(k exec redis-0 -- redis-cli GET "smoke:$marker")"

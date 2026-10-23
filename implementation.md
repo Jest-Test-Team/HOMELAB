@@ -749,3 +749,84 @@ Design choices for the minimum implementation:
 - **MCP:** rmcp Streamable HTTP on ClusterIP, protected by a mandatory bearer token (the server refuses to start without one). Sample tools: `server_version`, `echo`.
 - **Migrations:** embedded `sqlx` migrations, run only via `api migrate` in an explicit Job (`deploy-from-github.sh --migrate`, which takes a backup first).
 
+
+---
+
+## 14. Execution status (2026-10-23)
+
+### Where the work was done
+
+The agent ran on the **development Mac** (Apple M3, macOS 15.8.2), **not** on the M1 Pro UTM host: `/Volumes/HOMELAB` is not mounted there and UTM/`utmctl` is not installed. Every gate that needs the host, the VM, the LAN, Tailscale or the router is therefore **BLOCKED** (it needs the operator on that machine) and has a ready script. Repository, CI and Kubernetes behaviour were verified for real: in GitHub Actions, and on a local **k3s v1.36.5+k3s1** server in Docker (arm64), against a local registry and git origin that stood in for GHCR/GitHub.
+
+Raw logs are kept locally in `docs/evidence/` (git-ignored by operator choice, since the repo is public): `2026-10-23-cargo-test.log`, `2026-10-23-local-k3s/{deploy-*.log,smoke-persistence.log,deployments.jsonl}`. Secrets were scanned for before saving: none found.
+
+### Verified values
+
+| Item | Value |
+|---|---|
+| Repository | `Jest-Test-Team/HOMELAB` (public), branch `main` |
+| Images | `ghcr.io/jest-test-team/homelab-{api,mcp,worker}`; anonymous pull works (public packages) |
+| k3s release proposed/tested | `v1.36.5+k3s1` (stable channel on 2026-10-23) |
+| Toolchain / DB images | Rust 1.99.0; `postgres:18.6-alpine3.24`, `redis:8.8.3-alpine3.23` (digest-pinned) |
+| Image size | ~60 MB each (distroless cc, non-root 65532) |
+| Not discovered (needs operator) | VM username, VM IPs, LAN subnet, UTM version/network mode, Tailscale IP, Wi-Fi bridging result |
+
+### Validation matrix
+
+| ID | Status | Evidence / next step |
+|---|---|---|
+| STOR-01 | BLOCKED | run `deploy/scripts/preflight-host.sh` on the M1 Pro host |
+| STOR-02 | BLOCKED | same script (bundle location + virtual disk size) |
+| STOR-03 | BLOCKED | `preflight-host.sh --io-test 2048`; SMART recorded as UNKNOWN |
+| GUEST-01 | BLOCKED | `deploy/scripts/preflight-guest.sh` in the VM |
+| NET-01 | BLOCKED | `preflight-guest.sh` |
+| SSH-01 | BLOCKED | needs Bridged mode; otherwise N/A (report separately from SSH-02) |
+| SSH-02 | BLOCKED | `docs/access.md` §5 |
+| SSH-03 | BLOCKED / UNVERIFIED | must be tested from a different network (`docs/access.md`, WAN acceptance) |
+| SSH-04 | BLOCKED | `configure-ssh.sh apply` then the denied-login checks in `docs/access.md` |
+| GIT-01 | BLOCKED | read-only deploy key (`docs/runbook.md` P2); operator must add the key on GitHub |
+| CI-01 | **PASS** 2026-10-23T07:25Z | Actions: `ci` success on `90b2d02` and `a3f073a`; `publish-arm64` success, `skipped` when `ci` was cancelled (gate works). `sha-a3f073aed8c3…` digests: api `sha256:31617f08…af8f`, mcp `sha256:b05eabc2…9627`, worker `sha256:407aa824…a68a`; index contains `linux/arm64` + attestations |
+| K3S-01 | PASS (local k3s) / BLOCKED (VM) | Ready node on k3s v1.36.5 in Docker; VM: `install-k3s.sh` |
+| K3S-02 | PASS (local k3s) / BLOCKED (VM) | `postgres-data` 10Gi + `redis-data` 2Gi Bound on local-path |
+| APP-01 | PASS (local k3s) | `/health/ready` 200 `{"postgres":"ok","redis":"ok"}` |
+| APP-02 | PASS (local k3s + tests) | MCP 401 without token; `echo` tool via bearer token; Host allowlist rejects foreign Host (test) |
+| APP-03 | PASS (local k3s + tests) | idempotent enqueue, processed once; crashed-worker lease recovery (`worker_pg.rs`) |
+| DATA-01 | PASS (local k3s) | marker row survived `postgres-0` restart |
+| DATA-02 | PASS (local k3s) | AOF key survived `redis-0` restart |
+| NETPOL | PASS (local k3s) | non-client pod denied to `postgres:5432`, labelled client allowed |
+| DEPLOY-01 | PASS (local harness) | SHA A deployed with `--migrate`: backup → migrate Job → digest-pinned apply → pods' imageIDs match → smoke `--expect-sha` |
+| DEPLOY-02 | PASS (local harness) | A → B → `--rollback` → A; broken release C auto-restored to A's exact digests; PVC UIDs unchanged; off-branch / short / malformed SHAs and a concurrent deploy refused |
+| BOOT-01 | BLOCKED | reboot the VM, then `preflight-guest.sh --k3s` + `smoke-test.sh` |
+| HOST-01 | BLOCKED | `docs/runbook.md`, Host restart |
+| SEC-01 | BLOCKED | outside-in `nmap` from off-LAN (`docs/security.md`) |
+| Rust quality | PASS 2026-10-23 | `cargo fmt --check`, `clippy -D warnings`, 31 tests incl. real PostgreSQL/Redis |
+| Scripts / workflows | PASS | `shellcheck -x` clean; `actionlint` clean |
+
+### Defects found and fixed while verifying
+
+1. `smoke-test.sh` leaked `kubectl port-forward` processes (subshell PID capture, plus `$!` of a shell function). The leaked processes inherited and **held the deploy lock**, blocking later deploys.
+2. `deploy-from-github.sh` rollback loop overwrote the failing Deployment's name in the error message.
+3. `kubectl rollout undo` reverted Deployments the failed release had *not* changed to an *older* release. Rollback now re-applies the previous release's rendered, digest-pinned manifest.
+4. `kubectl delete pod --wait` could hang on StatefulSet pods; replaced with a bounded new-UID + Ready wait.
+5. Kustomize rejects absolute resource paths, so the release kustomization is generated inside the release worktree (`deploy/k8s/release/`, git-ignored).
+6. CI guard used `! grep` under `set -e`, which never fails a step (found by actionlint).
+7. macOS bash 3.2 empty-array expansion under `set -u` (`preflight-host.sh`).
+8. The runbook's first secrets procedure could not work as written (unprivileged `cd` into a root-only 0700 dir). Rewritten, and executed against a temp dir.
+
+### Operator next steps (in order)
+
+1. On the M1 Pro host: `preflight-host.sh` (+ `--io-test`), then move the bundle into `VMs/` if needed (P0).
+2. In the VM: `preflight-guest.sh`, then keys, Tailscale and `configure-ssh.sh` per `docs/access.md` (P1). Record values in `docs/access.md`.
+3. Add the VM's read-only deploy key on GitHub; clone to `/opt/homelab/repo`; create `/etc/homelab/deploy.env` (P2).
+4. `install-k3s.sh --version v1.36.5+k3s1 --yes`; create the Secrets (P3, runbook).
+5. `deploy-from-github.sh --migrate <SHA>` with a SHA whose `publish-arm64` run succeeded (P5), then `smoke-test.sh --persistence` and the BLOCKED gates above (P6).
+
+### Remaining risks
+
+- **External HDD reliability:** SMART is unreadable through the USB-SATA bridge, the dock had intermittent detection on another Mac, and it is a single disk. Health is unknown.
+- **Backups:** `BACKUP_DIR` must be on another physical device; none is configured yet.
+- **Always-on:** UTM does not start VMs before login, and host sleep stops the workload. There is no supported auto-start that waits for `/Volumes/HOMELAB`.
+- **Performance:** a USB HDD-backed virtual disk for PostgreSQL. Resource limits are placeholders until measured (`kubectl top`).
+- **Privilege:** `<vm-user>` holds an admin kubeconfig. k3s secrets encryption at rest is not yet verified.
+- **Public repo and images:** anything committed or published is world-readable. Keep evidence local (as configured).
+- **Not implemented in v1:** OpenTelemetry export, egress NetworkPolicy, image vulnerability scanning, a namespaced deploy identity.
