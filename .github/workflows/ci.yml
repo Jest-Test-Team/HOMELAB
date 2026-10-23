@@ -1,0 +1,72 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# PR jobs (including forks) get read-only contents and no secrets.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rust:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:18.6-alpine3.24@sha256:898c60cb390d1085bc97bdd6a1ae968757421df394b071848b52b1c09c89d6a5
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U test" --health-interval 5s --health-timeout 5s --health-retries 10
+      redis:
+        image: redis:8.8.3-alpine3.23@sha256:dc95ea2fcf5d5c4253be0f967c28143d0f625846197eed2fd32c748eb99abfca
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      CARGO_TERM_COLOR: always
+      TEST_DATABASE_URL: postgres://test:test@localhost:5432/test
+      TEST_REDIS_URL: redis://localhost:6379/0
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install pinned toolchain (rust-toolchain.toml)
+        run: rustup show active-toolchain || rustup toolchain install
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - run: cargo test --workspace --locked
+
+  scripts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: shellcheck -x deploy/scripts/*.sh
+      - run: bash -n deploy/scripts/*.sh
+
+  manifests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Render Kustomize overlay
+        run: kubectl kustomize deploy/k8s/overlays/homelab > /tmp/rendered.yaml && grep -c '^kind:' /tmp/rendered.yaml
+      - name: No floating tags or literal secrets in manifests
+        run: |
+          if grep -nE 'image: [^@]+:latest' /tmp/rendered.yaml; then echo "floating :latest tag"; exit 1; fi
+          if grep -nE '^\s*(password|token|POSTGRES_PASSWORD|MCP_AUTH_TOKEN):\s*\S' /tmp/rendered.yaml; then echo "literal secret"; exit 1; fi

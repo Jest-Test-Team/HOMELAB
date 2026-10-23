@@ -1,0 +1,9 @@
+target/
+.git/
+.claude/
+docs/
+deploy/
+.github/
+*.md
+.env
+.env.*
