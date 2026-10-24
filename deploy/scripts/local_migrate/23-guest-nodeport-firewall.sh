@@ -94,5 +94,5 @@ if sudo nft list table inet homelab_mgmt >/dev/null 2>&1; then
 else
   fail "nftables table homelab_mgmt not active"
 fi
-info "verify from the Mac: curl http://192.168.64.4:${NODEPORT} should hang/refuse; http://<tailscale-ip>:${NODEPORT} should work"
+info "verify from the Mac: curl http://<vm-shared-ip>:${NODEPORT} should hang/refuse; http://<tailscale-ip>:${NODEPORT} should work"
 finish

@@ -16,7 +16,7 @@ testing of anything outside `10.66.6.0/24`.
 
 **Evidence.** Output is written on the Kali VM under `~/lab-evidence/`. Pull it
 to the external drive from the Mac via the Ubuntu jump host when done:
-`scp -o ProxyJump=dennis@utm-homelab -r kali@10.66.6.20:lab-evidence \
+`scp -o ProxyJump=<vm-user>@utm-homelab -r kali@10.66.6.20:lab-evidence \
   /Volumes/HOMELAB/Backups/lab-evidence/`
 
 **Out of scope this phase.** Deliberately vulnerable targets and detection

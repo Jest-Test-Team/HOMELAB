@@ -54,8 +54,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - run: shellcheck -x deploy/scripts/*.sh deploy/scripts/local_migrate/*.sh lab/*.sh lab/scripts/*.sh lab/macos/*.sh lab/tests/*.sh
-      - run: bash -n deploy/scripts/*.sh deploy/scripts/local_migrate/*.sh lab/*.sh lab/scripts/*.sh lab/macos/*.sh lab/tests/*.sh
+      - run: shellcheck -x deploy/scripts/*.sh deploy/scripts/local_migrate/*.sh lab/*.sh lab/scripts/*.sh lab/macos/*.sh lab/tests/*.sh lab/kali/scripts/*.sh
+      - run: bash -n deploy/scripts/*.sh deploy/scripts/local_migrate/*.sh lab/*.sh lab/scripts/*.sh lab/macos/*.sh lab/tests/*.sh lab/kali/scripts/*.sh
+      - name: No secrets / PII in tracked files
+        run: bash deploy/scripts/scan-secrets.sh
 
   manifests:
     runs-on: ubuntu-24.04
