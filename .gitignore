@@ -40,3 +40,4 @@ lab/terraform/.terraform.lock.hcl
 __pycache__/
 *.pyc
 lab/scripts/enter_vms.sh
+local.env
