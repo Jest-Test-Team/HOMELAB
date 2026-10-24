@@ -41,24 +41,28 @@ if [ "$LOCAL_ONLY" -eq 1 ]; then
 fi
 
 REMOTE_URL="$(git -C "$REPO_ROOT" remote get-url origin)"
-info "force-pushing a single-commit $INBOX_BRANCH (triggers lab-analysis.yml)"
-STAGE="$WORK/stage"; mkdir -p "$STAGE/inbox"
-cp "$BLOB" "$STAGE/inbox/evidence.tar.zst.age"
-cat > "$STAGE/inbox/manifest.txt" <<EOF
+CURR_SHA="$(git -C "$REPO_ROOT" rev-parse --short HEAD)"
+info "publishing $INBOX_BRANCH from $CURR_SHA (carries the workflow + pipeline code + blob)"
+# Branch evidence-inbox from the current commit via a detached worktree, so the
+# pushed branch contains .github/workflows/lab-analysis.yml (a push to a branch
+# WITHOUT the workflow would not trigger it) plus analyze.jl and recipients.txt.
+WT="$WORK/wt"
+git -C "$REPO_ROOT" worktree add -q --detach "$WT" HEAD
+trap 'git -C "$REPO_ROOT" worktree remove --force "$WT" 2>/dev/null || true; rm -rf "$WORK"' EXIT
+mkdir -p "$WT/inbox"
+cp "$BLOB" "$WT/inbox/evidence.tar.zst.age"
+cat > "$WT/inbox/manifest.txt" <<EOF
 # Encrypted lab-evidence drop. Decrypt only inside lab-analysis.yml with LAB_ANALYSIS_KEY.
 stamp=$STAMP
 sha256=$(shasum -a 256 "$BLOB" | cut -d' ' -f1)
 EOF
 (
-  cd "$STAGE" || exit 1
-  git init -q
-  git checkout -q -b "$INBOX_BRANCH"
-  git -c user.name='homelab-bot' -c user.email='homelab-bot@users.noreply.github.com' \
-    add inbox/ >/dev/null
+  cd "$WT" || exit 1
+  git add -f inbox/   # *.tar.zst.age is gitignored; force it into this one commit
   git -c user.name='homelab-bot' -c user.email='homelab-bot@users.noreply.github.com' \
     commit -q -m "evidence drop $STAMP (encrypted)"
-  git push -q --force "$REMOTE_URL" "$INBOX_BRANCH"
+  git push -q --force "$REMOTE_URL" "HEAD:$INBOX_BRANCH"
 )
-pass "pushed $INBOX_BRANCH; analysis workflow will run"
-info "watch it: gh run list --workflow=lab-analysis.yml"
+pass "pushed $INBOX_BRANCH; lab-analysis.yml will run"
+info "watch it: gh run watch  (or: gh run list --workflow=lab-analysis.yml)"
 finish

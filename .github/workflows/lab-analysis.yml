@@ -23,10 +23,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - name: Checkout code (main) — analyze.jl + recipients.txt live here
+      - name: Checkout the triggering ref (evidence-inbox carries code + blob)
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: main
 
       - name: Install age + zstd
         run: sudo apt-get update && sudo apt-get install -y age zstd
@@ -52,11 +50,9 @@ jobs:
           # in logs; set +x above keeps the key out of command traces too.
           ID="$RUNNER_TEMP/t.key"; umask 077
           printf '%s' "$LAB_ANALYSIS_KEY" > "$ID"
-          # fetch the encrypted blob from the inbox branch (FETCH_HEAD is reliably
-          # set even with the checkout action's narrow refspec)
-          git fetch --no-tags --depth=1 origin evidence-inbox
-          git show FETCH_HEAD:inbox/evidence.tar.zst.age > "$RUNNER_TEMP/blob.age"
-          age -d -i "$ID" "$RUNNER_TEMP/blob.age" | zstd -dq | tar -C "$WORK/evidence" -xf -
+          # the encrypted blob is in the checkout at inbox/evidence.tar.zst.age
+          [ -f inbox/evidence.tar.zst.age ] || { echo "no inbox/evidence.tar.zst.age on this ref"; exit 1; }
+          age -d -i "$ID" inbox/evidence.tar.zst.age | zstd -dq | tar -C "$WORK/evidence" -xf -
           shred -u "$ID" 2>/dev/null || rm -f "$ID"
           echo "decrypted $(find "$WORK/evidence" -type f | wc -l) evidence file(s)"
 
