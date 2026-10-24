@@ -54,6 +54,8 @@ scan "public email addresses" \
   '[A-Za-z0-9._%+-]+@(gmail|outlook|hotmail|yahoo|icloud|proton(mail)?)\.[A-Za-z]{2,}'
 scan "SSH private keys" \
   'BEGIN (OPENSSH|RSA|EC|DSA) PRIVATE KEY'
+scan "age private identities" \
+  'AGE-SECRET-KEY-1[0-9A-Z]+'
 scan "concrete SSH key fingerprints (base64, not a placeholder)" \
   'SHA256:[A-Za-z0-9+/]{30,}'
 scan "MAC addresses" \

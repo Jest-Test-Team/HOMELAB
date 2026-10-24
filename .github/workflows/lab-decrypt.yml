@@ -1,0 +1,96 @@
+name: lab-decrypt
+
+# SEALED manual decryption. You asked for a workflow where you input your key once
+# to reveal the reports. On a PUBLIC runner, emitting plaintext would leak it, so
+# this instead: decrypts with your archive private key (provided just-in-time as the
+# masked secret LAB_DECRYPT_IDENTITY) and RE-ENCRYPTS the result to a one-time
+# passphrase you supply, into a 1-day artifact. You download it and open it locally
+# with that passphrase. Plaintext never leaves the runner, never hits the logs.
+#
+# Use (once):
+#   1. Settings > Secrets > Actions: set LAB_DECRYPT_IDENTITY = contents of
+#      ~/.config/age/lab-identity.txt   (your archive PRIVATE key).
+#   2. Run this workflow; inputs: the analysis run id + a one-time passphrase.
+#   3. Download the sealed-*.tar.zst.enc artifact; open locally with the passphrase:
+#        openssl enc -d -aes-256-ctr -pbkdf2 -iter 200000 -in sealed-*.tar.zst.enc \
+#          -pass pass:'<one_time_pass>' | zstd -dq | tar -x
+#   4. DELETE the LAB_DECRYPT_IDENTITY secret.
+#
+# The local script lab/crypto/decrypt-reports.sh does the same thing without ever
+# uploading your key, and is the recommended path.
+on:
+  workflow_dispatch:
+    inputs:
+      analysis_run_id:
+        description: "Run ID of the lab-analysis run whose reports-<sha> artifact to decrypt"
+        required: true
+      artifact_name:
+        description: "Artifact name (e.g. reports-<sha>)"
+        required: true
+      one_time_pass:
+        description: "One-time passphrase to re-seal the output (you will need it to open the download)"
+        required: true
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: lab-decrypt
+  cancel-in-progress: false
+
+jobs:
+  seal:
+    if: github.repository_owner == 'Jest-Test-Team'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Install age + zstd
+        run: sudo apt-get update && sudo apt-get install -y age zstd
+
+      - name: Download the encrypted reports artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -Eeuo pipefail
+          gh run download "${{ inputs.analysis_run_id }}" \
+            -n "${{ inputs.artifact_name }}" \
+            -R "${{ github.repository }}" \
+            -D "$RUNNER_TEMP/in"
+          ls -l "$RUNNER_TEMP/in"
+
+      - name: Decrypt then re-seal to the one-time passphrase
+        env:
+          LAB_DECRYPT_IDENTITY: ${{ secrets.LAB_DECRYPT_IDENTITY }}
+          ONE_TIME_PASS: ${{ inputs.one_time_pass }}
+        run: |
+          set -Eeuo pipefail
+          set +x
+          [ -n "${LAB_DECRYPT_IDENTITY:-}" ] || { echo "LAB_DECRYPT_IDENTITY secret not set"; exit 1; }
+          # LAB_DECRYPT_IDENTITY is a secret (auto-masked). ONE_TIME_PASS is a
+          # dispatch input, so mask it explicitly before it could appear anywhere.
+          echo "::add-mask::$ONE_TIME_PASS"
+          umask 077
+          ID="$RUNNER_TEMP/r.key"; printf '%s' "$LAB_DECRYPT_IDENTITY" > "$ID"
+          BLOB="$(find "$RUNNER_TEMP/in" -name '*.age' | head -1)"
+          [ -n "$BLOB" ] || { echo "no .age artifact found"; exit 1; }
+          OUT="$RUNNER_TEMP/sealed-$(date -u +%Y%m%dT%H%M%SZ).tar.zst.enc"
+          # Decrypt with the archive key, then immediately re-encrypt under the
+          # one-time passphrase (openssl: passphrase via env, never in argv/logs).
+          # Plaintext only transits the pipe; it is never written to disk.
+          age -d -i "$ID" "$BLOB" \
+            | openssl enc -aes-256-ctr -pbkdf2 -iter 200000 -salt -pass env:ONE_TIME_PASS -out "$OUT"
+          shred -u "$ID" 2>/dev/null || rm -f "$ID"
+          echo "OUT=$OUT" >> "$GITHUB_ENV"
+
+      - name: Upload the sealed output (short-lived)
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+        with:
+          name: sealed-report
+          path: ${{ env.OUT }}
+          retention-days: 1
+          if-no-files-found: error
+
+      - name: Scrub
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/in" "$RUNNER_TEMP"/sealed* 2>/dev/null || true

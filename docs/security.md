@@ -67,3 +67,33 @@ is proven. See `lab/README.md` and `lab/ROE.md`.
 | SMART unavailable through the USB-SATA bridge | drive health is **unknown** |
 | Single physical disk | backups must go to another device |
 | No egress policy, no image scanning, no OTel | v2 items |
+
+## Encrypted evidence analysis pipeline (`lab/crypto`, `lab/analysis`)
+
+Lab attack evidence is analysed with Julia on a **public** GitHub Actions runner,
+end-to-end encrypted so only the operator can read the data or reports. Two `age`
+keypairs keep the two concerns separate:
+
+| Key | Public (committed) | Private | Role |
+|---|---|---|---|
+| Archive `R` | `lab/crypto/recipients.txt` | `~/.config/age/lab-identity.txt` (local only) | runner encrypts outputs → operator decrypts |
+| Transport `T` | `lab/crypto/transport.recipient` | GitHub secret `LAB_ANALYSIS_KEY` | Mac encrypts input → runner decrypts |
+
+Flow: `push-evidence.sh` tar+zstd+`age`-encrypts the evidence to `T_pub` and
+force-pushes the single-commit `evidence-inbox` branch → `lab-analysis.yml` decrypts
+with `LAB_ANALYSIS_KEY` into `$RUNNER_TEMP` (never the checkout), runs `analyze.jl`,
+re-encrypts the raw+reports bundle to `R_pub`, and uploads **only that ciphertext** as
+a 90-day artifact. Decrypt locally with `decrypt-reports.sh` (recommended) or via the
+sealed `lab-decrypt.yml`.
+
+**Threat model / honest limits:**
+
+| Property | Status |
+|---|---|
+| Report/raw data confidentiality | **Protected** — sealed to `R_pub`; `R_priv` never leaves the Mac |
+| Artifact download by others | **Possible** (public repo) but useless without `R_priv`; true "no download" needs a private repo |
+| `LAB_ANALYSIS_KEY` on GitHub | decrypts **input only**; a leak does not expose report archives; rotate via `setup-keys.sh --rotate` |
+| Plaintext in logs | avoided: crypto runs with `set +x`, secrets masked, Julia never prints evidence content |
+| Malicious workflow edit exfiltrating secrets | mitigated: only collaborators can push `evidence-inbox` / edit workflows; fork PRs get no secrets |
+| `lab-decrypt.yml` transits plaintext in a public runner | true; the local `decrypt-reports.sh` is strictly safer and is the recommended path |
+| Loss of `~/.config/age/lab-identity.txt` | **irrecoverable** — back it up offline |

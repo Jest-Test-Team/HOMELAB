@@ -16,6 +16,16 @@ kubeconfig*
 *.agekey
 age.key
 secrets/
+# age private identities (public recipients lab/crypto/*.recipient and
+# recipients.txt ARE committed; only the secret identity must never be).
+*.identity
+lab-identity.txt
+# plaintext/encrypted evidence bundles are built on the fly, never committed
+# to main (the encrypted blob is force-pushed to the orphan evidence-inbox branch).
+*.tar.zst
+*.tar.zst.age
+*.tar.zst.enc
+lab/analysis/out/
 
 # Private evidence (unredacted output) stays local.
 docs/evidence/private/
