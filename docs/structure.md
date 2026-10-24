@@ -90,8 +90,19 @@ lab/
 ├── kali/                        # ← hands-on attack tutorials + scripts (bilingual)
 │   ├── attack-tutorial.en.md / attack-tutorial.zh-TW.md
 │   └── scripts/                 # 00-recon … 40-rate-limit, run-all.sh
+├── crypto/                      # encrypted evidence pipeline (age E2E)
+│   ├── setup-keys.sh            # make the two age keypairs + set the GH secret
+│   ├── push-evidence.sh         # encrypt + push evidence-inbox (cron/launchd)
+│   ├── decrypt-reports.sh       # local decrypt (recommended)
+│   └── recipients.txt / transport.recipient  # PUBLIC age keys (safe to commit)
+├── analysis/                    # Julia analysis (analyze.jl, Project.toml)
 └── run-attack-incluster.sh      # in-cluster Kali pod attack runner
 ```
+
+The evidence pipeline is end-to-end encrypted: Julia runs on a public GHA runner
+(`.github/workflows/lab-analysis.yml`) but only ciphertext leaves it; decrypt with
+`lab/crypto/decrypt-reports.sh` or the sealed `lab-decrypt.yml`. See `docs/security.md`
+and `lab/crypto/README.md`.
 
 `lab/tests/*` target the **isolated** segment (`10.66.6.10`); `lab/kali/scripts/*`
 are the VM-run, `TARGET`-parameterized version usable against either the Shared-net
@@ -109,9 +120,12 @@ node or the isolated gateway. See `lab/kali/README.md`.
 
 ## CI / publishing — `.github/workflows/`
 
-- `ci.yml` — Rust (`--workspace`) tests/clippy, shell lint, frontend build.
+- `ci.yml` — Rust (`--workspace`) tests/clippy, shell lint, secret scan, frontend build.
 - `publish-arm64.yml` — builds + pushes SHA-tagged images for the service matrix
   (`api`, `mcp`, `worker`, `dashboard`) to GHCR.
+- `lab-analysis.yml` — Julia analysis of encrypted lab-evidence (E2E encrypted; see
+  Security & hygiene below).
+- `lab-decrypt.yml` — manual sealed decryption of the encrypted report artifacts.
 
 ## Security & hygiene
 

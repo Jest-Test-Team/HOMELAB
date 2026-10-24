@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  launchd agent: periodically encrypt + push lab-evidence for analysis.
+
+  Install (per-user, no root):
+    cp lab/crypto/com.homelab.lab-evidence.plist ~/Library/LaunchAgents/
+    # edit the two <string> paths below if your repo lives elsewhere
+    launchctl load  ~/Library/LaunchAgents/com.homelab.lab-evidence.plist
+    launchctl start com.homelab.lab-evidence     # run once now
+  Uninstall:
+    launchctl unload ~/Library/LaunchAgents/com.homelab.lab-evidence.plist
+
+  cron alternative (the user named cron) — runs every 6h:
+    0 */6 * * * cd ~/Documents/GitHub/HOMELAB && /bin/bash lab/crypto/push-evidence.sh >> /tmp/lab-evidence.log 2>&1
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.homelab.lab-evidence</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/dennis_leedennis_lee/Documents/GitHub/HOMELAB/lab/crypto/push-evidence.sh</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/dennis_leedennis_lee/Documents/GitHub/HOMELAB</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <!-- launchd has a minimal PATH; include Homebrew so age/zstd/gh/git resolve. -->
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+
+  <!-- Every 6 hours. Adjust as needed. -->
+  <key>StartInterval</key>
+  <integer>21600</integer>
+
+  <!-- Also run shortly after load/login so it is not purely interval-bound. -->
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>StandardOutPath</key>
+  <string>/tmp/lab-evidence.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/lab-evidence.log</string>
+</dict>
+</plist>
