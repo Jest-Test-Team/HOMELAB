@@ -39,3 +39,4 @@ lab/terraform/.terraform.lock.hcl
 # Python bytecode
 __pycache__/
 *.pyc
+lab/scripts/enter_vms.sh
