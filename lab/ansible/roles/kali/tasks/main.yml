@@ -1,0 +1,77 @@
+---
+- name: Install Phase-1 tooling
+  ansible.builtin.apt:
+    name: "{{ kali_tools }}"
+    state: present
+    update_cache: true
+
+- name: Detect the single lab interface
+  ansible.builtin.shell: >-
+    set -o pipefail;
+    ip -o link show | awk -F': ' '/ether/ {print $2; exit}'
+  args:
+    executable: /bin/bash
+  register: kali_if_detect
+  changed_when: false
+
+- name: Set lab interface fact
+  ansible.builtin.set_fact:
+    kali_if: "{{ kali_if_detect.stdout | trim }}"
+
+- name: Static lab address, no gateway (systemd-networkd)
+  ansible.builtin.copy:
+    dest: /etc/systemd/network/10-lab.network
+    mode: "0644"
+    content: |
+      # Managed by lab/ansible (kali). Lab-only: static, no gateway, no DNS.
+      [Match]
+      Name={{ kali_if }}
+      [Network]
+      Address={{ lab_kali_ip }}/{{ lab_prefix }}
+      DHCP=no
+      IPv6AcceptRA=no
+  notify: restart networkd
+
+- name: Enable systemd-networkd
+  ansible.builtin.systemd:
+    name: systemd-networkd
+    enabled: true
+    state: started
+
+- name: Orchestration SSH key (lets Ubuntu drive the tests over the lab)
+  ansible.posix.authorized_key:
+    user: kali
+    key: "{{ kali_orchestration_pubkey }}"
+    state: present
+  when: kali_orchestration_pubkey | length > 0
+
+- name: Install nftables
+  ansible.builtin.apt:
+    name: nftables
+    state: present
+
+- name: Egress lockdown ruleset
+  ansible.builtin.template:
+    src: nftables-kali.nft.j2
+    dest: /etc/nftables.conf
+    mode: "0644"
+  notify: reload nftables
+
+- name: Enable nftables
+  ansible.builtin.systemd:
+    name: nftables
+    enabled: true
+    state: started
+
+- name: Stage the authorized Phase-1 test scripts
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /opt/lab-tests/
+    mode: "0755"
+  loop:
+    - "{{ playbook_dir }}/tests/nmap-exposure.sh"
+    - "{{ playbook_dir }}/tests/k8s-segmentation.sh"
+    - "{{ playbook_dir }}/tests/rate-limit.sh"
+    - "{{ playbook_dir }}/tests/mcp-auth-tests.py"
+    - "{{ playbook_dir }}/tests/api-zap-baseline.sh"
+    - "{{ playbook_dir }}/ROE.md"

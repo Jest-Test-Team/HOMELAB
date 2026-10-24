@@ -1,0 +1,76 @@
+---
+- name: Find the lab network interface (the one without the default route)
+  ansible.builtin.shell: >-
+    set -o pipefail;
+    ip -o link show | awk -F': ' '/ether/ {print $2}' |
+    while read -r i; do
+      ip -o -4 route show default | grep -q " dev $i " || { echo "$i"; break; }
+    done
+  args:
+    executable: /bin/bash
+  register: lab_if_detect
+  changed_when: false
+
+- name: Fail if no candidate lab interface was found
+  ansible.builtin.fail:
+    msg: "No second interface found; add the Host NIC with lab/scripts/ubuntu-add-lab-nic.sh"
+  when: lab_if_detect.stdout | trim == ""
+
+- name: Set lab interface fact
+  ansible.builtin.set_fact:
+    lab_if: "{{ lab_if_detect.stdout | trim }}"
+
+- name: Configure a static lab address with no gateway (netplan)
+  ansible.builtin.copy:
+    dest: /etc/netplan/60-homelab-lab.yaml
+    mode: "0600"
+    content: |
+      # Managed by lab/ansible (ubuntu-lab). Lab segment: static, no gateway,
+      # so there is no route from the lab to anywhere else.
+      network:
+        version: 2
+        ethernets:
+          {{ lab_if }}:
+            addresses: [{{ lab_ubuntu_ip }}/{{ lab_prefix }}]
+            dhcp4: false
+            dhcp6: false
+  notify: apply netplan
+
+- name: Install nftables
+  ansible.builtin.apt:
+    name: nftables
+    state: present
+    update_cache: true
+
+- name: Install the lab firewall ruleset
+  ansible.builtin.template:
+    src: nftables-lab.nft.j2
+    dest: /etc/homelab/nft/lab.nft
+    mode: "0644"
+  notify: reload lab nftables
+
+- name: Install the lab nftables systemd unit
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/homelab-lab-fw.service
+    mode: "0644"
+    content: |
+      [Unit]
+      Description=Homelab lab-segment firewall
+      After=network-pre.target
+      Wants=network-pre.target
+      [Service]
+      Type=oneshot
+      RemainAfterExit=yes
+      ExecStart=/usr/sbin/nft -f /etc/homelab/nft/lab.nft
+      ExecStop=/usr/sbin/nft delete table inet homelab_lab
+      ExecReload=/usr/sbin/nft -f /etc/homelab/nft/lab.nft
+      [Install]
+      WantedBy=multi-user.target
+  notify: reload lab nftables
+
+- name: Enable the lab firewall
+  ansible.builtin.systemd:
+    name: homelab-lab-fw.service
+    enabled: true
+    state: started
+    daemon_reload: true

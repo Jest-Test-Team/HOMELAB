@@ -1,0 +1,28 @@
+#!/usr/sbin/nft -f
+# Managed by lab/ansible (kali). Default-drop egress: Kali may send traffic ONLY
+# to the authorized target (the Ubuntu lab IP) — any port, so nmap can prove
+# which ports are actually open — and to nothing else. No internet, no home LAN,
+# no Tailscale, no Mac. The Ubuntu-side firewall decides what the target exposes.
+flush ruleset
+
+table inet kali_lab {
+  chain input {
+    type filter hook input priority filter; policy drop;
+    iif "lo" accept
+    ct state established,related accept
+    # Orchestration: accept SSH only from the Ubuntu lab IP.
+    ip saddr {{ lab_ubuntu_ip }} tcp dport 22 accept
+    # ICMP only from the authorized target.
+    ip saddr {{ lab_ubuntu_ip }} ip protocol icmp accept
+  }
+  chain forward {
+    type filter hook forward priority filter; policy drop;
+  }
+  chain output {
+    type filter hook output priority filter; policy drop;
+    oif "lo" accept
+    ct state established,related accept
+    # The authorized target, and ONLY it. Any port/proto so scans are meaningful.
+    ip daddr {{ lab_ubuntu_ip }} accept
+  }
+}

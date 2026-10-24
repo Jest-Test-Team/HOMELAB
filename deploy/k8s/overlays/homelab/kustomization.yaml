@@ -16,3 +16,6 @@ images:
   - name: homelab-worker
     newName: ghcr.io/OWNER/homelab-worker
     newTag: sha-0000000000000000000000000000000000000000
+  - name: homelab-dashboard
+    newName: ghcr.io/OWNER/homelab-dashboard
+    newTag: sha-0000000000000000000000000000000000000000

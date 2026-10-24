@@ -22,6 +22,8 @@ Every script is safe to rerun. Without `--yes` a script only checks and prints w
 | 12 | guest | `21-guest-k3s.sh --yes` | K3S-01 |
 | 13 | guest | `22-guest-secrets.sh --yes` | secrets |
 | 14 | dev Mac | `30-devmac-deploy.sh --dry-run`, then `--migrate --persistence` | DEPLOY-01, DATA-01/02 |
+| 15 | guest (post-deploy hardening) | `23-guest-nodeport-firewall.sh --yes` | dashboard 30300 → tailscale0 only |
+| 16 | guest (post-deploy hardening) | `24-guest-apiserver-firewall.sh --yes` | k3s 6443 → loopback + tailscale0 (closes the Kali 6443 finding) |
 
 ## Getting the scripts into the guest
 

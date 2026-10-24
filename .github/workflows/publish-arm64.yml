@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        service: [api, mcp, worker]
+        service: [api, mcp, worker, dashboard]
     env:
       SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
     steps:

@@ -1,0 +1,26 @@
+---
+# Lab addressing — keep in sync with lab/scripts/_lab_common.sh.
+lab_subnet_cidr: "10.66.6.0/24"
+lab_prefix: 24
+lab_ubuntu_ip: "10.66.6.10"
+lab_kali_ip: "10.66.6.20"
+
+# Authorized test surface (the only ports Kali may reach on the Ubuntu lab IP).
+api_lab_port: 30080
+mcp_lab_port: 30081
+
+# Ports that must NOT be reachable from the lab (asserted by verify + nftables).
+blocked_ubuntu_ports: [22, 6443, 5432, 6379, 30300]
+
+# Public key that lets the Ubuntu VM SSH into Kali over the lab for test
+# orchestration. Set this to the contents of the Ubuntu lab user's public key
+# (e.g. `ssh utm-homelab 'cat ~/.ssh/id_ed25519.pub'`), or leave empty to skip.
+kali_orchestration_pubkey: ""
+
+# Phase-1 Kali tooling (Zeek/Suricata are a later phase, not installed here).
+kali_tools:
+  - nmap
+  - zaproxy
+  - tshark
+  - python3
+  - python3-requests

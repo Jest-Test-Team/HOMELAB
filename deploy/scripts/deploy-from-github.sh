@@ -47,8 +47,8 @@ fi
 : "${KUBECTL:=kubectl}"
 export KUBECTL NAMESPACE
 read -r -a KC <<< "$KUBECTL"
-SERVICES=(api mcp worker)
-DEPLOYMENTS=(deploy/api deploy/mcp deploy/worker)
+SERVICES=(api mcp worker dashboard)
+DEPLOYMENTS=(deploy/api deploy/mcp deploy/worker deploy/dashboard)
 REQUIRED_SECRETS=(homelab-app homelab-postgres homelab-redis homelab-mcp)
 PLACEHOLDER_IMAGE_PREFIX="ghcr.io/OWNER/homelab-"
 
@@ -219,7 +219,7 @@ mkdir -p "$REL"
 } > "$REL/kustomization.yaml"
 RENDERED="$STATE_DIR/rendered-$SHA.yaml"
 "${KC[@]}" kustomize "$REL" > "$RENDERED"
-if grep -nE "image: .*homelab-(api|mcp|worker)" "$RENDERED" | grep -v '@sha256:'; then
+if grep -nE "image: .*homelab-(api|mcp|worker|dashboard)" "$RENDERED" | grep -v '@sha256:'; then
   die "rendered manifest has a homelab image without a digest"
 fi
 grep -q "$PLACEHOLDER_IMAGE_PREFIX" "$RENDERED" && die "placeholder image left in rendered manifest"
@@ -290,7 +290,7 @@ rollback() {
 }
 
 STAGE="rollout"
-for d in deploy/api deploy/mcp deploy/worker sts/postgres sts/redis; do
+for d in deploy/api deploy/mcp deploy/worker deploy/dashboard sts/postgres sts/redis; do
   if ! k rollout status "$d" --timeout="$ROLLOUT_TIMEOUT" >/dev/null; then
     k describe "$d" | tail -20 >&2 || true
     rollback

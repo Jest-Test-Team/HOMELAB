@@ -56,3 +56,20 @@ spec:
         - podSelector: {}
       ports:
         - {protocol: TCP, port: 8080}
+---
+# Dashboard: reachable on its NodePort (TCP 3000) from outside the cluster.
+# NodePort traffic is SNATed to the node IP, so allow any source. Exposure is
+# narrowed to the tailscale0 interface by a host nftables rule, not here.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: dashboard-ingress
+spec:
+  podSelector:
+    matchLabels: {app.kubernetes.io/name: dashboard}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - ipBlock: {cidr: 0.0.0.0/0}
+      ports:
+        - {protocol: TCP, port: 3000}

@@ -1,0 +1,13 @@
+# NodePort so the dashboard is reachable at the node's Tailscale IP
+# (http://<tailscale-ip>:30300). A guest nftables rule restricts 30300 to the
+# tailscale0 interface; see deploy/scripts/local_migrate/23-guest-nodeport-firewall.sh
+# and docs/security.md. kube-proxy still binds it on 0.0.0.0 without that rule.
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard
+spec:
+  type: NodePort
+  selector: {app.kubernetes.io/name: dashboard}
+  ports:
+    - {name: http, port: 80, targetPort: http, nodePort: 30300}
