@@ -69,7 +69,6 @@ jobs:
           OUT="$RUNNER_TEMP/reports-${GITHUB_SHA}.tar.zst.age"
           # bundle raw evidence + generated reports
           tar -C "$WORK" -cf - evidence out | zstd -q -19 | age -R lab/crypto/recipients.txt -o "$OUT"
-          echo "OUT=$OUT" >> "$GITHUB_ENV"
           # guard: refuse to proceed if anything unencrypted sits next to the artifact
           test -f "$OUT" || { echo "encrypted output missing"; exit 1; }
           test "$(find "$RUNNER_TEMP" -maxdepth 1 \( -name '*.tar' -o -name '*.tar.zst' \) | wc -l)" -eq 0 \
@@ -79,7 +78,7 @@ jobs:
         uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
         with:
           name: reports-${{ github.sha }}
-          path: ${{ env.OUT }}
+          path: ${{ runner.temp }}/reports-*.tar.zst.age
           retention-days: 90
           if-no-files-found: error
 

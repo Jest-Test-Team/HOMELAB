@@ -81,13 +81,12 @@ jobs:
           age -d -i "$ID" "$BLOB" \
             | openssl enc -aes-256-ctr -pbkdf2 -iter 200000 -salt -pass env:ONE_TIME_PASS -out "$OUT"
           shred -u "$ID" 2>/dev/null || rm -f "$ID"
-          echo "OUT=$OUT" >> "$GITHUB_ENV"
 
       - name: Upload the sealed output (short-lived)
         uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
         with:
           name: sealed-report
-          path: ${{ env.OUT }}
+          path: ${{ runner.temp }}/sealed-*.tar.zst.enc
           retention-days: 1
           if-no-files-found: error
 

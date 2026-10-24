@@ -51,3 +51,5 @@ __pycache__/
 *.pyc
 lab/scripts/enter_vms.sh
 local.env
+docs/operations.zh-TW.md
+triggers
