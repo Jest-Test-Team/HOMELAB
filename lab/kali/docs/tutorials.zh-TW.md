@@ -2,18 +2,22 @@
 
 > English：[`tutorials.en.md`](tutorials.en.md) · 總表：[`catalogue.zh-TW.md`](catalogue.zh-TW.md)
 
-每個工具都有 3 步：安裝 → 看說明 → 執行（對你**擁有**的目標，`<NODE_IP>`）。`Provides` 列出該套件實際提供的指令（由 apt-file 取得）。**382 個中有 354 個已在 VM 上安裝並執行，附上真實 `--help` 並標示 ✓**（其餘為函式庫/資料/純 GUI，無 CLI help）。 範圍見 `../../ROE.md`。
+每個工具都有 3 步：安裝 → 看說明 → 執行（對你**擁有**的目標，`<NODE_IP>`）。`Provides` 列出該套件實際提供的指令（由 apt-file 取得）。**382 個中有 360 個已在 VM 上安裝並執行，附上真實 `--help` 並標示 ✓**（其餘為函式庫/資料/純 GUI，無 CLI help）。 範圍見 `../../ROE.md`。
 
 
 ## 01 · 資訊蒐集／偵察  (`kali-tools-information-gathering`)
 
-### `0trace`
+### `0trace` ✓ verified on VM
 - 可在既有 TCP 連線中執行的 traceroute 工具
 - **提供指令:** `0trace.sh`, `sendprobe`, `usleep`
 - **步驟:**
   1. 安裝：`sudo apt install -y 0trace`
   2. 看說明：`usleep -h`（或 `man usleep`）
   3. 執行：`usleep <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Usage: /usr/bin/0trace.sh iface target_ip [ target_port ]
+  ```
 - 文件｜Docs: https://lcamtuf.coredump.cx
 
 ### `arping` ✓ verified on VM
@@ -1584,12 +1588,21 @@
   ```
 - 文件｜Docs: https://github.com/cldrn/davtest
 
-### `default-mysql-server`
+### `default-mysql-server` ✓ verified on VM
 - MySQL 資料庫伺服器（中繼套件）
 - **步驟:**
   1. 安裝：`sudo apt install -y default-mysql-server`
   2. 看說明：`default-mysql-server -h`（或 `man default-mysql-server`）
   3. 執行：`default-mysql-server http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  mysqld  Ver 11.8.9-MariaDB-2 from Debian for debian-linux-gnu on aarch64 (-- Please help get to 10k stars at https://github.com/MariaDB/Server)
+  Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+  
+  Starts the MariaDB database server.
+  
+  Usage: mysqld [OPTIONS]
+  ```
 
 ### `dirb` ✓ verified on VM
 - URL 暴力列舉工具
@@ -2074,12 +2087,21 @@
   ```
 - 文件｜Docs: https://github.com/lanjelot/patator
 
-### `php`
+### `php` ✓ verified on VM
 - 伺服器端 HTML 內嵌腳本語言（預設）
 - **步驟:**
   1. 安裝：`sudo apt install -y php`
   2. 看說明：`php -h`（或 `man php`）
   3. 執行：`php http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Usage: php [options] [-f] <file> [--] [args...]
+     php [options] -r <code> [--] [args...]
+     php [options] [-B <begin_code>] -R <code> [-E <end_code>] [--] [args...]
+     php [options] [-B <begin_code>] -F <file> [-E <end_code>] [--] [args...]
+     php [options] -S <addr>:<port> [-t docroot] [router]
+     php [options] -- [args...]
+  ```
 
 ### `php-mysql`
 - PHP 的 MySQL 模組（預設）
@@ -3050,12 +3072,16 @@
   ```
 - 文件｜Docs: https://hashcat.net/hashcat/
 
-### `hashcat-utils`
+### `hashcat-utils` ✓ verified on VM
 - 進階密碼破解的小工具集
 - **步驟:**
   1. 安裝：`sudo apt install -y hashcat-utils`
   2. 看說明：`hashcat-utils -h`（或 `man hashcat-utils`）
   3. 執行：`hashcat-utils <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  usage: /usr/lib/hashcat-utils/cap2hccapx.bin input.pcap output.hccapx [filter by essid] [additional network essid:bssid]
+  ```
 - 文件｜Docs: https://github.com/hashcat/hashcat-utils/
 
 ### `hashid` ✓ verified on VM
@@ -3943,12 +3969,21 @@
   ```
 - 文件｜Docs: https://wireless.wiki.kernel.org/en/users/documentation/iw
 
-### `kismet`
+### `kismet` ✓ verified on VM
 - 無線網路與裝置偵測器（中繼套件）
 - **步驟:**
   1. 安裝：`sudo apt install -y kismet`
   2. 看說明：`kismet -h`（或 `man kismet`）
   3. 執行：`sudo kismet wlan0` — 需要 monitor 模式網卡
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  usage: kismet [OPTION]
+  Nearly all of these options are run-time overrides for values in the
+  kismet.conf configuration file.  Permanent changes should be made to
+  the configuration file.
+   *** Generic Options ***
+   -v, --version                Show version
+  ```
 - 文件｜Docs: https://www.kismetwireless.net/
 
 ### `macchanger` ✓ verified on VM
@@ -6847,13 +6882,22 @@
   ```
 - 文件｜Docs: https://github.com/lvaccaro/truecrack
 
-### `unar`
+### `unar` ✓ verified on VM
 - 多種格式的解壓縮工具
 - **提供指令:** `lsar`, `unar`
 - **步驟:**
   1. 安裝：`sudo apt install -y unar`
   2. 看說明：`unar -h`（或 `man unar`）
   3. 執行：`unar <image-or-file-you-own>` — 分析你擁有的映像/檔案
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  unar v1.10.8, a tool for extracting the contents of archive files.
+  Usage: unar [options] archive [files ...]
+  
+  Available options:
+  -output-directory (-o) <string>    The directory to write the contents of the archive to. Defaults to the current directory. If set to a single dash (-), no files will be created, and all data will be output to stdout.
+  -force-overwrite (-f)              Always overwrite files when a file to be unpacked already exists on disk. By default, the program asks the user if possible, otherwise skips the file.
+  ```
 - 文件｜Docs: https://theunarchiver.com/command-line
 
 ### `undbx` ✓ verified on VM

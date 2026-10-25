@@ -2,18 +2,22 @@
 
 > 繁體中文：[`tutorials.zh-TW.md`](tutorials.zh-TW.md) · catalogue: [`catalogue.en.md`](catalogue.en.md)
 
-Every tool has 3 steps: install → read its help → run it (against an asset you **own**, `<NODE_IP>`). `Provides` lists the commands the package actually ships (via apt-file). **354 of the 382 tools were installed and run on the VM — their real `--help` is embedded and marked ✓** (the rest are libraries/data/GUI-only with no CLI help). Scope: `../../ROE.md`.
+Every tool has 3 steps: install → read its help → run it (against an asset you **own**, `<NODE_IP>`). `Provides` lists the commands the package actually ships (via apt-file). **360 of the 382 tools were installed and run on the VM — their real `--help` is embedded and marked ✓** (the rest are libraries/data/GUI-only with no CLI help). Scope: `../../ROE.md`.
 
 
 ## 01 · Information Gathering / Reconnaissance  (`kali-tools-information-gathering`)
 
-### `0trace`
+### `0trace` ✓ verified on VM
 - traceroute tool that can run within an existing TCP connection
 - **Provides:** `0trace.sh`, `sendprobe`, `usleep`
 - **Steps:**
   1. Install: `sudo apt install -y 0trace`
   2. Help: `usleep -h`  (or `man usleep`)
   3. Run: `usleep <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  Usage: /usr/bin/0trace.sh iface target_ip [ target_port ]
+  ```
 - Docs: https://lcamtuf.coredump.cx
 
 ### `arping` ✓ verified on VM
@@ -1584,12 +1588,21 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   ```
 - Docs: https://github.com/cldrn/davtest
 
-### `default-mysql-server`
+### `default-mysql-server` ✓ verified on VM
 - MySQL database server binaries and system database setup (metapackage)
 - **Steps:**
   1. Install: `sudo apt install -y default-mysql-server`
   2. Help: `default-mysql-server -h`  (or `man default-mysql-server`)
   3. Run: `default-mysql-server http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  mysqld  Ver 11.8.9-MariaDB-2 from Debian for debian-linux-gnu on aarch64 (-- Please help get to 10k stars at https://github.com/MariaDB/Server)
+  Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+  
+  Starts the MariaDB database server.
+  
+  Usage: mysqld [OPTIONS]
+  ```
 
 ### `dirb` ✓ verified on VM
 - URL bruteforcing tool
@@ -2074,12 +2087,21 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   ```
 - Docs: https://github.com/lanjelot/patator
 
-### `php`
+### `php` ✓ verified on VM
 - server-side, HTML-embedded scripting language (default)
 - **Steps:**
   1. Install: `sudo apt install -y php`
   2. Help: `php -h`  (or `man php`)
   3. Run: `php http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  Usage: php [options] [-f] <file> [--] [args...]
+     php [options] -r <code> [--] [args...]
+     php [options] [-B <begin_code>] -R <code> [-E <end_code>] [--] [args...]
+     php [options] [-B <begin_code>] -F <file> [-E <end_code>] [--] [args...]
+     php [options] -S <addr>:<port> [-t docroot] [router]
+     php [options] -- [args...]
+  ```
 
 ### `php-mysql`
 - MySQL module for PHP [default]
@@ -3050,12 +3072,16 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   ```
 - Docs: https://hashcat.net/hashcat/
 
-### `hashcat-utils`
+### `hashcat-utils` ✓ verified on VM
 - Set of small utilities for advanced password cracking
 - **Steps:**
   1. Install: `sudo apt install -y hashcat-utils`
   2. Help: `hashcat-utils -h`  (or `man hashcat-utils`)
   3. Run: `hashcat-utils <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
+- **real --help (verified on VM):**
+  ```
+  usage: /usr/lib/hashcat-utils/cap2hccapx.bin input.pcap output.hccapx [filter by essid] [additional network essid:bssid]
+  ```
 - Docs: https://github.com/hashcat/hashcat-utils/
 
 ### `hashid` ✓ verified on VM
@@ -3943,12 +3969,21 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   ```
 - Docs: https://wireless.wiki.kernel.org/en/users/documentation/iw
 
-### `kismet`
+### `kismet` ✓ verified on VM
 - wireless network and device detector (metapackage)
 - **Steps:**
   1. Install: `sudo apt install -y kismet`
   2. Help: `kismet -h`  (or `man kismet`)
   3. Run: `sudo kismet wlan0` — needs a monitor-mode adapter
+- **real --help (verified on VM):**
+  ```
+  usage: kismet [OPTION]
+  Nearly all of these options are run-time overrides for values in the
+  kismet.conf configuration file.  Permanent changes should be made to
+  the configuration file.
+   *** Generic Options ***
+   -v, --version                Show version
+  ```
 - Docs: https://www.kismetwireless.net/
 
 ### `macchanger` ✓ verified on VM
@@ -6847,13 +6882,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   ```
 - Docs: https://github.com/lvaccaro/truecrack
 
-### `unar`
+### `unar` ✓ verified on VM
 - Unarchiver for a variety of file formats
 - **Provides:** `lsar`, `unar`
 - **Steps:**
   1. Install: `sudo apt install -y unar`
   2. Help: `unar -h`  (or `man unar`)
   3. Run: `unar <image-or-file-you-own>` — analyse an image/file you own
+- **real --help (verified on VM):**
+  ```
+  unar v1.10.8, a tool for extracting the contents of archive files.
+  Usage: unar [options] archive [files ...]
+  
+  Available options:
+  -output-directory (-o) <string>    The directory to write the contents of the archive to. Defaults to the current directory. If set to a single dash (-), no files will be created, and all data will be output to stdout.
+  -force-overwrite (-f)              Always overwrite files when a file to be unpacked already exists on disk. By default, the program asks the user if possible, otherwise skips the file.
+  ```
 - Docs: https://theunarchiver.com/command-line
 
 ### `undbx` ✓ verified on VM
