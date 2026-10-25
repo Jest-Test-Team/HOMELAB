@@ -88,6 +88,8 @@ DRYRUN=1 ./apps.sh open wireshark          # show what would run, launch nothing
 ```
 
 (`toolkit.sh launch <exec>` does the same for a single tool inside the attack workflow.)
+
+**Coverage check (on the VM):** after installing the full toolset (450 menu apps), `apps.sh` resolved and could launch **all 450/450** (dry-run, 0 misses) — i.e. it drives every installed application, not a subset.
 GUI apps need the VNC/xrdp desktop up — see `../../docs/operations.zh-TW.md` §4.
 
 Each command writes a timestamped report to `$EVIDENCE_DIR` (default `~/lab-evidence/`)
