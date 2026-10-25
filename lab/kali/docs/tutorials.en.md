@@ -2,7 +2,7 @@
 
 > 繁體中文：[`tutorials.zh-TW.md`](tutorials.zh-TW.md) · catalogue: [`catalogue.en.md`](catalogue.en.md)
 
-Every tool has 3 steps: install → read its help → run it (against an asset you **own**, `<NODE_IP>`). `Provides` lists the commands the package actually ships (via apt-file). Scope: `../../ROE.md`.
+Every tool has 3 steps: install → read its help → run it (against an asset you **own**, `<NODE_IP>`). `Provides` lists the commands the package actually ships (via apt-file). **Tools marked ✓ were installed and run on the VM — their real `--help` is embedded.** Scope: `../../ROE.md`.
 
 
 ## 01 · Information Gathering / Reconnaissance  (`kali-tools-information-gathering`)
@@ -34,22 +34,40 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `braa <NODE_IP>` — run recon against a node you own
 - Docs: https://github.com/mteg/braa
 
-### `dmitry`
+### `dmitry` ✓ verified on VM
 - Deepmagic Information Gathering Tool
 - **Provides:** `dmitry`
 - **Steps:**
   1. Install: `sudo apt install -y dmitry`
   2. Help: `dmitry -h`  (or `man dmitry`)
   3. Run: `dmitry <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  dmitry: invalid option -- '-'
+  Deepmagic Information Gathering Tool
+  "There be some deep magic going on"
+  
+  Usage: dmitry [-winsepfb] [-t 0-9] [-o %host.txt] host
+    -o	 Save output to %host.txt or to file specified by -o file
+  ```
 - Docs: https://mor-pah.net/software/dmitry-deepmagic-information-gathering-tool/
 
-### `dnsenum`
+### `dnsenum` ✓ verified on VM
 - tool to enumerate domain DNS information
 - **Provides:** `dnsenum`
 - **Steps:**
   1. Install: `sudo apt install -y dnsenum`
   2. Help: `dnsenum -h`  (or `man dnsenum`)
   3. Run: `dnsenum <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  dnsenum VERSION:1.3.1
+  Usage: dnsenum [Options] <domain>
+  [Options]:
+  Note: If no -f tag supplied will default to /usr/share/dnsenum/dns.txt or
+  the dns.txt file in the same directory as dnsenum
+  GENERAL OPTIONS:
+  ```
 - Docs: https://github.com/SparrowOchon/dnsenum2
 
 ### `dnsmap`
@@ -61,13 +79,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `dnsmap <NODE_IP>` — run recon against a node you own
 - Docs: https://github.com/resurrecting-open-source-projects/dnsmap
 
-### `dnsrecon`
+### `dnsrecon` ✓ verified on VM
 - Powerful DNS enumeration script
 - **Provides:** `dnsrecon`
 - **Steps:**
   1. Install: `sudo apt install -y dnsrecon`
   2. Help: `dnsrecon -h`  (or `man dnsrecon`)
   3. Run: `dnsrecon <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  usage: dnsrecon [-h] [-d DOMAIN] [-iL INPUT_LIST] [-n NS_SERVER] [-r RANGE]
+                  [-D DICTIONARY] [-f] [-a] [-s] [-b] [-y] [-k] [-w] [--shodan]
+                  [--shodan-active] [--shodan-key SHODAN_KEY] [-z]
+                  [--threads THREADS] [--lifetime LIFETIME]
+                  [--loglevel {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [--tcp]
+                  [--db DB] [-x XML] [-c CSV] [-j JSON] [--iw]
+  ```
 - Docs: https://github.com/darkoperator/dnsrecon
 
 ### `dnstracer`
@@ -97,13 +124,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `enum4linux <NODE_IP>` — run recon against a node you own
 - Docs: https://labs.portcullis.co.uk/tools/enum4linux/
 
-### `fierce`
+### `fierce` ✓ verified on VM
 - Domain DNS scanner
 - **Provides:** `fierce`
 - **Steps:**
   1. Install: `sudo apt install -y fierce`
   2. Help: `fierce -h`  (or `man fierce`)
   3. Run: `fierce <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  usage: fierce [-h] [--domain DOMAIN] [--connect] [--wide]
+                [--traverse TRAVERSE] [--search SEARCH [SEARCH ...]]
+                [--range RANGE] [--delay DELAY]
+                [--subdomains SUBDOMAINS [SUBDOMAINS ...] |
+                --subdomain-file SUBDOMAIN_FILE]
+                [--dns-servers DNS_SERVERS [DNS_SERVERS ...] |
+  ```
 - Docs: https://github.com/mschwager/fierce
 
 ### `firewalk`
@@ -115,13 +151,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `firewalk <NODE_IP>` — run recon against a node you own
 - Docs: http://packetfactory.openwall.net/projects/firewalk/
 
-### `fping`
+### `fping` ✓ verified on VM
 - sends ICMP ECHO_REQUEST packets to network hosts
 - **Provides:** `fping`, `fping6`
 - **Steps:**
   1. Install: `sudo apt install -y fping`
   2. Help: `fping -h`  (or `man fping`)
   3. Run: `fping <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  Usage: fping [options] [targets...]
+  
+  Probing options:
+     -4, --ipv4         only ping IPv4 addresses
+     -6, --ipv6         only ping IPv6 addresses
+     -b, --size=BYTES   amount of ping data to send, in bytes (default: 56)
+  ```
 - Docs: https://www.fping.org/
 
 ### `fragrouter`
@@ -142,13 +187,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `ftest <NODE_IP>` — run recon against a node you own
 - Docs: https://dev.inversepath.com/ftester/
 
-### `hping3`
+### `hping3` ✓ verified on VM
 - Active Network Smashing Tool
 - **Provides:** `hping3`
 - **Steps:**
   1. Install: `sudo apt install -y hping3`
   2. Help: `hping3 -h`  (or `man hping3`)
   3. Run: `hping3 <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  usage: hping3 host [options]
+    -h  --help      show this help
+    -v  --version   show version
+    -c  --count     packet count
+    -i  --interval  wait (uX for X microseconds, for example -i u1000)
+        --fast      alias for -i u10000 (10 packets for second)
+  ```
 - Docs: http://www.hping.org/
 
 ### `ike-scan`
@@ -214,13 +268,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `maltego <NODE_IP>` — run recon against a node you own
 - Docs: https://www.maltego.com
 
-### `masscan`
+### `masscan` ✓ verified on VM
 - TCP port scanner
 - **Provides:** `masscan`
 - **Steps:**
   1. Install: `sudo apt install -y masscan`
   2. Help: `masscan -h`  (or `man masscan`)
   3. Run: `masscan <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  MASSCAN is a fast port scanner. The primary input parameters are the
+  IP addresses/ranges you want to scan, and the port numbers. An example
+  is the following, which scans the 10.x.x.x network for web servers:
+   masscan 10.0.0.0/8 -p80
+  The program auto-detects network interface/adapter settings. If this
+  fails, you'll have to set these manually. The following is an
+  ```
 - Docs: https://github.com/robertdavidgraham/masscan
 
 ### `metagoofil`
@@ -232,13 +295,21 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `metagoofil <NODE_IP>` — run recon against a node you own
 - Docs: https://github.com/opsdisk/metagoofil
 
-### `nbtscan`
+### `nbtscan` ✓ verified on VM
 - scan networks searching for NetBIOS information
 - **Provides:** `nbtscan`
 - **Steps:**
   1. Install: `sudo apt install -y nbtscan`
   2. Help: `nbtscan -h`  (or `man nbtscan`)
   3. Run: `nbtscan <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  nbtscan: invalid option -- '-'
+  
+  NBTscan version 1.7.2.
+  This is a free software and it comes with absolutely no warranty.
+  You can use, distribute and modify it under terms of GNU GPL 2+.
+  ```
 - Docs: https://github.com/resurrecting-open-source-projects/nbtscan
 
 ### `ncat`
@@ -250,13 +321,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `ncat <NODE_IP>` — run recon against a node you own
 - Docs: https://nmap.org/
 
-### `netdiscover`
+### `netdiscover` ✓ verified on VM
 - active/passive network address scanner using ARP requests
 - **Provides:** `netdiscover`
 - **Steps:**
   1. Install: `sudo apt install -y netdiscover`
   2. Help: `netdiscover -h`  (or `man netdiscover`)
   3. Run: `netdiscover <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  netdiscover: invalid option -- '-'
+  
+  Netdiscover 0.21 [Active/passive ARP reconnaissance tool]
+  Written by: Jaime Penalba <<email>>
+  
+  Usage: netdiscover [-i device] [-r range | -l file | -p] [-m file] [-F filter] [-s time] [-c count] [-n node] [-dfPLNS]
+  ```
 - Docs: https://github.com/netdiscover-scanner/netdiscover
 
 ### `netmask`
@@ -268,22 +348,40 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `netmask <NODE_IP>` — run recon against a node you own
 - Docs: https://github.com/tlby/netmask
 
-### `nmap`
+### `nmap` ✓ verified on VM
 - The Network Mapper
 - **Provides:** `nmap`, `nping`
 - **Steps:**
   1. Install: `sudo apt install -y nmap`
   2. Help: `nmap -h`  (or `man nmap`)
   3. Run: `nmap <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  Nmap 7.991 ( https://nmap.org )
+  Usage: nmap [Scan Type(s)] [Options] {target specification}
+  TARGET SPECIFICATION:
+    Can pass hostnames, IP addresses, networks, etc.
+    Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254
+    -iL <inputfilename>: Input from list of hosts/networks
+  ```
 - Docs: https://nmap.org/
 
-### `onesixtyone`
+### `onesixtyone` ✓ verified on VM
 - fast and simple SNMP scanner
 - **Provides:** `onesixtyone`
 - **Steps:**
   1. Install: `sudo apt install -y onesixtyone`
   2. Help: `onesixtyone -h`  (or `man onesixtyone`)
   3. Run: `onesixtyone <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  onesixtyone: invalid option -- '-'
+  onesixtyone 0.3.3 [options] <host> <community>
+    -c <communityfile> file with community names to try
+    -i <inputfile>     file with target hosts
+    -o <outputfile>    output log
+    -p                 specify an alternate destination SNMP port
+  ```
 - Docs: https://github.com/trailofbits/onesixtyone
 
 ### `p0f`
@@ -313,22 +411,40 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `recon-ng <NODE_IP>` — run recon against a node you own
 - Docs: https://github.com/lanmaster53/recon-ng
 
-### `smbmap`
+### `smbmap` ✓ verified on VM
 - handy SMB enumeration tool
 - **Provides:** `smbmap`
 - **Steps:**
   1. Install: `sudo apt install -y smbmap`
   2. Help: `smbmap -h`  (or `man smbmap`)
   3. Run: `smbmap <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  usage: smbmap [-h] (-H HOST | --host-file FILE) [-u USERNAME] [-p PASSWORD |
+                --prompt] [-k] [--no-pass] [--dc-ip IP or Host] [-s SHARE]
+                [-d DOMAIN] [-P PORT] [-v] [--signing] [--admin] [--no-banner]
+                [--no-color] [--no-update] [--timeout SCAN_TIMEOUT] [-x COMMAND]
+                [--mode CMDMODE] [-L | -r [PATH]] [-g FILE | --csv FILE]
+                [--dir-only] [--no-write-check] [-q] [--depth DEPTH]
+  ```
 - Docs: https://github.com/ShawnDEvans/smbmap
 
-### `smtp-user-enum`
+### `smtp-user-enum` ✓ verified on VM
 - Username guessing tool for the SMTP service
 - **Provides:** `smtp-user-enum`
 - **Steps:**
   1. Install: `sudo apt install -y smtp-user-enum`
   2. Help: `smtp-user-enum -h`  (or `man smtp-user-enum`)
   3. Run: `smtp-user-enum <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  /usr/bin/smtp-user-enum version [unknown] calling Getopt::Std::getopts (version 1.14 [paranoid]),
+  running under Perl version 5.42.3.
+  
+  Usage: smtp-user-enum [-OPTIONS [-MORE_OPTIONS]] [--] [PROGRAM_ARG1 ...]
+  
+  The following single-character options are accepted:
+  ```
 - Docs: http://pentestmonkey.net/tools/user-enumeration/smtp-user-enum
 
 ### `snmpcheck`
@@ -358,31 +474,57 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `sslh <NODE_IP>` — run recon against a node you own
 - Docs: http://www.rutschle.net/tech/sslh/README.html
 
-### `sslscan`
+### `sslscan` ✓ verified on VM
 - Tests SSL/TLS enabled services to discover supported cipher suites
 - **Provides:** `sslscan`
 - **Steps:**
   1. Install: `sudo apt install -y sslscan`
   2. Help: `sslscan -h`  (or `man sslscan`)
   3. Run: `sslscan <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  [1;34m                   _
+             ___ ___| |___  ___ __ _ _ __
+            / __/ __| / __|/ __/ _` | '_ \
+            \__ \__ \ \__ \ (_| (_| | | | |
+            |___/___/_|___/\___\__,_|_| |_|
+  ```
 - Docs: https://github.com/rbsec/sslscan
 
-### `sslyze`
+### `sslyze` ✓ verified on VM
 - Fast and full-featured SSL scanner
 - **Provides:** `sslyze`
 - **Steps:**
   1. Install: `sudo apt install -y sslyze`
   2. Help: `sslyze -h`  (or `man sslyze`)
   3. Run: `sslyze <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  usage: sslyze [-h] [--update_trust_stores] [--cert CERTIFICATE_FILE]
+                [--key KEY_FILE] [--keyform KEY_FORMAT] [--pass PASSPHRASE]
+                [--json_out JSON_FILE] [--targets_in TARGET_FILE] [--quiet]
+                [--slow_connection] [--https_tunnel PROXY_SETTINGS]
+                [--starttls PROTOCOL] [--xmpp_to HOSTNAME]
+                [--sni SERVER_NAME_INDICATION] [--reneg] [--compression]
+  ```
 - Docs: https://github.com/nabla-c0d3/sslyze
 
-### `swaks`
+### `swaks` ✓ verified on VM
 - SMTP command-line test tool
 - **Provides:** `swaks`
 - **Steps:**
   1. Install: `sudo apt install -y swaks`
   2. Help: `swaks -h`  (or `man swaks`)
   3. Run: `swaks <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  SWAKS(1)                             SWAKS                             SWAKS(1)
+  
+  NAME
+       Swaks - Swiss Army Knife SMTP, the all-purpose SMTP transaction tester
+  
+  DESCRIPTION
+  ```
 - Docs: https://www.jetmore.org/john/code/swaks/
 
 ### `thc-ipv6`
@@ -394,13 +536,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `atk6-alive6 <NODE_IP>` — run recon against a node you own
 - Docs: http://www.thc.org/thc-ipv6/
 
-### `theharvester`
+### `theharvester` ✓ verified on VM
 - tool for gathering e-mail accounts and subdomain names from public sources
 - **Provides:** `restfulHarvest`, `theharvester`, `theHarvester`
 - **Steps:**
   1. Install: `sudo apt install -y theharvester`
   2. Help: `theharvester -h`  (or `man theharvester`)
   3. Run: `theharvester <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  Read proxies.yaml from /etc/theHarvester/proxies.yaml
+  *******************************************************************
+  *  _   _                                            _             *
+  * | |_| |__   ___    /\  /\__ _ _ ____   _____  ___| |_ ___ _ __  *
+  * | __|  _ \ / _ \  / /_/ / _` | '__\ \ / / _ \/ __| __/ _ \ '__| *
+  * | |_| | | |  __/ / __  / (_| | |   \ V /  __/\__ \ ||  __/ |    *
+  ```
 - Docs: https://github.com/laramies/theHarvester
 
 ### `tlssled`
@@ -439,13 +590,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `urlcrazy <NODE_IP>` — run recon against a node you own
 - Docs: https://www.morningstarsecurity.com/research/urlcrazy
 
-### `wafw00f`
+### `wafw00f` ✓ verified on VM
 - identify and fingerprint Web Application Firewall products
 - **Provides:** `wafw00f`
 - **Steps:**
   1. Install: `sudo apt install -y wafw00f`
   2. Help: `wafw00f -h`  (or `man wafw00f`)
   3. Run: `wafw00f <NODE_IP>` — run recon against a node you own
+- **real --help (verified on VM):**
+  ```
+  Usage: wafw00f url1 [url2 [url3 ... ]]
+  example: wafw00f http://www.victim.org/
+  
+  Options:
+    -h, --help            show this help message and exit
+    -v, --verbose         Enable verbosity, multiple -v options increase
+  ```
 - Docs: https://github.com/EnableSecurity/wafw00f
 
 ### `zenmap`
@@ -576,22 +736,40 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `lynis http://<NODE_IP>:30080` — scan a service you own
 - Docs: https://cisofy.com/lynis/
 
-### `nikto`
+### `nikto` ✓ verified on VM
 - web server security scanner
 - **Provides:** `nikto`, `replay`
 - **Steps:**
   1. Install: `sudo apt install -y nikto`
   2. Help: `nikto -h`  (or `man nikto`)
   3. Run: `nikto http://<NODE_IP>:30080` — scan a service you own
+- **real --help (verified on VM):**
+  ```
+  Unknown option: help
+  
+     Options:
+         -Add-header         Add HTTP headers (can be used multiple times, one per header pair)
+         -ask+               Whether to ask about submitting updates
+                                 yes   Ask about each (default)
+  ```
 - Docs: https://github.com/sullo/nikto
 
-### `nmap`
+### `nmap` ✓ verified on VM
 - The Network Mapper
 - **Provides:** `nmap`, `nping`
 - **Steps:**
   1. Install: `sudo apt install -y nmap`
   2. Help: `nmap -h`  (or `man nmap`)
   3. Run: `nmap http://<NODE_IP>:30080` — scan a service you own
+- **real --help (verified on VM):**
+  ```
+  Nmap 7.991 ( https://nmap.org )
+  Usage: nmap [Scan Type(s)] [Options] {target specification}
+  TARGET SPECIFICATION:
+    Can pass hostnames, IP addresses, networks, etc.
+    Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254
+    -iL <inputfilename>: Input from list of hosts/networks
+  ```
 - Docs: https://nmap.org/
 
 ### `ohrwurm`
@@ -813,13 +991,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `cadaver http://<NODE_IP>:30080` — run against your own web service
 - Docs: https://github.com/notroj/cadaver
 
-### `commix`
+### `commix` ✓ verified on VM
 - Automated All-in-One OS Command Injection and Exploitation Tool
 - **Provides:** `commix`
 - **Steps:**
   1. Install: `sudo apt install -y commix`
   2. Help: `commix -h`  (or `man commix`)
   3. Run: `commix http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  Usage: commix [option(s)]
+  
+  Options:
+    -h, --help            Show help and exit.
+  
+    [1m[4mGeneral[0m:
+  ```
 - Docs: https://commixproject.com
 
 ### `cutycapt`
@@ -847,13 +1034,21 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   2. Help: `default-mysql-server -h`  (or `man default-mysql-server`)
   3. Run: `default-mysql-server http://<NODE_IP>:30080` — run against your own web service
 
-### `dirb`
+### `dirb` ✓ verified on VM
 - URL bruteforcing tool
 - **Provides:** `dirb`, `dirb-gendict`, `html2dic`
 - **Steps:**
   1. Install: `sudo apt install -y dirb`
   2. Help: `dirb -h`  (or `man dirb`)
   3. Run: `dirb http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  
+  -----------------
+  DIRB v2.22    
+  By The Dark Raver
+  -----------------
+  ```
 - Docs: https://dirb.sourceforge.net/
 
 ### `dirbuster`
@@ -937,13 +1132,19 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `httrack http://<NODE_IP>:30080` — run against your own web service
 - Docs: https://www.httrack.com
 
-### `hydra`
+### `hydra` ✓ verified on VM
 - very fast network logon cracker
 - **Provides:** `dpl4hydra`, `hydra`, `hydra-wizard`, `pw-inspector`
 - **Steps:**
   1. Install: `sudo apt install -y hydra`
   2. Help: `hydra -h`  (or `man hydra`)
   3. Run: `hydra http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  Hydra v9.7 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+  
+  hydra: invalid option -- '-'
+  ```
 - Docs: https://github.com/vanhauser-thc/thc-hydra
 
 ### `hydra-gtk`
@@ -1009,13 +1210,20 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `maltego http://<NODE_IP>:30080` — run against your own web service
 - Docs: https://www.maltego.com
 
-### `medusa`
+### `medusa` ✓ verified on VM
 - fast, parallel, modular, login brute-forcer for network services
 - **Provides:** `medusa`
 - **Steps:**
   1. Install: `sudo apt install -y medusa`
   2. Help: `medusa -h`  (or `man medusa`)
   3. Run: `medusa http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  medusa: invalid option -- '-'
+  CRITICAL: Unknown error processing command-line options.
+  ALERT: User logon information must be supplied.
+  Medusa v2.3 [http://www.foofus.net] (C) JoMo-Kun / Foofus Networks <<email>>
+  ```
 - Docs: http://foofus.net/?page_id=51
 
 ### `mitmproxy`
@@ -1027,22 +1235,40 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `mitmproxy http://<NODE_IP>:30080` — run against your own web service
 - Docs: https://mitmproxy.org
 
-### `ncrack`
+### `ncrack` ✓ verified on VM
 - High-speed network authentication cracking tool
 - **Provides:** `ncrack`
 - **Steps:**
   1. Install: `sudo apt install -y ncrack`
   2. Help: `ncrack -h`  (or `man ncrack`)
   3. Run: `ncrack http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  Ncrack 0.7 ( http://ncrack.org )
+  Usage: ncrack [Options] {target and service specification}
+  TARGET SPECIFICATION:
+    Can pass hostnames, IP addresses, networks, etc.
+    Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254
+    -iX <inputfilename>: Input from Nmap's -oX XML output format
+  ```
 - Docs: https://nmap.org/ncrack/
 
-### `nikto`
+### `nikto` ✓ verified on VM
 - web server security scanner
 - **Provides:** `nikto`, `replay`
 - **Steps:**
   1. Install: `sudo apt install -y nikto`
   2. Help: `nikto -h`  (or `man nikto`)
   3. Run: `nikto http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  Unknown option: help
+  
+     Options:
+         -Add-header         Add HTTP headers (can be used multiple times, one per header pair)
+         -ask+               Whether to ask about submitting updates
+                                 yes   Ask about each (default)
+  ```
 - Docs: https://github.com/sullo/nikto
 
 ### `nishang`
@@ -1054,13 +1280,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `nishang http://<NODE_IP>:30080` — run against your own web service
 - Docs: https://github.com/samratashok/nishang
 
-### `nmap`
+### `nmap` ✓ verified on VM
 - The Network Mapper
 - **Provides:** `nmap`, `nping`
 - **Steps:**
   1. Install: `sudo apt install -y nmap`
   2. Help: `nmap -h`  (or `man nmap`)
   3. Run: `nmap http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  Nmap 7.991 ( https://nmap.org )
+  Usage: nmap [Scan Type(s)] [Options] {target specification}
+  TARGET SPECIFICATION:
+    Can pass hostnames, IP addresses, networks, etc.
+    Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254
+    -iL <inputfilename>: Input from list of hosts/networks
+  ```
 - Docs: https://nmap.org/
 
 ### `oscanner`
@@ -1090,13 +1325,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `paros http://<NODE_IP>:30080` — run against your own web service
 - Docs: http://www.parosproxy.org/index.shtml
 
-### `patator`
+### `patator` ✓ verified on VM
 - Multi-purpose brute-forcer
 - **Provides:** `patator`
 - **Steps:**
   1. Install: `sudo apt install -y patator`
   2. Help: `patator -h`  (or `man patator`)
   3. Run: `patator http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  Patator 1.1.0 (https://github.com/lanjelot/patator) with Python-3.14.8
+  Usage: patator module --help
+  
+  Available modules:
+    + ftp_login     : Brute-force FTP
+    + ssh_login     : Brute-force SSH
+  ```
 - Docs: https://github.com/lanjelot/patator
 
 ### `php`
@@ -1167,13 +1411,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `siege http://<NODE_IP>:30080` — run against your own web service
 - Docs: https://www.joedog.org/JoeDog/Siege
 
-### `skipfish`
+### `skipfish` ✓ verified on VM
 - fully automated, active web application security reconnaissance tool
 - **Provides:** `skipfish`
 - **Steps:**
   1. Install: `sudo apt install -y skipfish`
   2. Help: `skipfish -h`  (or `man skipfish`)
   3. Run: `skipfish http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  skipfish web application scanner - version 2.10b
+  Usage: skipfish [ options ... ] -W wordlist -o output_dir start_url [ start_url2 ... ]
+  
+  Authentication and access options:
+  
+    -A user:pass      - use specified HTTP authentication credentials
+  ```
 
 ### `slowhttptest`
 - application layer Denial of Service attacks simulation tool
@@ -1193,13 +1446,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `sqlitebrowser http://<NODE_IP>:30080` — run against your own web service
 - Docs: https://sqlitebrowser.org/
 
-### `sqlmap`
+### `sqlmap` ✓ verified on VM
 - automatic SQL injection tool
 - **Provides:** `sqlmap`, `sqlmapapi`
 - **Steps:**
   1. Install: `sudo apt install -y sqlmap`
   2. Help: `sqlmap -h`  (or `man sqlmap`)
   3. Run: `sqlmap http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+          ___
+         __H__
+   ___ ___[)]_____ ___ ___  {1.10.9#stable}
+  |_ -| . [(]     | .'| . |
+  |___|_  ["]_|_|_|__,|  _|
+        |_|V...       |_|   https://sqlmap.org
+  ```
 - Docs: https://sqlmap.org/
 
 ### `sqlninja`
@@ -1238,13 +1500,21 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `sslh http://<NODE_IP>:30080` — run against your own web service
 - Docs: http://www.rutschle.net/tech/sslh/README.html
 
-### `sslscan`
+### `sslscan` ✓ verified on VM
 - Tests SSL/TLS enabled services to discover supported cipher suites
 - **Provides:** `sslscan`
 - **Steps:**
   1. Install: `sudo apt install -y sslscan`
   2. Help: `sslscan -h`  (or `man sslscan`)
   3. Run: `sslscan http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  [1;34m                   _
+             ___ ___| |___  ___ __ _ _ __
+            / __/ __| / __|/ __/ _` | '_ \
+            \__ \__ \ \__ \ (_| (_| | | | |
+            |___/___/_|___/\___\__,_|_| |_|
+  ```
 - Docs: https://github.com/rbsec/sslscan
 
 ### `sslsniff`
@@ -1265,13 +1535,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `sslsplit http://<NODE_IP>:30080` — run against your own web service
 - Docs: https://www.roe.ch/SSLsplit
 
-### `sslyze`
+### `sslyze` ✓ verified on VM
 - Fast and full-featured SSL scanner
 - **Provides:** `sslyze`
 - **Steps:**
   1. Install: `sudo apt install -y sslyze`
   2. Help: `sslyze -h`  (or `man sslyze`)
   3. Run: `sslyze http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  usage: sslyze [-h] [--update_trust_stores] [--cert CERTIFICATE_FILE]
+                [--key KEY_FILE] [--keyform KEY_FORMAT] [--pass PASSPHRASE]
+                [--json_out JSON_FILE] [--targets_in TARGET_FILE] [--quiet]
+                [--slow_connection] [--https_tunnel PROXY_SETTINGS]
+                [--starttls PROTOCOL] [--xmpp_to HOSTNAME]
+                [--sni SERVER_NAME_INDICATION] [--reneg] [--compression]
+  ```
 - Docs: https://github.com/nabla-c0d3/sslyze
 
 ### `stunnel4`
@@ -1310,31 +1589,58 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `tnscmd10g http://<NODE_IP>:30080` — run against your own web service
 - Docs: http://www.red-database-security.com/
 
-### `uniscan`
+### `uniscan` ✓ verified on VM
 - LFI, RFI, and RCE vulnerability scanner
 - **Provides:** `uniscan`, `uniscan-gui`
 - **Steps:**
   1. Install: `sudo apt install -y uniscan`
   2. Help: `uniscan -h`  (or `man uniscan`)
   3. Run: `uniscan http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  ./uniscan.pl version [unknown] calling Getopt::Std::getopts (version 1.14 [paranoid]),
+  running under Perl version 5.42.3.
+  
+  Usage: uniscan.pl [-OPTIONS [-MORE_OPTIONS]] [--] [PROGRAM_ARG1 ...]
+  
+  The following single-character options are accepted:
+  ```
 - Docs: https://sourceforge.net/projects/uniscan/
 
-### `wafw00f`
+### `wafw00f` ✓ verified on VM
 - identify and fingerprint Web Application Firewall products
 - **Provides:** `wafw00f`
 - **Steps:**
   1. Install: `sudo apt install -y wafw00f`
   2. Help: `wafw00f -h`  (or `man wafw00f`)
   3. Run: `wafw00f http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  Usage: wafw00f url1 [url2 [url3 ... ]]
+  example: wafw00f http://www.victim.org/
+  
+  Options:
+    -h, --help            show this help message and exit
+    -v, --verbose         Enable verbosity, multiple -v options increase
+  ```
 - Docs: https://github.com/EnableSecurity/wafw00f
 
-### `wapiti`
+### `wapiti` ✓ verified on VM
 - web application vulnerability scanner
 - **Provides:** `wapiti`, `wapiti-getcookie`
 - **Steps:**
   1. Install: `sudo apt install -y wapiti`
   2. Help: `wapiti -h`  (or `man wapiti`)
   3. Run: `wapiti http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  
+       __    __            _ _   _ _____
+      / / /\ \ \__ _ _ __ (_) |_(_)___ /
+      \ \/  \/ / _` | '_ \| | __| | |_ \
+       \  /\  / (_| | |_) | | |_| |___) |
+        \/  \/ \__,_| .__/|_|\__|_|____/
+  ```
 - Docs: https://wapiti.sourceforge.net/
 
 ### `webacoo`
@@ -1373,22 +1679,40 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `weevely http://<NODE_IP>:30080` — run against your own web service
 - Docs: https://github.com/epinna/weevely3/
 
-### `wfuzz`
+### `wfuzz` ✓ verified on VM
 - Web application bruteforcer
 - **Provides:** `wfuzz`
 - **Steps:**
   1. Install: `sudo apt install -y wfuzz`
   2. Help: `wfuzz -h`  (or `man wfuzz`)
   3. Run: `wfuzz http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  default
+  default
+  ********************************************************
+  * Wfuzz 3.1.0 - The Web Fuzzer                         *
+  *                                                      *
+  * Version up to 1.4c coded by:                         *
+  ```
 - Docs: http://www.edge-security.com/wfuzz.php
 
-### `whatweb`
+### `whatweb` ✓ verified on VM
 - Next generation web scanner
 - **Provides:** `whatweb`
 - **Steps:**
   1. Install: `sudo apt install -y whatweb`
   2. Help: `whatweb -h`  (or `man whatweb`)
   3. Run: `whatweb http://<NODE_IP>:30080` — run against your own web service
+- **real --help (verified on VM):**
+  ```
+  [1m[34m
+  .$$$     $.                                   .$$$     $.
+  $$$$     $$. .$$$  $$$ .$$$$$$.  .$$$$$$$$$$. $$$$     $$. .$$$$$$$. .$$$$$$.
+  $ $$     $$$ $ $$  $$$ $ $$$$$$. $$$$$ $$$$$$ $ $$     $$$ $ $$   $$ $ $$$$$$.
+  $ `$     $$$ $ `$  $$$ $ `$  $$$ $$' $ `$ `$$ $ `$     $$$ $ `$      $ `$  $$$'
+  $. $     $$$ $. $$$$$$ $. $$$$$$ `$  $. $  :' $. $     $$$ $. $$$$   $. $$$$$.
+  ```
 - Docs: https://github.com/urbanadventurer/WhatWeb
 
 ### `wireshark`
@@ -1475,13 +1799,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `sqlitebrowser <NODE_IP>` — assess your own DB (5432 should be blocked)
 - Docs: https://sqlitebrowser.org/
 
-### `sqlmap`
+### `sqlmap` ✓ verified on VM
 - automatic SQL injection tool
 - **Provides:** `sqlmap`, `sqlmapapi`
 - **Steps:**
   1. Install: `sudo apt install -y sqlmap`
   2. Help: `sqlmap -h`  (or `man sqlmap`)
   3. Run: `sqlmap <NODE_IP>` — assess your own DB (5432 should be blocked)
+- **real --help (verified on VM):**
+  ```
+          ___
+         __H__
+   ___ ___[)]_____ ___ ___  {1.10.9#stable}
+  |_ -| . [(]     | .'| . |
+  |___|_  ["]_|_|_|__,|  _|
+        |_|V...       |_|   https://sqlmap.org
+  ```
 - Docs: https://sqlmap.org/
 
 ### `sqlninja`
@@ -1514,13 +1847,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ## 05 · Password Attacks  (`kali-tools-passwords`)
 
-### `cewl`
+### `cewl` ✓ verified on VM
 - custom word list generator
 - **Provides:** `cewl`, `fab-cewl`
 - **Steps:**
   1. Install: `sudo apt install -y cewl`
   2. Help: `cewl -h`  (or `man cewl`)
   3. Run: `cewl <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
+- **real --help (verified on VM):**
+  ```
+  CeWL 6.2.1 (More Fixes) Robin Wood (<email>) (https://digi.ninja/)
+  Usage: cewl [OPTIONS] ... <url>
+  
+      OPTIONS:
+  	-h, --help: Show help.
+  	-k, --keep: Keep the downloaded file.
+  ```
 - Docs: https://github.com/digininja/CeWL
 
 ### `chntpw`
@@ -1559,13 +1901,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `creddump7 <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
 - Docs: https://github.com/CiscoCXSecurity/creddump7
 
-### `crunch`
+### `crunch` ✓ verified on VM
 - tool for creating wordlist
 - **Provides:** `crunch`
 - **Steps:**
   1. Install: `sudo apt install -y crunch`
   2. Help: `crunch -h`  (or `man crunch`)
   3. Run: `crunch <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
+- **real --help (verified on VM):**
+  ```
+  crunch version 3.6
+  
+  Crunch can create a wordlist based on criteria you specify.  The output from crunch can be sent to the screen, file, or to another program.
+  
+  Usage: crunch <min> <max> [options]
+  where min and max are numbers
+  ```
 - Docs: http://sourceforge.net/projects/crunch-wordlist/
 
 ### `fcrackzip`
@@ -1595,22 +1946,39 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `gpp-decrypt <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
 - Docs: http://carnal0wnage.attackresearch.com/2012/10/group-policy-preferences-and-getting.html
 
-### `hash-identifier`
+### `hash-identifier` ✓ verified on VM
 - Tool to identify hash types
 - **Provides:** `hash-identifier`
 - **Steps:**
   1. Install: `sudo apt install -y hash-identifier`
   2. Help: `hash-identifier -h`  (or `man hash-identifier`)
   3. Run: `hash-identifier <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
+- **real --help (verified on VM):**
+  ```
+     #########################################################################
+     #     __  __                     __           ______    _____           #
+     #    /\ \/\ \                   /\ \         /\__  _\  /\  _ `\         #
+     #    \ \ \_\ \     __      ____ \ \ \___     \/_/\ \/  \ \ \/\ \        #
+     #     \ \  _  \  /'__`\   / ,__\ \ \  _ `\      \ \ \   \ \ \ \ \       #
+     #      \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \      \_\ \__ \ \ \_\ \      #
+  ```
 - Docs: https://github.com/blackploit/hash-identifier
 
-### `hashcat`
+### `hashcat` ✓ verified on VM
 - World's fastest and most advanced password recovery utility
 - **Provides:** `hashcat`
 - **Steps:**
   1. Install: `sudo apt install -y hashcat`
   2. Help: `hashcat -h`  (or `man hashcat`)
   3. Run: `hashcat <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
+- **real --help (verified on VM):**
+  ```
+  hashcat (v7.1.2) starting in help mode
+  
+  Usage: hashcat [options]... hash|hashfile|hccapxfile [dictionary|mask|directory]...
+  
+  - [ Options ] -
+  ```
 - Docs: https://hashcat.net/hashcat/
 
 ### `hashcat-utils`
@@ -1621,22 +1989,37 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `hashcat-utils <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
 - Docs: https://github.com/hashcat/hashcat-utils/
 
-### `hashid`
+### `hashid` ✓ verified on VM
 - Identify the different types of hashes used to encrypt data
 - **Provides:** `hashid`
 - **Steps:**
   1. Install: `sudo apt install -y hashid`
   2. Help: `hashid -h`  (or `man hashid`)
   3. Run: `hashid <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
+- **real --help (verified on VM):**
+  ```
+  usage: hashid.py [-h] [-e] [-m] [-j] [-o FILE] [--version] INPUT
+  
+  Identify the different types of hashes used to encrypt data
+  
+  positional arguments:
+    INPUT               input to analyze (default: STDIN)
+  ```
 - Docs: https://psypanda.github.io/hashID/
 
-### `hydra`
+### `hydra` ✓ verified on VM
 - very fast network logon cracker
 - **Provides:** `dpl4hydra`, `hydra`, `hydra-wizard`, `pw-inspector`
 - **Steps:**
   1. Install: `sudo apt install -y hydra`
   2. Help: `hydra -h`  (or `man hydra`)
   3. Run: `hydra <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
+- **real --help (verified on VM):**
+  ```
+  Hydra v9.7 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+  
+  hydra: invalid option -- '-'
+  ```
 - Docs: https://github.com/vanhauser-thc/thc-hydra
 
 ### `hydra-gtk`
@@ -1648,13 +2031,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `xhydra <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
 - Docs: https://github.com/vanhauser-thc/thc-hydra
 
-### `john`
+### `john` ✓ verified on VM
 - active password cracking tool
 - **Provides:** `base64conv`, `bitlocker2john`, `calc_stat`, `cprepair`, `dmg2john`, `eapmd5tojohn`, `genmkvpwd`, `gpg2john`, `hccap2john`, `john`, `keepass2john`, `mailer`, `mkvcalcproba`, `putty2john`, `racf2john`, `rar2john`, `raw2dyna`, `SIPdump`, `tgtsnarf`, `uaf2john`, `unafs`, `undrop`, `unique`, `unshadow`, `vncpcap2john`, `wpapcap2john`, `zip2john`
 - **Steps:**
   1. Install: `sudo apt install -y john`
   2. Help: `john -h`  (or `man john`)
   3. Run: `john <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
+- **real --help (verified on VM):**
+  ```
+  Created directory: /home/kali/.john
+  John the Ripper 1.9.0-jumbo-1+bleeding-aec1328d6c 2021-11-02 10:45:52 +0100 OMP [linux-gnu 64-bit aarch64 ASIMD AC]
+  Copyright (c) 1996-2021 by Solar Designer and others
+  Homepage: https://www.openwall.com/john/
+  
+  Usage: john [OPTIONS] [PASSWORD-FILES]
+  ```
 - Docs: https://github.com/openwall/john
 
 ### `johnny`
@@ -1683,13 +2075,20 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `mp32 <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
 - Docs: https://github.com/hashcat/maskprocessor
 
-### `medusa`
+### `medusa` ✓ verified on VM
 - fast, parallel, modular, login brute-forcer for network services
 - **Provides:** `medusa`
 - **Steps:**
   1. Install: `sudo apt install -y medusa`
   2. Help: `medusa -h`  (or `man medusa`)
   3. Run: `medusa <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
+- **real --help (verified on VM):**
+  ```
+  medusa: invalid option -- '-'
+  CRITICAL: Unknown error processing command-line options.
+  ALERT: User logon information must be supplied.
+  Medusa v2.3 [http://www.foofus.net] (C) JoMo-Kun / Foofus Networks <<email>>
+  ```
 - Docs: http://foofus.net/?page_id=51
 
 ### `mimikatz`
@@ -1701,22 +2100,40 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `mimikatz <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
 - Docs: https://blog.gentilkiwi.com/mimikatz
 
-### `ncrack`
+### `ncrack` ✓ verified on VM
 - High-speed network authentication cracking tool
 - **Provides:** `ncrack`
 - **Steps:**
   1. Install: `sudo apt install -y ncrack`
   2. Help: `ncrack -h`  (or `man ncrack`)
   3. Run: `ncrack <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
+- **real --help (verified on VM):**
+  ```
+  Ncrack 0.7 ( http://ncrack.org )
+  Usage: ncrack [Options] {target and service specification}
+  TARGET SPECIFICATION:
+    Can pass hostnames, IP addresses, networks, etc.
+    Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254
+    -iX <inputfilename>: Input from Nmap's -oX XML output format
+  ```
 - Docs: https://nmap.org/ncrack/
 
-### `onesixtyone`
+### `onesixtyone` ✓ verified on VM
 - fast and simple SNMP scanner
 - **Provides:** `onesixtyone`
 - **Steps:**
   1. Install: `sudo apt install -y onesixtyone`
   2. Help: `onesixtyone -h`  (or `man onesixtyone`)
   3. Run: `onesixtyone <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
+- **real --help (verified on VM):**
+  ```
+  onesixtyone: invalid option -- '-'
+  onesixtyone 0.3.3 [options] <host> <community>
+    -c <communityfile> file with community names to try
+    -i <inputfile>     file with target hosts
+    -o <outputfile>    output log
+    -p                 specify an alternate destination SNMP port
+  ```
 - Docs: https://github.com/trailofbits/onesixtyone
 
 ### `ophcrack`
@@ -1764,13 +2181,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `pth-net <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
 - Docs: http://passing-the-hash.blogspot.fr
 
-### `patator`
+### `patator` ✓ verified on VM
 - Multi-purpose brute-forcer
 - **Provides:** `patator`
 - **Steps:**
   1. Install: `sudo apt install -y patator`
   2. Help: `patator -h`  (or `man patator`)
   3. Run: `patator <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
+- **real --help (verified on VM):**
+  ```
+  Patator 1.1.0 (https://github.com/lanjelot/patator) with Python-3.14.8
+  Usage: patator module --help
+  
+  Available modules:
+    + ftp_login     : Brute-force FTP
+    + ssh_login     : Brute-force SSH
+  ```
 - Docs: https://github.com/lanjelot/patator
 
 ### `pdfcrack`
@@ -1863,13 +2289,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `svmap <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
 - Docs: https://github.com/EnableSecurity/sipvicious
 
-### `smbmap`
+### `smbmap` ✓ verified on VM
 - handy SMB enumeration tool
 - **Provides:** `smbmap`
 - **Steps:**
   1. Install: `sudo apt install -y smbmap`
   2. Help: `smbmap -h`  (or `man smbmap`)
   3. Run: `smbmap <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
+- **real --help (verified on VM):**
+  ```
+  usage: smbmap [-h] (-H HOST | --host-file FILE) [-u USERNAME] [-p PASSWORD |
+                --prompt] [-k] [--no-pass] [--dc-ip IP or Host] [-s SHARE]
+                [-d DOMAIN] [-P PORT] [-v] [--signing] [--admin] [--no-banner]
+                [--no-color] [--no-update] [--timeout SCAN_TIMEOUT] [-x COMMAND]
+                [--mode CMDMODE] [-L | -r [PATH]] [-g FILE | --csv FILE]
+                [--dir-only] [--no-write-check] [-q] [--depth DEPTH]
+  ```
 - Docs: https://github.com/ShawnDEvans/smbmap
 
 ### `statsprocessor`
@@ -2072,13 +2507,21 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `sudo freeradius-wpe wlan0` — needs a monitor-mode adapter
 - Docs: https://www.freeradius.org/
 
-### `hashcat`
+### `hashcat` ✓ verified on VM
 - World's fastest and most advanced password recovery utility
 - **Provides:** `hashcat`
 - **Steps:**
   1. Install: `sudo apt install -y hashcat`
   2. Help: `hashcat -h`  (or `man hashcat`)
   3. Run: `sudo hashcat wlan0` — needs a monitor-mode adapter
+- **real --help (verified on VM):**
+  ```
+  hashcat (v7.1.2) starting in help mode
+  
+  Usage: hashcat [options]... hash|hashfile|hccapxfile [dictionary|mask|directory]...
+  
+  - [ Options ] -
+  ```
 - Docs: https://hashcat.net/hashcat/
 
 ### `hostapd-wpe`
@@ -2513,13 +2956,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `setoolkit` — interactive; validation on your own targets only
 - Docs: https://www.trustedsec.com/downloads/social-engineer-toolkit/
 
-### `sqlmap`
+### `sqlmap` ✓ verified on VM
 - automatic SQL injection tool
 - **Provides:** `sqlmap`, `sqlmapapi`
 - **Steps:**
   1. Install: `sudo apt install -y sqlmap`
   2. Help: `sqlmap -h`  (or `man sqlmap`)
   3. Run: `sqlmap` — interactive; validation on your own targets only
+- **real --help (verified on VM):**
+  ```
+          ___
+         __H__
+   ___ ___[)]_____ ___ ___  {1.10.9#stable}
+  |_ -| . [(]     | .'| . |
+  |___|_  ["]_|_|_|__,|  _|
+        |_|V...       |_|   https://sqlmap.org
+  ```
 - Docs: https://sqlmap.org/
 
 ### `termineter`
@@ -3625,13 +4077,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `ssdeep <image-or-file-you-own>` — analyse an image/file you own
 - Docs: https://github.com/ssdeep-project/ssdeep
 
-### `tcpdump`
+### `tcpdump` ✓ verified on VM
 - command-line network traffic analyzer
 - **Provides:** `tcpdump`
 - **Steps:**
   1. Install: `sudo apt install -y tcpdump`
   2. Help: `tcpdump -h`  (or `man tcpdump`)
   3. Run: `tcpdump <image-or-file-you-own>` — analyse an image/file you own
+- **real --help (verified on VM):**
+  ```
+  tcpdump version 4.99.6
+  libpcap version 1.10.6 (64-bit time_t, with TPACKET_V3)
+  OpenSSL 3.6.3 9 Jun 2026
+  64-bit build, 64-bit time_t
+  Usage: tcpdump [-AbdDefghHIJKlLnNOpqStuUvxX#] [ -B size ] [ -c count ] [--count]
+  		[ -C file_size ] [ -E algo:secret ] [ -F file ] [ -G seconds ]
+  ```
 - Docs: https://www.tcpdump.org/
 
 ### `tcpflow`
@@ -3984,13 +4445,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `tiger <NODE_IP>` — triage/identify a target you own
 - Docs: http://savannah.nongnu.org/projects/tiger/
 
-### `wapiti`
+### `wapiti` ✓ verified on VM
 - web application vulnerability scanner
 - **Provides:** `wapiti`, `wapiti-getcookie`
 - **Steps:**
   1. Install: `sudo apt install -y wapiti`
   2. Help: `wapiti -h`  (or `man wapiti`)
   3. Run: `wapiti <NODE_IP>` — triage/identify a target you own
+- **real --help (verified on VM):**
+  ```
+  
+       __    __            _ _   _ _____
+      / / /\ \ \__ _ _ __ (_) |_(_)___ /
+      \ \/  \/ / _` | '_ \| | __| | |_ \
+       \  /\  / (_| | |_) | | |_| |___) |
+        \/  \/ \__,_| .__/|_|\__|_|____/
+  ```
 - Docs: https://wapiti.sourceforge.net/
 
 ### `witnessme`
@@ -4041,13 +4511,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `ntlm2 <target-you-own>` — fuzz a target you own
 - Docs: http://www.immunitysec.com/resources-freesoftware.shtml
 
-### `wfuzz`
+### `wfuzz` ✓ verified on VM
 - Web application bruteforcer
 - **Provides:** `wfuzz`
 - **Steps:**
   1. Install: `sudo apt install -y wfuzz`
   2. Help: `wfuzz -h`  (or `man wfuzz`)
   3. Run: `wfuzz <target-you-own>` — fuzz a target you own
+- **real --help (verified on VM):**
+  ```
+  default
+  default
+  ********************************************************
+  * Wfuzz 3.1.0 - The Web Fuzzer                         *
+  *                                                      *
+  * Version up to 1.4c coded by:                         *
+  ```
 - Docs: http://www.edge-security.com/wfuzz.php
 
 
@@ -4088,13 +4567,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `libfindrtp <NODE_IP>` — needs your own SIP/VoIP target
 - Docs: http://www.hackingvoip.com/sec_tools.html
 
-### `nmap`
+### `nmap` ✓ verified on VM
 - The Network Mapper
 - **Provides:** `nmap`, `nping`
 - **Steps:**
   1. Install: `sudo apt install -y nmap`
   2. Help: `nmap -h`  (or `man nmap`)
   3. Run: `nmap <NODE_IP>` — needs your own SIP/VoIP target
+- **real --help (verified on VM):**
+  ```
+  Nmap 7.991 ( https://nmap.org )
+  Usage: nmap [Scan Type(s)] [Options] {target specification}
+  TARGET SPECIFICATION:
+    Can pass hostnames, IP addresses, networks, etc.
+    Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254
+    -iL <inputfilename>: Input from list of hosts/networks
+  ```
 - Docs: https://nmap.org/
 
 ### `ohrwurm`
@@ -4692,22 +5180,37 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `aircrack-ng -h` — one of the most-used tools
 - Docs: https://www.aircrack-ng.org/
 
-### `hydra`
+### `hydra` ✓ verified on VM
 - very fast network logon cracker
 - **Provides:** `dpl4hydra`, `hydra`, `hydra-wizard`, `pw-inspector`
 - **Steps:**
   1. Install: `sudo apt install -y hydra`
   2. Help: `hydra -h`  (or `man hydra`)
   3. Run: `hydra -h` — one of the most-used tools
+- **real --help (verified on VM):**
+  ```
+  Hydra v9.7 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+  
+  hydra: invalid option -- '-'
+  ```
 - Docs: https://github.com/vanhauser-thc/thc-hydra
 
-### `john`
+### `john` ✓ verified on VM
 - active password cracking tool
 - **Provides:** `base64conv`, `bitlocker2john`, `calc_stat`, `cprepair`, `dmg2john`, `eapmd5tojohn`, `genmkvpwd`, `gpg2john`, `hccap2john`, `john`, `keepass2john`, `mailer`, `mkvcalcproba`, `putty2john`, `racf2john`, `rar2john`, `raw2dyna`, `SIPdump`, `tgtsnarf`, `uaf2john`, `unafs`, `undrop`, `unique`, `unshadow`, `vncpcap2john`, `wpapcap2john`, `zip2john`
 - **Steps:**
   1. Install: `sudo apt install -y john`
   2. Help: `john -h`  (or `man john`)
   3. Run: `john -h` — one of the most-used tools
+- **real --help (verified on VM):**
+  ```
+  Created directory: /home/kali/.john
+  John the Ripper 1.9.0-jumbo-1+bleeding-aec1328d6c 2021-11-02 10:45:52 +0100 OMP [linux-gnu 64-bit aarch64 ASIMD AC]
+  Copyright (c) 1996-2021 by Solar Designer and others
+  Homepage: https://www.openwall.com/john/
+  
+  Usage: john [OPTIONS] [PASSWORD-FILES]
+  ```
 - Docs: https://github.com/openwall/john
 
 ### `metasploit-framework`
@@ -4719,22 +5222,40 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `msf-jsobfu -h` — one of the most-used tools
 - Docs: https://www.metasploit.com/
 
-### `netexec`
+### `netexec` ✓ verified on VM
 - Network Execution Tool
 - **Provides:** `netexec`, `nxc`, `nxcdb`
 - **Steps:**
   1. Install: `sudo apt install -y netexec`
   2. Help: `netexec -h`  (or `man netexec`)
   3. Run: `netexec -h` — one of the most-used tools
+- **real --help (verified on VM):**
+  ```
+  [*] First time use detected
+  [*] Creating home directory structure
+  [*] Creating missing folder logs
+  [*] Creating missing folder modules
+  [*] Creating missing folder workspaces
+  [*] Creating missing folder obfuscated_scripts
+  ```
 - Docs: https://github.com/Pennyw0rth/NetExec
 
-### `nmap`
+### `nmap` ✓ verified on VM
 - The Network Mapper
 - **Provides:** `nmap`, `nping`
 - **Steps:**
   1. Install: `sudo apt install -y nmap`
   2. Help: `nmap -h`  (or `man nmap`)
   3. Run: `nmap -h` — one of the most-used tools
+- **real --help (verified on VM):**
+  ```
+  Nmap 7.991 ( https://nmap.org )
+  Usage: nmap [Scan Type(s)] [Options] {target specification}
+  TARGET SPECIFICATION:
+    Can pass hostnames, IP addresses, networks, etc.
+    Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254
+    -iL <inputfilename>: Input from list of hosts/networks
+  ```
 - Docs: https://nmap.org/
 
 ### `responder`
@@ -4746,13 +5267,22 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
   3. Run: `responder -h` — one of the most-used tools
 - Docs: https://github.com/lgandx/Responder
 
-### `sqlmap`
+### `sqlmap` ✓ verified on VM
 - automatic SQL injection tool
 - **Provides:** `sqlmap`, `sqlmapapi`
 - **Steps:**
   1. Install: `sudo apt install -y sqlmap`
   2. Help: `sqlmap -h`  (or `man sqlmap`)
   3. Run: `sqlmap -h` — one of the most-used tools
+- **real --help (verified on VM):**
+  ```
+          ___
+         __H__
+   ___ ___[)]_____ ___ ___  {1.10.9#stable}
+  |_ -| . [(]     | .'| . |
+  |___|_  ["]_|_|_|__,|  _|
+        |_|V...       |_|   https://sqlmap.org
+  ```
 - Docs: https://sqlmap.org/
 
 ### `wireshark`

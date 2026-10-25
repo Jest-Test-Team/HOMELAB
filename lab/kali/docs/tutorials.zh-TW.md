@@ -2,7 +2,7 @@
 
 > English：[`tutorials.en.md`](tutorials.en.md) · 總表：[`catalogue.zh-TW.md`](catalogue.zh-TW.md)
 
-每個工具都有 3 步：安裝 → 看說明 → 執行（對你**擁有**的目標，`<NODE_IP>`）。`Provides` 列出該套件實際提供的指令（由 apt-file 取得）。範圍見 `../../ROE.md`。
+每個工具都有 3 步：安裝 → 看說明 → 執行（對你**擁有**的目標，`<NODE_IP>`）。`Provides` 列出該套件實際提供的指令（由 apt-file 取得）。**標示 ✓ 的工具已在 VM 上安裝並執行，附上真實 `--help`。** 範圍見 `../../ROE.md`。
 
 
 ## 01 · 資訊蒐集／偵察  (`kali-tools-information-gathering`)
@@ -34,22 +34,40 @@
   3. 執行：`braa <NODE_IP>` — 對你擁有的節點執行偵察
 - 文件｜Docs: https://github.com/mteg/braa
 
-### `dmitry`
+### `dmitry` ✓ verified on VM
 - Deepmagic 資訊蒐集工具
 - **提供指令:** `dmitry`
 - **步驟:**
   1. 安裝：`sudo apt install -y dmitry`
   2. 看說明：`dmitry -h`（或 `man dmitry`）
   3. 執行：`dmitry <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  dmitry: invalid option -- '-'
+  Deepmagic Information Gathering Tool
+  "There be some deep magic going on"
+  
+  Usage: dmitry [-winsepfb] [-t 0-9] [-o %host.txt] host
+    -o	 Save output to %host.txt or to file specified by -o file
+  ```
 - 文件｜Docs: https://mor-pah.net/software/dmitry-deepmagic-information-gathering-tool/
 
-### `dnsenum`
+### `dnsenum` ✓ verified on VM
 - 列舉網域 DNS 資訊的工具
 - **提供指令:** `dnsenum`
 - **步驟:**
   1. 安裝：`sudo apt install -y dnsenum`
   2. 看說明：`dnsenum -h`（或 `man dnsenum`）
   3. 執行：`dnsenum <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  dnsenum VERSION:1.3.1
+  Usage: dnsenum [Options] <domain>
+  [Options]:
+  Note: If no -f tag supplied will default to /usr/share/dnsenum/dns.txt or
+  the dns.txt file in the same directory as dnsenum
+  GENERAL OPTIONS:
+  ```
 - 文件｜Docs: https://github.com/SparrowOchon/dnsenum2
 
 ### `dnsmap`
@@ -61,13 +79,22 @@
   3. 執行：`dnsmap <NODE_IP>` — 對你擁有的節點執行偵察
 - 文件｜Docs: https://github.com/resurrecting-open-source-projects/dnsmap
 
-### `dnsrecon`
+### `dnsrecon` ✓ verified on VM
 - 強大的 DNS 列舉腳本
 - **提供指令:** `dnsrecon`
 - **步驟:**
   1. 安裝：`sudo apt install -y dnsrecon`
   2. 看說明：`dnsrecon -h`（或 `man dnsrecon`）
   3. 執行：`dnsrecon <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  usage: dnsrecon [-h] [-d DOMAIN] [-iL INPUT_LIST] [-n NS_SERVER] [-r RANGE]
+                  [-D DICTIONARY] [-f] [-a] [-s] [-b] [-y] [-k] [-w] [--shodan]
+                  [--shodan-active] [--shodan-key SHODAN_KEY] [-z]
+                  [--threads THREADS] [--lifetime LIFETIME]
+                  [--loglevel {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [--tcp]
+                  [--db DB] [-x XML] [-c CSV] [-j JSON] [--iw]
+  ```
 - 文件｜Docs: https://github.com/darkoperator/dnsrecon
 
 ### `dnstracer`
@@ -97,13 +124,22 @@
   3. 執行：`enum4linux <NODE_IP>` — 對你擁有的節點執行偵察
 - 文件｜Docs: https://labs.portcullis.co.uk/tools/enum4linux/
 
-### `fierce`
+### `fierce` ✓ verified on VM
 - 網域 DNS 掃描器
 - **提供指令:** `fierce`
 - **步驟:**
   1. 安裝：`sudo apt install -y fierce`
   2. 看說明：`fierce -h`（或 `man fierce`）
   3. 執行：`fierce <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  usage: fierce [-h] [--domain DOMAIN] [--connect] [--wide]
+                [--traverse TRAVERSE] [--search SEARCH [SEARCH ...]]
+                [--range RANGE] [--delay DELAY]
+                [--subdomains SUBDOMAINS [SUBDOMAINS ...] |
+                --subdomain-file SUBDOMAIN_FILE]
+                [--dns-servers DNS_SERVERS [DNS_SERVERS ...] |
+  ```
 - 文件｜Docs: https://github.com/mschwager/fierce
 
 ### `firewalk`
@@ -115,13 +151,22 @@
   3. 執行：`firewalk <NODE_IP>` — 對你擁有的節點執行偵察
 - 文件｜Docs: http://packetfactory.openwall.net/projects/firewalk/
 
-### `fping`
+### `fping` ✓ verified on VM
 - 對多台主機送出 ICMP ECHO_REQUEST
 - **提供指令:** `fping`, `fping6`
 - **步驟:**
   1. 安裝：`sudo apt install -y fping`
   2. 看說明：`fping -h`（或 `man fping`）
   3. 執行：`fping <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Usage: fping [options] [targets...]
+  
+  Probing options:
+     -4, --ipv4         only ping IPv4 addresses
+     -6, --ipv6         only ping IPv6 addresses
+     -b, --size=BYTES   amount of ping data to send, in bytes (default: 56)
+  ```
 - 文件｜Docs: https://www.fping.org/
 
 ### `fragrouter`
@@ -142,13 +187,22 @@
   3. 執行：`ftest <NODE_IP>` — 對你擁有的節點執行偵察
 - 文件｜Docs: https://dev.inversepath.com/ftester/
 
-### `hping3`
+### `hping3` ✓ verified on VM
 - 主動式網路壓測工具
 - **提供指令:** `hping3`
 - **步驟:**
   1. 安裝：`sudo apt install -y hping3`
   2. 看說明：`hping3 -h`（或 `man hping3`）
   3. 執行：`hping3 <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  usage: hping3 host [options]
+    -h  --help      show this help
+    -v  --version   show version
+    -c  --count     packet count
+    -i  --interval  wait (uX for X microseconds, for example -i u1000)
+        --fast      alias for -i u10000 (10 packets for second)
+  ```
 - 文件｜Docs: http://www.hping.org/
 
 ### `ike-scan`
@@ -214,13 +268,22 @@
   3. 執行：`maltego <NODE_IP>` — 對你擁有的節點執行偵察
 - 文件｜Docs: https://www.maltego.com
 
-### `masscan`
+### `masscan` ✓ verified on VM
 - TCP 連接埠掃描器
 - **提供指令:** `masscan`
 - **步驟:**
   1. 安裝：`sudo apt install -y masscan`
   2. 看說明：`masscan -h`（或 `man masscan`）
   3. 執行：`masscan <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  MASSCAN is a fast port scanner. The primary input parameters are the
+  IP addresses/ranges you want to scan, and the port numbers. An example
+  is the following, which scans the 10.x.x.x network for web servers:
+   masscan 10.0.0.0/8 -p80
+  The program auto-detects network interface/adapter settings. If this
+  fails, you'll have to set these manually. The following is an
+  ```
 - 文件｜Docs: https://github.com/robertdavidgraham/masscan
 
 ### `metagoofil`
@@ -232,13 +295,21 @@
   3. 執行：`metagoofil <NODE_IP>` — 對你擁有的節點執行偵察
 - 文件｜Docs: https://github.com/opsdisk/metagoofil
 
-### `nbtscan`
+### `nbtscan` ✓ verified on VM
 - 掃描網路尋找 NetBIOS 資訊
 - **提供指令:** `nbtscan`
 - **步驟:**
   1. 安裝：`sudo apt install -y nbtscan`
   2. 看說明：`nbtscan -h`（或 `man nbtscan`）
   3. 執行：`nbtscan <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  nbtscan: invalid option -- '-'
+  
+  NBTscan version 1.7.2.
+  This is a free software and it comes with absolutely no warranty.
+  You can use, distribute and modify it under terms of GNU GPL 2+.
+  ```
 - 文件｜Docs: https://github.com/resurrecting-open-source-projects/nbtscan
 
 ### `ncat`
@@ -250,13 +321,22 @@
   3. 執行：`ncat <NODE_IP>` — 對你擁有的節點執行偵察
 - 文件｜Docs: https://nmap.org/
 
-### `netdiscover`
+### `netdiscover` ✓ verified on VM
 - 以 ARP 請求做主動/被動網路位址掃描
 - **提供指令:** `netdiscover`
 - **步驟:**
   1. 安裝：`sudo apt install -y netdiscover`
   2. 看說明：`netdiscover -h`（或 `man netdiscover`）
   3. 執行：`netdiscover <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  netdiscover: invalid option -- '-'
+  
+  Netdiscover 0.21 [Active/passive ARP reconnaissance tool]
+  Written by: Jaime Penalba <<email>>
+  
+  Usage: netdiscover [-i device] [-r range | -l file | -p] [-m file] [-F filter] [-s time] [-c count] [-n node] [-dfPLNS]
+  ```
 - 文件｜Docs: https://github.com/netdiscover-scanner/netdiscover
 
 ### `netmask`
@@ -268,22 +348,40 @@
   3. 執行：`netmask <NODE_IP>` — 對你擁有的節點執行偵察
 - 文件｜Docs: https://github.com/tlby/netmask
 
-### `nmap`
+### `nmap` ✓ verified on VM
 - 網路測繪器（The Network Mapper）
 - **提供指令:** `nmap`, `nping`
 - **步驟:**
   1. 安裝：`sudo apt install -y nmap`
   2. 看說明：`nmap -h`（或 `man nmap`）
   3. 執行：`nmap <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Nmap 7.991 ( https://nmap.org )
+  Usage: nmap [Scan Type(s)] [Options] {target specification}
+  TARGET SPECIFICATION:
+    Can pass hostnames, IP addresses, networks, etc.
+    Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254
+    -iL <inputfilename>: Input from list of hosts/networks
+  ```
 - 文件｜Docs: https://nmap.org/
 
-### `onesixtyone`
+### `onesixtyone` ✓ verified on VM
 - 快速簡單的 SNMP 掃描器
 - **提供指令:** `onesixtyone`
 - **步驟:**
   1. 安裝：`sudo apt install -y onesixtyone`
   2. 看說明：`onesixtyone -h`（或 `man onesixtyone`）
   3. 執行：`onesixtyone <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  onesixtyone: invalid option -- '-'
+  onesixtyone 0.3.3 [options] <host> <community>
+    -c <communityfile> file with community names to try
+    -i <inputfile>     file with target hosts
+    -o <outputfile>    output log
+    -p                 specify an alternate destination SNMP port
+  ```
 - 文件｜Docs: https://github.com/trailofbits/onesixtyone
 
 ### `p0f`
@@ -313,22 +411,40 @@
   3. 執行：`recon-ng <NODE_IP>` — 對你擁有的節點執行偵察
 - 文件｜Docs: https://github.com/lanmaster53/recon-ng
 
-### `smbmap`
+### `smbmap` ✓ verified on VM
 - 好用的 SMB 列舉工具
 - **提供指令:** `smbmap`
 - **步驟:**
   1. 安裝：`sudo apt install -y smbmap`
   2. 看說明：`smbmap -h`（或 `man smbmap`）
   3. 執行：`smbmap <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  usage: smbmap [-h] (-H HOST | --host-file FILE) [-u USERNAME] [-p PASSWORD |
+                --prompt] [-k] [--no-pass] [--dc-ip IP or Host] [-s SHARE]
+                [-d DOMAIN] [-P PORT] [-v] [--signing] [--admin] [--no-banner]
+                [--no-color] [--no-update] [--timeout SCAN_TIMEOUT] [-x COMMAND]
+                [--mode CMDMODE] [-L | -r [PATH]] [-g FILE | --csv FILE]
+                [--dir-only] [--no-write-check] [-q] [--depth DEPTH]
+  ```
 - 文件｜Docs: https://github.com/ShawnDEvans/smbmap
 
-### `smtp-user-enum`
+### `smtp-user-enum` ✓ verified on VM
 - SMTP 服務使用者名稱猜測工具
 - **提供指令:** `smtp-user-enum`
 - **步驟:**
   1. 安裝：`sudo apt install -y smtp-user-enum`
   2. 看說明：`smtp-user-enum -h`（或 `man smtp-user-enum`）
   3. 執行：`smtp-user-enum <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  /usr/bin/smtp-user-enum version [unknown] calling Getopt::Std::getopts (version 1.14 [paranoid]),
+  running under Perl version 5.42.3.
+  
+  Usage: smtp-user-enum [-OPTIONS [-MORE_OPTIONS]] [--] [PROGRAM_ARG1 ...]
+  
+  The following single-character options are accepted:
+  ```
 - 文件｜Docs: http://pentestmonkey.net/tools/user-enumeration/smtp-user-enum
 
 ### `snmpcheck`
@@ -358,31 +474,57 @@
   3. 執行：`sslh <NODE_IP>` — 對你擁有的節點執行偵察
 - 文件｜Docs: http://www.rutschle.net/tech/sslh/README.html
 
-### `sslscan`
+### `sslscan` ✓ verified on VM
 - 測試 SSL/TLS 服務支援的加密套件
 - **提供指令:** `sslscan`
 - **步驟:**
   1. 安裝：`sudo apt install -y sslscan`
   2. 看說明：`sslscan -h`（或 `man sslscan`）
   3. 執行：`sslscan <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  [1;34m                   _
+             ___ ___| |___  ___ __ _ _ __
+            / __/ __| / __|/ __/ _` | '_ \
+            \__ \__ \ \__ \ (_| (_| | | | |
+            |___/___/_|___/\___\__,_|_| |_|
+  ```
 - 文件｜Docs: https://github.com/rbsec/sslscan
 
-### `sslyze`
+### `sslyze` ✓ verified on VM
 - 快速且功能完整的 SSL 掃描器
 - **提供指令:** `sslyze`
 - **步驟:**
   1. 安裝：`sudo apt install -y sslyze`
   2. 看說明：`sslyze -h`（或 `man sslyze`）
   3. 執行：`sslyze <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  usage: sslyze [-h] [--update_trust_stores] [--cert CERTIFICATE_FILE]
+                [--key KEY_FILE] [--keyform KEY_FORMAT] [--pass PASSPHRASE]
+                [--json_out JSON_FILE] [--targets_in TARGET_FILE] [--quiet]
+                [--slow_connection] [--https_tunnel PROXY_SETTINGS]
+                [--starttls PROTOCOL] [--xmpp_to HOSTNAME]
+                [--sni SERVER_NAME_INDICATION] [--reneg] [--compression]
+  ```
 - 文件｜Docs: https://github.com/nabla-c0d3/sslyze
 
-### `swaks`
+### `swaks` ✓ verified on VM
 - SMTP 命令列測試工具
 - **提供指令:** `swaks`
 - **步驟:**
   1. 安裝：`sudo apt install -y swaks`
   2. 看說明：`swaks -h`（或 `man swaks`）
   3. 執行：`swaks <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  SWAKS(1)                             SWAKS                             SWAKS(1)
+  
+  NAME
+       Swaks - Swiss Army Knife SMTP, the all-purpose SMTP transaction tester
+  
+  DESCRIPTION
+  ```
 - 文件｜Docs: https://www.jetmore.org/john/code/swaks/
 
 ### `thc-ipv6`
@@ -394,13 +536,22 @@
   3. 執行：`atk6-alive6 <NODE_IP>` — 對你擁有的節點執行偵察
 - 文件｜Docs: http://www.thc.org/thc-ipv6/
 
-### `theharvester`
+### `theharvester` ✓ verified on VM
 - 從公開來源蒐集 email 與子網域的工具
 - **提供指令:** `restfulHarvest`, `theharvester`, `theHarvester`
 - **步驟:**
   1. 安裝：`sudo apt install -y theharvester`
   2. 看說明：`theharvester -h`（或 `man theharvester`）
   3. 執行：`theharvester <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Read proxies.yaml from /etc/theHarvester/proxies.yaml
+  *******************************************************************
+  *  _   _                                            _             *
+  * | |_| |__   ___    /\  /\__ _ _ ____   _____  ___| |_ ___ _ __  *
+  * | __|  _ \ / _ \  / /_/ / _` | '__\ \ / / _ \/ __| __/ _ \ '__| *
+  * | |_| | | |  __/ / __  / (_| | |   \ V /  __/\__ \ ||  __/ |    *
+  ```
 - 文件｜Docs: https://github.com/laramies/theHarvester
 
 ### `tlssled`
@@ -439,13 +590,22 @@
   3. 執行：`urlcrazy <NODE_IP>` — 對你擁有的節點執行偵察
 - 文件｜Docs: https://www.morningstarsecurity.com/research/urlcrazy
 
-### `wafw00f`
+### `wafw00f` ✓ verified on VM
 - 辨識並指紋辨識 Web 應用防火牆
 - **提供指令:** `wafw00f`
 - **步驟:**
   1. 安裝：`sudo apt install -y wafw00f`
   2. 看說明：`wafw00f -h`（或 `man wafw00f`）
   3. 執行：`wafw00f <NODE_IP>` — 對你擁有的節點執行偵察
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Usage: wafw00f url1 [url2 [url3 ... ]]
+  example: wafw00f http://www.victim.org/
+  
+  Options:
+    -h, --help            show this help message and exit
+    -v, --verbose         Enable verbosity, multiple -v options increase
+  ```
 - 文件｜Docs: https://github.com/EnableSecurity/wafw00f
 
 ### `zenmap`
@@ -576,22 +736,40 @@
   3. 執行：`lynis http://<NODE_IP>:30080` — 掃描你擁有的服務
 - 文件｜Docs: https://cisofy.com/lynis/
 
-### `nikto`
+### `nikto` ✓ verified on VM
 - web 伺服器安全掃描器
 - **提供指令:** `nikto`, `replay`
 - **步驟:**
   1. 安裝：`sudo apt install -y nikto`
   2. 看說明：`nikto -h`（或 `man nikto`）
   3. 執行：`nikto http://<NODE_IP>:30080` — 掃描你擁有的服務
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Unknown option: help
+  
+     Options:
+         -Add-header         Add HTTP headers (can be used multiple times, one per header pair)
+         -ask+               Whether to ask about submitting updates
+                                 yes   Ask about each (default)
+  ```
 - 文件｜Docs: https://github.com/sullo/nikto
 
-### `nmap`
+### `nmap` ✓ verified on VM
 - 網路測繪器（The Network Mapper）
 - **提供指令:** `nmap`, `nping`
 - **步驟:**
   1. 安裝：`sudo apt install -y nmap`
   2. 看說明：`nmap -h`（或 `man nmap`）
   3. 執行：`nmap http://<NODE_IP>:30080` — 掃描你擁有的服務
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Nmap 7.991 ( https://nmap.org )
+  Usage: nmap [Scan Type(s)] [Options] {target specification}
+  TARGET SPECIFICATION:
+    Can pass hostnames, IP addresses, networks, etc.
+    Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254
+    -iL <inputfilename>: Input from list of hosts/networks
+  ```
 - 文件｜Docs: https://nmap.org/
 
 ### `ohrwurm`
@@ -813,13 +991,22 @@
   3. 執行：`cadaver http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
 - 文件｜Docs: https://github.com/notroj/cadaver
 
-### `commix`
+### `commix` ✓ verified on VM
 - 自動化一站式 OS 命令注入與利用工具
 - **提供指令:** `commix`
 - **步驟:**
   1. 安裝：`sudo apt install -y commix`
   2. 看說明：`commix -h`（或 `man commix`）
   3. 執行：`commix http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Usage: commix [option(s)]
+  
+  Options:
+    -h, --help            Show help and exit.
+  
+    [1m[4mGeneral[0m:
+  ```
 - 文件｜Docs: https://commixproject.com
 
 ### `cutycapt`
@@ -847,13 +1034,21 @@
   2. 看說明：`default-mysql-server -h`（或 `man default-mysql-server`）
   3. 執行：`default-mysql-server http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
 
-### `dirb`
+### `dirb` ✓ verified on VM
 - URL 暴力列舉工具
 - **提供指令:** `dirb`, `dirb-gendict`, `html2dic`
 - **步驟:**
   1. 安裝：`sudo apt install -y dirb`
   2. 看說明：`dirb -h`（或 `man dirb`）
   3. 執行：`dirb http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  
+  -----------------
+  DIRB v2.22    
+  By The Dark Raver
+  -----------------
+  ```
 - 文件｜Docs: https://dirb.sourceforge.net/
 
 ### `dirbuster`
@@ -937,13 +1132,19 @@
   3. 執行：`httrack http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
 - 文件｜Docs: https://www.httrack.com
 
-### `hydra`
+### `hydra` ✓ verified on VM
 - 非常快速的網路登入破解器
 - **提供指令:** `dpl4hydra`, `hydra`, `hydra-wizard`, `pw-inspector`
 - **步驟:**
   1. 安裝：`sudo apt install -y hydra`
   2. 看說明：`hydra -h`（或 `man hydra`）
   3. 執行：`hydra http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Hydra v9.7 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+  
+  hydra: invalid option -- '-'
+  ```
 - 文件｜Docs: https://github.com/vanhauser-thc/thc-hydra
 
 ### `hydra-gtk`
@@ -1009,13 +1210,20 @@
   3. 執行：`maltego http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
 - 文件｜Docs: https://www.maltego.com
 
-### `medusa`
+### `medusa` ✓ verified on VM
 - 快速、平行、模組化的網路服務登入暴力破解器
 - **提供指令:** `medusa`
 - **步驟:**
   1. 安裝：`sudo apt install -y medusa`
   2. 看說明：`medusa -h`（或 `man medusa`）
   3. 執行：`medusa http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  medusa: invalid option -- '-'
+  CRITICAL: Unknown error processing command-line options.
+  ALERT: User logon information must be supplied.
+  Medusa v2.3 [http://www.foofus.net] (C) JoMo-Kun / Foofus Networks <<email>>
+  ```
 - 文件｜Docs: http://foofus.net/?page_id=51
 
 ### `mitmproxy`
@@ -1027,22 +1235,40 @@
   3. 執行：`mitmproxy http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
 - 文件｜Docs: https://mitmproxy.org
 
-### `ncrack`
+### `ncrack` ✓ verified on VM
 - 高速網路驗證破解工具
 - **提供指令:** `ncrack`
 - **步驟:**
   1. 安裝：`sudo apt install -y ncrack`
   2. 看說明：`ncrack -h`（或 `man ncrack`）
   3. 執行：`ncrack http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Ncrack 0.7 ( http://ncrack.org )
+  Usage: ncrack [Options] {target and service specification}
+  TARGET SPECIFICATION:
+    Can pass hostnames, IP addresses, networks, etc.
+    Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254
+    -iX <inputfilename>: Input from Nmap's -oX XML output format
+  ```
 - 文件｜Docs: https://nmap.org/ncrack/
 
-### `nikto`
+### `nikto` ✓ verified on VM
 - web 伺服器安全掃描器
 - **提供指令:** `nikto`, `replay`
 - **步驟:**
   1. 安裝：`sudo apt install -y nikto`
   2. 看說明：`nikto -h`（或 `man nikto`）
   3. 執行：`nikto http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Unknown option: help
+  
+     Options:
+         -Add-header         Add HTTP headers (can be used multiple times, one per header pair)
+         -ask+               Whether to ask about submitting updates
+                                 yes   Ask about each (default)
+  ```
 - 文件｜Docs: https://github.com/sullo/nikto
 
 ### `nishang`
@@ -1054,13 +1280,22 @@
   3. 執行：`nishang http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
 - 文件｜Docs: https://github.com/samratashok/nishang
 
-### `nmap`
+### `nmap` ✓ verified on VM
 - 網路測繪器（The Network Mapper）
 - **提供指令:** `nmap`, `nping`
 - **步驟:**
   1. 安裝：`sudo apt install -y nmap`
   2. 看說明：`nmap -h`（或 `man nmap`）
   3. 執行：`nmap http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Nmap 7.991 ( https://nmap.org )
+  Usage: nmap [Scan Type(s)] [Options] {target specification}
+  TARGET SPECIFICATION:
+    Can pass hostnames, IP addresses, networks, etc.
+    Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254
+    -iL <inputfilename>: Input from list of hosts/networks
+  ```
 - 文件｜Docs: https://nmap.org/
 
 ### `oscanner`
@@ -1090,13 +1325,22 @@
   3. 執行：`paros http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
 - 文件｜Docs: http://www.parosproxy.org/index.shtml
 
-### `patator`
+### `patator` ✓ verified on VM
 - 多用途暴力破解器
 - **提供指令:** `patator`
 - **步驟:**
   1. 安裝：`sudo apt install -y patator`
   2. 看說明：`patator -h`（或 `man patator`）
   3. 執行：`patator http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Patator 1.1.0 (https://github.com/lanjelot/patator) with Python-3.14.8
+  Usage: patator module --help
+  
+  Available modules:
+    + ftp_login     : Brute-force FTP
+    + ssh_login     : Brute-force SSH
+  ```
 - 文件｜Docs: https://github.com/lanjelot/patator
 
 ### `php`
@@ -1167,13 +1411,22 @@
   3. 執行：`siege http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
 - 文件｜Docs: https://www.joedog.org/JoeDog/Siege
 
-### `skipfish`
+### `skipfish` ✓ verified on VM
 - 全自動主動式 web 應用安全偵察工具
 - **提供指令:** `skipfish`
 - **步驟:**
   1. 安裝：`sudo apt install -y skipfish`
   2. 看說明：`skipfish -h`（或 `man skipfish`）
   3. 執行：`skipfish http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  skipfish web application scanner - version 2.10b
+  Usage: skipfish [ options ... ] -W wordlist -o output_dir start_url [ start_url2 ... ]
+  
+  Authentication and access options:
+  
+    -A user:pass      - use specified HTTP authentication credentials
+  ```
 
 ### `slowhttptest`
 - 應用層 DoS 攻擊模擬工具
@@ -1193,13 +1446,22 @@
   3. 執行：`sqlitebrowser http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
 - 文件｜Docs: https://sqlitebrowser.org/
 
-### `sqlmap`
+### `sqlmap` ✓ verified on VM
 - 自動化 SQL 注入工具
 - **提供指令:** `sqlmap`, `sqlmapapi`
 - **步驟:**
   1. 安裝：`sudo apt install -y sqlmap`
   2. 看說明：`sqlmap -h`（或 `man sqlmap`）
   3. 執行：`sqlmap http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+          ___
+         __H__
+   ___ ___[)]_____ ___ ___  {1.10.9#stable}
+  |_ -| . [(]     | .'| . |
+  |___|_  ["]_|_|_|__,|  _|
+        |_|V...       |_|   https://sqlmap.org
+  ```
 - 文件｜Docs: https://sqlmap.org/
 
 ### `sqlninja`
@@ -1238,13 +1500,21 @@
   3. 執行：`sslh http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
 - 文件｜Docs: http://www.rutschle.net/tech/sslh/README.html
 
-### `sslscan`
+### `sslscan` ✓ verified on VM
 - 測試 SSL/TLS 服務支援的加密套件
 - **提供指令:** `sslscan`
 - **步驟:**
   1. 安裝：`sudo apt install -y sslscan`
   2. 看說明：`sslscan -h`（或 `man sslscan`）
   3. 執行：`sslscan http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  [1;34m                   _
+             ___ ___| |___  ___ __ _ _ __
+            / __/ __| / __|/ __/ _` | '_ \
+            \__ \__ \ \__ \ (_| (_| | | | |
+            |___/___/_|___/\___\__,_|_| |_|
+  ```
 - 文件｜Docs: https://github.com/rbsec/sslscan
 
 ### `sslsniff`
@@ -1265,13 +1535,22 @@
   3. 執行：`sslsplit http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
 - 文件｜Docs: https://www.roe.ch/SSLsplit
 
-### `sslyze`
+### `sslyze` ✓ verified on VM
 - 快速且功能完整的 SSL 掃描器
 - **提供指令:** `sslyze`
 - **步驟:**
   1. 安裝：`sudo apt install -y sslyze`
   2. 看說明：`sslyze -h`（或 `man sslyze`）
   3. 執行：`sslyze http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  usage: sslyze [-h] [--update_trust_stores] [--cert CERTIFICATE_FILE]
+                [--key KEY_FILE] [--keyform KEY_FORMAT] [--pass PASSPHRASE]
+                [--json_out JSON_FILE] [--targets_in TARGET_FILE] [--quiet]
+                [--slow_connection] [--https_tunnel PROXY_SETTINGS]
+                [--starttls PROTOCOL] [--xmpp_to HOSTNAME]
+                [--sni SERVER_NAME_INDICATION] [--reneg] [--compression]
+  ```
 - 文件｜Docs: https://github.com/nabla-c0d3/sslyze
 
 ### `stunnel4`
@@ -1310,31 +1589,58 @@
   3. 執行：`tnscmd10g http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
 - 文件｜Docs: http://www.red-database-security.com/
 
-### `uniscan`
+### `uniscan` ✓ verified on VM
 - LFI、RFI、RCE 弱點掃描器
 - **提供指令:** `uniscan`, `uniscan-gui`
 - **步驟:**
   1. 安裝：`sudo apt install -y uniscan`
   2. 看說明：`uniscan -h`（或 `man uniscan`）
   3. 執行：`uniscan http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  ./uniscan.pl version [unknown] calling Getopt::Std::getopts (version 1.14 [paranoid]),
+  running under Perl version 5.42.3.
+  
+  Usage: uniscan.pl [-OPTIONS [-MORE_OPTIONS]] [--] [PROGRAM_ARG1 ...]
+  
+  The following single-character options are accepted:
+  ```
 - 文件｜Docs: https://sourceforge.net/projects/uniscan/
 
-### `wafw00f`
+### `wafw00f` ✓ verified on VM
 - 辨識並指紋辨識 Web 應用防火牆
 - **提供指令:** `wafw00f`
 - **步驟:**
   1. 安裝：`sudo apt install -y wafw00f`
   2. 看說明：`wafw00f -h`（或 `man wafw00f`）
   3. 執行：`wafw00f http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Usage: wafw00f url1 [url2 [url3 ... ]]
+  example: wafw00f http://www.victim.org/
+  
+  Options:
+    -h, --help            show this help message and exit
+    -v, --verbose         Enable verbosity, multiple -v options increase
+  ```
 - 文件｜Docs: https://github.com/EnableSecurity/wafw00f
 
-### `wapiti`
+### `wapiti` ✓ verified on VM
 - web 應用弱點掃描器
 - **提供指令:** `wapiti`, `wapiti-getcookie`
 - **步驟:**
   1. 安裝：`sudo apt install -y wapiti`
   2. 看說明：`wapiti -h`（或 `man wapiti`）
   3. 執行：`wapiti http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  
+       __    __            _ _   _ _____
+      / / /\ \ \__ _ _ __ (_) |_(_)___ /
+      \ \/  \/ / _` | '_ \| | __| | |_ \
+       \  /\  / (_| | |_) | | |_| |___) |
+        \/  \/ \__,_| .__/|_|\__|_|____/
+  ```
 - 文件｜Docs: https://wapiti.sourceforge.net/
 
 ### `webacoo`
@@ -1373,22 +1679,40 @@
   3. 執行：`weevely http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
 - 文件｜Docs: https://github.com/epinna/weevely3/
 
-### `wfuzz`
+### `wfuzz` ✓ verified on VM
 - web 應用暴力列舉器
 - **提供指令:** `wfuzz`
 - **步驟:**
   1. 安裝：`sudo apt install -y wfuzz`
   2. 看說明：`wfuzz -h`（或 `man wfuzz`）
   3. 執行：`wfuzz http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  default
+  default
+  ********************************************************
+  * Wfuzz 3.1.0 - The Web Fuzzer                         *
+  *                                                      *
+  * Version up to 1.4c coded by:                         *
+  ```
 - 文件｜Docs: http://www.edge-security.com/wfuzz.php
 
-### `whatweb`
+### `whatweb` ✓ verified on VM
 - 下一代 web 掃描器
 - **提供指令:** `whatweb`
 - **步驟:**
   1. 安裝：`sudo apt install -y whatweb`
   2. 看說明：`whatweb -h`（或 `man whatweb`）
   3. 執行：`whatweb http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  [1m[34m
+  .$$$     $.                                   .$$$     $.
+  $$$$     $$. .$$$  $$$ .$$$$$$.  .$$$$$$$$$$. $$$$     $$. .$$$$$$$. .$$$$$$.
+  $ $$     $$$ $ $$  $$$ $ $$$$$$. $$$$$ $$$$$$ $ $$     $$$ $ $$   $$ $ $$$$$$.
+  $ `$     $$$ $ `$  $$$ $ `$  $$$ $$' $ `$ `$$ $ `$     $$$ $ `$      $ `$  $$$'
+  $. $     $$$ $. $$$$$$ $. $$$$$$ `$  $. $  :' $. $     $$$ $. $$$$   $. $$$$$.
+  ```
 - 文件｜Docs: https://github.com/urbanadventurer/WhatWeb
 
 ### `wireshark`
@@ -1475,13 +1799,22 @@
   3. 執行：`sqlitebrowser <NODE_IP>` — 評估你擁有的資料庫（5432 應被擋）
 - 文件｜Docs: https://sqlitebrowser.org/
 
-### `sqlmap`
+### `sqlmap` ✓ verified on VM
 - 自動化 SQL 注入工具
 - **提供指令:** `sqlmap`, `sqlmapapi`
 - **步驟:**
   1. 安裝：`sudo apt install -y sqlmap`
   2. 看說明：`sqlmap -h`（或 `man sqlmap`）
   3. 執行：`sqlmap <NODE_IP>` — 評估你擁有的資料庫（5432 應被擋）
+- **實際 --help（已在 VM 驗證）:**
+  ```
+          ___
+         __H__
+   ___ ___[)]_____ ___ ___  {1.10.9#stable}
+  |_ -| . [(]     | .'| . |
+  |___|_  ["]_|_|_|__,|  _|
+        |_|V...       |_|   https://sqlmap.org
+  ```
 - 文件｜Docs: https://sqlmap.org/
 
 ### `sqlninja`
@@ -1514,13 +1847,22 @@
 
 ## 05 · 密碼攻擊  (`kali-tools-passwords`)
 
-### `cewl`
+### `cewl` ✓ verified on VM
 - 自訂字典產生器
 - **提供指令:** `cewl`, `fab-cewl`
 - **步驟:**
   1. 安裝：`sudo apt install -y cewl`
   2. 看說明：`cewl -h`（或 `man cewl`）
   3. 執行：`cewl <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  CeWL 6.2.1 (More Fixes) Robin Wood (<email>) (https://digi.ninja/)
+  Usage: cewl [OPTIONS] ... <url>
+  
+      OPTIONS:
+  	-h, --help: Show help.
+  	-k, --keep: Keep the downloaded file.
+  ```
 - 文件｜Docs: https://github.com/digininja/CeWL
 
 ### `chntpw`
@@ -1559,13 +1901,22 @@
   3. 執行：`creddump7 <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
 - 文件｜Docs: https://github.com/CiscoCXSecurity/creddump7
 
-### `crunch`
+### `crunch` ✓ verified on VM
 - 字典產生工具
 - **提供指令:** `crunch`
 - **步驟:**
   1. 安裝：`sudo apt install -y crunch`
   2. 看說明：`crunch -h`（或 `man crunch`）
   3. 執行：`crunch <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  crunch version 3.6
+  
+  Crunch can create a wordlist based on criteria you specify.  The output from crunch can be sent to the screen, file, or to another program.
+  
+  Usage: crunch <min> <max> [options]
+  where min and max are numbers
+  ```
 - 文件｜Docs: http://sourceforge.net/projects/crunch-wordlist/
 
 ### `fcrackzip`
@@ -1595,22 +1946,39 @@
   3. 執行：`gpp-decrypt <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
 - 文件｜Docs: http://carnal0wnage.attackresearch.com/2012/10/group-policy-preferences-and-getting.html
 
-### `hash-identifier`
+### `hash-identifier` ✓ verified on VM
 - 辨識雜湊類型的工具
 - **提供指令:** `hash-identifier`
 - **步驟:**
   1. 安裝：`sudo apt install -y hash-identifier`
   2. 看說明：`hash-identifier -h`（或 `man hash-identifier`）
   3. 執行：`hash-identifier <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
+- **實際 --help（已在 VM 驗證）:**
+  ```
+     #########################################################################
+     #     __  __                     __           ______    _____           #
+     #    /\ \/\ \                   /\ \         /\__  _\  /\  _ `\         #
+     #    \ \ \_\ \     __      ____ \ \ \___     \/_/\ \/  \ \ \/\ \        #
+     #     \ \  _  \  /'__`\   / ,__\ \ \  _ `\      \ \ \   \ \ \ \ \       #
+     #      \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \      \_\ \__ \ \ \_\ \      #
+  ```
 - 文件｜Docs: https://github.com/blackploit/hash-identifier
 
-### `hashcat`
+### `hashcat` ✓ verified on VM
 - 世上最快、最先進的密碼還原工具
 - **提供指令:** `hashcat`
 - **步驟:**
   1. 安裝：`sudo apt install -y hashcat`
   2. 看說明：`hashcat -h`（或 `man hashcat`）
   3. 執行：`hashcat <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  hashcat (v7.1.2) starting in help mode
+  
+  Usage: hashcat [options]... hash|hashfile|hccapxfile [dictionary|mask|directory]...
+  
+  - [ Options ] -
+  ```
 - 文件｜Docs: https://hashcat.net/hashcat/
 
 ### `hashcat-utils`
@@ -1621,22 +1989,37 @@
   3. 執行：`hashcat-utils <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
 - 文件｜Docs: https://github.com/hashcat/hashcat-utils/
 
-### `hashid`
+### `hashid` ✓ verified on VM
 - 辨識用於加密資料的各種雜湊類型
 - **提供指令:** `hashid`
 - **步驟:**
   1. 安裝：`sudo apt install -y hashid`
   2. 看說明：`hashid -h`（或 `man hashid`）
   3. 執行：`hashid <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  usage: hashid.py [-h] [-e] [-m] [-j] [-o FILE] [--version] INPUT
+  
+  Identify the different types of hashes used to encrypt data
+  
+  positional arguments:
+    INPUT               input to analyze (default: STDIN)
+  ```
 - 文件｜Docs: https://psypanda.github.io/hashID/
 
-### `hydra`
+### `hydra` ✓ verified on VM
 - 非常快速的網路登入破解器
 - **提供指令:** `dpl4hydra`, `hydra`, `hydra-wizard`, `pw-inspector`
 - **步驟:**
   1. 安裝：`sudo apt install -y hydra`
   2. 看說明：`hydra -h`（或 `man hydra`）
   3. 執行：`hydra <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Hydra v9.7 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+  
+  hydra: invalid option -- '-'
+  ```
 - 文件｜Docs: https://github.com/vanhauser-thc/thc-hydra
 
 ### `hydra-gtk`
@@ -1648,13 +2031,22 @@
   3. 執行：`xhydra <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
 - 文件｜Docs: https://github.com/vanhauser-thc/thc-hydra
 
-### `john`
+### `john` ✓ verified on VM
 - 主動式密碼破解工具
 - **提供指令:** `base64conv`, `bitlocker2john`, `calc_stat`, `cprepair`, `dmg2john`, `eapmd5tojohn`, `genmkvpwd`, `gpg2john`, `hccap2john`, `john`, `keepass2john`, `mailer`, `mkvcalcproba`, `putty2john`, `racf2john`, `rar2john`, `raw2dyna`, `SIPdump`, `tgtsnarf`, `uaf2john`, `unafs`, `undrop`, `unique`, `unshadow`, `vncpcap2john`, `wpapcap2john`, `zip2john`
 - **步驟:**
   1. 安裝：`sudo apt install -y john`
   2. 看說明：`john -h`（或 `man john`）
   3. 執行：`john <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Created directory: /home/kali/.john
+  John the Ripper 1.9.0-jumbo-1+bleeding-aec1328d6c 2021-11-02 10:45:52 +0100 OMP [linux-gnu 64-bit aarch64 ASIMD AC]
+  Copyright (c) 1996-2021 by Solar Designer and others
+  Homepage: https://www.openwall.com/john/
+  
+  Usage: john [OPTIONS] [PASSWORD-FILES]
+  ```
 - 文件｜Docs: https://github.com/openwall/john
 
 ### `johnny`
@@ -1683,13 +2075,20 @@
   3. 執行：`mp32 <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
 - 文件｜Docs: https://github.com/hashcat/maskprocessor
 
-### `medusa`
+### `medusa` ✓ verified on VM
 - 快速、平行、模組化的網路服務登入暴力破解器
 - **提供指令:** `medusa`
 - **步驟:**
   1. 安裝：`sudo apt install -y medusa`
   2. 看說明：`medusa -h`（或 `man medusa`）
   3. 執行：`medusa <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  medusa: invalid option -- '-'
+  CRITICAL: Unknown error processing command-line options.
+  ALERT: User logon information must be supplied.
+  Medusa v2.3 [http://www.foofus.net] (C) JoMo-Kun / Foofus Networks <<email>>
+  ```
 - 文件｜Docs: http://foofus.net/?page_id=51
 
 ### `mimikatz`
@@ -1701,22 +2100,40 @@
   3. 執行：`mimikatz <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
 - 文件｜Docs: https://blog.gentilkiwi.com/mimikatz
 
-### `ncrack`
+### `ncrack` ✓ verified on VM
 - 高速網路驗證破解工具
 - **提供指令:** `ncrack`
 - **步驟:**
   1. 安裝：`sudo apt install -y ncrack`
   2. 看說明：`ncrack -h`（或 `man ncrack`）
   3. 執行：`ncrack <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Ncrack 0.7 ( http://ncrack.org )
+  Usage: ncrack [Options] {target and service specification}
+  TARGET SPECIFICATION:
+    Can pass hostnames, IP addresses, networks, etc.
+    Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254
+    -iX <inputfilename>: Input from Nmap's -oX XML output format
+  ```
 - 文件｜Docs: https://nmap.org/ncrack/
 
-### `onesixtyone`
+### `onesixtyone` ✓ verified on VM
 - 快速簡單的 SNMP 掃描器
 - **提供指令:** `onesixtyone`
 - **步驟:**
   1. 安裝：`sudo apt install -y onesixtyone`
   2. 看說明：`onesixtyone -h`（或 `man onesixtyone`）
   3. 執行：`onesixtyone <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  onesixtyone: invalid option -- '-'
+  onesixtyone 0.3.3 [options] <host> <community>
+    -c <communityfile> file with community names to try
+    -i <inputfile>     file with target hosts
+    -o <outputfile>    output log
+    -p                 specify an alternate destination SNMP port
+  ```
 - 文件｜Docs: https://github.com/trailofbits/onesixtyone
 
 ### `ophcrack`
@@ -1764,13 +2181,22 @@
   3. 執行：`pth-net <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
 - 文件｜Docs: http://passing-the-hash.blogspot.fr
 
-### `patator`
+### `patator` ✓ verified on VM
 - 多用途暴力破解器
 - **提供指令:** `patator`
 - **步驟:**
   1. 安裝：`sudo apt install -y patator`
   2. 看說明：`patator -h`（或 `man patator`）
   3. 執行：`patator <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Patator 1.1.0 (https://github.com/lanjelot/patator) with Python-3.14.8
+  Usage: patator module --help
+  
+  Available modules:
+    + ftp_login     : Brute-force FTP
+    + ssh_login     : Brute-force SSH
+  ```
 - 文件｜Docs: https://github.com/lanjelot/patator
 
 ### `pdfcrack`
@@ -1863,13 +2289,22 @@
   3. 執行：`svmap <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
 - 文件｜Docs: https://github.com/EnableSecurity/sipvicious
 
-### `smbmap`
+### `smbmap` ✓ verified on VM
 - 好用的 SMB 列舉工具
 - **提供指令:** `smbmap`
 - **步驟:**
   1. 安裝：`sudo apt install -y smbmap`
   2. 看說明：`smbmap -h`（或 `man smbmap`）
   3. 執行：`smbmap <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  usage: smbmap [-h] (-H HOST | --host-file FILE) [-u USERNAME] [-p PASSWORD |
+                --prompt] [-k] [--no-pass] [--dc-ip IP or Host] [-s SHARE]
+                [-d DOMAIN] [-P PORT] [-v] [--signing] [--admin] [--no-banner]
+                [--no-color] [--no-update] [--timeout SCAN_TIMEOUT] [-x COMMAND]
+                [--mode CMDMODE] [-L | -r [PATH]] [-g FILE | --csv FILE]
+                [--dir-only] [--no-write-check] [-q] [--depth DEPTH]
+  ```
 - 文件｜Docs: https://github.com/ShawnDEvans/smbmap
 
 ### `statsprocessor`
@@ -2072,13 +2507,21 @@
   3. 執行：`sudo freeradius-wpe wlan0` — 需要 monitor 模式網卡
 - 文件｜Docs: https://www.freeradius.org/
 
-### `hashcat`
+### `hashcat` ✓ verified on VM
 - 世上最快、最先進的密碼還原工具
 - **提供指令:** `hashcat`
 - **步驟:**
   1. 安裝：`sudo apt install -y hashcat`
   2. 看說明：`hashcat -h`（或 `man hashcat`）
   3. 執行：`sudo hashcat wlan0` — 需要 monitor 模式網卡
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  hashcat (v7.1.2) starting in help mode
+  
+  Usage: hashcat [options]... hash|hashfile|hccapxfile [dictionary|mask|directory]...
+  
+  - [ Options ] -
+  ```
 - 文件｜Docs: https://hashcat.net/hashcat/
 
 ### `hostapd-wpe`
@@ -2513,13 +2956,22 @@
   3. 執行：`setoolkit` — 互動式；僅對自有目標驗證
 - 文件｜Docs: https://www.trustedsec.com/downloads/social-engineer-toolkit/
 
-### `sqlmap`
+### `sqlmap` ✓ verified on VM
 - 自動化 SQL 注入工具
 - **提供指令:** `sqlmap`, `sqlmapapi`
 - **步驟:**
   1. 安裝：`sudo apt install -y sqlmap`
   2. 看說明：`sqlmap -h`（或 `man sqlmap`）
   3. 執行：`sqlmap` — 互動式；僅對自有目標驗證
+- **實際 --help（已在 VM 驗證）:**
+  ```
+          ___
+         __H__
+   ___ ___[)]_____ ___ ___  {1.10.9#stable}
+  |_ -| . [(]     | .'| . |
+  |___|_  ["]_|_|_|__,|  _|
+        |_|V...       |_|   https://sqlmap.org
+  ```
 - 文件｜Docs: https://sqlmap.org/
 
 ### `termineter`
@@ -3625,13 +4077,22 @@
   3. 執行：`ssdeep <image-or-file-you-own>` — 分析你擁有的映像/檔案
 - 文件｜Docs: https://github.com/ssdeep-project/ssdeep
 
-### `tcpdump`
+### `tcpdump` ✓ verified on VM
 - 命令列網路流量分析器
 - **提供指令:** `tcpdump`
 - **步驟:**
   1. 安裝：`sudo apt install -y tcpdump`
   2. 看說明：`tcpdump -h`（或 `man tcpdump`）
   3. 執行：`tcpdump <image-or-file-you-own>` — 分析你擁有的映像/檔案
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  tcpdump version 4.99.6
+  libpcap version 1.10.6 (64-bit time_t, with TPACKET_V3)
+  OpenSSL 3.6.3 9 Jun 2026
+  64-bit build, 64-bit time_t
+  Usage: tcpdump [-AbdDefghHIJKlLnNOpqStuUvxX#] [ -B size ] [ -c count ] [--count]
+  		[ -C file_size ] [ -E algo:secret ] [ -F file ] [ -G seconds ]
+  ```
 - 文件｜Docs: https://www.tcpdump.org/
 
 ### `tcpflow`
@@ -3984,13 +4445,22 @@
   3. 執行：`tiger <NODE_IP>` — 分流/辨識你擁有的目標
 - 文件｜Docs: http://savannah.nongnu.org/projects/tiger/
 
-### `wapiti`
+### `wapiti` ✓ verified on VM
 - web 應用弱點掃描器
 - **提供指令:** `wapiti`, `wapiti-getcookie`
 - **步驟:**
   1. 安裝：`sudo apt install -y wapiti`
   2. 看說明：`wapiti -h`（或 `man wapiti`）
   3. 執行：`wapiti <NODE_IP>` — 分流/辨識你擁有的目標
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  
+       __    __            _ _   _ _____
+      / / /\ \ \__ _ _ __ (_) |_(_)___ /
+      \ \/  \/ / _` | '_ \| | __| | |_ \
+       \  /\  / (_| | |_) | | |_| |___) |
+        \/  \/ \__,_| .__/|_|\__|_|____/
+  ```
 - 文件｜Docs: https://wapiti.sourceforge.net/
 
 ### `witnessme`
@@ -4041,13 +4511,22 @@
   3. 執行：`ntlm2 <target-you-own>` — 對自有目標做模糊測試
 - 文件｜Docs: http://www.immunitysec.com/resources-freesoftware.shtml
 
-### `wfuzz`
+### `wfuzz` ✓ verified on VM
 - web 應用暴力列舉器
 - **提供指令:** `wfuzz`
 - **步驟:**
   1. 安裝：`sudo apt install -y wfuzz`
   2. 看說明：`wfuzz -h`（或 `man wfuzz`）
   3. 執行：`wfuzz <target-you-own>` — 對自有目標做模糊測試
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  default
+  default
+  ********************************************************
+  * Wfuzz 3.1.0 - The Web Fuzzer                         *
+  *                                                      *
+  * Version up to 1.4c coded by:                         *
+  ```
 - 文件｜Docs: http://www.edge-security.com/wfuzz.php
 
 
@@ -4088,13 +4567,22 @@
   3. 執行：`libfindrtp <NODE_IP>` — 需要自有 SIP/VoIP 目標
 - 文件｜Docs: http://www.hackingvoip.com/sec_tools.html
 
-### `nmap`
+### `nmap` ✓ verified on VM
 - 網路測繪器（The Network Mapper）
 - **提供指令:** `nmap`, `nping`
 - **步驟:**
   1. 安裝：`sudo apt install -y nmap`
   2. 看說明：`nmap -h`（或 `man nmap`）
   3. 執行：`nmap <NODE_IP>` — 需要自有 SIP/VoIP 目標
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Nmap 7.991 ( https://nmap.org )
+  Usage: nmap [Scan Type(s)] [Options] {target specification}
+  TARGET SPECIFICATION:
+    Can pass hostnames, IP addresses, networks, etc.
+    Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254
+    -iL <inputfilename>: Input from list of hosts/networks
+  ```
 - 文件｜Docs: https://nmap.org/
 
 ### `ohrwurm`
@@ -4692,22 +5180,37 @@
   3. 執行：`aircrack-ng -h` — 最常用工具
 - 文件｜Docs: https://www.aircrack-ng.org/
 
-### `hydra`
+### `hydra` ✓ verified on VM
 - 非常快速的網路登入破解器
 - **提供指令:** `dpl4hydra`, `hydra`, `hydra-wizard`, `pw-inspector`
 - **步驟:**
   1. 安裝：`sudo apt install -y hydra`
   2. 看說明：`hydra -h`（或 `man hydra`）
   3. 執行：`hydra -h` — 最常用工具
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Hydra v9.7 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+  
+  hydra: invalid option -- '-'
+  ```
 - 文件｜Docs: https://github.com/vanhauser-thc/thc-hydra
 
-### `john`
+### `john` ✓ verified on VM
 - 主動式密碼破解工具
 - **提供指令:** `base64conv`, `bitlocker2john`, `calc_stat`, `cprepair`, `dmg2john`, `eapmd5tojohn`, `genmkvpwd`, `gpg2john`, `hccap2john`, `john`, `keepass2john`, `mailer`, `mkvcalcproba`, `putty2john`, `racf2john`, `rar2john`, `raw2dyna`, `SIPdump`, `tgtsnarf`, `uaf2john`, `unafs`, `undrop`, `unique`, `unshadow`, `vncpcap2john`, `wpapcap2john`, `zip2john`
 - **步驟:**
   1. 安裝：`sudo apt install -y john`
   2. 看說明：`john -h`（或 `man john`）
   3. 執行：`john -h` — 最常用工具
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Created directory: /home/kali/.john
+  John the Ripper 1.9.0-jumbo-1+bleeding-aec1328d6c 2021-11-02 10:45:52 +0100 OMP [linux-gnu 64-bit aarch64 ASIMD AC]
+  Copyright (c) 1996-2021 by Solar Designer and others
+  Homepage: https://www.openwall.com/john/
+  
+  Usage: john [OPTIONS] [PASSWORD-FILES]
+  ```
 - 文件｜Docs: https://github.com/openwall/john
 
 ### `metasploit-framework`
@@ -4719,22 +5222,40 @@
   3. 執行：`msf-jsobfu -h` — 最常用工具
 - 文件｜Docs: https://www.metasploit.com/
 
-### `netexec`
+### `netexec` ✓ verified on VM
 - 網路執行工具（NetExec）
 - **提供指令:** `netexec`, `nxc`, `nxcdb`
 - **步驟:**
   1. 安裝：`sudo apt install -y netexec`
   2. 看說明：`netexec -h`（或 `man netexec`）
   3. 執行：`netexec -h` — 最常用工具
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  [*] First time use detected
+  [*] Creating home directory structure
+  [*] Creating missing folder logs
+  [*] Creating missing folder modules
+  [*] Creating missing folder workspaces
+  [*] Creating missing folder obfuscated_scripts
+  ```
 - 文件｜Docs: https://github.com/Pennyw0rth/NetExec
 
-### `nmap`
+### `nmap` ✓ verified on VM
 - 網路測繪器（The Network Mapper）
 - **提供指令:** `nmap`, `nping`
 - **步驟:**
   1. 安裝：`sudo apt install -y nmap`
   2. 看說明：`nmap -h`（或 `man nmap`）
   3. 執行：`nmap -h` — 最常用工具
+- **實際 --help（已在 VM 驗證）:**
+  ```
+  Nmap 7.991 ( https://nmap.org )
+  Usage: nmap [Scan Type(s)] [Options] {target specification}
+  TARGET SPECIFICATION:
+    Can pass hostnames, IP addresses, networks, etc.
+    Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254
+    -iL <inputfilename>: Input from list of hosts/networks
+  ```
 - 文件｜Docs: https://nmap.org/
 
 ### `responder`
@@ -4746,13 +5267,22 @@
   3. 執行：`responder -h` — 最常用工具
 - 文件｜Docs: https://github.com/lgandx/Responder
 
-### `sqlmap`
+### `sqlmap` ✓ verified on VM
 - 自動化 SQL 注入工具
 - **提供指令:** `sqlmap`, `sqlmapapi`
 - **步驟:**
   1. 安裝：`sudo apt install -y sqlmap`
   2. 看說明：`sqlmap -h`（或 `man sqlmap`）
   3. 執行：`sqlmap -h` — 最常用工具
+- **實際 --help（已在 VM 驗證）:**
+  ```
+          ___
+         __H__
+   ___ ___[)]_____ ___ ___  {1.10.9#stable}
+  |_ -| . [(]     | .'| . |
+  |___|_  ["]_|_|_|__,|  _|
+        |_|V...       |_|   https://sqlmap.org
+  ```
 - 文件｜Docs: https://sqlmap.org/
 
 ### `wireshark`
