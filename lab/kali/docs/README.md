@@ -7,7 +7,7 @@ Kali 選單中工具的參考：每個是什麼、逐步教學，全部限於操
 
 | Document | Language | Contents |
 |---|---|---|
-| [`installed-apps.md`](installed-apps.md) | EN + 繁中 | **Exhaustive list of every application actually on this VM** (79 menu apps), auto-generated from the VM by [`../scripts/list-apps.sh`](../scripts/list-apps.sh) |
+| [`installed-apps.md`](installed-apps.md) | EN + 繁中 | **Every application on this VM (78), each with an intro + step-by-step tutorial**, grouped; the app set is enumerated from the VM by [`../scripts/list-apps.sh`](../scripts/list-apps.sh) |
 | [`applications.en.md`](applications.en.md) | English | Offensive-tool catalogue by menu category (01-Reconnaissance … 16-Services), intro + step-by-step per tool |
 | [`applications.zh-TW.md`](applications.zh-TW.md) | 繁體中文 | 攻擊工具依選單分類的清單，每個工具的介紹＋逐步教學 |
 

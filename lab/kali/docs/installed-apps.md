@@ -1,291 +1,749 @@
-# Installed applications on this Kali VM — complete list (English / 繁體中文)
+# Every application on this Kali VM — introductions & step-by-step (English / 繁體中文)
 
-> Auto-generated from the VM on 2026-10-25 by enumerating every visible `.desktop` entry
-> in `/usr/share/applications`. Regenerate after installing tools with
-> [`../scripts/list-apps.sh`](../scripts/list-apps.sh).
-> Curated offensive **tutorials** live in [`applications.en.md`](applications.en.md) /
-> [`applications.zh-TW.md`](applications.zh-TW.md); this file is the exhaustive inventory.
+> Auto-generated from the VM on 2026-10-25 by enumerating every visible `.desktop` entry.
+> Regenerate the list with [`../scripts/list-apps.sh`](../scripts/list-apps.sh); launch any
+> of these with [`../scripts/apps.sh`](../scripts/apps.sh) (`apps.sh open "<name>"`).
+> The offensive-tool deep-dives live in [`applications.en.md`](applications.en.md) /
+> [`applications.zh-TW.md`](applications.zh-TW.md).
 
-**Fact check (this VM, `Kali-Red5`):** it is a **minimal** install — `kali-linux-core`
-only. **79** applications are in the menu, but they are mostly the Xfce desktop, Kali
-web-links, and a handful of tools (`tcpdump`, `netcat`, `nmap`→ via core). The large
-offensive toolset (nmap/nuclei/metasploit/…) is **not installed yet** — those menu
-categories (01-Reconnaissance, 12-Command and Control, …) are populated by installing the
-Kali metapackages. Install them with [`../scripts/install-tools.sh`](../scripts/install-tools.sh)
-or `sudo apt install kali-linux-default`, then re-run `list-apps.sh` to regenerate this file.
+**Honest status (this VM, `Kali-Red5`):** a **minimal** install — `kali-linux-core` only,
+**78** applications in the menu (mostly the Xfce desktop, Kali web-links, terminals/editors,
+and `tcpdump`/`netcat`). The large offensive toolset is **not installed yet**; the numbered
+menu categories (01-Reconnaissance … 16-Services) fill in after
+[`../scripts/install-tools.sh`](../scripts/install-tools.sh) or `sudo apt install kali-linux-default`.
+Re-run `list-apps.sh` afterwards and this file can be regenerated to include the new tools.
 
-To **use** any security tool below from one entry point, see
-[`../scripts/toolkit.sh`](../scripts/toolkit.sh) and [`../scripts/README.md`](../scripts/README.md).
-To open a GUI app over the VNC desktop: `../scripts/toolkit.sh launch <exec>` (e.g. `launch burpsuite`).
+**How to use any app below:**
+- GUI app → `../scripts/apps.sh open "<Name>"` (opens on the VNC/xrdp desktop), or the whisker menu.
+- CLI security tool → `../scripts/toolkit.sh <module>` (run/chain), see [`../scripts/README.md`](../scripts/README.md).
 
----
+每個應用程式都附**英文與繁體中文的介紹與逐步步驟**。GUI 程式用 `apps.sh open "<名稱>"`
+在 VNC 桌面開啟；CLI 安全工具用 `toolkit.sh`。攻擊工具的深入教學見 `applications.zh-TW.md`。
 
-## English — all 79 menu applications, grouped
+## 1. Security / networking tools｜安全與網路工具
 
-### 1. Security / networking tools
+### maltego (installer)
 
-| Application | What it is |
-|---|---|
-| maltego (installer) | OSINT/link-analysis tool — this entry installs it on first run. |
-| netcat | The TCP/UDP Swiss-army knife (nc) — banners, simple exfil/listener tests. |
-| tcpdump | CLI packet sniffer — capture traffic to/from the target. |
+- **EN:** OSINT & link-analysis — this menu entry installs Maltego on first run.
+- **繁中:** OSINT 與關聯分析 —— 此選單項目首次執行時安裝 Maltego。
+- **Steps｜步驟:**
+  1. Launch once; it downloads/installs Maltego (needs internet).
+     - 啟動一次；它會下載/安裝 Maltego（需網路）。
+  2. After install, register a free CE account; use only on your own data.
+     - 安裝後註冊免費 CE 帳號；僅對自有資料使用。
 
-### 2. Kali resources (web links)
+### netcat
 
-| Application | What it is |
-|---|---|
-| Exploit Database | Opens exploit-db.com (see searchsploit for the offline copy). |
-| Kali Bugs | Link to the Kali bug tracker. |
-| Kali Docs | Link to the Kali documentation. |
-| Kali Forums | Link to the Kali community forums. |
-| Kali Linux | Link to kali.org. |
-| Kali Tools | Link to the Kali tools listing (tools.kali.org). |
-| NetHunter | Link to Kali NetHunter (mobile). |
-| OffSec Training | Link to OffSec courses. |
-| VulnHub | Link to VulnHub practice VMs. |
+- **EN:** nc — the TCP/UDP Swiss-army knife: banners, listeners, simple transfers.
+- **繁中:** nc —— TCP/UDP 萬用工具：抓 banner、監聽、簡單傳輸。
+- **Steps｜步驟:**
+  1. Banner grab: `nc -v <NODE_IP> 30080` then type a request.
+     - 抓 banner：`nc -v <NODE_IP> 30080` 再輸入請求。
+  2. Egress test: `nc -zv <NODE_IP> 5432` — refused = DB control holds.
+     - 出站測試：`nc -zv <NODE_IP> 5432` —— 被拒＝DB 控制有效。
+  3. Listener (own hosts only): `nc -lvnp 4444`.
+     - 監聽（僅自有主機）：`nc -lvnp 4444`。
 
-### 3. Terminals
+### tcpdump
 
-| Application | What it is |
-|---|---|
-| QTerminal | The default terminal emulator — where you run every tool below. |
-| QTerminal Drop-down | Drop-down (Quake-style) terminal. |
-| Root Terminal Emulator | Terminal that opens as root. |
+- **EN:** CLI packet sniffer — capture traffic to/from the target.
+- **繁中:** CLI 封包嗅探器 —— 擷取與目標間流量。
+- **Steps｜步驟:**
+  1. `sudo tcpdump -ni eth0 host <NODE_IP> and port 30080 -c 40 -w cap.pcap`.
+     - `sudo tcpdump -ni eth0 host <NODE_IP> and port 30080 -c 40 -w cap.pcap`。
+  2. Or let the toolkit do it: `./toolkit.sh sniff eth0 40`.
+     - 或用工具組：`./toolkit.sh sniff eth0 40`。
+  3. Open the .pcap in Wireshark to analyse.
+     - 用 Wireshark 開 .pcap 分析。
 
-### 4. Editors
 
-| Application | What it is |
-|---|---|
-| Mousepad | Lightweight GUI text editor. |
-| Text Editor | Default text editor. |
-| Vim | Modal CLI text editor. |
+## 2. Kali resources (web links)｜Kali 資源（網頁連結）
 
-### 5. Files & archives
+### Exploit Database
 
-| Application | What it is |
-|---|---|
-| Bulk Rename | Thunar bulk file renamer. |
-| Engrampa Archive Manager | Create/extract archives — unpack wordlists, bundle evidence. |
-| Help | Yelp help browser. |
-| Thunar File Manager | Graphical file manager — browse ~/lab-evidence. |
+- **EN:** Opens exploit-db.com in the browser (offline copy = searchsploit).
+- **繁中:** 在瀏覽器開啟 exploit-db.com（離線版 = searchsploit）。
+- **Steps｜步驟:**
+  1. Launch it to browse exploits online.
+     - 啟動以線上瀏覽 exploit。
+  2. For offline/CLI: `toolkit.sh search <product version>`.
+     - 離線/CLI 用：`toolkit.sh search <產品 版本>`。
 
-### 6. Media & documents
+### Kali Bugs
 
-| Application | What it is |
-|---|---|
-| Atril Document Viewer | PDF/document viewer — read exported reports. |
-| Parole Media Player | Media player. |
-| Ristretto Image Viewer | Image viewer — review screenshots. |
-| Volume Control | Xfce/desktop setting. |
+- **EN:** Opens the Kali bug tracker (bugs.kali.org).
+- **繁中:** 開啟 Kali bug 追蹤系統（bugs.kali.org）。
+- **Steps｜步驟:**
+  1. Launch to report or search Kali bugs.
+     - 啟動以回報或搜尋 Kali bug。
 
-### 7. Web & network
+### Kali Docs
 
-| Application | What it is |
-|---|---|
-| Firefox ESR | Browser — proxy it through Burp/ZAP to inspect the lab web/API. |
-| Mail Reader | Default mail client launcher. |
-| Web Browser | Default web browser launcher. |
-| Web Browser | Default web browser launcher. |
+- **EN:** Opens kali.org/docs.
+- **繁中:** 開啟 kali.org/docs。
+- **Steps｜步驟:**
+  1. Launch for official how-tos (install, tools, troubleshooting).
+     - 啟動查官方教學（安裝、工具、疑難排解）。
 
-### 8. Accessibility
+### Kali Forums
 
-| Application | What it is |
-|---|---|
-| Onboard | On-screen keyboard. |
-| Onboard Settings | Xfce/desktop setting. |
+- **EN:** Opens forums.kali.org.
+- **繁中:** 開啟 forums.kali.org。
+- **Steps｜步驟:**
+  1. Launch to ask/search community questions.
+     - 啟動以提問/搜尋社群問題。
 
-### 9. Settings & desktop
+### Kali Linux
 
-| Application | What it is |
-|---|---|
-| Accessibility | Assistive settings (sticky keys, etc.). |
-| Advanced Network Configuration | NetworkManager editor — set the VM IP/DNS, add the isolated-lab NIC. |
-| Appearance | Xfce/desktop setting. |
-| Clipboard Manager Settings | Xfce/desktop setting. |
-| Color Profiles | Xfce/desktop setting. |
-| Default Applications | Xfce/desktop setting. |
-| Desktop | Xfce/desktop setting. |
-| Display | Xfce/desktop setting. |
-| Kali HiDPI Mode | Toggle HiDPI scaling for high-res displays. |
-| Kali Tweaks | Central Kali config — enable tool metapackages, undercover mode, shells. |
-| Keyboard | Xfce/desktop setting. |
-| LightDM GTK Greeter settings | Configure the login screen. |
-| Mouse and Touchpad | Xfce/desktop setting. |
-| Notifications | Xfce/desktop setting. |
-| Panel | Xfce/desktop setting. |
-| Panel Profiles | Xfce/desktop setting. |
-| Power Manager | Xfce/desktop setting. |
-| Qt5 Settings | Xfce/desktop setting. |
-| Qt6 Settings | Xfce/desktop setting. |
-| Removable Drives and Media | Xfce/desktop setting. |
-| Session and Startup | Xfce/desktop setting. |
-| Settings Editor | Xfce/desktop setting. |
-| Settings Manager | Xfce/desktop setting. |
-| Thunar Preferences | Xfce/desktop setting. |
-| Time and Date | Xfce/desktop setting. |
-| Users and Groups | Manage local accounts. |
-| Window Manager | Xfce/desktop setting. |
-| Window Manager Tweaks | Xfce/desktop setting. |
-| Workspaces | Xfce/desktop setting. |
-| Xfce Screensaver | Xfce/desktop setting. |
+- **EN:** Opens kali.org.
+- **繁中:** 開啟 kali.org。
+- **Steps｜步驟:**
+  1. Launch for downloads/news.
+     - 啟動查下載/消息。
 
-### 10. System & utilities
+### Kali Tools
 
-| Application | What it is |
-|---|---|
-| About Xfce | Shows the Xfce desktop version. |
-| Application Finder | Search & launch any installed app (the whisker menu search). |
-| BackTrack Mode | Kali Tweaks toggle for the legacy BackTrack look. |
-| Catfish File Search | Desktop file-content search. |
-| Clipboard Manager | Clipboard history tray applet. |
-| Disks | GNOME Disks — partition/format/mount drives, image a disk. |
-| File Manager | Thunar file manager (opener). |
-| GtkHash | Compute file checksums (MD5/SHA) — verify evidence integrity. |
-| Kali Halloween Mode | Kali Tweaks seasonal theme toggle. |
-| Kali Undercover Mode | Makes the desktop look like Windows (stealth demo). |
-| Log Out | End the desktop session. |
-| MATE Calculator | Calculator. |
-| Run Program... | Run an arbitrary command (app launcher). |
-| Screenshot | Capture the screen — attach to evidence. |
-| Sensor Viewer | Show hardware sensors. |
-| Task Manager | Process/resource monitor. |
-| Terminal Emulator | Xfce terminal (opener). |
+- **EN:** Opens tools.kali.org — the full tool catalogue.
+- **繁中:** 開啟 tools.kali.org —— 完整工具目錄。
+- **Steps｜步驟:**
+  1. Launch to look up any Kali tool's docs/usage.
+     - 啟動查任何 Kali 工具的文件/用法。
 
----
+### NetHunter
 
-## 繁體中文 —— 選單中所有應用程式（依類別）
+- **EN:** Opens the Kali NetHunter (mobile) page.
+- **繁中:** 開啟 Kali NetHunter（行動版）頁面。
+- **Steps｜步驟:**
+  1. Launch for NetHunter docs (Android pentest platform).
+     - 啟動查 NetHunter 文件（Android 滲透平台）。
 
-### 1. Security / networking tools
+### OffSec Training
 
-| 應用程式 | 說明 |
-|---|---|
-| maltego (installer) | OSINT／關聯分析工具 —— 此項目首次執行時安裝。 |
-| netcat | TCP/UDP 萬用工具（nc）—— 抓 banner、簡單外洩/監聽測試。 |
-| tcpdump | CLI 封包嗅探器 —— 擷取與目標間的流量。 |
+- **EN:** Opens OffSec course catalogue.
+- **繁中:** 開啟 OffSec 課程目錄。
+- **Steps｜步驟:**
+  1. Launch to browse PEN-200/OSCP etc.
+     - 啟動瀏覽 PEN-200/OSCP 等課程。
 
-### 2. Kali resources (web links)
+### VulnHub
 
-| 應用程式 | 說明 |
-|---|---|
-| Exploit Database | 開啟 exploit-db.com（離線版見 searchsploit）。 |
-| Kali Bugs | Kali bug 追蹤系統連結。 |
-| Kali Docs | Kali 官方文件連結。 |
-| Kali Forums | Kali 社群論壇連結。 |
-| Kali Linux | kali.org 連結。 |
-| Kali Tools | Kali 工具清單連結（tools.kali.org）。 |
-| NetHunter | Kali NetHunter（行動版）連結。 |
-| OffSec Training | OffSec 課程連結。 |
-| VulnHub | VulnHub 練習 VM 連結。 |
+- **EN:** Opens VulnHub — downloadable vulnerable practice VMs.
+- **繁中:** 開啟 VulnHub —— 可下載的練習靶機 VM。
+- **Steps｜步驟:**
+  1. Launch to find legal practice targets (run them isolated).
+     - 啟動找合法練習靶機（隔離執行）。
 
-### 3. Terminals
 
-| 應用程式 | 說明 |
-|---|---|
-| QTerminal | 預設終端機 —— 以下所有工具都在這裡執行。 |
-| QTerminal Drop-down | 下拉式（Quake 風格）終端機。 |
-| Root Terminal Emulator | 以 root 開啟的終端機。 |
+## 3. Terminals｜終端機
 
-### 4. Editors
+### QTerminal
 
-| 應用程式 | 說明 |
-|---|---|
-| Mousepad | 輕量 GUI 文字編輯器。 |
-| Text Editor | 預設文字編輯器。 |
-| Vim | 模式化 CLI 文字編輯器。 |
+- **EN:** The default terminal — where you run every CLI tool here.
+- **繁中:** 預設終端機 —— 以下所有 CLI 工具都在這裡執行。
+- **Steps｜步驟:**
+  1. Open it; `cd ~/kali-scripts`.
+     - 開啟後 `cd ~/kali-scripts`。
+  2. Run the toolkit, e.g. `TARGET=<NODE_IP> ./toolkit.sh chain recon,web`.
+     - 執行工具組，例如 `TARGET=<NODE_IP> ./toolkit.sh chain recon,web`。
 
-### 5. Files & archives
+### QTerminal Drop-down
 
-| 應用程式 | 說明 |
-|---|---|
-| Bulk Rename | Thunar 批次檔名重新命名。 |
-| Engrampa Archive Manager | 建立／解開壓縮檔 —— 解壓字典、打包證據。 |
-| Help | Yelp 說明瀏覽器。 |
-| Thunar File Manager | 圖形檔案管理員 —— 瀏覽 ~/lab-evidence。 |
+- **EN:** Quake-style drop-down terminal.
+- **繁中:** Quake 風格下拉終端機。
+- **Steps｜步驟:**
+  1. Press its hotkey to drop the terminal from the top.
+     - 按熱鍵從上方拉下終端機。
 
-### 6. Media & documents
+### Root Terminal Emulator
 
-| 應用程式 | 說明 |
-|---|---|
-| Atril Document Viewer | PDF／文件檢視器 —— 閱讀匯出的報告。 |
-| Parole Media Player | 媒體播放器。 |
-| Ristretto Image Viewer | 圖片檢視器 —— 檢視截圖。 |
-| Volume Control | Xfce／桌面設定。 |
+- **EN:** Terminal that opens as root.
+- **繁中:** 以 root 開啟的終端機。
+- **Steps｜步驟:**
+  1. Launch (asks for the password); use only when sudo isn't enough.
+     - 啟動（需密碼）；僅在 sudo 不足時使用。
 
-### 7. Web & network
 
-| 應用程式 | 說明 |
-|---|---|
-| Firefox ESR | 瀏覽器 —— 透過 Burp/ZAP 代理檢視 lab 的 web/API。 |
-| Mail Reader | 預設郵件程式啟動器。 |
-| Web Browser | 預設瀏覽器啟動器。 |
-| Web Browser | 預設瀏覽器啟動器。 |
+## 4. Editors｜編輯器
 
-### 8. Accessibility
+### Mousepad
 
-| 應用程式 | 說明 |
-|---|---|
-| Onboard | 螢幕小鍵盤。 |
-| Onboard Settings | Xfce／桌面設定。 |
+- **EN:** Lightweight GUI text editor.
+- **繁中:** 輕量 GUI 文字編輯器。
+- **Steps｜步驟:**
+  1. `apps.sh open Mousepad notes.txt` or File → Open.
+     - `apps.sh open Mousepad notes.txt` 或 File → Open。
+  2. Edit; Ctrl+S to save.
+     - 編輯；Ctrl+S 儲存。
 
-### 9. Settings & desktop
+### Text Editor
 
-| 應用程式 | 說明 |
-|---|---|
-| Accessibility | 輔助使用設定（黏滯鍵等）。 |
-| Advanced Network Configuration | NetworkManager 編輯器 —— 設定 VM 的 IP/DNS、加入隔離 lab 網卡。 |
-| Appearance | Xfce／桌面設定。 |
-| Clipboard Manager Settings | Xfce／桌面設定。 |
-| Color Profiles | Xfce／桌面設定。 |
-| Default Applications | Xfce／桌面設定。 |
-| Desktop | Xfce／桌面設定。 |
-| Display | Xfce／桌面設定。 |
-| Kali HiDPI Mode | 切換 HiDPI 高解析度縮放。 |
-| Kali Tweaks | Kali 設定中心 —— 啟用工具套件、undercover 模式、shell。 |
-| Keyboard | Xfce／桌面設定。 |
-| LightDM GTK Greeter settings | 設定登入畫面。 |
-| Mouse and Touchpad | Xfce／桌面設定。 |
-| Notifications | Xfce／桌面設定。 |
-| Panel | Xfce／桌面設定。 |
-| Panel Profiles | Xfce／桌面設定。 |
-| Power Manager | Xfce／桌面設定。 |
-| Qt5 Settings | Xfce／桌面設定。 |
-| Qt6 Settings | Xfce／桌面設定。 |
-| Removable Drives and Media | Xfce／桌面設定。 |
-| Session and Startup | Xfce／桌面設定。 |
-| Settings Editor | Xfce／桌面設定。 |
-| Settings Manager | Xfce／桌面設定。 |
-| Thunar Preferences | Xfce／桌面設定。 |
-| Time and Date | Xfce／桌面設定。 |
-| Users and Groups | 管理本機帳號。 |
-| Window Manager | Xfce／桌面設定。 |
-| Window Manager Tweaks | Xfce／桌面設定。 |
-| Workspaces | Xfce／桌面設定。 |
-| Xfce Screensaver | Xfce／桌面設定。 |
+- **EN:** Opens the default text editor.
+- **繁中:** 開啟預設文字編輯器。
+- **Steps｜步驟:**
+  1. Launch; edit and save config/notes.
+     - 啟動；編輯並儲存設定/筆記。
 
-### 10. System & utilities
+### Vim
 
-| 應用程式 | 說明 |
-|---|---|
-| About Xfce | 顯示 Xfce 桌面版本資訊。 |
-| Application Finder | 搜尋並啟動任何已安裝程式（選單搜尋）。 |
-| BackTrack Mode | Kali Tweaks 切換成舊版 BackTrack 外觀。 |
-| Catfish File Search | 桌面檔案／內容搜尋。 |
-| Clipboard Manager | 剪貼簿歷史列小工具。 |
-| Disks | GNOME Disks —— 分割／格式化／掛載磁碟、製作磁碟映像。 |
-| File Manager | Thunar 檔案管理員。 |
-| GtkHash | 計算檔案雜湊（MD5/SHA）—— 驗證證據完整性。 |
-| Kali Halloween Mode | Kali Tweaks 節慶主題切換。 |
-| Kali Undercover Mode | 讓桌面偽裝成 Windows（隱蔽示範）。 |
-| Log Out | 結束桌面工作階段。 |
-| MATE Calculator | 計算機。 |
-| Run Program... | 執行任意指令（啟動器）。 |
-| Screenshot | 擷取螢幕畫面 —— 附加到證據。 |
-| Sensor Viewer | 顯示硬體感測器。 |
-| Task Manager | 程序／資源監視器。 |
-| Terminal Emulator | Xfce 終端機。 |
+- **EN:** Modal CLI text editor (powerful once learned).
+- **繁中:** 模式化 CLI 文字編輯器（熟練後很強大）。
+- **Steps｜步驟:**
+  1. `vim file` ; press i to insert, Esc then :wq to save+quit.
+     - `vim file`；按 i 進入編輯，Esc 後 :wq 儲存離開。
 
----
 
-> 註：這 79 個是**目前**選單中的程式。安裝工具套件後（見 install-tools.sh），
-> 01-Reconnaissance、08-Exploitation、12-Command and Control 等分類會出現數十到數百個工具；
-> 之後重跑 `list-apps.sh` 即可更新本清單。每個攻擊工具的逐步教學見 `applications.zh-TW.md`。
+## 5. Files & archives｜檔案與壓縮
+
+### Bulk Rename
+
+- **EN:** Thunar's batch file renamer.
+- **繁中:** Thunar 的批次檔名重新命名工具。
+- **Steps｜步驟:**
+  1. Open it; add files with the + button.
+     - 開啟後用 + 加入檔案。
+  2. Choose a rule (replace/numbering); preview; Rename.
+     - 選規則（取代/編號）；預覽；Rename。
+
+### Engrampa Archive Manager
+
+- **EN:** Create/extract zip/tar/7z — unpack wordlists, bundle evidence.
+- **繁中:** 建立/解開 zip/tar/7z —— 解壓字典、打包證據。
+- **Steps｜步驟:**
+  1. `apps.sh open "Engrampa Archive Manager" file.zip` or File → Open.
+     - `apps.sh open ... file.zip` 或 File → Open。
+  2. Extract button → choose a folder; or drag files in and Save to create.
+     - Extract → 選資料夾；或拖入檔案後 Save 建立壓縮檔。
+
+### Help
+
+- **EN:** Yelp documentation browser.
+- **繁中:** Yelp 說明文件瀏覽器。
+- **Steps｜步驟:**
+  1. Open it; browse or search the help topics.
+     - 開啟後瀏覽或搜尋說明主題。
+
+### Thunar File Manager
+
+- **EN:** Graphical file manager — browse ~/lab-evidence.
+- **繁中:** 圖形檔案管理員 —— 瀏覽 ~/lab-evidence。
+- **Steps｜步驟:**
+  1. Open it; navigate to your evidence folder.
+     - 開啟後進入證據資料夾。
+  2. Tools → Open Terminal Here to act on a folder.
+     - Tools → Open Terminal Here 以對資料夾操作。
+
+
+## 6. Media & documents｜媒體與文件
+
+### Atril Document Viewer
+
+- **EN:** PDF/PostScript/DjVu viewer — read exported reports.
+- **繁中:** PDF/PostScript/DjVu 檢視器 —— 閱讀匯出的報告。
+- **Steps｜步驟:**
+  1. `apps.sh open "Atril Document Viewer" report.pdf` or File → Open.
+     - `apps.sh open "Atril Document Viewer" report.pdf` 或 File → Open。
+  2. Navigate with the sidebar; Ctrl+F to search text.
+     - 用側欄導覽；Ctrl+F 搜尋文字。
+
+### Parole Media Player
+
+- **EN:** Audio/video player.
+- **繁中:** 音訊/影片播放器。
+- **Steps｜步驟:**
+  1. `apps.sh open "Parole Media Player" clip.mp4` or Open.
+     - `apps.sh open "Parole Media Player" clip.mp4` 或 Open。
+
+### Ristretto Image Viewer
+
+- **EN:** Image viewer — review screenshots/evidence.
+- **繁中:** 圖片檢視器 —— 檢視截圖/證據。
+- **Steps｜步驟:**
+  1. `apps.sh open "Ristretto Image Viewer" shot.png`.
+     - `apps.sh open "Ristretto Image Viewer" shot.png`。
+  2. Arrow keys to page through a folder.
+     - 方向鍵逐張瀏覽資料夾。
+
+### Volume Control
+
+- **EN:** Audio mixer.
+- **繁中:** 音訊混音器。
+- **Steps｜步驟:**
+  1. Open it; adjust output/input levels.
+     - 開啟後調整輸出/輸入音量。
+
+
+## 7. Web & network｜網頁與網路
+
+### Firefox ESR
+
+- **EN:** Browser — proxy through Burp/ZAP to inspect the lab web/API.
+- **繁中:** 瀏覽器 —— 透過 Burp/ZAP 代理檢視 lab 的 web/API。
+- **Steps｜步驟:**
+  1. `apps.sh open "Firefox ESR" http://<NODE_IP>:30080`.
+     - `apps.sh open "Firefox ESR" http://<NODE_IP>:30080`。
+  2. Settings → Network → Manual proxy 127.0.0.1:8080 to route through Burp.
+     - Settings → Network → 手動代理 127.0.0.1:8080 以經 Burp。
+  3. Import Burp's CA cert to intercept HTTPS.
+     - 匯入 Burp 的 CA 憑證以攔截 HTTPS。
+
+### Mail Reader
+
+- **EN:** Launches the default mail client.
+- **繁中:** 啟動預設郵件程式。
+- **Steps｜步驟:**
+  1. Launch; configure an account if prompted.
+     - 啟動；若提示則設定帳號。
+
+### Web Browser
+
+- **EN:** Launches the default browser.
+- **繁中:** 啟動預設瀏覽器。
+- **Steps｜步驟:**
+  1. Launch; same proxy workflow as Firefox ESR above.
+     - 啟動；代理流程同上方 Firefox ESR。
+
+
+## 8. Accessibility｜輔助使用
+
+### Onboard
+
+- **EN:** On-screen keyboard (useful over VNC without a keyboard).
+- **繁中:** 螢幕小鍵盤（VNC 無實體鍵盤時好用）。
+- **Steps｜步驟:**
+  1. Launch it; click keys with the mouse.
+     - 啟動後用滑鼠點按鍵。
+
+### Onboard Settings
+
+- **EN:** Configure the on-screen keyboard.
+- **繁中:** 設定螢幕小鍵盤。
+- **Steps｜步驟:**
+  1. Open it; set layout/theme/auto-show.
+     - 開啟後設定配置/佈景/自動顯示。
+
+
+## 9. Settings & desktop｜設定與桌面
+
+### Accessibility
+
+- **EN:** Assistive input settings (sticky/bounce/slow keys, mouse keys).
+- **繁中:** 輔助輸入設定（黏滯鍵、彈回鍵、慢速鍵、滑鼠鍵）。
+- **Steps｜步驟:**
+  1. Open it; pick the Keyboard or Mouse tab.
+     - 開啟後選 Keyboard 或 Mouse 分頁。
+  2. Toggle the assists you need; changes apply live.
+     - 開啟需要的輔助；即時生效。
+
+### Advanced Network Configuration
+
+- **EN:** NetworkManager editor — set the VM's IP/DNS and add the isolated-lab NIC.
+- **繁中:** NetworkManager 編輯器 —— 設定 VM 的 IP/DNS、加入隔離 lab 網卡。
+- **Steps｜步驟:**
+  1. Open it; click + to add a connection or select the existing Ethernet.
+     - 開啟後按 + 新增連線，或選現有的 Ethernet。
+  2. IPv4 tab → Manual → add address/netmask/gateway for the lab segment.
+     - IPv4 分頁 → Manual → 填入 lab 網段的位址/遮罩/閘道。
+  3. Save; re-activate the connection to apply.
+     - 儲存後重新啟用連線以套用。
+
+### Appearance
+
+- **EN:** Theme, icons and fonts for the desktop.
+- **繁中:** 桌面的佈景、圖示與字型。
+- **Steps｜步驟:**
+  1. Open it; choose a Style/Icons on the first tabs.
+     - 開啟後在前幾個分頁選 Style/Icons。
+  2. Fonts tab → adjust DPI if text is tiny over VNC.
+     - Fonts 分頁 → 若 VNC 下字太小可調 DPI。
+
+### Clipboard Manager Settings
+
+- **EN:** Configure clipboard history size/behaviour.
+- **繁中:** 設定剪貼簿歷史大小/行為。
+- **Steps｜步驟:**
+  1. Open it; set history length and ignore rules.
+     - 開啟後設定歷史長度與忽略規則。
+  2. Close to save.
+     - 關閉即儲存。
+
+### Color Profiles
+
+- **EN:** Manage ICC colour profiles for displays.
+- **繁中:** 管理顯示器的 ICC 色彩設定檔。
+- **Steps｜步驟:**
+  1. Open it; select the display; add/assign a profile.
+     - 開啟後選顯示器；新增/指定設定檔。
+
+### Default Applications
+
+- **EN:** Pick default browser/mail/terminal/file-manager.
+- **繁中:** 選預設瀏覽器/郵件/終端機/檔案管理員。
+- **Steps｜步驟:**
+  1. Open it; set each default on the Internet/Utilities tabs.
+     - 開啟後在 Internet/Utilities 分頁設定各預設。
+
+### Desktop
+
+- **EN:** Wallpaper, desktop icons and menu behaviour.
+- **繁中:** 桌布、桌面圖示與選單行為。
+- **Steps｜步驟:**
+  1. Open it; Background tab → choose wallpaper.
+     - 開啟後 Background 分頁選桌布。
+  2. Icons tab → toggle which icons show.
+     - Icons 分頁 → 切換要顯示的圖示。
+
+### Display
+
+- **EN:** Resolution, scaling and multi-monitor layout.
+- **繁中:** 解析度、縮放與多螢幕配置。
+- **Steps｜步驟:**
+  1. Open it; set resolution to match your VNC geometry (e.g. 1440x900).
+     - 開啟後把解析度設成與 VNC 相符（例如 1440x900）。
+  2. Apply; confirm to keep.
+     - Apply 後確認保留。
+
+### Kali HiDPI Mode
+
+- **EN:** Toggle HiDPI scaling for high-resolution screens.
+- **繁中:** 切換 HiDPI 高解析度縮放。
+- **Steps｜步驟:**
+  1. Launch once to enable; run again to disable.
+     - 執行一次啟用；再執行停用。
+
+### Kali Tweaks
+
+- **EN:** Central config — enable tool metapackages, undercover mode, shell, VPN.
+- **繁中:** 設定中心 —— 啟用工具套件、undercover 模式、shell、VPN。
+- **Steps｜步驟:**
+  1. Open it (runs in a terminal); arrow-keys to a section.
+     - 開啟（在終端機中執行）；方向鍵移到區段。
+  2. 'Metapackages' → tick kali-linux-default to install the full toolset.
+     - 'Metapackages' → 勾選 kali-linux-default 安裝完整工具集。
+  3. Apply; it runs apt for you.
+     - 套用；它會替你跑 apt。
+
+### Keyboard
+
+- **EN:** Layout, repeat rate and shortcuts.
+- **繁中:** 鍵盤配置、重複速率與快捷鍵。
+- **Steps｜步驟:**
+  1. Open it; Layout tab → add/select your layout.
+     - 開啟後 Layout 分頁新增/選配置。
+  2. Application Shortcuts tab → bind keys to commands.
+     - Application Shortcuts 分頁 → 綁定按鍵到指令。
+
+### LightDM GTK Greeter settings
+
+- **EN:** Configure the graphical login screen.
+- **繁中:** 設定圖形登入畫面。
+- **Steps｜步驟:**
+  1. Open it (asks for sudo); set theme/background/user list.
+     - 開啟（需 sudo）；設定佈景/背景/使用者清單。
+  2. Save; changes show at next login.
+     - 儲存；下次登入生效。
+
+### Mouse and Touchpad
+
+- **EN:** Pointer speed, buttons and touchpad behaviour.
+- **繁中:** 指標速度、按鍵與觸控板行為。
+- **Steps｜步驟:**
+  1. Open it; adjust Acceleration/Buttons.
+     - 開啟後調整 Acceleration/Buttons。
+
+### Notifications
+
+- **EN:** Desktop notification appearance/behaviour.
+- **繁中:** 桌面通知外觀/行為。
+- **Steps｜步驟:**
+  1. Open it; set position and do-not-disturb.
+     - 開啟後設定位置與勿擾。
+
+### Panel
+
+- **EN:** Add/remove panels and panel items.
+- **繁中:** 新增/移除面板與面板項目。
+- **Steps｜步驟:**
+  1. Open it; Items tab → add a launcher/clock/systray.
+     - 開啟後 Items 分頁新增啟動器/時鐘/系統匣。
+
+### Panel Profiles
+
+- **EN:** Save/restore panel layouts.
+- **繁中:** 儲存/還原面板配置。
+- **Steps｜步驟:**
+  1. Open it; Save the current layout, or load a backup.
+     - 開啟後儲存目前配置，或載入備份。
+
+### Power Manager
+
+- **EN:** Battery/sleep/screen-blank behaviour.
+- **繁中:** 電源/睡眠/螢幕變暗行為。
+- **Steps｜步驟:**
+  1. Open it; set 'display sleep' to never for long scans.
+     - 開啟後把顯示睡眠設為 never 以利長時掃描。
+
+### Qt5 Settings
+
+- **EN:** Theme/behaviour for Qt5 apps.
+- **繁中:** Qt5 程式的佈景/行為。
+- **Steps｜步驟:**
+  1. Open it; match the Qt theme to the GTK one.
+     - 開啟後把 Qt 佈景調成與 GTK 一致。
+
+### Qt6 Settings
+
+- **EN:** Theme/behaviour for Qt6 apps.
+- **繁中:** Qt6 程式的佈景/行為。
+- **Steps｜步驟:**
+  1. Open it; match the Qt theme to the GTK one.
+     - 開啟後把 Qt 佈景調成與 GTK 一致。
+
+### Removable Drives and Media
+
+- **EN:** Auto-mount/auto-run behaviour for USB/CD.
+- **繁中:** USB/CD 的自動掛載/自動執行行為。
+- **Steps｜步驟:**
+  1. Open it; toggle auto-mount per media type.
+     - 開啟後依媒體類型切換自動掛載。
+
+### Session and Startup
+
+- **EN:** Auto-started apps and session save/restore.
+- **繁中:** 自動啟動的程式與工作階段儲存/還原。
+- **Steps｜步驟:**
+  1. Open it; Application Autostart tab → add e.g. the VNC server.
+     - 開啟後 Application Autostart 分頁 → 加入例如 VNC server。
+
+### Settings Editor
+
+- **EN:** Low-level registry of all Xfconf settings.
+- **繁中:** 所有 Xfconf 設定的底層登錄。
+- **Steps｜步驟:**
+  1. Open it; browse channels; edit values carefully.
+     - 開啟後瀏覽 channel；謹慎編輯值。
+
+### Settings Manager
+
+- **EN:** The hub linking every settings dialog above.
+- **繁中:** 連到以上所有設定對話框的中心。
+- **Steps｜步驟:**
+  1. Open it; click any icon to reach that setting.
+     - 開啟後點任一圖示進入該設定。
+
+### Thunar Preferences
+
+- **EN:** Configure the file manager's views/behaviour.
+- **繁中:** 設定檔案管理員的檢視/行為。
+- **Steps｜步驟:**
+  1. Open it; set default view and show-hidden.
+     - 開啟後設定預設檢視與顯示隱藏檔。
+
+### Time and Date
+
+- **EN:** System clock, timezone and NTP.
+- **繁中:** 系統時鐘、時區與 NTP。
+- **Steps｜步驟:**
+  1. Open it (sudo); set timezone to UTC for consistent evidence stamps.
+     - 開啟（sudo）；時區設 UTC 讓證據時間戳一致。
+
+### Users and Groups
+
+- **EN:** Manage local accounts and group membership.
+- **繁中:** 管理本機帳號與群組成員。
+- **Steps｜步驟:**
+  1. Open it (sudo); add a user or add yourself to a group (e.g. wireshark).
+     - 開啟（sudo）；新增使用者或把自己加入群組（例如 wireshark）。
+
+### Window Manager
+
+- **EN:** Keybindings, focus and window theme.
+- **繁中:** 視窗按鍵綁定、焦點與佈景。
+- **Steps｜步驟:**
+  1. Open it; Keyboard tab → set tiling/switch shortcuts.
+     - 開啟後 Keyboard 分頁設定視窗切換/排列快捷鍵。
+
+### Window Manager Tweaks
+
+- **EN:** Advanced compositor/focus tweaks.
+- **繁中:** 進階合成器/焦點微調。
+- **Steps｜步驟:**
+  1. Open it; Compositor tab → disable shadows if VNC is laggy.
+     - 開啟後 Compositor 分頁 → VNC 卡頓時關閉陰影。
+
+### Workspaces
+
+- **EN:** Number/naming of virtual desktops.
+- **繁中:** 虛擬桌面數量/命名。
+- **Steps｜步驟:**
+  1. Open it; set the workspace count and margins.
+     - 開啟後設定工作區數量與邊界。
+
+### Xfce Screensaver
+
+- **EN:** Screen-lock/blank settings.
+- **繁中:** 螢幕鎖定/變暗設定。
+- **Steps｜步驟:**
+  1. Open it; disable lock-on-idle for long unattended scans.
+     - 開啟後關閉閒置鎖定以利長時無人掃描。
+
+
+## 10. System & utilities｜系統與工具
+
+### About Xfce
+
+- **EN:** Shows the desktop-environment version and credits.
+- **繁中:** 顯示桌面環境版本與致謝。
+- **Steps｜步驟:**
+  1. Menu → About Xfce (or `apps.sh open "About Xfce"`).
+     - 選單 → About Xfce（或 `apps.sh open "About Xfce"`）。
+  2. Read the version on the first tab; close when done.
+     - 在第一頁看版本；看完關閉。
+
+### Application Finder
+
+- **EN:** Search-and-launch box for every installed app.
+- **繁中:** 搜尋並啟動任何已安裝程式的輸入框。
+- **Steps｜步驟:**
+  1. Press the shortcut or open it; type an app name.
+     - 按快捷鍵或開啟後輸入程式名稱。
+  2. Enter to launch; this is the fastest way to open tools.
+     - Enter 啟動；這是開啟工具最快的方式。
+
+### BackTrack Mode
+
+- **EN:** Kali-Tweaks toggle for the retro BackTrack theme.
+- **繁中:** Kali-Tweaks 切換成復古 BackTrack 佈景。
+- **Steps｜步驟:**
+  1. Launch it (runs kali-undercover variant) to switch theme.
+     - 啟動它（kali-undercover 變體）切換佈景。
+  2. Run again to revert.
+     - 再執行一次即可還原。
+
+### Catfish File Search
+
+- **EN:** Fast filename/content search across the disk.
+- **繁中:** 快速搜尋磁碟上的檔名/內容。
+- **Steps｜步驟:**
+  1. Open it; type a term; optionally tick 'search file contents'.
+     - 開啟後輸入關鍵字；可勾選搜尋檔案內容。
+  2. Double-click a result to open it.
+     - 雙擊結果開啟。
+
+### Clipboard Manager
+
+- **EN:** Tray applet keeping clipboard history.
+- **繁中:** 保留剪貼簿歷史的列小工具。
+- **Steps｜步驟:**
+  1. It runs in the tray; click it to see recent clips.
+     - 在系統列執行；點它看近期剪貼。
+  2. Click an entry to copy it back.
+     - 點一筆即可重新複製。
+
+### Disks
+
+- **EN:** GNOME Disks — partition, format, mount, and image drives.
+- **繁中:** GNOME Disks —— 分割、格式化、掛載、製作磁碟映像。
+- **Steps｜步驟:**
+  1. Open it; select a disk in the left list.
+     - 開啟後在左側清單選磁碟。
+  2. Use the ⋮ menu → Create Disk Image / Format for forensics or prep.
+     - 用 ⋮ 選單 → Create Disk Image / Format 做鑑識或準備。
+  3. Mount/unmount with the ▶/⏏ buttons; never touch a disk you don't own.
+     - 用 ▶/⏏ 掛載/卸載；絕不動不屬於你的磁碟。
+
+### File Manager
+
+- **EN:** Opens the default file manager (Thunar).
+- **繁中:** 開啟預設檔案管理員（Thunar）。
+- **Steps｜步驟:**
+  1. Launch it; browse to ~/lab-evidence.
+     - 啟動後瀏覽到 ~/lab-evidence。
+
+### GtkHash
+
+- **EN:** Compute file checksums (MD5/SHA-256) — verify evidence integrity.
+- **繁中:** 計算檔案雜湊（MD5/SHA-256）—— 驗證證據完整性。
+- **Steps｜步驟:**
+  1. Open it; pick a file; tick the hash algorithms.
+     - 開啟後選檔案；勾選雜湊演算法。
+  2. Hash; compare against the expected value.
+     - 按 Hash；與預期值比對。
+
+### Kali Halloween Mode
+
+- **EN:** Seasonal theme toggle (Kali Tweaks).
+- **繁中:** 節慶佈景切換（Kali Tweaks）。
+- **Steps｜步驟:**
+  1. Launch to apply/revert the theme.
+     - 啟動以套用/還原佈景。
+
+### Kali Undercover Mode
+
+- **EN:** Disguises the desktop as Windows (quick stealth).
+- **繁中:** 把桌面偽裝成 Windows（快速隱蔽）。
+- **Steps｜步驟:**
+  1. Launch to toggle the Windows-like look on/off.
+     - 啟動以切換類 Windows 外觀。
+
+### Log Out
+
+- **EN:** End the desktop session (logout/restart/shutdown).
+- **繁中:** 結束桌面工作階段（登出/重開/關機）。
+- **Steps｜步驟:**
+  1. Launch; pick Log Out / Restart / Shut Down.
+     - 啟動後選 Log Out / Restart / Shut Down。
+
+### MATE Calculator
+
+- **EN:** Calculator (basic/scientific/programmer modes).
+- **繁中:** 計算機（基本/科學/程式設計模式）。
+- **Steps｜步驟:**
+  1. Open it; Mode menu → Programmer for hex/bitwise.
+     - 開啟後 Mode 選單 → Programmer 做十六進位/位元運算。
+
+### Run Program...
+
+- **EN:** Run an arbitrary command from a dialog.
+- **繁中:** 從對話框執行任意指令。
+- **Steps｜步驟:**
+  1. Launch; type a command and Enter.
+     - 啟動；輸入指令並 Enter。
+
+### Screenshot
+
+- **EN:** Capture the screen/window/region for evidence.
+- **繁中:** 擷取螢幕/視窗/區域作為證據。
+- **Steps｜步驟:**
+  1. Launch; pick Full/Window/Region and delay.
+     - 啟動；選全螢幕/視窗/區域與延遲。
+  2. Save into ~/lab-evidence.
+     - 存到 ~/lab-evidence。
+
+### Sensor Viewer
+
+- **EN:** Show hardware temperature/fan sensors.
+- **繁中:** 顯示硬體溫度/風扇感測器。
+- **Steps｜步驟:**
+  1. Open it to read available sensors (limited in a VM).
+     - 開啟查看可用感測器（VM 內有限）。
+
+### Task Manager
+
+- **EN:** Process/CPU/memory monitor; kill runaway tools.
+- **繁中:** 程序/CPU/記憶體監視器；可結束失控工具。
+- **Steps｜步驟:**
+  1. Open it; sort by CPU/MEM.
+     - 開啟後依 CPU/MEM 排序。
+  2. Right-click a process → Kill if a scan hangs.
+     - 右鍵程序 → Kill 以結束當掉的掃描。
+
+### Terminal Emulator
+
+- **EN:** The Xfce terminal (alternative to QTerminal).
+- **繁中:** Xfce 終端機（QTerminal 的替代）。
+- **Steps｜步驟:**
+  1. Open it; same usage as QTerminal.
+     - 開啟；用法同 QTerminal。
+
+
+<!-- apps covered: 78 -->

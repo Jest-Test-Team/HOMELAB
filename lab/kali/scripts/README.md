@@ -19,6 +19,7 @@ export TARGET=<NODE_IP>          # the homelab node you own
 
 | Script | Purpose |
 |---|---|
+| [`apps.sh`](apps.sh) | Generic launcher — `open`/`info`/`list` **any** of the installed desktop apps (reads live `.desktop` entries). |
 | [`list-apps.sh`](list-apps.sh) | Enumerate **every** installed app on the VM → regenerates `../docs/installed-apps.md`. |
 | [`install-tools.sh`](install-tools.sh) | Install the tools from the catalogue (this VM is a minimal install). |
 | [`toolkit.sh`](toolkit.sh) | One entry point to run, **chain**, and `launch` the tools; writes a combined report. |
@@ -63,15 +64,21 @@ CARVE_FILE=fw.bin ./toolkit.sh forensics   # binwalk/foremost carve — GATED (f
 ./toolkit.sh launch burpsuite              # open ANY installed GUI app on the VNC desktop
 ```
 
-### Using the GUI applications
+### Using ANY application (GUI or CLI) — `apps.sh`
 
-Every graphical app from [`../docs/installed-apps.md`](../docs/installed-apps.md) (Firefox,
-Burp, Wireshark, …) opens on the VNC/xrdp desktop via `launch`:
+`apps.sh` drives **every** app in [`../docs/installed-apps.md`](../docs/installed-apps.md) by
+reading the live `.desktop` entries, so it always matches what's installed:
 
 ```bash
-./toolkit.sh launch wireshark              # needs the VNC desktop up (operations.zh-TW.md §4)
-./toolkit.sh launch firefox-esr https://<NODE_IP>:30080
+./apps.sh list                             # all apps (name, exec, categories)
+./apps.sh list Settings                    # filter by a Category word
+./apps.sh info "Disks"                      # show an app's Exec/Categories/Comment
+./apps.sh open "Firefox ESR" http://<NODE_IP>:30080   # launch on the VNC desktop
+DRYRUN=1 ./apps.sh open wireshark          # show what would run, launch nothing
 ```
+
+(`toolkit.sh launch <exec>` does the same for a single tool inside the attack workflow.)
+GUI apps need the VNC/xrdp desktop up — see `../../docs/operations.zh-TW.md` §4.
 
 Each command writes a timestamped report to `$EVIDENCE_DIR` (default `~/lab-evidence/`)
 and streams it to the console.
