@@ -23,6 +23,10 @@ Kali 選單中工具的參考：每個是什麼、逐步教學，全部限於操
 Install any category with `../scripts/install-tools.sh cat:<slug>`, drive any tool with
 `../scripts/tool.sh <name>`, then re-run `list-apps.sh` to refresh `installed-apps.md`.
 
+## Verification / 驗證
+
+[`verification.md`](verification.md) records that the scripts were run against **every** installed app: `tool.sh` drove all 357 runnable CLI tools (357/357 PASS), `apps.sh` resolved 450/450, + real node runs and GUI launches.
+
 ## Related / 相關
 
 - Attack walkthrough: [`../attack-tutorial.en.md`](../attack-tutorial.en.md) · [`../attack-tutorial.zh-TW.md`](../attack-tutorial.zh-TW.md)
