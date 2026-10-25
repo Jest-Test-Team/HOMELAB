@@ -19,11 +19,19 @@ export TARGET=<NODE_IP>          # the homelab node you own
 
 | Script | Purpose |
 |---|---|
+| [`list-apps.sh`](list-apps.sh) | Enumerate **every** installed app on the VM → regenerates `../docs/installed-apps.md`. |
 | [`install-tools.sh`](install-tools.sh) | Install the tools from the catalogue (this VM is a minimal install). |
-| [`toolkit.sh`](toolkit.sh) | One entry point to run **and chain** the tools; writes a combined evidence report. |
+| [`toolkit.sh`](toolkit.sh) | One entry point to run, **chain**, and `launch` the tools; writes a combined report. |
 | [`run-all.sh`](run-all.sh) | The fixed Phase-1 control suite (api/mcp/segmentation/rate). |
 | `00-recon.sh … 40-rate-limit.sh` | The individual Phase-1 steps `run-all.sh` calls. |
 | [`_common.sh`](_common.sh) | Shared config + helpers (sourced; `TARGET` is **required**). |
+
+### List what's actually installed
+
+```bash
+./list-apps.sh                 # markdown inventory of every menu app on this VM
+./list-apps.sh --tsv           # raw name<TAB>categories<TAB>exec
+```
 
 ## 1. Install tools
 
@@ -42,11 +50,27 @@ Groups: `recon vuln web pass exploit sniff rev forensics extra`.
 ./toolkit.sh list                          # modules + which tools are installed
 ./toolkit.sh recon                         # nmap sweep + versions + arp-scan + whatweb
 ./toolkit.sh recon <NODE_IP>               # target as a positional arg (overrides $TARGET)
+./toolkit.sh discovery                     # arp-scan + nmap host scan + smbmap (445 shut?)
+./toolkit.sh osint                         # whois + dnsrecon + theHarvester (own assets)
 ./toolkit.sh web                           # whatweb + ffuf content discovery + nikto
 ./toolkit.sh vuln                          # nuclei (templated) + nikto
+./toolkit.sh exploit                       # metasploit aux HTTP scan (validation only)
 ./toolkit.sh sniff eth0 40                 # tcpdump 40 packets to/from $TARGET -> .pcap
 ./toolkit.sh search nginx 1.2              # searchsploit lookup (no target needed)
-./toolkit.sh pass                          # SSH login control test — GATED, see below
+./toolkit.sh pass                          # SSH login control test — GATED (CONFIRM=yes)
+HASHFILE=h.txt ./toolkit.sh crack          # offline john crack — GATED (hashes you own)
+CARVE_FILE=fw.bin ./toolkit.sh forensics   # binwalk/foremost carve — GATED (file you own)
+./toolkit.sh launch burpsuite              # open ANY installed GUI app on the VNC desktop
+```
+
+### Using the GUI applications
+
+Every graphical app from [`../docs/installed-apps.md`](../docs/installed-apps.md) (Firefox,
+Burp, Wireshark, …) opens on the VNC/xrdp desktop via `launch`:
+
+```bash
+./toolkit.sh launch wireshark              # needs the VNC desktop up (operations.zh-TW.md §4)
+./toolkit.sh launch firefox-esr https://<NODE_IP>:30080
 ```
 
 Each command writes a timestamped report to `$EVIDENCE_DIR` (default `~/lab-evidence/`)

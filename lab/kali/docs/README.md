@@ -7,8 +7,14 @@ Kali 選單中工具的參考：每個是什麼、逐步教學，全部限於操
 
 | Document | Language | Contents |
 |---|---|---|
-| [`applications.en.md`](applications.en.md) | English | Full catalogue by menu category (01-Reconnaissance … 16-Services), intro + step-by-step per tool |
-| [`applications.zh-TW.md`](applications.zh-TW.md) | 繁體中文 | 依選單分類的完整清單，每個工具的介紹＋逐步教學 |
+| [`installed-apps.md`](installed-apps.md) | EN + 繁中 | **Exhaustive list of every application actually on this VM** (79 menu apps), auto-generated from the VM by [`../scripts/list-apps.sh`](../scripts/list-apps.sh) |
+| [`applications.en.md`](applications.en.md) | English | Offensive-tool catalogue by menu category (01-Reconnaissance … 16-Services), intro + step-by-step per tool |
+| [`applications.zh-TW.md`](applications.zh-TW.md) | 繁體中文 | 攻擊工具依選單分類的清單，每個工具的介紹＋逐步教學 |
+
+**Two views, on purpose:** `installed-apps.md` is the *complete inventory of what is on the
+VM right now* (mostly the Xfce desktop + Kali links on a minimal install); `applications.*.md`
+are the *tutorials for the offensive toolset you install and use*. Install tools →
+`../scripts/install-tools.sh`, then re-run `list-apps.sh` and the inventory grows.
 
 ## Related / 相關
 

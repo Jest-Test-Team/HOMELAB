@@ -7,13 +7,19 @@
 #
 # Usage:
 #   ./toolkit.sh list                       # modules + whether each tool is installed
-#   ./toolkit.sh recon   [TARGET]           # nmap sweep + versions + arp-scan + whatweb
-#   ./toolkit.sh web     [TARGET]           # whatweb + ffuf content discovery + nikto
-#   ./toolkit.sh vuln    [TARGET]           # nuclei (templated) + nikto
-#   ./toolkit.sh sniff   [IFACE] [COUNT]    # tcpdump COUNT packets to/from TARGET
-#   ./toolkit.sh pass    [TARGET]           # hydra SSH control test  (needs CONFIRM=yes)
-#   ./toolkit.sh search  <query>            # searchsploit lookup (no target)
-#   ./toolkit.sh chain   recon,web,vuln     # run modules in order -> ONE report
+#   ./toolkit.sh recon     [TARGET]         # nmap sweep + versions + arp-scan + whatweb
+#   ./toolkit.sh discovery [TARGET]         # arp-scan + nmap host scan + smbmap (445 shut?)
+#   ./toolkit.sh osint     [TARGET]         # whois + dnsrecon + theHarvester (OWN assets)
+#   ./toolkit.sh web       [TARGET]         # whatweb + ffuf content discovery + nikto
+#   ./toolkit.sh vuln      [TARGET]         # nuclei (templated) + nikto
+#   ./toolkit.sh exploit   [TARGET]         # metasploit aux HTTP scan (validation only)
+#   ./toolkit.sh sniff     [IFACE] [COUNT]  # tcpdump COUNT packets to/from TARGET
+#   ./toolkit.sh pass      [TARGET]         # hydra SSH control test  (needs CONFIRM=yes)
+#   ./toolkit.sh crack                      # john offline crack      (needs HASHFILE=)
+#   ./toolkit.sh forensics                  # binwalk/foremost carve  (needs CARVE_FILE=)
+#   ./toolkit.sh search    <query>          # searchsploit lookup (no target)
+#   ./toolkit.sh launch    <app> [args]     # open any installed GUI app on the VNC desktop
+#   ./toolkit.sh chain  recon,discovery,web,vuln   # run modules in order -> ONE report
 #   ./toolkit.sh all                        # alias for: chain recon,web,vuln
 #
 # Target & ports come from the environment (see _common.sh): TARGET is required
@@ -133,27 +139,113 @@ mod_search() {
   if have searchsploit; then run searchsploit "$@"; else skip searchsploit "sudo apt install -y exploitdb"; fi
 }
 
+mod_osint() {
+  require_target
+  local dom="${OSINT_DOMAIN:-homelab.local}"
+  hdr "osint — passive intel on $TARGET / $dom (own assets only)"
+  if have whois;    then run whois "$TARGET"; else skip whois "sudo apt install -y whois"; fi
+  if have dnsrecon; then run dnsrecon -n "$TARGET" -d "$dom"; else skip dnsrecon "sudo apt install -y dnsrecon"; fi
+  if have theHarvester; then run theHarvester -d "$dom" -b duckduckgo; else skip theHarvester "sudo apt install -y theharvester"; fi
+}
+
+mod_discovery() {
+  require_target
+  hdr "discovery — live hosts + exposed services ($TARGET)"
+  if have arp-scan; then run sudo arp-scan --localnet; else skip arp-scan "sudo apt install -y arp-scan"; fi
+  if have nmap;     then run nmap -Pn -sn "$TARGET"; else skip nmap "sudo apt install -y nmap"; fi
+  # prove SMB (445) is shut — connection refused here is the PASS condition
+  if have smbmap;   then run smbmap -H "$TARGET"; else skip smbmap "sudo apt install -y smbmap"; fi
+}
+
+mod_exploit() {
+  require_target
+  hdr "exploit — msf auxiliary HTTP scan ($TARGET:$API_PORT) — validation only, no live exploits"
+  if have msfconsole; then
+    run msfconsole -q -x "use auxiliary/scanner/http/http_version; set RHOSTS $TARGET; set RPORT $API_PORT; run; exit"
+  else
+    skip msfconsole "sudo apt install -y metasploit-framework"
+  fi
+  if have searchsploit; then note "tip: ./toolkit.sh search <product version>  (offline exploit-db lookup)"; fi
+}
+
+mod_crack() {
+  # offline, local — no target. Needs HASHFILE of hashes you lawfully own.
+  hdr "crack — offline hash cracking (local)"
+  local hf="${HASHFILE:-}"
+  if [ -z "$hf" ]; then
+    note "[gated] set HASHFILE=/path/to/hashes (hashes you lawfully own), e.g. HASHFILE=h.txt ./toolkit.sh crack"
+    return 0
+  fi
+  [ -f "$hf" ] || die "HASHFILE not found: $hf"
+  if have john; then run john "$hf"; run john --show "$hf"; else skip john "sudo apt install -y john"; fi
+  if have hashid; then run hashid -m "$hf"; fi
+}
+
+mod_forensics() {
+  # carve a file you own. Needs CARVE_FILE.
+  hdr "forensics — carve a file you own"
+  local f="${CARVE_FILE:-}"
+  if [ -z "$f" ]; then
+    note "[gated] set CARVE_FILE=/path/to/file, e.g. CARVE_FILE=fw.bin ./toolkit.sh forensics"
+    return 0
+  fi
+  [ -f "$f" ] || die "CARVE_FILE not found: $f"
+  if have binwalk; then run binwalk -e "$f"; else skip binwalk "sudo apt install -y binwalk"; fi
+  if have foremost; then
+    mkdir -p "$EVIDENCE_DIR"
+    local od; od="$EVIDENCE_DIR/foremost-$(date -u +%Y%m%dT%H%M%SZ)"
+    run foremost -i "$f" -o "$od"
+  else
+    skip foremost "sudo apt install -y foremost"
+  fi
+}
+
+# Launch ANY installed GUI application on the VNC/xrdp desktop (DISPLAY=:1).
+# This is how you "use" the graphical apps (burpsuite, wireshark, firefox, …).
+mod_launch() {
+  local app="${1:-}"; shift || true
+  [ -n "$app" ] || die "launch needs an app, e.g. ./toolkit.sh launch burpsuite  (see: ./list-apps.sh)"
+  have "$app" || die "$app not on PATH — install it (install-tools.sh / apt). GUI apps need the VNC or xrdp desktop up."
+  export DISPLAY="${DISPLAY:-:1}"
+  note "launching '$app' on DISPLAY=$DISPLAY (connect via VNC: see docs/operations.zh-TW.md §4)"
+  setsid "$app" "$@" >/dev/null 2>&1 &
+  note "started pid $!"
+}
+
+yn() { if have "$1"; then printf y; else printf n; fi; }
 list_modules() {
   printf 'modules (tool install status):\n'
-  printf '  %-8s nmap=%s arp-scan=%s whatweb=%s\n'  recon  "$(have nmap && echo y || echo n)"   "$(have arp-scan && echo y || echo n)" "$(have whatweb && echo y || echo n)"
-  printf '  %-8s whatweb=%s ffuf=%s nikto=%s\n'     web    "$(have whatweb && echo y || echo n)" "$(have ffuf && echo y || echo n)"     "$(have nikto && echo y || echo n)"
-  printf '  %-8s nuclei=%s nikto=%s\n'              vuln   "$(have nuclei && echo y || echo n)"  "$(have nikto && echo y || echo n)"
-  printf '  %-8s tcpdump=%s\n'                      sniff  "$(have tcpdump && echo y || echo n)"
-  printf '  %-8s hydra=%s   (gated: CONFIRM=yes)\n' pass   "$(have hydra && echo y || echo n)"
-  printf '  %-8s searchsploit=%s\n'                 search "$(have searchsploit && echo y || echo n)"
-  printf '\nchain example: ./toolkit.sh chain recon,web,vuln\n'
-  printf 'install tools: ./install-tools.sh --list\n'
+  printf '  %-10s nmap=%s arp-scan=%s whatweb=%s\n'   recon     "$(yn nmap)" "$(yn arp-scan)" "$(yn whatweb)"
+  printf '  %-10s whatweb=%s ffuf=%s nikto=%s\n'      web       "$(yn whatweb)" "$(yn ffuf)" "$(yn nikto)"
+  printf '  %-10s nuclei=%s nikto=%s\n'               vuln      "$(yn nuclei)" "$(yn nikto)"
+  printf '  %-10s whois=%s dnsrecon=%s theHarvester=%s\n' osint "$(yn whois)" "$(yn dnsrecon)" "$(yn theHarvester)"
+  printf '  %-10s arp-scan=%s nmap=%s smbmap=%s\n'    discovery "$(yn arp-scan)" "$(yn nmap)" "$(yn smbmap)"
+  printf '  %-10s msfconsole=%s searchsploit=%s\n'    exploit   "$(yn msfconsole)" "$(yn searchsploit)"
+  printf '  %-10s tcpdump=%s\n'                       sniff     "$(yn tcpdump)"
+  printf '  %-10s hydra=%s   (gated: CONFIRM=yes)\n'  pass      "$(yn hydra)"
+  printf '  %-10s john=%s hashid=%s   (gated: HASHFILE=)\n'  crack     "$(yn john)" "$(yn hashid)"
+  printf '  %-10s binwalk=%s foremost=%s (gated: CARVE_FILE=)\n' forensics "$(yn binwalk)" "$(yn foremost)"
+  printf '  %-10s searchsploit=%s\n'                  search    "$(yn searchsploit)"
+  printf '  %-10s (opens any installed GUI app on the VNC desktop)\n' launch
+  printf '\nchain example: ./toolkit.sh chain recon,discovery,web,vuln\n'
+  printf 'launch a GUI app: ./toolkit.sh launch burpsuite   (full inventory: ./list-apps.sh)\n'
+  printf 'install tools:    ./install-tools.sh --list\n'
 }
 
 # Run one module by name (used by both single commands and chain)
 dispatch_module() {
   case "$1" in
-    recon) mod_recon ;;
-    web)   mod_web ;;
-    vuln)  mod_vuln ;;
-    sniff) mod_sniff ;;
-    pass)  mod_pass ;;
-    *)     die "unknown module: $1 (recon|web|vuln|sniff|pass)" ;;
+    recon)     mod_recon ;;
+    web)       mod_web ;;
+    vuln)      mod_vuln ;;
+    osint)     mod_osint ;;
+    discovery) mod_discovery ;;
+    exploit)   mod_exploit ;;
+    sniff)     mod_sniff ;;
+    pass)      mod_pass ;;
+    crack)     mod_crack ;;
+    forensics) mod_forensics ;;
+    *)         die "unknown module: $1 (recon|discovery|web|vuln|osint|exploit|sniff|pass|crack|forensics)" ;;
   esac
 }
 
@@ -163,7 +255,8 @@ run_chain() {
   for m in "${mods[@]}"; do dispatch_module "$m"; done
 }
 
-usage() { sed -n '2,33p' "${BASH_SOURCE[0]}" | sed 's/^#\{0,1\} \{0,1\}//'; }
+# Print the comment header (line 2 until the first non-comment line).
+usage() { awk 'NR>1 && /^[^#]/{exit} NR>1{sub(/^# ?/,"");print}' "${BASH_SOURCE[0]}"; }
 
 # Wrap a run in a timestamped report that is also streamed to the console.
 report() {
@@ -191,7 +284,11 @@ main() {
     list|-l|--list) list_modules ;;
     -h|--help|help) usage ;;
     search)         report search mod_search "$@" ;;
-    recon|web|vuln|pass)
+    launch)         mod_launch "$@" ;;
+    crack|forensics)
+      # local, no target (gated by HASHFILE / CARVE_FILE)
+      report "$cmd" dispatch_module "$cmd" ;;
+    recon|web|vuln|pass|osint|discovery|exploit)
       # optional positional TARGET override for probing modules
       if [ -n "${1:-}" ]; then export TARGET="$1"; shift || true; fi
       require_target
