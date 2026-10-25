@@ -11,7 +11,7 @@ Kali 選單中工具的參考：每個是什麼、逐步教學，全部限於操
 | [`tutorials.zh-TW.md`](tutorials.zh-TW.md) | 繁體中文 | **全部 382 個工具的逐步教學** —— 每個附實際指令（`提供指令`）、安裝→說明→執行三步驟與文件連結。 |
 | [`catalogue.en.md`](catalogue.en.md) | English | Compact index of all 382 tools by category (description + install + docs link). |
 | [`catalogue.zh-TW.md`](catalogue.zh-TW.md) | 繁體中文 | 所有 382 個工具的精簡索引（說明＋安裝＋文件）。 |
-| [`installed-apps.md`](installed-apps.md) | EN + 繁中 | Every application **currently on this VM** (78), each with an intro + step-by-step; enumerated by [`../scripts/list-apps.sh`](../scripts/list-apps.sh) |
+| [`installed-apps.md`](installed-apps.md) | EN + 繁中 | Every application **currently on this VM** (450 after full toolset install), each with an intro + step-by-step; enumerated by [`../scripts/list-apps.sh`](../scripts/list-apps.sh) |
 | [`applications.en.md`](applications.en.md) | English | Hand-written deep-dive tutorials for the core offensive tools |
 | [`applications.zh-TW.md`](applications.zh-TW.md) | 繁體中文 | 核心攻擊工具的詳細教學 |
 
