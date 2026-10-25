@@ -386,6 +386,22 @@ Standalone **real-work** runs (no external target needed): arp-scan, binwalk, bu
 
 > In `installed-apps.md` **all 450 apps have specific step-by-step** — **369 carry real `--help` captured on the VM** (tools, incl. sub-tool binaries like `blkcat`/`fls`/`cutter`), and the rest have hand-written desktop steps (Disks, Firefox, …) or type-specific steps (libraries, metapackages, GUI). **Zero entries use a generic template.**
 
+
+## Documentation completeness audit (every app, both languages)
+
+Audited the docs for full per-application coverage in **both** Traditional Chinese and English:
+
+| Document | Coverage | Intro + step-by-step present |
+|---|---|---|
+| `tutorials.en.md` | 382 tools (524 rows incl. multi-category) | **524/524** sections have intro + Steps, 0 gaps |
+| `tutorials.zh-TW.md` | 382 tools (524 rows) | **524/524** sections have 介紹 + 步驟, 0 gaps |
+| `installed-apps.md` | 450 installed apps × EN+繁中 | **900/900** sections have intro + steps, 0 gaps |
+| `catalogue.en.md` / `catalogue.zh-TW.md` | 382 tools each | 524/524 rows each language |
+
+So **every application is listed with a bilingual introduction and step-by-step tutorial** —
+the documentation deliverable is complete with no missing entry. (Of these, 364 tutorial
+entries also carry output captured by actually running the tool on the VM; see above.)
+
 ## 繁體中文摘要
 
 本報告記錄 `lab/kali/scripts` 的驅動腳本已對**每一個**已安裝應用程式實際執行（非抽樣）：
