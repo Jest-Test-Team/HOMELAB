@@ -6,14 +6,25 @@ Scripts to install and drive the Kali tools catalogued in
 HOMELAB lab only ([`../../ROE.md`](../../ROE.md)). All runs are non-destructive and
 rate-limited.
 
-Run them **on the Kali VM**. Copy the folder over first:
+Run them **on the Kali VM** — the scripts live in this repo on the Mac, so the VM
+needs its own copy (a path like `/Users/.../HOMELAB/...` does not exist on Kali).
+Deploy with one command from the Mac:
 
 ```bash
-scp -i ~/.ssh/homelab_utm_ed25519 -r lab/kali/scripts kali@<KALI_IP>:~/kali-scripts
-ssh -i ~/.ssh/homelab_utm_ed25519 kali@<KALI_IP>
-cd ~/kali-scripts && chmod +x *.sh
-export TARGET=<NODE_IP>          # the homelab node you own
+lab/kali/scripts/deploy-to-kali.sh kali@<KALI_IP>   # rsync scripts -> ~/kali-scripts on the VM
 ```
+
+Then on the VM:
+
+```bash
+ssh -i ~/.ssh/homelab_utm_ed25519 kali@<KALI_IP>
+cd ~/kali-scripts
+export TARGET=<NODE_IP>          # the homelab node you own
+./list-apps.sh                   # … and drive any script from here
+```
+
+Re-run `deploy-to-kali.sh` after editing any script to push the change to the VM
+(`rsync --delete` keeps the VM copy identical to the repo).
 
 ## The scripts
 
@@ -26,6 +37,7 @@ export TARGET=<NODE_IP>          # the homelab node you own
 | [`install-tools.sh`](install-tools.sh) | Install tools by group or **whole category** (`cat:<slug>`), or `--all`. |
 | [`list-apps.sh`](list-apps.sh) | Enumerate **every** installed app on the VM → regenerates `../docs/installed-apps.md`. |
 | [`run-all.sh`](run-all.sh) + `00–40` | The fixed Phase-1 control suite and its steps. |
+| [`deploy-to-kali.sh`](deploy-to-kali.sh) | **Copy this folder onto the Kali VM** (`rsync` → `~/kali-scripts`), from the Mac. |
 
 ### Three ways to drive tools — pick by need
 
@@ -153,6 +165,53 @@ scp -i ~/.ssh/homelab_utm_ed25519 "kali@<KALI_IP>:lab-evidence/*" /Volumes/HOMEL
 ```
 
 Never commit raw evidence to git — it's git-ignored for a reason.
+
+## Audit log — every attack is recorded
+
+`run-all.sh`, `tool.sh` and `toolkit.sh` all append to a single, **append-only** audit
+log so the homelab keeps a durable record of what was run, by whom, against what, and
+with what result. It is written under `$EVIDENCE_DIR/audit/` (default
+`~/lab-evidence/audit/`, `chmod 700`) in two synchronised forms:
+
+| File | Format | Use |
+|---|---|---|
+| `homelab-audit.log` | human-readable | one line per event, plus a framed `BEGIN … END` block per `run-all.sh` run with the evidence file's **sha256** |
+| `homelab-audit.jsonl` | one JSON object per line | machine-parseable (feed to `jq`, the analysis pipeline, a SIEM) |
+
+Every event carries: UTC timestamp, a per-run `run` id shared across all steps, the
+level (`BEGIN`/`END`/`PASS`/`FAIL`/`WARN`/`INFO`), the `step` (e.g. `00-recon`,
+`tool.sh`, `toolkit:web`), the `target`, and the `operator`/`host`. A framed run block
+also records the attacker IP+kernel, the exact command line, whether an MCP token was
+present, the evidence path and its sha256 — so the log alone proves which evidence file
+a run produced.
+
+```text
+================================================================
+RUN 20261025T1055Z-12402  started 2026-10-25T10:55:34Z
+  operator : kali@kali-red
+  target   : <NODE_IP>  (api:30080 mcp:30081 dash:30300 pg:5432 redis:6379 api-server:6443)
+  command  : TARGET=<NODE_IP> ./run-all.sh
+  evidence : ~/lab-evidence/kali-attack-2026-10-25T105534Z.md
+----------------------------------------------------------------
+… PASS step=00-recon        SSH :22 -> open (expected open)
+… PASS step=30-segmentation k3s API :6443 blocked
+… END  step=run             finished status=0 pass=17 fail=0 warn=0
+----------------------------------------------------------------
+RUN …  finished …  status=0
+  totals   : 17 pass, 0 fail, 0 warn
+  sha256   : 6984ec3d…
+================================================================
+```
+
+Query it with `jq`, e.g. every FAIL ever recorded, or one run's timeline:
+
+```bash
+jq -r 'select(.level=="FAIL") | "\(.ts) \(.step) \(.msg)"'  ~/lab-evidence/audit/homelab-audit.jsonl
+jq -r 'select(.run=="20261025T1055Z-12402")'                ~/lab-evidence/audit/homelab-audit.jsonl
+```
+
+Disable with `AUDIT=0` (e.g. `AUDIT=0 ./run-all.sh`). The audit log holds real
+targets/IPs, so like all evidence it stays on the VM and is **never committed**.
 
 ## Worked example — the drivers running real tools (captured on the VM)
 

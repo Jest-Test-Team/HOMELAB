@@ -56,6 +56,23 @@ banner() {
   printf '%s\n' "--- AUTHORIZED LAB TEST (lab/ROE.md) --- target=${TARGET:-<unset>}"
 }
 
+# ---- audit (append-only, shared homelab log; never committed) --------------
+AUDIT="${AUDIT:-1}"
+AUDIT_DIR="${AUDIT_DIR:-$EVIDENCE_DIR/audit}"
+AUDIT_LOG="${AUDIT_LOG:-$AUDIT_DIR/homelab-audit.log}"
+AUDIT_JSONL="${AUDIT_JSONL:-$AUDIT_DIR/homelab-audit.jsonl}"
+AUDIT_RUN_ID="${AUDIT_RUN_ID:-$(date -u +%Y%m%dT%H%M%SZ)-$$}"
+_aj() { local s=${1-}; s=${s//\\/\\\\}; s=${s//\"/\\\"}; s=${s//$'\n'/\\n}; printf '%s' "$s"; }
+audit() {  # audit LEVEL STEP MESSAGE
+  [ "$AUDIT" = 1 ] || return 0
+  mkdir -p "$AUDIT_DIR" 2>/dev/null && chmod 700 "$AUDIT_DIR" 2>/dev/null || true
+  local ts; ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  printf '%s  run=%s  %-5s step=%-14s %s\n' "$ts" "$AUDIT_RUN_ID" "$1" "toolkit:$2" "$3" >>"$AUDIT_LOG" 2>/dev/null || true
+  printf '{"ts":"%s","run":"%s","level":"%s","step":"toolkit:%s","target":"%s","operator":"%s","host":"%s","msg":"%s"}\n' \
+    "$ts" "$AUDIT_RUN_ID" "$1" "$(_aj "$2")" "$(_aj "${TARGET:-}")" "$(_aj "$(id -un 2>/dev/null)")" "$(_aj "$(hostname 2>/dev/null)")" "$(_aj "$3")" \
+    >>"$AUDIT_JSONL" 2>/dev/null || true
+}
+
 # ---------------------------------------------------------------------------
 # Modules. Each prints markdown to stdout; the caller tees to the report.
 # ---------------------------------------------------------------------------
@@ -266,6 +283,7 @@ report() {
   local label="$1"; shift
   mkdir -p "$EVIDENCE_DIR"
   local out; out="$EVIDENCE_DIR/toolkit-$label-$(date -u +%Y%m%dT%H%M%SZ).md"
+  audit BEGIN "$label" "module '$label' started (target=${TARGET:-none})"
   {
     printf '# Kali toolkit — %s — %s\n\n' "$label" "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
     # shellcheck disable=SC2016  # backticks here are literal markdown, not command substitution
@@ -276,6 +294,7 @@ report() {
     banner
     "$@"
   } 2>&1 | tee "$out"
+  audit END "$label" "module '$label' finished report=$out"
   printf '\nreport: %s\n' "$out"
 }
 

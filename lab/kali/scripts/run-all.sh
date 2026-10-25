@@ -16,6 +16,13 @@ mkdir -p "$EVIDENCE_DIR"
 STAMP="$(date -u +%Y-%m-%dT%H%M%SZ)"
 OUT="$EVIDENCE_DIR/kali-attack-$STAMP.md"
 
+# ---- audit: one run id shared by every step, framed begin/end --------------
+export AUDIT_RUN_ID="${AUDIT_RUN_ID:-$STAMP-$$}"
+export AUDIT_CMD="TARGET=$TARGET $0 $*"
+export AUDIT_EVIDENCE="$OUT"
+audit_begin
+trap 'audit_end "$?"' EXIT
+
 {
   echo "# HOMELAB Phase-1 attack from Kali — $STAMP"
   echo
@@ -27,7 +34,7 @@ OUT="$EVIDENCE_DIR/kali-attack-$STAMP.md"
   echo '```'
   for step in 00-recon 10-api-test 20-mcp-auth 30-segmentation 40-rate-limit; do
     echo "### $step"
-    bash "$DIR/$step.sh" || echo "(step $step exited non-zero)"
+    AUDIT_STEP="$step" bash "$DIR/$step.sh" || echo "(step $step exited non-zero)"
     echo
   done
   echo '```'
@@ -35,3 +42,4 @@ OUT="$EVIDENCE_DIR/kali-attack-$STAMP.md"
 
 echo
 echo "Evidence written to: $OUT"
+[ "${AUDIT:-1}" = 1 ] && echo "Audit log appended:  $AUDIT_LOG"
