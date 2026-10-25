@@ -1764,65 +1764,48 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Exploit Database
 - Archive of public exploits that is CVE compliant
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Exploit Database"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch it to browse exploits online.
+  2. For offline/CLI: `toolkit.sh search <product version>`.
 
 ### Kali Bugs
 - The Kali Linux bug tracker
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Kali Bugs"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch to report or search Kali bugs.
 
 ### Kali Docs
 - Official Kali Linux documentation website
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Kali Docs"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch for official how-tos (install, tools, troubleshooting).
 
 ### Kali Forums
 - Get community support on forums
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Kali Forums"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch to ask/search community questions.
 
 ### Kali Linux
 - The official web site of Kali Linux
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Kali Linux"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch for downloads/news.
 
 ### Kali Tools
 - Discover tools available in Kali Linux
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Kali Tools"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch to look up any Kali tool's docs/usage.
 
 ### NetHunter
 - Penetration testing tools on mobile devices
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "NetHunter"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch for NetHunter docs (Android pentest platform).
 
 ### OffSec Training
 - Follow courses and get certified to show off your skills
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "OffSec Training"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch to browse PEN-200/OSCP etc.
 
 ### VulnHub
 - Vulnerable by design - lab to download virtual machines to test your skills
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "VulnHub"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch to find legal practice targets (run them isolated).
 
 
 ## Kali tools — lateral-movement (3)
@@ -2403,9 +2386,9 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### netcat
 - TCP/IP swiss army knife
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "netcat"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Banner grab: `nc -v <NODE_IP> 30080` then type a request.
+  2. Egress test: `nc -zv <NODE_IP> 5432` — refused = DB control holds.
+  3. Listener (own hosts only): `nc -lvnp 4444`.
 
 ### powercat
 - netcat features all in powershell v2
@@ -3826,16 +3809,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Kali Tweaks
 - Tool to adjust advanced configuration settings for Kali Linux
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Kali Tweaks"`.
-  2. Adjust the setting (Kali Tweaks).
-  3. Close to apply.
+  1. Open it (runs in a terminal); arrow-keys to a section.
+  2. 'Metapackages' → tick kali-linux-default to install the full toolset.
+  3. Apply; it runs apt for you.
 
 ### Root Terminal Emulator
 - Opens a terminal as the root user, using sudo to ask for the password
 - **Steps:**
-  1. Open it: `../scripts/apps.sh open "Root Terminal Emulator"` (or from the menu).
-  2. Run any CLI tool here, e.g. `TARGET=<NODE_IP> ../scripts/toolkit.sh chain recon,web`.
-  3. Ctrl+Shift+T for a new tab.
+  1. Launch (asks for the password); use only when sudo isn't enough.
 
 
 ## Kali tools — sleuth-kit-suite (33)
@@ -5128,16 +5109,13 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### QTerminal
 - Terminal emulator
 - **Steps:**
-  1. Open it: `../scripts/apps.sh open "QTerminal"` (or from the menu).
-  2. Run any CLI tool here, e.g. `TARGET=<NODE_IP> ../scripts/toolkit.sh chain recon,web`.
-  3. Ctrl+Shift+T for a new tab.
+  1. Open it; `cd ~/kali-scripts`.
+  2. Run the toolkit, e.g. `TARGET=<NODE_IP> ./toolkit.sh chain recon,web`.
 
 ### QTerminal Drop-down
 - A drop-down terminal emulator
 - **Steps:**
-  1. Open it: `../scripts/apps.sh open "QTerminal Drop-down"` (or from the menu).
-  2. Run any CLI tool here, e.g. `TARGET=<NODE_IP> ../scripts/toolkit.sh chain recon,web`.
-  3. Ctrl+Shift+T for a new tab.
+  1. Press its hotkey to drop the terminal from the top.
 
 ### UXTerm
 - xterm wrapper for Unicode environments
@@ -5159,23 +5137,18 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Mousepad
 - Simple Text Editor
 - **Steps:**
-  1. Open a file: `../scripts/apps.sh open "Mousepad"` then File → Open.
+  1. `apps.sh open Mousepad notes.txt` or File → Open.
   2. Edit; Ctrl+S to save.
-  3. Use it for configs/notes/wordlists.
 
 ### Text Editor
 - Simple Text Editor
 - **Steps:**
-  1. Open a file: `../scripts/apps.sh open "Text Editor"` then File → Open.
-  2. Edit; Ctrl+S to save.
-  3. Use it for configs/notes/wordlists.
+  1. Launch; edit and save config/notes.
 
 ### Vim
 - Edit text files
 - **Steps:**
-  1. Open a file: `../scripts/apps.sh open "Vim"` then File → Open.
-  2. Edit; Ctrl+S to save.
-  3. Use it for configs/notes/wordlists.
+  1. `vim file` ; press i to insert, Esc then :wq to save+quit.
 
 
 ## Web & network (2)
@@ -5183,16 +5156,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Firefox ESR
 - Browse the World Wide Web
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Firefox ESR"`.
-  2. Point it at the lab: `http://<NODE_IP>:30080`.
-  3. Proxy via Burp/ZAP (127.0.0.1:8080) to inspect requests.
+  1. `apps.sh open "Firefox ESR" http://<NODE_IP>:30080`.
+  2. Settings → Network → Manual proxy 127.0.0.1:8080 to route through Burp.
+  3. Import Burp's CA cert to intercept HTTPS.
 
 ### Web Browser
 - Browse the web
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Web Browser"`.
-  2. Point it at the lab: `http://<NODE_IP>:30080`.
-  3. Proxy via Burp/ZAP (127.0.0.1:8080) to inspect requests.
+  1. Launch; same proxy workflow as Firefox ESR above.
 
 
 ## Files & archives (2)
@@ -5200,16 +5171,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Engrampa Archive Manager
 - Create and modify an archive
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Engrampa Archive Manager"`.
-  2. Browse to `~/lab-evidence`.
-  3. Extract/compress or open a terminal in a folder.
+  1. `apps.sh open "Engrampa Archive Manager" file.zip` or File → Open.
+  2. Extract button → choose a folder; or drag files in and Save to create.
 
 ### Thunar File Manager
 - Browse the filesystem with the file manager
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Thunar File Manager"`.
-  2. Browse to `~/lab-evidence`.
-  3. Extract/compress or open a terminal in a folder.
+  1. Open it; navigate to your evidence folder.
+  2. Tools → Open Terminal Here to act on a folder.
 
 
 ## Media & documents (3)
@@ -5217,23 +5186,18 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Parole Media Player
 - Play your media
 - **Steps:**
-  1. Open a file: `../scripts/apps.sh open "Parole Media Player"` with a path.
-  2. Review screenshots/PDF evidence.
-  3. Export/save as needed.
+  1. `apps.sh open "Parole Media Player" clip.mp4` or Open.
 
 ### Ristretto Image Viewer
 - Look at your images easily
 - **Steps:**
-  1. Open a file: `../scripts/apps.sh open "Ristretto Image Viewer"` with a path.
-  2. Review screenshots/PDF evidence.
-  3. Export/save as needed.
+  1. `apps.sh open "Ristretto Image Viewer" shot.png`.
+  2. Arrow keys to page through a folder.
 
 ### Volume Control
 - Adjust the volume level
 - **Steps:**
-  1. Open a file: `../scripts/apps.sh open "Volume Control"` with a path.
-  2. Review screenshots/PDF evidence.
-  3. Export/save as needed.
+  1. Open it; adjust output/input levels.
 
 
 ## Accessibility (2)
@@ -5241,16 +5205,12 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Onboard
 - Flexible onscreen keyboard
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Onboard"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch it; click keys with the mouse.
 
 ### Onboard Settings
 - Change Onboard settings
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Onboard Settings"`.
-  2. Adjust the setting (Onboard Settings).
-  3. Close to apply.
+  1. Open it; set layout/theme/auto-show.
 
 
 ## Settings & desktop (30)
@@ -5258,205 +5218,156 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Accessibility
 - Improve keyboard and mouse accessibility
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Accessibility"`.
-  2. Adjust the setting (Accessibility).
-  3. Close to apply.
+  1. Open it; pick the Keyboard or Mouse tab.
+  2. Toggle the assists you need; changes apply live.
 
 ### Advanced Network Configuration
 - Manage and change your network connection settings
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Advanced Network Configuration"`.
-  2. Adjust the setting (Advanced Network Configuration).
-  3. Close to apply.
+  1. Open it; click + to add a connection or select the existing Ethernet.
+  2. IPv4 tab → Manual → add address/netmask/gateway for the lab segment.
+  3. Save; re-activate the connection to apply.
 
 ### Appearance
 - Customize the look of your desktop
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Appearance"`.
-  2. Adjust the setting (Appearance).
-  3. Close to apply.
+  1. Open it; choose a Style/Icons on the first tabs.
+  2. Fonts tab → adjust DPI if text is tiny over VNC.
 
 ### Clipboard Manager Settings
 - Customize your clipboard
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Clipboard Manager Settings"`.
-  2. Adjust the setting (Clipboard Manager Settings).
-  3. Close to apply.
+  1. Open it; set history length and ignore rules.
+  2. Close to save.
 
 ### Color Profiles
 - Set color profiles
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Color Profiles"`.
-  2. Adjust the setting (Color Profiles).
-  3. Close to apply.
+  1. Open it; select the display; add/assign a profile.
 
 ### Default Applications
 - Associate preferred applications with MIME types
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Default Applications"`.
-  2. Adjust the setting (Default Applications).
-  3. Close to apply.
+  1. Open it; set each default on the Internet/Utilities tabs.
 
 ### Desktop
 - Set desktop background and menu and icon behavior
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Desktop"`.
-  2. Adjust the setting (Desktop).
-  3. Close to apply.
+  1. Open it; Background tab → choose wallpaper.
+  2. Icons tab → toggle which icons show.
 
 ### Display
 - Configure screen settings and layout
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Display"`.
-  2. Adjust the setting (Display).
-  3. Close to apply.
+  1. Open it; set resolution to match your VNC geometry (e.g. 1440x900).
+  2. Apply; confirm to keep.
 
 ### Kali HiDPI Mode
 - Toggle HiDPI desktop mode
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Kali HiDPI Mode"`.
-  2. Adjust the setting (Kali HiDPI Mode).
-  3. Close to apply.
+  1. Launch once to enable; run again to disable.
 
 ### Keyboard
 - Edit keyboard settings and application shortcuts
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Keyboard"`.
-  2. Adjust the setting (Keyboard).
-  3. Close to apply.
+  1. Open it; Layout tab → add/select your layout.
+  2. Application Shortcuts tab → bind keys to commands.
 
 ### LightDM GTK Greeter settings
 - Configure LightDM GTK Greeter
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "LightDM GTK Greeter settings"`.
-  2. Adjust the setting (LightDM GTK Greeter settings).
-  3. Close to apply.
+  1. Open it (asks for sudo); set theme/background/user list.
+  2. Save; changes show at next login.
 
 ### Mouse and Touchpad
 - Configure pointer device behavior and appearance
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Mouse and Touchpad"`.
-  2. Adjust the setting (Mouse and Touchpad).
-  3. Close to apply.
+  1. Open it; adjust Acceleration/Buttons.
 
 ### Notifications
 - Customize how notifications appear on your screen
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Notifications"`.
-  2. Adjust the setting (Notifications).
-  3. Close to apply.
+  1. Open it; set position and do-not-disturb.
 
 ### Panel
 - Customize the panel
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Panel"`.
-  2. Adjust the setting (Panel).
-  3. Close to apply.
+  1. Open it; Items tab → add a launcher/clock/systray.
 
 ### Panel Profiles
 - Backup and restore your panel configuration
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Panel Profiles"`.
-  2. Adjust the setting (Panel Profiles).
-  3. Close to apply.
+  1. Open it; Save the current layout, or load a backup.
 
 ### Power Manager
 - Settings for the Xfce Power Manager
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Power Manager"`.
-  2. Adjust the setting (Power Manager).
-  3. Close to apply.
+  1. Open it; set 'display sleep' to never for long scans.
 
 ### Qt5 Settings
 - Qt5 Configuration Tool
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Qt5 Settings"`.
-  2. Adjust the setting (Qt5 Settings).
-  3. Close to apply.
+  1. Open it; match the Qt theme to the GTK one.
 
 ### Qt6 Settings
 - Qt6 Configuration Tool
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Qt6 Settings"`.
-  2. Adjust the setting (Qt6 Settings).
-  3. Close to apply.
+  1. Open it; match the Qt theme to the GTK one.
 
 ### Removable Drives and Media
 - Configure management of removable drives and media
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Removable Drives and Media"`.
-  2. Adjust the setting (Removable Drives and Media).
-  3. Close to apply.
+  1. Open it; toggle auto-mount per media type.
 
 ### Session and Startup
 - Customize desktop startup
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Session and Startup"`.
-  2. Adjust the setting (Session and Startup).
-  3. Close to apply.
+  1. Open it; Application Autostart tab → add e.g. the VNC server.
 
 ### Settings Editor
 - Graphical settings editor for Xfconf
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Settings Editor"`.
-  2. Adjust the setting (Settings Editor).
-  3. Close to apply.
+  1. Open it; browse channels; edit values carefully.
 
 ### Settings Manager
 - Graphical Settings Manager for Xfce
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Settings Manager"`.
-  2. Adjust the setting (Settings Manager).
-  3. Close to apply.
+  1. Open it; click any icon to reach that setting.
 
 ### Thunar Preferences
 - Configure the Thunar file manager
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Thunar Preferences"`.
-  2. Adjust the setting (Thunar Preferences).
-  3. Close to apply.
+  1. Open it; set default view and show-hidden.
 
 ### Time and Date
 - Change system time, date, and timezone
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Time and Date"`.
-  2. Adjust the setting (Time and Date).
-  3. Close to apply.
+  1. Open it (sudo); set timezone to UTC for consistent evidence stamps.
 
 ### Users and Groups
 - Add or remove users and groups
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Users and Groups"`.
-  2. Adjust the setting (Users and Groups).
-  3. Close to apply.
+  1. Open it (sudo); add a user or add yourself to a group (e.g. wireshark).
 
 ### Window Manager
 - Configure window behavior and shortcuts
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Window Manager"`.
-  2. Adjust the setting (Window Manager).
-  3. Close to apply.
+  1. Open it; Keyboard tab → set tiling/switch shortcuts.
 
 ### Window Manager Tweaks
 - Fine-tune window behaviour and effects
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Window Manager Tweaks"`.
-  2. Adjust the setting (Window Manager Tweaks).
-  3. Close to apply.
+  1. Open it; Compositor tab → disable shadows if VNC is laggy.
 
 ### Workspaces
 - Configure layout, names and margins
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Workspaces"`.
-  2. Adjust the setting (Workspaces).
-  3. Close to apply.
+  1. Open it; set the workspace count and margins.
 
 ### Xfce Screensaver
 - Set your screensaver preferences
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Xfce Screensaver"`.
-  2. Adjust the setting (Xfce Screensaver).
-  3. Close to apply.
+  1. Open it; disable lock-on-idle for long unattended scans.
 
 ### xfreerdp
 - Connect to RDP servers for remote work or administration
@@ -5471,65 +5382,56 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### About Xfce
 - Information about the Xfce Desktop Environment
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "About Xfce"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Menu → About Xfce (or `apps.sh open "About Xfce"`).
+  2. Read the version on the first tab; close when done.
 
 ### Application Finder
 - Find and launch applications installed on your system
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Application Finder"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Press the shortcut or open it; type an app name.
+  2. Enter to launch; this is the fastest way to open tools.
 
 ### Atril Document Viewer
 - View multi-page documents
 - **Steps:**
-  1. Open a file: `../scripts/apps.sh open "Atril Document Viewer"` with a path.
-  2. Review screenshots/PDF evidence.
-  3. Export/save as needed.
+  1. `apps.sh open "Atril Document Viewer" report.pdf` or File → Open.
+  2. Navigate with the sidebar; Ctrl+F to search text.
 
 ### BackTrack Mode
 - Toggle BackTrack Mode
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "BackTrack Mode"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch it (runs kali-undercover variant) to switch theme.
+  2. Run again to revert.
 
 ### Bulk Rename
 - Rename Multiple Files
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Bulk Rename"`.
-  2. Browse to `~/lab-evidence`.
-  3. Extract/compress or open a terminal in a folder.
+  1. Open it; add files with the + button.
+  2. Choose a rule (replace/numbering); preview; Rename.
 
 ### Catfish File Search
 - Search the file system
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Catfish File Search"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Open it; type a term; optionally tick 'search file contents'.
+  2. Double-click a result to open it.
 
 ### Clipboard Manager
 - Clipboard Manager Autostart File
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Clipboard Manager"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. It runs in the tray; click it to see recent clips.
+  2. Click an entry to copy it back.
 
 ### Disks
 - Manage Drives and Media
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Disks"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Open it; select a disk in the left list.
+  2. Use the ⋮ menu → Create Disk Image / Format for forensics or prep.
+  3. Mount/unmount with the ▶/⏏ buttons; never touch a disk you don't own.
 
 ### File Manager
 - Browse the file system
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "File Manager"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch it; browse to ~/lab-evidence.
 
 ### GParted
 - Create, reorganize, and delete partitions
@@ -5546,9 +5448,8 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### GtkHash
 - Calculate message digests or checksums
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "GtkHash"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Open it; pick a file; tick the hash algorithms.
+  2. Hash; compare against the expected value.
 
 ### Hardware Locality lstopo
 - Show hardware topology
@@ -5560,9 +5461,7 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Help
 - Get help with GNOME
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Help"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Open it; browse or search the help topics.
 
 ### Kali Autopilot
 - Automated Kali Attack Platform
@@ -5579,37 +5478,27 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Kali Halloween Mode
 - Toggle Kali Halloween Mode
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Kali Halloween Mode"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch to apply/revert the theme.
 
 ### Kali Undercover Mode
 - Toggle Kali Undercover Mode
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Kali Undercover Mode"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch to toggle the Windows-like look on/off.
 
 ### Log Out
 - Log out of the Xfce Desktop
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Log Out"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch; pick Log Out / Restart / Shut Down.
 
 ### MATE Calculator
 - Perform arithmetic, scientific or financial calculations
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "MATE Calculator"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Open it; Mode menu → Programmer for hex/bitwise.
 
 ### Mail Reader
 - Read your email
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Mail Reader"`.
-  2. Point it at the lab: `http://<NODE_IP>:30080`.
-  3. Proxy via Burp/ZAP (127.0.0.1:8080) to inspect requests.
+  1. Launch; configure an account if prompted.
 
 ### RFDump
 - Tool to directly interoperate with an RFID reader
@@ -5627,37 +5516,29 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Run Program...
 - Enter a command you want to launch
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Run Program..."`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch; type a command and Enter.
 
 ### Screenshot
 - Take screenshots of the entire screen, of the active window or of a region
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Screenshot"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Launch; pick Full/Window/Region and delay.
+  2. Save into ~/lab-evidence.
 
 ### Sensor Viewer
 - Show sensor values.
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Sensor Viewer"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Open it to read available sensors (limited in a VM).
 
 ### Task Manager
 - Easy to use application to monitor system resources
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Task Manager"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Open it; sort by CPU/MEM.
+  2. Right-click a process → Kill if a scan hangs.
 
 ### Terminal Emulator
 - Use the command line
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Terminal Emulator"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Open it; same usage as QTerminal.
 
 ### TigerVNC viewer
 - Connect to VNC server and display remote desktop
@@ -5669,9 +5550,7 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Web Browser
 - Browse the web
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Web Browser"`.
-  2. Point it at the lab: `http://<NODE_IP>:30080`.
-  3. Proxy via Burp/ZAP (127.0.0.1:8080) to inspect requests.
+  1. Launch; same proxy workflow as Firefox ESR above.
 
 
 ---
@@ -7442,65 +7321,48 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Exploit Database
 - Archive of public exploits that is CVE compliant
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Exploit Database"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動以線上瀏覽 exploit。
+  2. 離線/CLI 用：`toolkit.sh search <產品 版本>`。
 
 ### Kali Bugs
 - The Kali Linux bug tracker
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Kali Bugs"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動以回報或搜尋 Kali bug。
 
 ### Kali Docs
 - Official Kali Linux documentation website
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Kali Docs"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動查官方教學（安裝、工具、疑難排解）。
 
 ### Kali Forums
 - Get community support on forums
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Kali Forums"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動以提問/搜尋社群問題。
 
 ### Kali Linux
 - The official web site of Kali Linux
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Kali Linux"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動查下載/消息。
 
 ### Kali Tools
 - Discover tools available in Kali Linux
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Kali Tools"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動查任何 Kali 工具的文件/用法。
 
 ### NetHunter
 - Penetration testing tools on mobile devices
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "NetHunter"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動查 NetHunter 文件（Android 滲透平台）。
 
 ### OffSec Training
 - Follow courses and get certified to show off your skills
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "OffSec Training"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動瀏覽 PEN-200/OSCP 等課程。
 
 ### VulnHub
 - Vulnerable by design - lab to download virtual machines to test your skills
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "VulnHub"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動找合法練習靶機（隔離執行）。
 
 
 ## Kali tools — lateral-movement (3)
@@ -8081,9 +7943,9 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### netcat
 - TCP/IP swiss army knife
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "netcat"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 抓 banner：`nc -v <NODE_IP> 30080` 再輸入請求。
+  2. 出站測試：`nc -zv <NODE_IP> 5432` —— 被拒＝DB 控制有效。
+  3. 監聽（僅自有主機）：`nc -lvnp 4444`。
 
 ### powercat
 - 以 PowerShell 實作的 netcat 功能
@@ -9504,16 +9366,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Kali Tweaks
 - Tool to adjust advanced configuration settings for Kali Linux
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Kali Tweaks"`。
-  2. 調整該設定（Kali Tweaks）。
-  3. 關閉即套用。
+  1. 開啟（在終端機中執行）；方向鍵移到區段。
+  2. 'Metapackages' → 勾選 kali-linux-default 安裝完整工具集。
+  3. 套用；它會替你跑 apt。
 
 ### Root Terminal Emulator
 - Opens a terminal as the root user, using sudo to ask for the password
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Root Terminal Emulator"`（或從選單）。
-  2. 在此執行任何 CLI 工具，例如 `TARGET=<NODE_IP> ../scripts/toolkit.sh chain recon,web`。
-  3. Ctrl+Shift+T 開新分頁。
+  1. 啟動（需密碼）；僅在 sudo 不足時使用。
 
 
 ## Kali tools — sleuth-kit-suite (33)
@@ -10806,16 +10666,13 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### QTerminal
 - Terminal emulator
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "QTerminal"`（或從選單）。
-  2. 在此執行任何 CLI 工具，例如 `TARGET=<NODE_IP> ../scripts/toolkit.sh chain recon,web`。
-  3. Ctrl+Shift+T 開新分頁。
+  1. 開啟後 `cd ~/kali-scripts`。
+  2. 執行工具組，例如 `TARGET=<NODE_IP> ./toolkit.sh chain recon,web`。
 
 ### QTerminal Drop-down
 - A drop-down terminal emulator
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "QTerminal Drop-down"`（或從選單）。
-  2. 在此執行任何 CLI 工具，例如 `TARGET=<NODE_IP> ../scripts/toolkit.sh chain recon,web`。
-  3. Ctrl+Shift+T 開新分頁。
+  1. 按熱鍵從上方拉下終端機。
 
 ### UXTerm
 - xterm wrapper for Unicode environments
@@ -10837,23 +10694,18 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Mousepad
 - Simple Text Editor
 - **步驟:**
-  1. 開啟檔案：`../scripts/apps.sh open "Mousepad"` 後 File → Open。
+  1. `apps.sh open Mousepad notes.txt` 或 File → Open。
   2. 編輯；Ctrl+S 儲存。
-  3. 可用於設定/筆記/字典。
 
 ### Text Editor
 - Simple Text Editor
 - **步驟:**
-  1. 開啟檔案：`../scripts/apps.sh open "Text Editor"` 後 File → Open。
-  2. 編輯；Ctrl+S 儲存。
-  3. 可用於設定/筆記/字典。
+  1. 啟動；編輯並儲存設定/筆記。
 
 ### Vim
 - Edit text files
 - **步驟:**
-  1. 開啟檔案：`../scripts/apps.sh open "Vim"` 後 File → Open。
-  2. 編輯；Ctrl+S 儲存。
-  3. 可用於設定/筆記/字典。
+  1. `vim file`；按 i 進入編輯，Esc 後 :wq 儲存離開。
 
 
 ## Web & network (2)
@@ -10861,16 +10713,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Firefox ESR
 - Browse the World Wide Web
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Firefox ESR"`。
-  2. 指向 lab：`http://<NODE_IP>:30080`。
-  3. 用 Burp/ZAP 代理（127.0.0.1:8080）檢視請求。
+  1. `apps.sh open "Firefox ESR" http://<NODE_IP>:30080`。
+  2. Settings → Network → 手動代理 127.0.0.1:8080 以經 Burp。
+  3. 匯入 Burp 的 CA 憑證以攔截 HTTPS。
 
 ### Web Browser
 - Browse the web
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Web Browser"`。
-  2. 指向 lab：`http://<NODE_IP>:30080`。
-  3. 用 Burp/ZAP 代理（127.0.0.1:8080）檢視請求。
+  1. 啟動；代理流程同上方 Firefox ESR。
 
 
 ## Files & archives (2)
@@ -10878,16 +10728,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Engrampa Archive Manager
 - Create and modify an archive
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Engrampa Archive Manager"`。
-  2. 瀏覽到 `~/lab-evidence`。
-  3. 解壓/壓縮，或在資料夾開啟終端機。
+  1. `apps.sh open ... file.zip` 或 File → Open。
+  2. Extract → 選資料夾；或拖入檔案後 Save 建立壓縮檔。
 
 ### Thunar File Manager
 - Browse the filesystem with the file manager
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Thunar File Manager"`。
-  2. 瀏覽到 `~/lab-evidence`。
-  3. 解壓/壓縮，或在資料夾開啟終端機。
+  1. 開啟後進入證據資料夾。
+  2. Tools → Open Terminal Here 以對資料夾操作。
 
 
 ## Media & documents (3)
@@ -10895,23 +10743,18 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Parole Media Player
 - Play your media
 - **步驟:**
-  1. 開啟檔案：`../scripts/apps.sh open "Parole Media Player"` 加路徑。
-  2. 檢視截圖/PDF 證據。
-  3. 視需要匯出/儲存。
+  1. `apps.sh open "Parole Media Player" clip.mp4` 或 Open。
 
 ### Ristretto Image Viewer
 - Look at your images easily
 - **步驟:**
-  1. 開啟檔案：`../scripts/apps.sh open "Ristretto Image Viewer"` 加路徑。
-  2. 檢視截圖/PDF 證據。
-  3. 視需要匯出/儲存。
+  1. `apps.sh open "Ristretto Image Viewer" shot.png`。
+  2. 方向鍵逐張瀏覽資料夾。
 
 ### Volume Control
 - Adjust the volume level
 - **步驟:**
-  1. 開啟檔案：`../scripts/apps.sh open "Volume Control"` 加路徑。
-  2. 檢視截圖/PDF 證據。
-  3. 視需要匯出/儲存。
+  1. 開啟後調整輸出/輸入音量。
 
 
 ## Accessibility (2)
@@ -10919,16 +10762,12 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Onboard
 - Flexible onscreen keyboard
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Onboard"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動後用滑鼠點按鍵。
 
 ### Onboard Settings
 - Change Onboard settings
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Onboard Settings"`。
-  2. 調整該設定（Onboard Settings）。
-  3. 關閉即套用。
+  1. 開啟後設定配置/佈景/自動顯示。
 
 
 ## Settings & desktop (30)
@@ -10936,205 +10775,156 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Accessibility
 - Improve keyboard and mouse accessibility
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Accessibility"`。
-  2. 調整該設定（Accessibility）。
-  3. 關閉即套用。
+  1. 開啟後選 Keyboard 或 Mouse 分頁。
+  2. 開啟需要的輔助；即時生效。
 
 ### Advanced Network Configuration
 - Manage and change your network connection settings
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Advanced Network Configuration"`。
-  2. 調整該設定（Advanced Network Configuration）。
-  3. 關閉即套用。
+  1. 開啟後按 + 新增連線，或選現有的 Ethernet。
+  2. IPv4 分頁 → Manual → 填入 lab 網段的位址/遮罩/閘道。
+  3. 儲存後重新啟用連線以套用。
 
 ### Appearance
 - Customize the look of your desktop
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Appearance"`。
-  2. 調整該設定（Appearance）。
-  3. 關閉即套用。
+  1. 開啟後在前幾個分頁選 Style/Icons。
+  2. Fonts 分頁 → 若 VNC 下字太小可調 DPI。
 
 ### Clipboard Manager Settings
 - Customize your clipboard
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Clipboard Manager Settings"`。
-  2. 調整該設定（Clipboard Manager Settings）。
-  3. 關閉即套用。
+  1. 開啟後設定歷史長度與忽略規則。
+  2. 關閉即儲存。
 
 ### Color Profiles
 - Set color profiles
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Color Profiles"`。
-  2. 調整該設定（Color Profiles）。
-  3. 關閉即套用。
+  1. 開啟後選顯示器；新增/指定設定檔。
 
 ### Default Applications
 - Associate preferred applications with MIME types
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Default Applications"`。
-  2. 調整該設定（Default Applications）。
-  3. 關閉即套用。
+  1. 開啟後在 Internet/Utilities 分頁設定各預設。
 
 ### Desktop
 - Set desktop background and menu and icon behavior
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Desktop"`。
-  2. 調整該設定（Desktop）。
-  3. 關閉即套用。
+  1. 開啟後 Background 分頁選桌布。
+  2. Icons 分頁 → 切換要顯示的圖示。
 
 ### Display
 - Configure screen settings and layout
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Display"`。
-  2. 調整該設定（Display）。
-  3. 關閉即套用。
+  1. 開啟後把解析度設成與 VNC 相符（例如 1440x900）。
+  2. Apply 後確認保留。
 
 ### Kali HiDPI Mode
 - Toggle HiDPI desktop mode
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Kali HiDPI Mode"`。
-  2. 調整該設定（Kali HiDPI Mode）。
-  3. 關閉即套用。
+  1. 執行一次啟用；再執行停用。
 
 ### Keyboard
 - Edit keyboard settings and application shortcuts
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Keyboard"`。
-  2. 調整該設定（Keyboard）。
-  3. 關閉即套用。
+  1. 開啟後 Layout 分頁新增/選配置。
+  2. Application Shortcuts 分頁 → 綁定按鍵到指令。
 
 ### LightDM GTK Greeter settings
 - Configure LightDM GTK Greeter
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "LightDM GTK Greeter settings"`。
-  2. 調整該設定（LightDM GTK Greeter settings）。
-  3. 關閉即套用。
+  1. 開啟（需 sudo）；設定佈景/背景/使用者清單。
+  2. 儲存；下次登入生效。
 
 ### Mouse and Touchpad
 - Configure pointer device behavior and appearance
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Mouse and Touchpad"`。
-  2. 調整該設定（Mouse and Touchpad）。
-  3. 關閉即套用。
+  1. 開啟後調整 Acceleration/Buttons。
 
 ### Notifications
 - Customize how notifications appear on your screen
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Notifications"`。
-  2. 調整該設定（Notifications）。
-  3. 關閉即套用。
+  1. 開啟後設定位置與勿擾。
 
 ### Panel
 - Customize the panel
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Panel"`。
-  2. 調整該設定（Panel）。
-  3. 關閉即套用。
+  1. 開啟後 Items 分頁新增啟動器/時鐘/系統匣。
 
 ### Panel Profiles
 - Backup and restore your panel configuration
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Panel Profiles"`。
-  2. 調整該設定（Panel Profiles）。
-  3. 關閉即套用。
+  1. 開啟後儲存目前配置，或載入備份。
 
 ### Power Manager
 - Settings for the Xfce Power Manager
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Power Manager"`。
-  2. 調整該設定（Power Manager）。
-  3. 關閉即套用。
+  1. 開啟後把顯示睡眠設為 never 以利長時掃描。
 
 ### Qt5 Settings
 - Qt5 Configuration Tool
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Qt5 Settings"`。
-  2. 調整該設定（Qt5 Settings）。
-  3. 關閉即套用。
+  1. 開啟後把 Qt 佈景調成與 GTK 一致。
 
 ### Qt6 Settings
 - Qt6 Configuration Tool
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Qt6 Settings"`。
-  2. 調整該設定（Qt6 Settings）。
-  3. 關閉即套用。
+  1. 開啟後把 Qt 佈景調成與 GTK 一致。
 
 ### Removable Drives and Media
 - Configure management of removable drives and media
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Removable Drives and Media"`。
-  2. 調整該設定（Removable Drives and Media）。
-  3. 關閉即套用。
+  1. 開啟後依媒體類型切換自動掛載。
 
 ### Session and Startup
 - Customize desktop startup
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Session and Startup"`。
-  2. 調整該設定（Session and Startup）。
-  3. 關閉即套用。
+  1. 開啟後 Application Autostart 分頁 → 加入例如 VNC server。
 
 ### Settings Editor
 - Graphical settings editor for Xfconf
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Settings Editor"`。
-  2. 調整該設定（Settings Editor）。
-  3. 關閉即套用。
+  1. 開啟後瀏覽 channel；謹慎編輯值。
 
 ### Settings Manager
 - Graphical Settings Manager for Xfce
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Settings Manager"`。
-  2. 調整該設定（Settings Manager）。
-  3. 關閉即套用。
+  1. 開啟後點任一圖示進入該設定。
 
 ### Thunar Preferences
 - Configure the Thunar file manager
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Thunar Preferences"`。
-  2. 調整該設定（Thunar Preferences）。
-  3. 關閉即套用。
+  1. 開啟後設定預設檢視與顯示隱藏檔。
 
 ### Time and Date
 - Change system time, date, and timezone
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Time and Date"`。
-  2. 調整該設定（Time and Date）。
-  3. 關閉即套用。
+  1. 開啟（sudo）；時區設 UTC 讓證據時間戳一致。
 
 ### Users and Groups
 - Add or remove users and groups
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Users and Groups"`。
-  2. 調整該設定（Users and Groups）。
-  3. 關閉即套用。
+  1. 開啟（sudo）；新增使用者或把自己加入群組（例如 wireshark）。
 
 ### Window Manager
 - Configure window behavior and shortcuts
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Window Manager"`。
-  2. 調整該設定（Window Manager）。
-  3. 關閉即套用。
+  1. 開啟後 Keyboard 分頁設定視窗切換/排列快捷鍵。
 
 ### Window Manager Tweaks
 - Fine-tune window behaviour and effects
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Window Manager Tweaks"`。
-  2. 調整該設定（Window Manager Tweaks）。
-  3. 關閉即套用。
+  1. 開啟後 Compositor 分頁 → VNC 卡頓時關閉陰影。
 
 ### Workspaces
 - Configure layout, names and margins
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Workspaces"`。
-  2. 調整該設定（Workspaces）。
-  3. 關閉即套用。
+  1. 開啟後設定工作區數量與邊界。
 
 ### Xfce Screensaver
 - Set your screensaver preferences
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Xfce Screensaver"`。
-  2. 調整該設定（Xfce Screensaver）。
-  3. 關閉即套用。
+  1. 開啟後關閉閒置鎖定以利長時無人掃描。
 
 ### xfreerdp
 - Connect to RDP servers for remote work or administration
@@ -11149,65 +10939,56 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### About Xfce
 - Information about the Xfce Desktop Environment
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "About Xfce"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 選單 → About Xfce（或 `apps.sh open "About Xfce"`）。
+  2. 在第一頁看版本；看完關閉。
 
 ### Application Finder
 - Find and launch applications installed on your system
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Application Finder"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 按快捷鍵或開啟後輸入程式名稱。
+  2. Enter 啟動；這是開啟工具最快的方式。
 
 ### Atril Document Viewer
 - View multi-page documents
 - **步驟:**
-  1. 開啟檔案：`../scripts/apps.sh open "Atril Document Viewer"` 加路徑。
-  2. 檢視截圖/PDF 證據。
-  3. 視需要匯出/儲存。
+  1. `apps.sh open "Atril Document Viewer" report.pdf` 或 File → Open。
+  2. 用側欄導覽；Ctrl+F 搜尋文字。
 
 ### BackTrack Mode
 - Toggle BackTrack Mode
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "BackTrack Mode"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動它（kali-undercover 變體）切換佈景。
+  2. 再執行一次即可還原。
 
 ### Bulk Rename
 - Rename Multiple Files
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Bulk Rename"`。
-  2. 瀏覽到 `~/lab-evidence`。
-  3. 解壓/壓縮，或在資料夾開啟終端機。
+  1. 開啟後用 + 加入檔案。
+  2. 選規則（取代/編號）；預覽；Rename。
 
 ### Catfish File Search
 - Search the file system
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Catfish File Search"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 開啟後輸入關鍵字；可勾選搜尋檔案內容。
+  2. 雙擊結果開啟。
 
 ### Clipboard Manager
 - Clipboard Manager Autostart File
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Clipboard Manager"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 在系統列執行；點它看近期剪貼。
+  2. 點一筆即可重新複製。
 
 ### Disks
 - Manage Drives and Media
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Disks"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 開啟後在左側清單選磁碟。
+  2. 用 ⋮ 選單 → Create Disk Image / Format 做鑑識或準備。
+  3. 用 ▶/⏏ 掛載/卸載；絕不動不屬於你的磁碟。
 
 ### File Manager
 - Browse the file system
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "File Manager"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動後瀏覽到 ~/lab-evidence。
 
 ### GParted
 - GNOME 磁碟分割編輯器
@@ -11224,9 +11005,8 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### GtkHash
 - Calculate message digests or checksums
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "GtkHash"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 開啟後選檔案；勾選雜湊演算法。
+  2. 按 Hash；與預期值比對。
 
 ### Hardware Locality lstopo
 - Show hardware topology
@@ -11238,9 +11018,7 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Help
 - Get help with GNOME
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Help"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 開啟後瀏覽或搜尋說明主題。
 
 ### Kali Autopilot
 - Kali 自動攻擊腳本工具
@@ -11257,37 +11035,27 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Kali Halloween Mode
 - Toggle Kali Halloween Mode
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Kali Halloween Mode"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動以套用/還原佈景。
 
 ### Kali Undercover Mode
 - Toggle Kali Undercover Mode
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Kali Undercover Mode"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動以切換類 Windows 外觀。
 
 ### Log Out
 - Log out of the Xfce Desktop
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Log Out"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動後選 Log Out / Restart / Shut Down。
 
 ### MATE Calculator
 - Perform arithmetic, scientific or financial calculations
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "MATE Calculator"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 開啟後 Mode 選單 → Programmer 做十六進位/位元運算。
 
 ### Mail Reader
 - Read your email
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Mail Reader"`。
-  2. 指向 lab：`http://<NODE_IP>:30080`。
-  3. 用 Burp/ZAP 代理（127.0.0.1:8080）檢視請求。
+  1. 啟動；若提示則設定帳號。
 
 ### RFDump
 - 解碼 RFID 標籤資料的工具
@@ -11305,37 +11073,29 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Run Program...
 - Enter a command you want to launch
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Run Program..."`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動；輸入指令並 Enter。
 
 ### Screenshot
 - Take screenshots of the entire screen, of the active window or of a region
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Screenshot"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 啟動；選全螢幕/視窗/區域與延遲。
+  2. 存到 ~/lab-evidence。
 
 ### Sensor Viewer
 - Show sensor values.
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Sensor Viewer"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 開啟查看可用感測器（VM 內有限）。
 
 ### Task Manager
 - Easy to use application to monitor system resources
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Task Manager"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 開啟後依 CPU/MEM 排序。
+  2. 右鍵程序 → Kill 以結束當掉的掃描。
 
 ### Terminal Emulator
 - Use the command line
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Terminal Emulator"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 開啟；用法同 QTerminal。
 
 ### TigerVNC viewer
 - Connect to VNC server and display remote desktop
@@ -11347,7 +11107,5 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Web Browser
 - Browse the web
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Web Browser"`。
-  2. 指向 lab：`http://<NODE_IP>:30080`。
-  3. 用 Burp/ZAP 代理（127.0.0.1:8080）檢視請求。
+  1. 啟動；代理流程同上方 Firefox ESR。
 

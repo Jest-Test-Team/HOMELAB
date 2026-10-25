@@ -14,7 +14,7 @@ application, not a sample.
 | [`tool.sh`](../scripts/tool.sh) with real args vs the node | 35 tools (recon/web/vuln/passwords) | all ran, evidence to `~/lab-evidence/` |
 | [`toolkit.sh`](../scripts/toolkit.sh) `chain recon,web,vuln` | nmap+whatweb+ffuf+nikto+nuclei | ran live against the node |
 | [`apps.sh`](../scripts/apps.sh) `open` (dry-run resolve) | **all 450 menu apps** | **450/450** resolved, 0 misses |
-| [`apps.sh`](../scripts/apps.sh) real GUI launch | firefox-esr, zaproxy, mousepad, Thunar | confirmed running on DISPLAY=:1 |
+| [`apps.sh`](../scripts/apps.sh) real GUI launch | **13 distinct GUI apps** (firefox-esr, zaproxy, wireshark, mousepad, sqlitebrowser, xhydra, johnny, ristretto, catfish, mate-calc, thunar, …) | confirmed running on DISPLAY=:1 (28 X clients) |
 
 The 35 tools run with real node args: nmap, masscan, netdiscover, arping, fping, hping3,
 nbtscan, dnsrecon, dnsenum, fierce, dmitry, whatweb, wafw00f, sslscan, sslyze, nikto,
@@ -382,6 +382,8 @@ netexec, theHarvester, hydra, medusa, john, hashcat, hashid, crunch, cewl.
 | `yersinia` | `yersinia` | PASS |
 | `zaproxy` | `zaproxy` | PASS |
 | `zenmap` | `zenmap` | PASS |
+
+> Note: in `installed-apps.md`, the 78 desktop/system apps use hand-written specific steps (e.g. Disks → select disk → ⋮ Create Disk Image/Format → mount with ▶/⏏), not a generic template.
 
 ## 繁體中文摘要
 
