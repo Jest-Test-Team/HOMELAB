@@ -10,13 +10,15 @@ application, not a sample.
 
 | Driver | Coverage | Result |
 |---|---|---|
-| [`tool.sh`](../scripts/tool.sh) `<tool> --help/--version` | **all 357 runnable CLI tools** | **357/357 PASS** (each produced real output) |
-| [`tool.sh`](../scripts/tool.sh) with **real args** vs the node | **50 tools** (recon/web/vuln/DB/SMTP/SNMP/DNS) | all produced real output, logged |
+| [`tool.sh`](../scripts/tool.sh) `<tool> --help/--version` | **all 357 runnable CLI tools** | **357/357 PASS**; of these **102 also run with real work** (above) |
+| [`tool.sh`](../scripts/tool.sh) with **real work** | **102 distinct tools** — 50 node-targeted (recon/web/vuln/DB/SMTP/SNMP/DNS) + 54 standalone (hash/crack benchmarks, wordlist gen, file forensics, local audits, disassembly) | all produced real output, logged |
 | [`toolkit.sh`](../scripts/toolkit.sh) `chain recon,web,vuln` | nmap+whatweb+ffuf+nikto+nuclei | ran live against the node |
 | [`apps.sh`](../scripts/apps.sh) `open` (dry-run resolve) | **all 450 menu apps** | **450/450** resolved, 0 misses |
 | [`apps.sh`](../scripts/apps.sh) **real GUI launch** | **~93 of the 102 true GUI apps** opened a window | launched in waves on DISPLAY=:1, counted by `wmctrl -l` (window appearance) — the accurate measure; the other ~348 menu entries are CLI tools that open in a terminal and are driven by `tool.sh` |
 
 The 50 tools run with real node args: nmap, masscan, netdiscover, arping, fping, hping3, nbtscan, netmask, dnsrecon, dnsenum, dnsmap, fierce, dnstracer, dmitry, whatweb, wafw00f, lbd, nikto, nuclei, wapiti, uniscan, dirb, gobuster, ffuf, wfuzz, cutycapt, sslscan, sslyze, httpx/httrack, sqlmap, commix, smbmap, enum4linux, smtp-user-enum, swaks, onesixtyone, snmpcheck, braa, ike-scan, ncat, socat, amass, p0f, slowhttptest, siege, davtest, cadaver, whois, host, dig.
+
+Standalone **real-work** runs (no external target needed): arp-scan, binwalk, bulk_extractor, ccrypt, cewl, chkrootkit, crunch, dc3dd, dcfldd, dsniff, exe2hex, exiv2, fls, foremost, gdb, hash-identifier, hashcat, hashdeep, hashid, john, lynis, macchanger, mactime, mdb-ver, medusa, nasm, ncrack, nping, objdump, p0f, pack2, patator, pdf-parser, pdfid, pipal, proxychains4, radare2, rizin, rkhunter, rsmangler, scalpel, sqlite3, ssdeep, ssldump, sslscan, steghide, stegsnow, strings, tcpdump, tiger, unshadow, wordlists, yara, zip2john.
 
 **Breakdown of the 450 menu entries:** ~102 are true windowed GUI apps (`apps.sh` opened ~93/102 for real, `wmctrl`-verified); the other ~348 are CLI tools that launch in a terminal — all driven by `tool.sh` (357/357 below). So between `tool.sh` and `apps.sh`, every installed application is actually exercised.
 
