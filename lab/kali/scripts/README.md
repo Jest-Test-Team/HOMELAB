@@ -166,7 +166,5 @@ $ TARGET=<NODE_IP> ./toolkit.sh chain recon,web
 report: ~/lab-evidence/toolkit-chain-<ts>.md
 ```
 
-Verified live through `tool.sh`: **nmap, whatweb, nc, dig, nikto, wafw00f, sslscan, dnsrecon,
-fping, hping3, nbtscan, onesixtyone, smtp-user-enum, whois, dmitry** (and `toolkit.sh chain
-recon,web,vuln` running nmap+whatweb+ffuf+nikto+nuclei) — all against the node, writing evidence to `~/lab-evidence/`. The same
+Verified live through `tool.sh` — **35 diverse real tools driven against the node/self-test**: nmap, masscan, netdiscover, arping, fping, hping3, nbtscan, dnsrecon, dnsenum, fierce, dmitry, whatweb, wafw00f, sslscan, sslyze, nikto, nuclei, wapiti, uniscan, ffuf, gobuster, wfuzz, sqlmap, whois, onesixtyone, smtp-user-enum, netexec, theHarvester, hydra, medusa, john, hashcat, hashid, crunch, cewl (and `toolkit.sh chain recon,web,vuln` running nmap+whatweb+ffuf+nikto+nuclei) — all against the node, writing evidence to `~/lab-evidence/`. The same
 `tool.sh <name>` pattern drives any of the 382 tools in [`../docs/tutorials.en.md`](../docs/tutorials.en.md); `apps.sh open "<Name>"` launches any GUI app.
