@@ -8,7 +8,8 @@ from the Kali VM. **Authorized, operator-owned targets only** — see
 |---|---|
 | [`attack-tutorial.en.md`](attack-tutorial.en.md) | Step-by-step tutorial (English) |
 | [`attack-tutorial.zh-TW.md`](attack-tutorial.zh-TW.md) | 教學（繁體中文） |
-| [`docs/catalogue.en.md`](docs/catalogue.en.md) / [`.zh-TW.md`](docs/catalogue.zh-TW.md) | **All 382 Kali tools by menu category** (EN + 繁中), from the VM's apt metadata |
+| [`docs/tutorials.en.md`](docs/tutorials.en.md) / [`.zh-TW.md`](docs/tutorials.zh-TW.md) | **Per-tool step-by-step for all 382 tools** (EN + 繁中) — real binaries + install/help/run steps |
+| [`docs/catalogue.en.md`](docs/catalogue.en.md) / [`.zh-TW.md`](docs/catalogue.zh-TW.md) | Compact index of all 382 Kali tools by category, from the VM's apt metadata |
 | [`docs/`](docs/README.md) | Doc index: catalogue + per-app tutorials (`installed-apps.md`) + deep-dives |
 | [`scripts/README.md`](scripts/README.md) | How to install, drive, and **chain** the tools |
 | [`scripts/tool.sh`](scripts/tool.sh) | Run **any** installed tool with ROE banner + evidence |

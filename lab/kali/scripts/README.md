@@ -164,5 +164,6 @@ $ TARGET=<NODE_IP> ./toolkit.sh chain recon,web
 report: ~/lab-evidence/toolkit-chain-<ts>.md
 ```
 
-So `tool.sh` drives any single tool, `toolkit.sh` chains several, and both write evidence
-to `~/lab-evidence/`. `apps.sh open "<Name>"` launches any GUI app the same way.
+Verified live through `tool.sh`: **nmap, whatweb, nc, dig, nikto** (and `toolkit.sh chain`
+with nmap+whatweb) — all against the node, writing evidence to `~/lab-evidence/`. The same
+`tool.sh <name>` pattern drives any of the 382 tools in [`../docs/tutorials.en.md`](../docs/tutorials.en.md); `apps.sh open "<Name>"` launches any GUI app.
