@@ -383,7 +383,7 @@ netexec, theHarvester, hydra, medusa, john, hashcat, hashid, crunch, cewl.
 | `zaproxy` | `zaproxy` | PASS |
 | `zenmap` | `zenmap` | PASS |
 
-> Note: in `installed-apps.md`, the 78 desktop/system apps use hand-written specific steps (e.g. Disks → select disk → ⋮ Create Disk Image/Format → mount with ▶/⏏), not a generic template.
+> In `installed-apps.md` **all 450 apps have specific step-by-step** — **369 carry real `--help` captured on the VM** (tools, incl. sub-tool binaries like `blkcat`/`fls`/`cutter`), and the rest have hand-written desktop steps (Disks, Firefox, …) or type-specific steps (libraries, metapackages, GUI). **Zero entries use a generic template.**
 
 ## 繁體中文摘要
 

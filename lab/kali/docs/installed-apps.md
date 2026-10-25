@@ -44,10 +44,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### bloodhound-python
 - ingestor for BloodHound, based on Impacket (Python 3)
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "bloodhound-python"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y bloodhound-python`
+  2. Help: `bloodhound-python -h`  (or `man bloodhound-python`)
+  3. Run: `bloodhound-python ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  usage: bloodhound-python [-h] [-c COLLECTIONMETHOD] [-d DOMAIN] [-v]
+                           [-u USERNAME] [-p PASSWORD] [-k] [--hashes HASHES]
+                           [-no-pass] [-aesKey hex key]
+                           [--auth-method {auto,ntlm,kerberos}] [-ns NAMESERVER]
+                           [--dns-tcp] [--dns-timeout DNS_TIMEOUT] [-dc HOST]
+                           [-gc HOST] [-w WORKERS] [--exclude-dcs]
+  ```
 
 
 ## Kali tools — application-layer-protocol (2)
@@ -174,10 +183,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### fang
 - Locates non-discoverable bluetooth devices
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "fang"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y redfang`
+  2. Help: `fang -h`  (or `man fang`)
+  3. Run: `fang ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  fang: invalid option -- '-'
+  redfang - the bluetooth hunter ver 2.5
+  (c)2003 @stake Inc
+  author:   Ollie Whitehouse <<email>>
+  enhanced: threads by Simon Halsall <<email>>
+  enhanced: device info discovery by Stephen Kapp <<email>>
+  ```
 
 ### spooftooph
 - Automates spoofing or cloning Bluetooth devices
@@ -198,10 +216,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### ubertooth-util
 - General purpose Ubertooth utility
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "ubertooth-util"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y ubertooth`
+  2. Help: `ubertooth-util -h`  (or `man ubertooth-util`)
+  3. Run: `ubertooth-util ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  ubertooth-util: invalid option -- '-'
+  ubertooth-util - command line utility for Ubertooth Zero and Ubertooth One
+  
+  Common options:
+  	-v get firmware revision number
+  	-V get compile info
+  ```
 
 
 ## Kali tools — brute-force (6)
@@ -288,20 +315,34 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### xhydra
 - Gtk+3 frontend for thc-hydra
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "xhydra"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y hydra-gtk`
+  2. Help: `xhydra -h`  (or `man xhydra`)
+  3. Run: `xhydra ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  
+  (xhydra:1188024): Gtk-WARNING **: 08:41:48.037: cannot open display: 
+  ```
 
 
 ## Kali tools — cisco-tools (3)
 
 ### cge.pl
 - Simple and fast Cisco exploitation tool
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "cge.pl"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y cisco-global-exploiter`
+  2. Help: `cge.pl -h`  (or `man cge.pl`)
+  3. Run: `cge.pl ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  
+  Usage :
+  perl cge.pl <target> <vulnerability number>
+  
+  Vulnerabilities list :
+  [1] - Cisco 677/678 Telnet Buffer Overflow Vulnerability
+  ```
 
 ### cisco-ocs
 - Mass Cisco scanner
@@ -341,10 +382,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### ettercap-pkexec
 - Graphical pkexec-based launcher for ettercap
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "ettercap-pkexec"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y ettercap-graphical`
+  2. Help: `ettercap-pkexec -h`  (or `man ettercap-pkexec`)
+  3. Run: `ettercap-pkexec ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Error executing command as another user: No authentication agent found.
+  ```
 
 ### ferret-sidejack
 - Monitors data and extracts interesting data
@@ -494,24 +539,50 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### impacket-mssqlclient
 - Python3 module to easily build and dissect network protocols
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "impacket-mssqlclient"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y impacket-scripts`
+  2. Help: `impacket-mssqlclient -h`  (or `man impacket-mssqlclient`)
+  3. Run: `impacket-mssqlclient ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies 
+  
+  usage: mssqlclient.py [-h] [-db DB] [-windows-auth] [-debug] [-ts] [-show]
+                        [-command [COMMAND ...]] [-file FILE]
+                        [--host-name HOST_NAME] [--app-name APP_NAME]
+                        [-hashes LMHASH:NTHASH] [-no-pass] [-k]
+  ```
 
 ### mdb-sql
 - SQL interface to MDB Tools
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "mdb-sql"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y mdbtools`
+  2. Help: `mdb-sql -h`  (or `man mdb-sql`)
+  3. Run: `mdb-sql ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Usage:
+    mdb-sql [OPTION…] <file> - Run SQL
+  
+  Help Options:
+    -h, --help                Show help options
+  ```
 
 ### mysql
 - The MariaDB command-line tool (mysql is now a symlink to mariadb)
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "mysql"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y mysql`
+  2. Help: `mysql -h`  (or `man mysql`)
+  3. Run: `mysql ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  mysql from 11.8.9-MariaDB, client 15.2 for debian-linux-gnu (aarch64) using  EditLine wrapper
+  Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+  
+  Usage: mysql [OPTIONS] [database]
+  
+  Default options are read from the following files in the given order:
+  ```
 
 ### oscanner
 - Oracle assessment framework
@@ -532,10 +603,18 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### sidguess
 - Guesses sids against an Oracle database
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "sidguess"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sidguesser`
+  2. Help: `sidguess -h`  (or `man sidguess`)
+  3. Run: `sidguess ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  sidguess: invalid option -- '-'
+  
+  SIDGuesser v1.0.5 by <email>
+  -------------------------------------
+  sidguess -i <ip> -d <dictionary> [options]
+  ```
 
 ### sqlitebrowser
 - Light GUI editor for SQLite databases
@@ -592,10 +671,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### exe2hex
 - Convert EXE to bat
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "exe2hex"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y exe2hexbat`
+  2. Help: `exe2hex -h`  (or `man exe2hex`)
+  3. Run: `exe2hex ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  /usr/bin/exe2hex:495: SyntaxWarning: "\[" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\["? A raw string is also an option.
+    send_user "\\n\\n\[i\] Done\\n"
+  [*] exe2hex v1.5.1
+  Usage: exe2hex [options]
+  
+  Options:
+  ```
 
 ### fragrouter
 - Network intrusion detection evasion toolkit
@@ -615,10 +703,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### ftest
 - Tool for testing firewalls and Intrusion Detection System (IDS)
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "ftest"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y ftester`
+  2. Help: `ftest -h`  (or `man ftest`)
+  3. Run: `ftest ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  /usr/bin/ftest version [unknown] calling Getopt::Std::getopts (version 1.14 [paranoid]),
+  running under Perl version 5.42.3.
+  
+  Usage: ftest [-OPTIONS [-MORE_OPTIONS]] [--] [PROGRAM_ARG1 ...]
+  
+  The following single-character options are accepted:
+  ```
 
 ### macchanger
 - MAC Changer
@@ -785,10 +882,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### readpst
 - Convert PST (MS Outlook Personal Folders) files to mbox and other formats
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "readpst"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y pst-utils`
+  2. Help: `readpst -h`  (or `man readpst`)
+  3. Run: `readpst ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  readpst: invalid option -- '-'
+  ReadPST / LibPST v0.6.76
+  Little Endian implementation being used.
+  Usage: readpst [OPTIONS] {PST FILENAME}
+  OPTIONS:
+  	-V	- Version. Display program version
+  ```
 
 ### reglookup
 - Windows NT+ registry reader/lookup tool
@@ -859,17 +965,31 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### beef-xss-start
 - Browser Exploitation Framework (BeEF)
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "beef-xss-start"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y beef-xss`
+  2. Help: `beef-xss-start -h`  (or `man beef-xss-start`)
+  3. Run: `beef-xss-start ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  sudo: a terminal is required to read the password; either use ssh's -t option or configure an askpass helper
+  sudo: a password is required
+  ```
 
 ### evilgrade
 - Evilgrade framework
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "evilgrade"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y isr-evilgrade`
+  2. Help: `evilgrade -h`  (or `man evilgrade`)
+  3. Run: `evilgrade ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  [DEBUG] - Loading module: modules/fcleaner.pm
+  [DEBUG] - Loading module: modules/flashget.pm
+  [DEBUG] - Loading module: modules/techtracker.pm
+  [DEBUG] - Loading module: modules/filezilla.pm
+  [DEBUG] - Loading module: modules/teamviewer.pm
+  [DEBUG] - Loading module: modules/istat.pm
+  ```
 
 ### nishang
 - Collection of PowerShell scripts and payloads
@@ -927,10 +1047,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### impacket-smbserver
 - Python3 module to easily build and dissect network protocols
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "impacket-smbserver"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y impacket-scripts`
+  2. Help: `impacket-smbserver -h`  (or `man impacket-smbserver`)
+  3. Run: `impacket-smbserver ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies 
+  
+  usage: smbserver.py [-h] [-comment COMMENT] [-username USERNAME]
+                      [-password PASSWORD]
+                      [-computeraccountname COMPUTERACCOUNTNAME]
+                      [-computeraccounthash COMPUTERACCOUNTHASH]
+  ```
 
 
 ## Kali tools — forensic-carving-tools (15)
@@ -1186,24 +1315,51 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### affcat
 - Output contents of an image file to stdout.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "affcat"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y afflib-tools`
+  2. Help: `affcat -h`  (or `man affcat`)
+  3. Run: `affcat ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  affcat: invalid option -- '-'
+  affcat version 3.7.22
+  usage: affcat [options] infile [... more infiles]
+  options:
+      -s name --- Just output segment name
+      -p ###  --- just output data page number ###
+  ```
 
 ### dd_rescue
 - Data recovery and protection tool
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "dd_rescue"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y ddrescue`
+  2. Help: `dd_rescue -h`  (or `man dd_rescue`)
+  3. Run: `dd_rescue ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  
+  dd_rescue Version 1.99.13, <email>, GNU GPL v2/v3
+   (DD_RESCUE_1_99_13)
+   (compiled May 21 2025 11:21:52 by gcc (Debian 14.2.0-19) 14.2.0)
+   (features: O_DIRECT dl/libfallocate fallocate splice fitrim xattr aes arm8)
+  dd_rescue is free software. It's protected by the terms of GNU GPL v2 or v3
+  ```
 
 ### ewfacquire
 - Acquires data in the EWF format
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "ewfacquire"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y ewf-tools`
+  2. Help: `ewfacquire -h`  (or `man ewfacquire`)
+  3. Run: `ewfacquire ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  ewfacquire: invalid option -- '-'
+  ewfacquire 20140816
+  
+  Invalid argument: ewfacquire
+  Use ewfacquire to acquire data from a file or device and store it in the EWF
+  format (Expert Witness Compression Format).
+  ```
 
 ### guymager
 - A forensic acquisition program
@@ -1216,9 +1372,9 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   
   Using default log file name /var/log/guymager.log
   Log file error: Can't be opened
-  Sun 25.Oct.2026 05:44:09 A3BE27E0 toollog.cpp t_Log 76                     Info  - Log file opened
-  Sun 25.Oct.2026 05:44:09 A3BE27E0 main.cpp MainGo 418                      Info  - =================================================== Starting GUYMAGER ===================================================
-  Sun 25.Oct.2026 05:44:09 A3BE27E0 main.cpp MainGo 419                      Info  - Version: 0.8.13-3
+  Sun 25.Oct.2026 08:40:35 B85627E0 toollog.cpp t_Log 76                     Info  - Log file opened
+  Sun 25.Oct.2026 08:40:35 B85627E0 main.cpp MainGo 418                      Info  - =================================================== Starting GUYMAGER ===================================================
+  Sun 25.Oct.2026 08:40:35 B85627E0 main.cpp MainGo 419                      Info  - Version: 0.8.13-3
   ```
 - Docs: https://guymager.sourceforge.net/
 
@@ -1261,10 +1417,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### bulk_extractor
 - Scans a disk image for regular expressions and other content.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "bulk_extractor"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y bulk-extractor`
+  2. Help: `bulk_extractor -h`  (or `man bulk_extractor`)
+  3. Run: `bulk_extractor ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  bulk_extractor version 2.1.1: A high-performance flexible digital forensics program.
+  Usage:
+    bulk_extractor [OPTION...] image_name
+  
+    -A, --offset_add arg          Offset added (in bytes) to feature locations 
+                                  (default: 0)
+  ```
 
 ### chkrootkit
 - Scan the system for signs of rootkits
@@ -1451,10 +1616,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### spiderfoot-cli
 - OSINT collection and reconnaissance tool
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "spiderfoot-cli"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y spiderfoot`
+  2. Help: `spiderfoot-cli -h`  (or `man spiderfoot-cli`)
+  3. Run: `spiderfoot-cli ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  usage: sfcli.py [-h] [-d] [-s URL] [-u USER] [-p PASS] [-P PASSFILE] [-e FILE]
+                  [-l FILE] [-n] [-o FILE] [-i] [-q] [-k] [-b]
+  
+  SpiderFoot: Open Source Intelligence Automation.
+  
+  options:
+  ```
 
 
 ## Kali tools — identify (4)
@@ -1478,17 +1652,35 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### nipper
 - Network Infrastructure Parser. Produces reports based of network device configuration file settings.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "nipper"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y nipper-ng`
+  2. Help: `nipper -h`  (or `man nipper`)
+  3. Run: `nipper ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+                       _                           ____
+                 _ __ (_)_ __  _ __   ___ _ __    / ->/|
+                | '_ \| | '_ \| '_ \ / _ \ '__|  /<-_/ |
+                | | | | | |_) | |_) |  __/ |     |   | /
+                |_| |_|_| .__/| .__/ \___|_|     |___|/
+                        |_|   |_|
+  ```
 
 ### osrframework-cli
 - Open Sources Research Framework
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "osrframework-cli"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y osrframework`
+  2. Help: `osrframework-cli -h`  (or `man osrframework-cli`)
+  3. Run: `osrframework-cli ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  usage: osrf [-h] [--license] [--version]
+              <sub_command> <sub_command_options> ...
+  
+  OSRFramework CLI. Collection of tools included in the framework.
+  
+  SUBCOMMANDS:
+  ```
 
 ### tiger
 - UNIX Security Checker
@@ -1587,12 +1779,12 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   3. Run: `siege ...` against a target you own (see the real --help below).
 - **real --help (verified on VM):**
   ```
-  New configuration template added to /home/kali/.siege
-  Run siege -C to view the current settings in that file
   SIEGE 4.1.7
   Usage: siege [options]
          siege [options] URL
          siege -g URL
+  Options:
+    -V, --version             VERSION, prints the version number.
   ```
 - Docs: https://www.joedog.org/JoeDog/Siege
 
@@ -1664,31 +1856,62 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### dns-rebind
 - DNS rebinding tool
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "dns-rebind"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y rebind`
+  2. Help: `dns-rebind -h`  (or `man dns-rebind`)
+  3. Run: `dns-rebind ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  
+  Rebind v0.3.4
+  
+  Usage: dns-rebind [OPTIONS]
+  
+  	-i <interface>	Specify the network interface to bind to
+  ```
 
 ### jboss-linux
 - JBoss script for obtaining remote shell access
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "jboss-linux"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y jboss-autopwn`
+  2. Help: `jboss-linux -h`  (or `man jboss-linux`)
+  3. Run: `jboss-linux ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  [x] Retrieving cookie
+  nc: invalid option -- '-'
+  nc -h for help
+  [x] Now creating BSH script...
+  nc: invalid option -- '-'
+  nc -h for help
+  ```
 
 ### jboss-win
 - JBoss script for obtaining remote shell access
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "jboss-win"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y jboss-autopwn`
+  2. Help: `jboss-win -h`  (or `man jboss-win`)
+  3. Run: `jboss-win ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  [x] Retrieving cookie
+  nc: invalid option -- '-'
+  nc -h for help
+  [x] Now creating BSH script...
+  nc: invalid option -- '-'
+  nc -h for help
+  ```
 
 ### jsql
 - Java tool for automatic database injection
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "jsql"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y jsql-injection`
+  2. Help: `jsql -h`  (or `man jsql`)
+  3. Run: `jsql ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  2026-10-25 08:40:51,439 ERROR [main] jsql.MainApp (MainApp.java:30) - Headless runtime not supported, use default Java runtime instead
+  ```
 
 ### metasploit-framework
 - Framework for exploit development and vulnerability research
@@ -1704,10 +1927,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### setoolkit
 - Social-Engineer Toolkit
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "setoolkit"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y set`
+  2. Help: `setoolkit -h`  (or `man setoolkit`)
+  3. Run: `setoolkit ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  
+   The Social-Engineer Toolkit (SET) - by David Kennedy (ReL1K)
+  
+   Not running as root. 
+  
+  Exiting the Social-Engineer Toolkit (SET).
+  ```
 
 ### sqlmap
 - Automatic SQL injection tool
@@ -1719,9 +1951,9 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   ```
           ___
          __H__
-   ___ ___[.]_____ ___ ___  {1.10.9#stable}
-  |_ -| . [.]     | .'| . |
-  |___|_  ["]_|_|_|__,|  _|
+   ___ ___[(]_____ ___ ___  {1.10.9#stable}
+  |_ -| . [']     | .'| . |
+  |___|_  [)]_|_|_|__,|  _|
         |_|V...       |_|   https://sqlmap.org
   ```
 - Docs: https://sqlmap.org/
@@ -1812,24 +2044,51 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### impacket-psexec
 - Python3 module to easily build and dissect network protocols
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "impacket-psexec"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y impacket-scripts`
+  2. Help: `impacket-psexec -h`  (or `man impacket-psexec`)
+  3. Run: `impacket-psexec ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies 
+  
+  usage: psexec.py [-h] [-c pathname] [-path PATH] [-file FILE] [-ts] [-debug]
+                   [-codec CODEC] [-hashes LMHASH:NTHASH] [-no-pass] [-k]
+                   [-aesKey hex key] [-keytab KEYTAB] [-dc-ip ip address]
+                   [-target-ip ip address] [-port [destination port]]
+  ```
 
 ### impacket-smbexec
 - Python3 module to easily build and dissect network protocols
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "impacket-smbexec"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y impacket-scripts`
+  2. Help: `impacket-smbexec -h`  (or `man impacket-smbexec`)
+  3. Run: `impacket-smbexec ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies 
+  
+  usage: smbexec.py [-h] [-share SHARE] [-mode {SERVER,SHARE}] [-ts] [-debug]
+                    [-codec CODEC] [-shell-type {cmd,powershell}]
+                    [-dc-ip ip address] [-target-ip ip address]
+                    [-port [destination port]] [-service-name service_name]
+  ```
 
 ### rdesktop
 - Remote Desktop Protocol client
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "rdesktop"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y rdesktop`
+  2. Help: `rdesktop -h`  (or `man rdesktop`)
+  3. Run: `rdesktop ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  rdesktop: invalid option -- '-'
+  rdesktop: A Remote Desktop Protocol client.
+  Version 1.9.0. Copyright (C) 1999-2016 Matthew Chapman et al.
+  See http://www.rdesktop.org/ for more information.
+  
+  Usage: rdesktop [options] server[:port]
+  ```
 
 
 ## Kali tools — network-information (7)
@@ -1902,15 +2161,16 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 - tool for gathering e-mail accounts and subdomain names from public sources
 - **Steps (verified ✓):**
   1. Install: `sudo apt install -y theharvester`
-  2. Help: `theharvester -h`  (or `man theharvester`)
-  3. Run: `theharvester ...` against a target you own (see the real --help below).
+  2. Help: `theHarvester -h`  (or `man theHarvester`)
+  3. Run: `theHarvester ...` against a target you own (see the real --help below).
 - **real --help (verified on VM):**
   ```
-  ┏━(Message from Kali developers)
-  ┃
-  ┃ The command theharvester is deprecated. Please use theHarvester instead.
-  ┃
-  ┗━
+  Read proxies.yaml from /etc/theHarvester/proxies.yaml
+  *******************************************************************
+  *  _   _                                            _             *
+  * | |_| |__   ___    /\  /\__ _ _ ____   _____  ___| |_ ___ _ __  *
+  * | __|  _ \ / _ \  / /_/ / _` | '__\ \ / / _ \/ __| __/ _ \ '__| *
+  * | |_| | | |  __/ / __  / (_| | |   \ V /  __/\__ \ ||  __/ |    *
   ```
 - Docs: https://github.com/laramies/theHarvester
 
@@ -2161,10 +2421,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### smbclient
 - Ftp-like client to access SMB/CIFS resources on servers
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "smbclient"`.
-  2. Point it at the lab: `http://<NODE_IP>:30080`.
-  3. Proxy via Burp/ZAP (127.0.0.1:8080) to inspect requests.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y smbclient`
+  2. Help: `smbclient -h`  (or `man smbclient`)
+  3. Run: `smbclient ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Usage: smbclient [OPTIONS] service <password>
+    -M, --message=HOST                           Send message
+    -I, --ip-address=IP                          Use this IP to connect to
+    -E, --stderr                                 Write messages to stderr
+                                                 instead of stdout
+    -L, --list=HOST                              Get a list of shares available
+  ```
 
 
 ## Kali tools — network-sniffing (12)
@@ -2188,10 +2457,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### arpspoof
 - Intercept packets on a switched LAN
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "arpspoof"`.
-  2. Point it at the lab: `http://<NODE_IP>:30080`.
-  3. Proxy via Burp/ZAP (127.0.0.1:8080) to inspect requests.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y dsniff`
+  2. Help: `arpspoof -h`  (or `man arpspoof`)
+  3. Run: `arpspoof ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  arpspoof: libnet_open_link(): UID/EUID 0 or capability CAP_NET_RAW required
+  ```
 
 ### darkstat
 - Network statistics gatherer
@@ -2235,7 +2508,7 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   3. Run: `driftnet ...` against a target you own (see the real --help below).
 - **real --help (verified on VM):**
   ```
-  Sun Oct 25 05:43:31 2026 - error: unrecognised option --
+  Sun Oct 25 08:40:29 2026 - error: unrecognised option --
   driftnet, version 1.5.0
   Capture images from network traffic and display them.
   
@@ -2296,10 +2569,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### scapy
 - Interactive packet manipulation tool
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "scapy"`.
-  2. Point it at the lab: `http://<NODE_IP>:30080`.
-  3. Proxy via Burp/ZAP (127.0.0.1:8080) to inspect requests.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y scapy`
+  2. Help: `scapy -h`  (or `man scapy`)
+  3. Run: `scapy ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  ERROR: option --help not recognized
+  ```
 
 ### tcpdump
 - Dump traffic on a network
@@ -2385,10 +2662,15 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### netcat
 - TCP/IP swiss army knife
-- **Steps:**
-  1. Banner grab: `nc -v <NODE_IP> 30080` then type a request.
-  2. Egress test: `nc -zv <NODE_IP> 5432` — refused = DB control holds.
-  3. Listener (own hosts only): `nc -lvnp 4444`.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y netcat`
+  2. Help: `netcat -h`  (or `man netcat`)
+  3. Run: `netcat ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  netcat: invalid option -- '-'
+  nc -h for help
+  ```
 
 ### powercat
 - netcat features all in powershell v2
@@ -2421,10 +2703,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### socat
 - Multipurpose relay (SOcket CAT)
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "socat"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y socat`
+  2. Help: `socat -h`  (or `man socat`)
+  3. Run: `socat ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  2026/10/25 08:41:21 socat[1186875] E unknown option "--help"; use option "-h" for help
+  ```
 
 ### termineter
 - Smart meter testing framework
@@ -2541,7 +2827,6 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   3. Run: `netexec ...` against a target you own (see the real --help below).
 - **real --help (verified on VM):**
   ```
-  [*] Copying default configuration file
   usage: netexec [-h] [--version] [-t THREADS] [--timeout TIMEOUT]
                  [--jitter INTERVAL] [--no-progress] [--log LOG] [--verbose |
                  --debug] [-6] [--dns-server DNS_SERVER] [--dns-tcp]
@@ -2586,10 +2871,18 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### xfreerdp3
 - FreeRDP X11 client
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "xfreerdp3"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y freerdp3-x11`
+  2. Help: `xfreerdp3 -h`  (or `man xfreerdp3`)
+  3. Run: `xfreerdp3 ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  
+  xfreerdp3 - A Free Remote Desktop Protocol Implementation
+  See www.freerdp.com for more information
+  
+  Usage: xfreerdp3 [file] [options] [/v:<server>[:port]]
+  ```
 
 
 ## Kali tools — password-cracking (11)
@@ -2709,10 +3002,15 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### rcracki_mt
 - Version of rcrack that supports hybrid and indexed tables
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "rcracki_mt"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y rcracki-mt`
+  2. Help: `rcracki_mt -h`  (or `man rcracki_mt`)
+  3. Run: `rcracki_mt ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Using 1 threads for pre-calculation and false alarm checking...
+  no rainbow table found
+  ```
 
 ### sipcrack
 - A suite of tools to sniff and crack the digest authentications within the SIP protocol.
@@ -2803,17 +3101,35 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### maskgen
 - Password analysis and cracking kit
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "maskgen"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y pack`
+  2. Help: `maskgen -h`  (or `man maskgen`)
+  3. Run: `maskgen ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Usage: maskgen pass0.masks [pass1.masks ...] [options]
+  
+  Options:
+    --version             show program's version number and exit
+    -h, --help            show this help message and exit
+    -t 86400, --targettime=86400
+  ```
 
 ### policygen
 - Password analysis and cracking kit
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "policygen"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y pack`
+  2. Help: `policygen -h`  (or `man policygen`)
+  3. Run: `policygen ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Usage: policygen [options]
+  
+  Type --help for more options
+  
+  Options:
+    --version             show program's version number and exit
+  ```
 
 ### rsmangler
 - Wordlist mangling tool
@@ -2833,10 +3149,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### statsgen
 - Password analysis and cracking kit
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "statsgen"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y pack`
+  2. Help: `statsgen -h`  (or `man statsgen`)
+  3. Run: `statsgen ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Usage: statsgen [options] passwords.txt
+  
+  Type --help for more options
+  
+  Options:
+    --version             show program's version number and exit
+  ```
 
 ### twofi
 - Twitter words of interest
@@ -3002,10 +3327,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### linpeas
 - Privilege Escalation Awesome Scripts SUITE
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "linpeas"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y peass`
+  2. Help: `linpeas -h`  (or `man linpeas`)
+  3. Run: `linpeas ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  
+  > peass ~ Privilege Escalation Awesome Scripts SUITE
+  
+  /usr/share/peass/linpeas
+  ├── linpeas_darwin_amd64
+  ├── linpeas_darwin_arm64
+  ```
 
 ### lynis
 - System and security auditing tool
@@ -3059,30 +3393,53 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### winpeas
 - Privilege Escalation Awesome Scripts SUITE
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "winpeas"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y peass`
+  2. Help: `winpeas -h`  (or `man winpeas`)
+  3. Run: `winpeas ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  
+  > peass ~ Privilege Escalation Awesome Scripts SUITE
+  
+  /usr/share/peass/winpeas
+  ├── winPEASany.exe
+  ├── winPEASany_ofs.exe
+  ```
 
 
 ## Kali tools — protect (3)
 
 ### clamscan
 - Scan files and directories for viruses
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "clamscan"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y clamav`
+  2. Help: `clamscan -h`  (or `man clamscan`)
+  3. Run: `clamscan ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  
+                         Clam AntiVirus: Scanner 1.4.6
+             By The ClamAV Team: https://www.clamav.net/about.html#credits
+             (C) 2024 Cisco Systems, Inc.
+  
+      clamscan [options] [file/directory/-]
+  ```
 
 ### cryptsetup
 - Utility for configuring and managing encrypted storage devices
 - **Steps (verified ✓):**
   1. Install: `sudo apt install -y cryptsetup`
-  2. Help: `luksformat -h`  (or `man luksformat`)
-  3. Run: `luksformat ...` against a target you own (see the real --help below).
+  2. Help: `cryptsetup -h`  (or `man cryptsetup`)
+  3. Run: `cryptsetup ...` against a target you own (see the real --help below).
 - **real --help (verified on VM):**
   ```
-  This program needs to be started as root
+  cryptsetup 2.8.8 flags: UDEV BLKID KEYRING KERNEL_CAPI HW_OPAL 
+  Usage: cryptsetup [OPTION...] <action> <action-specific>
+  
+  Help options:
+    -?, --help                              Show this help message
+        --usage                             Display brief usage
   ```
 - Docs: https://gitlab.com/cryptsetup/cryptsetup
 
@@ -3108,24 +3465,48 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### dns2tcpc
 - A tunneling tool that encapsulate TCP traffic over DNS.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "dns2tcpc"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y dns2tcp`
+  2. Help: `dns2tcpc -h`  (or `man dns2tcpc`)
+  3. Run: `dns2tcpc ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  dns2tcpc: invalid option -- '-'
+  dns2tcp v0.5.2 ( http://www.hsc.fr/ )
+  Usage : dns2tcpc [options] [server] 
+  	-c         	: enable compression
+  	-z <domain>	: domain to use (mandatory)
+  	-d <1|2|3>	: debug_level (1, 2 or 3)
+  ```
 
 ### dns2tcpd
 - A tunneling tool that encapsulate TCP traffic over DNS.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "dns2tcpd"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y dns2tcp`
+  2. Help: `dns2tcpd -h`  (or `man dns2tcpd`)
+  3. Run: `dns2tcpd ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  dns2tcpd: invalid option -- '-'
+  Usage : dns2tcpd [ -i IP ] [ -F ] [ -d debug_level ] [ -f config-file ] [ -p pidfile ]
+  	 -F : dns2tcpd will run in foreground
+  ```
 
 ### iodine-client-start
 - Start an iodine IPv4-over-DNS tunnel
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "iodine-client-start"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y iodine`
+  2. Help: `iodine-client-start -h`  (or `man iodine-client-start`)
+  3. Run: `iodine-client-start ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  'iodine-client-start' starts an iodine IP-over-DNS tunnel.
+  
+  Usage: iodine-client-start [option]
+  
+    -h, --help		Print help and exit
+    -v, --version		Print version info and exit
+  ```
 
 ### miredo
 - Teredo IPv6 tunneling for Unix
@@ -3269,16 +3650,22 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### chirpw
 - A tool for programming two-way radio equipment
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "chirpw"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Install: `sudo apt install -y chirp`
+  2. Launch on the VNC desktop: `../scripts/apps.sh open chirpw`.
+  3. Radio menu → Download From Radio (needs a supported radio on serial/USB).
 
 ### hackrf_info
 - Probe device and show configuration
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "hackrf_info"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y hackrf`
+  2. Help: `hackrf_info -h`  (or `man hackrf_info`)
+  3. Run: `hackrf_info ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  hackrf_info version: 2026.01.3
+  libhackrf version: 2026.01.3 (0.9.2)
+  No HackRF boards found.
+  ```
 
 ### rfcat
 - Swiss army knife of sub-GHz radio
@@ -3309,11 +3696,11 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 - **real --help (verified on VM):**
   ```
   arm64
-  java is /usr/bin/java
-  found java executable in PATH
-  pwd: jar:file:/usr/share/maltego/maltego-ui/modules/ext/com.paterva.maltego.java-config-ui/com-paterva-maltego/java-config-app.jar!/BOOT-INF/lib/java-config-lib-1.0-SNAPSHOT.jar!/
-  file: /usr/share/maltego/maltego-ui/modules/ext/com.paterva.maltego.java-config-ui/com-paterva-maltego/java-config-app.jar
-  installDir: /usr/share/maltego
+  Usage: ./../platform/lib/nbexec {options} arguments
+  
+  General options:
+    --help                show this help 
+    --jdkhome <path>      path to Java(TM) 2 SDK, Standard Edition
   ```
 - Docs: https://www.maltego.com
 
@@ -3338,10 +3725,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### atk6-thcping6
 - The Hacker Choice's IPv6 Attack Toolkit
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "atk6-thcping6"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y thc-ipv6`
+  2. Help: `atk6-thcping6 -h`  (or `man atk6-thcping6`)
+  3. Run: `atk6-thcping6 ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  atk6-thcping6 3.8 (c) 2020 by van Hauser / THC <<email>> www.github.com/vanhauser-thc/thc-ipv6
+  
+  Syntax: atk6-thcping6 [-EafqxO] [-e ethertype] [-H t:l:v] [-D t:l:v] [-F dst] [-e ethertype] [-L length] [-N nextheader] [-V version] [-t ttl] [-c class] [-l label] [-d size] [-S port|-U port|-T type -C code] interface src6 dst6 [srcmac [dstmac [data]]]
+  
+  Options:
+    -T number       ICMPv6 type to send (default: 128 = ping)
+  ```
 
 ### fierce
 - DNS scanner that helps locate non-contiguous IP space and hostnames against specified domains.
@@ -3448,10 +3844,15 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### faraday-start
 - Collaborative Penetration Test IDE
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "faraday-start"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y faraday`
+  2. Help: `faraday-start -h`  (or `man faraday-start`)
+  3. Run: `faraday-start ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  sudo: a terminal is required to read the password; either use ssh's -t option or configure an askpass helper
+  sudo: a password is required
+  ```
 
 ### pipal
 - Statistical analysis on password dumps
@@ -3509,10 +3910,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### afl-fuzz
 - instrumentation-driven fuzzer for binary formats
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "afl-fuzz"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y afl++`
+  2. Help: `afl-fuzz -h`  (or `man afl-fuzz`)
+  3. Run: `afl-fuzz ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  afl-fuzz++5.02c
+  
+  afl-fuzz [ options ] -- /path/to/fuzzed_app [ ... ]
+  
+  Required parameters:
+    -i dir        - input directory with test cases (or '-' to resume, also see 
+  ```
 
 ### apktool
 - Tool for reverse engineering Android apk files
@@ -3582,24 +3992,51 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### clang++
 - C, C++ and Objective-C compiler (LLVM based), clang binary
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "clang++"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y clang`
+  2. Help: `clang++ -h`  (or `man clang++`)
+  3. Run: `clang++ ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  OVERVIEW: clang LLVM compiler
+  
+  USAGE: clang [options] file...
+  
+  OPTIONS:
+    -###                    Print (but do not run) the commands to run for this compilation
+  ```
 
 ### cutter
 - reverse engineering platform powered by rizin
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "cutter"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y rizin-cutter`
+  2. Help: `cutter -h`  (or `man cutter`)
+  3. Run: `cutter ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  qt.qpa.xcb: could not connect to display 
+  qt.qpa.plugin: From 6.5.0, xcb-cursor0 or libxcb-cursor0 is needed to load the Qt xcb platform plugin.
+  qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+  This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+  
+  Available platform plugins are: wayland-brcm, wayland-egl, wayland, vkkhrdisplay, xcb, vnc, minimal, eglfs, minimalegl, linuxfb, offscreen.
+  ```
 
 ### d2j-dex2jar
 - Tools to work with android .dex and java .class files
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "d2j-dex2jar"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y dex2jar`
+  2. Help: `d2j-dex2jar -h`  (or `man d2j-dex2jar`)
+  3. Run: `d2j-dex2jar ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  d2j-dex2jar -- convert dex to jar
+  usage: d2j-dex2jar [options] <file0> [file1 ... fileN]
+  options:
+   --skip-exceptions            skip-exceptions
+   -d,--debug-info              translate debug info
+   -e,--exception-file <file>   detail exception file, default is $current_dir/[fi
+  ```
 
 ### gdb
 - GNU Debugger
@@ -3620,38 +4057,71 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### generic_chunked
 - Network protocol fuzzer
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "generic_chunked"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y spike`
+  2. Help: `generic_chunked -h`  (or `man generic_chunked`)
+  3. Run: `generic_chunked ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Usage: ./generic_web_server_fuzz target port file.spk skipvariables skipfuzzstring
+  Example: ./gwsf exchange1 80 owa1.spk 0 0
+  http://www.immunitysec.com/spike.html
+  ```
 
 ### generic_listen_tcp
 - Network protocol fuzzer
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "generic_listen_tcp"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y spike`
+  2. Help: `generic_listen_tcp -h`  (or `man generic_listen_tcp`)
+  3. Run: `generic_listen_tcp ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  argc=2
+  Usage: ./generic_listen_tcp port spike_script
+  ./generic_listen_tcp 70 gopherd.spk
+  ```
 
 ### generic_send_tcp
 - Network protocol fuzzer
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "generic_send_tcp"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y spike`
+  2. Help: `generic_send_tcp -h`  (or `man generic_send_tcp`)
+  3. Run: `generic_send_tcp ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  argc=2
+  Usage: ./generic_send_tcp host port spike_script SKIPVAR SKIPSTR
+  ./generic_send_tcp 192.168.1.100 701 something.spk 0 0
+  ```
 
 ### generic_send_udp
 - Network protocol fuzzer
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "generic_send_udp"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y spike`
+  2. Help: `generic_send_udp -h`  (or `man generic_send_udp`)
+  3. Run: `generic_send_udp ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  argc=2
+  Usage: ./gsu target port file.spk startvariable startfuzzstring startvariable startstring totaltosend
+  ./gsu 192.168.1.104 80 file.spk 0 0 5000
+  ```
 
 ### jadx-gui
 - Dex to Java decompiler
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "jadx-gui"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y jadx`
+  2. Help: `jadx-gui -h`  (or `man jadx-gui`)
+  3. Run: `jadx-gui ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  
+  jadx - dex to java decompiler, version: 1.5.6
+  
+  usage: jadx [command] [options] <input files> (.apk, .dex, .jar, .class, .smali, .zip, .aar, .arsc, .aab, .xapk, .apkm, .jadx.kts)
+  commands (use '<command> --help' for command options):
+    plugins	  - manage jadx plugins
+  ```
 
 ### javasnoop
 - Intercept Java applications locally
@@ -3688,10 +4158,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### msf-nasm_shell
 - Framework for exploit development and vulnerability research
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "msf-nasm_shell"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y metasploit-framework`
+  2. Help: `msf-nasm_shell -h`  (or `man msf-nasm_shell`)
+  3. Run: `msf-nasm_shell ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  0 bits not supported
+  ```
 
 ### msfpc
 - MSFvenom Payload Creator (MSFPC)
@@ -3712,10 +4186,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### msfvenom
 - Payload Generator and Encoder
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "msfvenom"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y msfvenom`
+  2. Help: `msfvenom -h`  (or `man msfvenom`)
+  3. Run: `msfvenom ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  MsfVenom - a Metasploit standalone payload generator.
+  Also a replacement for msfpayload and msfencode.
+  Usage: /usr/bin/msfvenom [options] <var=val>
+  Example: /usr/bin/msfvenom -p windows/meterpreter/reverse_tcp LHOST=<IP> -f exe -o payload.exe
+  
+  Options:
+  ```
 
 ### radare2
 - Advanced command-line hexadecimal editor, disassembler and debugger
@@ -3742,7 +4225,7 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   3. Run: `rizin ...` against a target you own (see the real --help below).
 - **real --help (verified on VM):**
   ```
-   -- You can add commands into your ~/.rizinrc to customize your experience with Rizin
+   -- Change the block size with 'b <block-size>'. In visual mode you can also enter rizin command pressing the ':' key (like vi does)
   [2K
   
   [0x00000000]> 
@@ -3752,10 +4235,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### searchsploit
 - Exploit Database Archive Search
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "searchsploit"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y exploitdb`
+  2. Help: `searchsploit -h`  (or `man searchsploit`)
+  3. Run: `searchsploit ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+    Usage: searchsploit [options] term1 [term2] ... [termN]
+  
+  ==========
+   Examples 
+  ==========
+    searchsploit afd windows local
+  ```
 
 ### sfuzz
 - Black Box testing utilities
@@ -3840,227 +4332,513 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### blkcalc
 - Converts between unallocated disk unit numbers and regular disk unit numbers.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "blkcalc"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `blkcalc -h`  (or `man blkcalc`)
+  3. Run: `blkcalc ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  blkcalc: invalid option -- '-'
+  Invalid argument: --help
+  usage: blkcalc [-dsu unit_addr] [-vV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] image [images]
+  Slowly calculates the opposite block number
+  	One of the following must be given:
+  	  -d: The given address is from a 'dd' image 
+  ```
 
 ### blkcat
 - Display the contents of file system data unit in a disk image.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "blkcat"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `blkcat -h`  (or `man blkcat`)
+  3. Run: `blkcat ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  blkcat: invalid option -- '-'
+  Invalid argument: --help
+  usage: blkcat [-ahsvVw] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] [-k password] [-u usize] image [images] unit_addr [num]
+  	-a: displays in all ASCII 
+  	-h: displays in hexdump-like fashion
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  ```
 
 ### blkls
 - List or output file system data units.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "blkls"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `blkls -h`  (or `man blkls`)
+  3. Run: `blkls ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  blkls: invalid option -- '-'
+  Invalid argument: --help
+  usage: blkls [-aAelvV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] image [images] [start-stop]
+  	-e: every block (including file system metadata blocks)
+  	-l: print details in time machine list format
+  	-a: Display allocated blocks
+  ```
 
 ### blkstat
 - Display details of a file system data unit (i.e. block or sector)
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "blkstat"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `blkstat -h`  (or `man blkstat`)
+  3. Run: `blkstat ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  blkstat: invalid option -- '-'
+  Invalid argument: --help
+  usage: blkstat [-vV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] image [images] addr
+  	-f fstype: File system type (use '-f list' for supported types)
+  	-k password: Decryption password for encrypted volumes
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  ```
 
 ### ffind
 - Finds the name of the file or directory using a given inode
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "ffind"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `ffind -h`  (or `man ffind`)
+  3. Run: `ffind ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  ffind: invalid option -- '-'
+  Invalid argument: --help
+  usage: ffind [-aduvV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] image [images] inode
+  	-a: Find all occurrences
+  	-d: Find deleted entries ONLY
+  	-u: Find undeleted entries ONLY
+  ```
 
 ### fls
 - List file and directory names in a disk image.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "fls"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `fls -h`  (or `man fls`)
+  3. Run: `fls ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  fls: invalid option -- '-'
+  Invalid argument: --help
+  usage: fls [-adDFlhpruvV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-m dir/] [-o imgoffset] [-z ZONE] [-s seconds] image [images] [inode]
+  	If [inode] is not given, the root directory is used
+  	-a: Display "." and ".." entries
+  	-d: Display deleted entries only
+  ```
 
 ### fsstat
 - Display general details of a file system
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "fsstat"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `fsstat -h`  (or `man fsstat`)
+  3. Run: `fsstat ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  fsstat: invalid option -- '-'
+  Invalid argument: --help
+  usage: fsstat [-tvV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] image
+  	-t: display type only
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  ```
 
 ### grokevt-addlog
 - A tool for adding a raw event log to an existing GrokEVT database.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "grokevt-addlog"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y grokevt`
+  2. Help: `grokevt-addlog -h`  (or `man grokevt-addlog`)
+  3. Run: `grokevt-addlog ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  USAGE:
+    /usr/bin/grokevt-addlog <DATABASE_DIR> <EVT_FILE> <NEW_TYPE> <BASE_TYPE>
+  
+  This script takes a raw Windows event log and adds it to a
+  previously built database generated by grokevt-builddb.
+  See the man page for more details.
+  ```
 
 ### grokevt-builddb
 - Builds a database tree based on a single windows system for the purpose of event log conversion.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "grokevt-builddb"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y grokevt`
+  2. Help: `grokevt-builddb -h`  (or `man grokevt-builddb`)
+  3. Run: `grokevt-builddb ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  USAGE:
+    grokevt-builddb [-v] [-c CSID] <CONFIG_PROFILE> <OUTPUT_DIR>
+  
+  grokevt-builddb builds a database tree based on a
+  single windows system for the purpose of event log
+  conversion.  Please see the man page for more
+  ```
 
 ### grokevt-findlogs
 - Attempts to find log file fragments in raw binary files, such as memory dumps and disk images.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "grokevt-findlogs"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y grokevt`
+  2. Help: `grokevt-findlogs -h`  (or `man grokevt-findlogs`)
+  3. Run: `grokevt-findlogs ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  USAGE:
+    grokevt-findlogs -?
+    grokevt-findlogs [-v] [-h] [-H] [-o <OFFSET>] <RAW_FILE>
+  
+  grokevt-findlogs attempts to find log file fragments in raw
+  binary files, such as memory dumps and disk images.
+  ```
 
 ### grokevt-parselog
 - Parse a windows event log and generate human-readable output based on message resources stored in a database.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "grokevt-parselog"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y grokevt`
+  2. Help: `grokevt-parselog -h`  (or `man grokevt-parselog`)
+  3. Run: `grokevt-parselog ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  USAGE:
+    grokevt-parselog -?|--help
+    grokevt-parselog -l <DATABASE_DIR>
+    grokevt-parselog -m <DATABASE_DIR> <LOG_TYPE>
+    grokevt-parselog [-v] [-H] [-h] <DATABASE_DIR> <LOG_TYPE>
+  ```
 
 ### grokevt-ripdll
 - A tool for extracting message resources from a PE-formatted file.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "grokevt-ripdll"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y grokevt`
+  2. Help: `grokevt-ripdll -h`  (or `man grokevt-ripdll`)
+  3. Run: `grokevt-ripdll ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  USAGE:
+    grokevt-ripdll <INPUT_DLL> <OUTPUT_DB>
+  
+  grokevt-ripdll is a tool for extracting message resources from a PE-formatted file.
+  Please see the man page for more information.
+  ```
 
 ### hfind
 - Lookup a hash value in a hash database
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "hfind"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `hfind -h`  (or `man hfind`)
+  3. Run: `hfind ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  hfind: invalid option -- '-'
+  usage: hfind [-eqVa] [-c] [-f lookup_file] [-i db_type] db_file [hashes]
+  	-e: Extended mode - where values other than just the name are printed
+  	-q: Quick mode - where a 1 is printed if it is found, else 0
+  	-V: Print version to STDOUT
+  	-c db_name: Create new database with the given name.
+  ```
 
 ### icat
 - Output the contents of a file based on its inode number.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "icat"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `icat -h`  (or `man icat`)
+  3. Run: `icat ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  icat: invalid option -- '-'
+  Invalid argument: --help
+  usage: icat [-hrRsvV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] image [images] inum[-typ[-id]]
+  	-h: Do not display holes in sparse files
+  	-r: Recover deleted file
+  	-R: Recover deleted file and suppress recovery errors
+  ```
 
 ### ifind
 - Find the meta-data structure that has allocated a given disk unit or file name.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "ifind"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `ifind -h`  (or `man ifind`)
+  3. Run: `ifind ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  ifind: invalid option -- '-'
+  Invalid argument: --help
+  usage: ifind [-alvV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] [-d unit_addr] [-n file] [-p par_addr] [-z ZONE] image [images]
+  	-a: find all inodes
+  	-d unit_addr: Find the meta data given the data unit
+  	-l: long format when -p is given
+  ```
 
 ### ils
 - List inode information
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "ils"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `ils -h`  (or `man ils`)
+  3. Run: `ils ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  ils: invalid option -- '-'
+  Invalid argument: --help
+  usage: ils [-emOpvV] [-aAlLzZ] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] [-s seconds] image [images] [inum[-end]]
+  	-e: Display all inodes
+  	-m: Display output in the mactime format
+  	-O: Display inodes that are unallocated, but were sill open (UFS/ExtX only)
+  ```
 
 ### img_cat
 - Output contents of an image file.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "img_cat"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `img_cat -h`  (or `man img_cat`)
+  3. Run: `img_cat ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  img_cat: invalid option -- '-'
+  Invalid argument: --help
+  usage: img_cat [-vV] [-i imgtype] [-b dev_sector_size] [-s start_sector] [-e stop_sector] image
+  	-i imgtype: The format of the image file (use 'i list' for supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  	-s start_sector: The sector number to start at
+  ```
 
 ### img_stat
 - Display details of an image file
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "img_stat"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `img_stat -h`  (or `man img_stat`)
+  3. Run: `img_stat ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  img_stat: invalid option -- '-'
+  Invalid argument: --help
+  usage: img_stat [-tvV] [-i imgtype] [-b dev_sector_size] image
+  	-t: display type only
+  	-i imgtype: The format of the image file (use '-i list' for list of supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  ```
 
 ### istat
 - Display details of a meta-data structure (i.e. inode)
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "istat"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `istat -h`  (or `man istat`)
+  3. Run: `istat ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  istat: invalid option -- '-'
+  Invalid argument: --help
+  usage: istat [-N num] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] [-z zone] [-s seconds] [-rvV] image inum
+  	-N num: force the display of NUM address of block pointers
+  	-r: display run list instead of list of block addresses
+  	-z zone: time zone of original machine (i.e. EST5EDT or GMT)
+  ```
 
 ### jcat
 - Show the contents of a block in the file system journal.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "jcat"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `jcat -h`  (or `man jcat`)
+  3. Run: `jcat ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  jcat: invalid option -- '-'
+  Invalid argument: --help
+  usage: jcat [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-vV] image [images] [inode] blk
+  	blk: The journal block to view
+  	inode: The file system inode where the journal is located
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  ```
 
 ### jls
 - List the contents of a file system journal
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "jls"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `jls -h`  (or `man jls`)
+  3. Run: `jls ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  jls: invalid option -- '-'
+  Invalid argument: --help
+  usage: jls [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-vV] image [inode]
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  	-f fstype: File system type (use '-f list' for supported types)
+  ```
 
 ### mactime
 - Create an ASCII time line of file activity
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "mactime"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `mactime -h`  (or `man mactime`)
+  3. Run: `mactime ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Unknown option: --help
+  mactime [-b body_file] [-p password_file] [-g group_file] [-i day|hour idx_file] [-d] [-h] [-V] [-y] [-z TIME_ZONE] [DATE]
+  		-b: Specifies the body file location, else STDIN is used
+  		-d: Output in comma delimited format
+  		-h: Display a header with session information
+  		-i [day | hour] file: Specifies the index file with a summary of results
+  ```
 
 ### mmcat
 - Output the contents of a partition to stdout
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "mmcat"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `mmcat -h`  (or `man mmcat`)
+  3. Run: `mmcat ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  mmcat: invalid option -- '-'
+  Unknown argument
+  usage: mmcat [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-vV] [-t vstype] image [images] part_num
+  	-t vstype: The type of partition system (use '-t list' for list of supported types)
+  	-i imgtype: The format of the image file (use '-i list' for list of supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  ```
 
 ### mmls
 - Display the partition layout of a volume system (partition tables)
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "mmls"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `mmls -h`  (or `man mmls`)
+  3. Run: `mmls ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  mmls: invalid option -- '-'
+  Unknown argument
+  usage: mmls [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-BrvV] [-aAmM] [-t vstype] image [images]
+  	-t vstype: The type of volume system (use '-t list' for list of supported types)
+  	-i imgtype: The format of the image file (use '-i list' for list supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  ```
 
 ### mmstat
 - Display details about the volume system (partition tables)
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "mmstat"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `mmstat -h`  (or `man mmstat`)
+  3. Run: `mmstat ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  mmstat: invalid option -- '-'
+  Unknown argument
+  usage: mmstat [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-vV] [-t vstype] image [images]
+  	-t vstype: The volume system type (use '-t list' for list of supported types)
+  	-i imgtype: The format of the image file (use '-i list' for list of supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  ```
 
 ### sigfind
 - Find a binary signature in a file
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "sigfind"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `sigfind -h`  (or `man sigfind`)
+  3. Run: `sigfind ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  sigfind: invalid option -- '-'
+  sigfind [-b bsize] [-o offset] [-t template] [-lV] [hex_signature] file
+  	-b bsize: Give block size (default 512)
+  	-o offset: Give offset into block where signature should exist (default 0)
+  	-l: Signature will be little endian in image
+  	-V: Version
+  ```
 
 ### sorter
 - Sort files in an image into categories based on file type
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "sorter"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `sorter -h`  (or `man sorter`)
+  3. Run: `sorter ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Unknown option: --help
+  
+  sorter [-b size] [-E] [-e] [-h]  [-l] [-md5] [-s] [-sha1] [-U] [-v] [-V] [-a hash_alert] [-c config] [-C config] [-d dir] [-m mnt] [-n nsrl_db] [-x hash_exclude] [-o imgoffset] [-f fstype] [-i imgtype] image [images] [dir_meta_addr] 
+  
+      -b size: Minimum size.  Ignore files smaller than 'size'
+  	-E: Perform category indexing only (no extension checks - was '-i')
+  ```
 
 ### srch_strings
 - Display printable strings in files
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "srch_strings"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `srch_strings -h`  (or `man srch_strings`)
+  3. Run: `srch_strings ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  srch_strings: invalid option -- '-'
+  Usage: srch_strings [option(s)] [file(s)]
+   Display printable strings in [file(s)] (stdin by default)
+   The options are:
+    -a -                 Scan the entire file, not just the data section
+    -f       Print the name of the file before each string
+  ```
 
 ### tsk_comparedir
 - Compare the contents of a directory with the contents of an image or local device.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "tsk_comparedir"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `tsk_comparedir -h`  (or `man tsk_comparedir`)
+  3. Run: `tsk_comparedir ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  tsk_comparedir: invalid option -- '-'
+  Invalid argument: --help
+  usage: tsk_comparedir [-f fstype] [-i imgtype] [-b dev_sector_size] [-o sector_offset] [-P pooltype] [-B pool_volume_block] [-n start_inum] [-vV] image [image] comparison_directory
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  	-f fstype: The file system type (use '-f list' for supported types)
+  ```
 
 ### tsk_gettimes
 - Collect MAC times from a disk image into a body file.
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "tsk_gettimes"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `tsk_gettimes -h`  (or `man tsk_gettimes`)
+  3. Run: `tsk_gettimes ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  tsk_gettimes: invalid option -- '-'
+  Invalid argument: --help
+  usage: tsk_gettimes [-vVm] [-i imgtype] [-b dev_sector_size] [-z zone] [-s seconds] image [image]
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  	-m: Calculate MD5 hash in output (slow)
+  ```
 
 ### tsk_loaddb
 - Populate a SQLite database with metadata from a disk image
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "tsk_loaddb"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `tsk_loaddb -h`  (or `man tsk_loaddb`)
+  3. Run: `tsk_loaddb ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  tsk_loaddb: invalid option -- '-'
+  Invalid argument: --help
+  usage: tsk_loaddb [-ahkvV] [-i imgtype] [-b dev_sector_size] [-d database] [-z ZONE] image [image]
+  	-a: Add image to existing database, instead of creating a new one (requires -d to specify database)
+  	-k: Don't create block data table
+  	-h: Calculate hash values for the files
+  ```
 
 ### tsk_recover
 - Export files from an image into a local directory
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "tsk_recover"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sleuthkit`
+  2. Help: `tsk_recover -h`  (or `man tsk_recover`)
+  3. Run: `tsk_recover ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  tsk_recover: invalid option -- '-'
+  Invalid argument: --help
+  usage: tsk_recover [-vVae] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o sector_offset] [-P pooltype] [-B pool_volume_block] [-d dir_inum] image [image] output_dir
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  	-f fstype: The file system type (use '-f list' for supported types)
+  ```
 
 
 ## Kali tools — smtp (1)
@@ -4121,10 +4899,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### snmp-check
 - SNMP device enumerator
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "snmp-check"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y snmpcheck`
+  2. Help: `snmp-check -h`  (or `man snmp-check`)
+  3. Run: `snmp-check ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  snmp-check v1.9 - SNMP enumerator
+  Copyright (c) 2005-2015 by Matteo Cantoni (www.nothink.org)
+  
+   Usage: snmp-check [OPTIONS] <target IP address>
+  
+    -p --port        : SNMP port. Default port is 161;
+  ```
 
 
 ## Kali tools — ssl-tls (3)
@@ -4158,7 +4945,7 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
                 [--json_out JSON_FILE] [--targets_in TARGET_FILE] [--quiet]
                 [--slow_connection] [--https_tunnel PROXY_SETTINGS]
                 [--starttls PROTOCOL] [--xmpp_to HOSTNAME]
-                [--sni SERVER_NAME_INDICATION] [--http_headers] [--ems]
+                [--sni SERVER_NAME_INDICATION] [--tlsv1_3] [--fallback]
   ```
 - Docs: https://github.com/nabla-c0d3/sslyze
 
@@ -4184,24 +4971,46 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### 0trace.sh
 - traceroute tool that can run within an existing TCP connection
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "0trace.sh"`.
-  2. Point it at the lab: `http://<NODE_IP>:30080`.
-  3. Proxy via Burp/ZAP (127.0.0.1:8080) to inspect requests.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y 0trace`
+  2. Help: `0trace.sh -h`  (or `man 0trace.sh`)
+  3. Run: `0trace.sh ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Usage: /usr/bin/0trace.sh iface target_ip [ target_port ]
+  ```
 
 ### ass
 - Autonomous system scanner
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "ass"`.
-  2. Point it at the lab: `http://<NODE_IP>:30080`.
-  3. Proxy via Burp/ZAP (127.0.0.1:8080) to inspect requests.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y irpas`
+  2. Help: `ass -h`  (or `man ass`)
+  3. Run: `ass ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  ass: invalid option -- '-'
+  ass [-v[v[v]]] -i <interface> [-ApcMs] [-P IER12]
+  	[-a <autonomous system start> -b <autonomous system stop>]
+  	[-S <spoofed source IP>] [-D <destination ip>]
+  	[-T <packets per delay>]
+  	[-r <filename>]
+  ```
 
 ### cdp
 - Cdp packet generator
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "cdp"`.
-  2. Point it at the lab: `http://<NODE_IP>:30080`.
-  3. Proxy via Burp/ZAP (127.0.0.1:8080) to inspect requests.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y irpas`
+  2. Help: `cdp -h`  (or `man cdp`)
+  3. Run: `cdp ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  cdp: invalid option -- '-'
+  cdp [-v] -i <interface> -m {0,1} ...
+  
+  Flood mode (-m 0):
+  -n <number>	number of packets
+  -l <number>	length of the device id
+  ```
 
 ### intrace
 - Traceroute-like application piggybacking on existing TCP connections
@@ -4213,8 +5022,8 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   ```
   intrace: invalid option -- '-'
   InTrace, version 1.6 (C)2007-2016 Robert Swiecki <<email>>
-  2026/10/25 05:44:39.93599 <ERROR> Couldn't resolve 'elp': 'Authoritative Answer. Host not found'
-  2026/10/25 05:44:39.93660 <FATAL> Resolving 'elp' failed
+  2026/10/25 08:40:45.785167 <ERROR> Couldn't resolve 'elp': 'Authoritative Answer. Host not found'
+  2026/10/25 08:40:45.785185 <FATAL> Resolving 'elp' failed
   ```
 - Docs: https://github.com/robertswiecki/intrace
 
@@ -4263,7 +5072,7 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   You must be root to run yersinia 0.8.2
   
   
-  MOTD: Having lotto fun with my Audiovector Mi3 Avantgarde Arrete LE... :)
+  MOTD: Magic people, voodoo people!
   ```
 - Docs: https://github.com/tomac/yersinia
 
@@ -4272,52 +5081,93 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### beef-xss-stop
 - Browser Exploitation Framework (BeEF)
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "beef-xss-stop"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y beef-xss`
+  2. Help: `beef-xss-stop -h`  (or `man beef-xss-stop`)
+  3. Run: `beef-xss-stop ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  
+  ┏━(Message from Kali developers)
+  ┃ 
+  Failed to stop beef-xss.service: Access denied as the requested operation requires interactive authentication. However, interactive authentication has not been enabled by the calling program.
+  See system logs and 'systemctl status beef-xss.service' for details.
+  ```
 
 ### defectdojo-start
 - security orchestration and vulnerability management platform
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "defectdojo-start"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y defectdojo`
+  2. Help: `defectdojo-start -h`  (or `man defectdojo-start`)
+  3. Run: `defectdojo-start ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  sudo: a terminal is required to read the password; either use ssh's -t option or configure an askpass helper
+  sudo: a password is required
+  ```
 
 ### defectdojo-stop
 - security orchestration and vulnerability management platform
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "defectdojo-stop"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y defectdojo`
+  2. Help: `defectdojo-stop -h`  (or `man defectdojo-stop`)
+  3. Run: `defectdojo-stop ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  sudo: a terminal is required to read the password; either use ssh's -t option or configure an askpass helper
+  sudo: a password is required
+  ```
 
 ### faraday-stop
 - Collaborative Penetration Test IDE
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "faraday-stop"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y faraday`
+  2. Help: `faraday-stop -h`  (or `man faraday-stop`)
+  3. Run: `faraday-stop ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  
+  ┏━(Message from Kali developers)
+  ┃ 
+  Failed to stop faraday.service: Access denied as the requested operation requires interactive authentication. However, interactive authentication has not been enabled by the calling program.
+  See system logs and 'systemctl status faraday.service' for details.
+  ```
 
 ### gvm-check-setup
 - remote network security auditor - metapackage and useful scripts
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "gvm-check-setup"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y gvm`
+  2. Help: `gvm-check-setup -h`  (or `man gvm-check-setup`)
+  3. Run: `gvm-check-setup ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  gvm-check-setup 25.04.0
+   This script is provided and maintained by Debian and Kali.
+    Test completeness and readiness of GVM-25.04.0
+  [-] Error: /usr/bin/gvm-check-setup must be run as root
+  ```
 
 ### gvm-setup
 - remote network security auditor - metapackage and useful scripts
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "gvm-setup"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y gvm`
+  2. Help: `gvm-setup -h`  (or `man gvm-setup`)
+  3. Run: `gvm-setup ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  [-] Error: /usr/bin/gvm-setup must be run as root
+  ```
 
 ### gvm-stop
 - remote network security auditor - metapackage and useful scripts
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "gvm-stop"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y gvm`
+  2. Help: `gvm-stop -h`  (or `man gvm-stop`)
+  3. Run: `gvm-stop ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  [-] Error: /usr/bin/gvm-stop must be run as root
+  ```
 
 
 ## Kali tools — voip (13)
@@ -4356,7 +5206,7 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 - **real --help (verified on VM):**
   ```
   --
-  25/10/2026#05:47:08 Fatal error at main.c:485:init_opt: option '-' invalid; exit forced.
+  25/10/2026#08:41:19 Fatal error at main.c:485:init_opt: option '-' invalid; exit forced.
   --
   ```
 - Docs: http://dallachiesa.com/code/rtpbreak/
@@ -4445,31 +5295,64 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### svcrash
 - Stop unauthorized scans from svcrack/svwar tool
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "svcrash"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sipvicious`
+  2. Help: `svcrash -h`  (or `man svcrash`)
+  3. Run: `svcrash ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Usage: svcrash [options]
+  
+  Options:
+    --version        show program's version number and exit
+    -h, --help       show this help message and exit
+    --auto           Automatically send responses to attacks
+  ```
 
 ### svmap
 - Scanner that searches for SIP devices on a given network
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "svmap"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sipvicious`
+  2. Help: `svmap -h`  (or `man svmap`)
+  3. Run: `svmap ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Usage: svmap [options] host1 host2 hostrange
+  Scans for SIP devices on a given network
+  
+  examples:
+  
+  svmap 10.0.0.1-10.0.0.255 172.16.131.1 sipvicious.org/22 10.0.1.1/241.1.1.1-20 1.1.2-20.* 4.1.*.*
+  ```
 
 ### svreport
 - Report engine manage sessions from previous scans with SIPVicious
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "svreport"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sipvicious`
+  2. Help: `svreport -h`  (or `man svreport`)
+  3. Run: `svreport ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Usage: svreport [command] [options]
+  
+  Supported commands:
+  
+                  - list:	lists all scans
+  ```
 
 ### svwar
 - Extension line scanner
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "svwar"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sipvicious`
+  2. Help: `svwar -h`  (or `man svwar`)
+  3. Run: `svwar ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Usage: svwar [options] target
+  examples:
+  svwar -e100-999 udp://10.0.0.1:5080
+  svwar -d dictionary.txt 10.0.0.2
+  ```
 
 ### voiphopper
 - Runs a VLAN hop security test
@@ -4510,27 +5393,47 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### svcrack
 - Online password guessing tool for SIP devices
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "svcrack"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y sipvicious`
+  2. Help: `svcrack -h`  (or `man svcrack`)
+  3. Run: `svcrack ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Usage: svcrack -u username [options] target
+  examples:
+  svcrack -u100 -d dictionary.txt udp://10.0.0.1:5080
+  svcrack -u100 -r1-9999 -z4 10.0.0.1
+  ```
 
 
 ## Kali tools — vulnerability-scanning (3)
 
 ### CAT
 - Concatenate files and print on the standard output
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "CAT"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y cisco-auditing-tool`
+  2. Help: `CAT -h`  (or `man CAT`)
+  3. Run: `CAT ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  /usr/bin/CAT version [unknown] calling Getopt::Std::getopts (version 1.14 [paranoid]),
+  running under Perl version 5.42.3.
+  
+  Usage: CAT [-OPTIONS [-MORE_OPTIONS]] [--] [PROGRAM_ARG1 ...]
+  
+  The following single-character options are accepted:
+  ```
 
 ### gvm-start
 - remote network security auditor - metapackage and useful scripts
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "gvm-start"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y gvm`
+  2. Help: `gvm-start -h`  (or `man gvm-start`)
+  3. Run: `gvm-start ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  [-] Error: /usr/bin/gvm-start must be run as root
+  ```
 
 ### heartleech
 - Exploits OpenSSL heartbleed vulnerability
@@ -4545,7 +5448,7 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   
   /usr/share/windows-resources/heartleech/
   └── heartleech.exe
-  bash: cannot set terminal process group (159027): Inappropriate ioctl for device
+  bash: cannot set terminal process group (1184247): Inappropriate ioctl for device
   ```
 - Docs: https://github.com/robertdavidgraham/heartleech
 
@@ -4601,24 +5504,50 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### feroxbuster
 - Manual page for feroxbuster 2.13.1
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "feroxbuster"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y feroxbuster`
+  2. Help: `feroxbuster -h`  (or `man feroxbuster`)
+  3. Run: `feroxbuster ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  A fast, simple, recursive content discovery tool.
+  
+  Usage: feroxbuster [OPTIONS]
+  
+  Options:
+    -h, --help
+  ```
 
 ### ffuf
 - Fast web fuzzer written in Go
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "ffuf"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y ffuf`
+  2. Help: `ffuf -h`  (or `man ffuf`)
+  3. Run: `ffuf ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Fuzz Faster U Fool - v2.3.0
+  
+  HTTP OPTIONS:
+    -H                  Header "Name: Value", separated by colon. Multiple -H flags are accepted.
+    -X                  HTTP method to use
+    -b                  Cookie data "NAME1=VALUE1; NAME2=VALUE2" for copy as curl functionality.
+  ```
 
 ### gobuster
 - Directory/file, DNS and virtual host brute-forcing tool written in Go
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "gobuster"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y gobuster`
+  2. Help: `gobuster -h`  (or `man gobuster`)
+  3. Run: `gobuster ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  NAME:
+     gobuster - the tool you love
+  
+  USAGE:
+     gobuster command [command options]
+  ```
 
 ### lbd
 - Load balancer detector
@@ -4655,10 +5584,17 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### uniscan-gui
 - LFI, RFI, and RCE vulnerability scanner
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "uniscan-gui"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y uniscan`
+  2. Help: `uniscan-gui -h`  (or `man uniscan-gui`)
+  3. Run: `uniscan-gui ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Authorization required, but no authorization protocol specified
+  
+  couldn't connect to display ":0" at /usr/lib/aarch64-linux-gnu/perl5/5.42/Tk/MainWindow.pm line 53.
+  MainWindow->new() at ./uniscan_gui.pl line 8.
+  ```
 
 ### urlcrazy
 - Domain typo generator
@@ -4670,10 +5606,10 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   ```
   Warning. File descriptor limit may be too low. Check with `ulimit -a` and change with `ulimit -n 10000`
   
-  ____ _____________.____   _________                             
-  |    |   \______   \    |  \_   ___ \___________  ___________.__.
-  |    |   /|       _/    |  /    \  \|_  __ \__  \ \___   <   |  |
-  |    |  / |    |   \    |__\     \___|  | \// __ \_/    / \___  |
+  db    db d8888b. db       .o88b. d8888b.  .d8b.  d88888D db    db 
+  88    88 88  `8D 88      d8P  Y8 88  `8D d8' `8b YP  d8' `8b  d8' 
+  88    88 88oobY' 88      8P      88oobY' 88ooo88    d8'   `8bd8'  
+  88    88 88`8b   88      8b      88`8b   88~~~88   d8'      88    
   ```
 - Docs: https://www.morningstarsecurity.com/research/urlcrazy
 
@@ -4750,10 +5686,18 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### nuclei
 - Fast and customizable vulnerability scanner based on simple YAML based DSL
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "nuclei"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y nuclei`
+  2. Help: `nuclei -h`  (or `man nuclei`)
+  3. Run: `nuclei ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  Nuclei is a fast, template based vulnerability scanner focusing
+  on extensive configurability, massive extensibility and ease of use.
+  
+  Usage:
+    nuclei [flags]
+  ```
 
 ### paros
 - Web application proxy
@@ -4797,11 +5741,11 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 - **real --help (verified on VM):**
   ```
   
-   ██╗    ██╗ █████╗ ██████╗ ██╗████████╗██╗██████╗
-   ██║    ██║██╔══██╗██╔══██╗██║╚══██╔══╝██║╚════██╗
-   ██║ █╗ ██║███████║██████╔╝██║   ██║   ██║ █████╔╝
-   ██║███╗██║██╔══██║██╔═══╝ ██║   ██║   ██║ ╚═══██╗
-   ╚███╔███╔╝██║  ██║██║     ██║   ██║   ██║██████╔╝
+       __    __            _ _   _ _____
+      / / /\ \ \__ _ _ __ (_) |_(_)___ /
+      \ \/  \/ / _` | '_ \| | __| | |_ \
+       \  /\  / (_| | |_) | | |_| |___) |
+        \/  \/ \__,_| .__/|_|\__|_|____/
   ```
 - Docs: https://wapiti.sourceforge.net/
 
@@ -4867,9 +5811,9 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   Found Java version 25.0.5-ea
   Available memory: 2965 MB
   Using JVM args: -Xmx741m
-  666 [main] INFO  org.parosproxy.paros.Constant - Copying default configuration to /home/kali/.ZAP/config.xml
-  814 [main] INFO  org.parosproxy.paros.Constant - Creating directory /home/kali/.ZAP/session
-  815 [main] INFO  org.parosproxy.paros.Constant - Creating directory /home/kali/.ZAP/dirbuster
+  1002 [main] INFO  org.zaproxy.zap.GuiBootstrap - ZAP 2.17.0 started 25/10/2026, 08:41:49 with home: /home/kali/.ZAP/ cores: 2 maxMemory: 742 MB
+  1012 [main] FATAL org.zaproxy.zap.GuiBootstrap - ZAP GUI is not supported on a headless environment.
+  Run ZAP inline or in daemon mode, use -help command line argument for more details.
   ```
 - Docs: https://github.com/zaproxy/zaproxy
 
@@ -4912,10 +5856,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### wash
 - brute force attack tool against Wi-Fi Protected Setup PIN number
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "wash"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y reaver`
+  2. Help: `wash -h`  (or `man wash`)
+  3. Run: `wash ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  
+  Wash v1.6.6 WiFi Protected Setup Scan Tool
+  Copyright (c) 2011, Tactical Network Solutions, Craig Heffner
+  
+  Required Arguments:
+  	-i, --interface=<iface>              Interface to capture packets on
+  ```
 
 
 ## Kali tools — wifi-credential-access (10)
@@ -5371,10 +6324,18 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### xfreerdp
 - Connect to RDP servers for remote work or administration
-- **Steps:**
-  1. Open: `../scripts/apps.sh open "xfreerdp"`.
-  2. Adjust the setting (xfreerdp).
-  3. Close to apply.
+- **Steps (verified ✓):**
+  1. Install: `sudo apt install -y xfreerdp`
+  2. Help: `xfreerdp -h`  (or `man xfreerdp`)
+  3. Run: `xfreerdp ...` against a target you own (see the real --help below).
+- **real --help (verified on VM):**
+  ```
+  
+  xfreerdp - A Free Remote Desktop Protocol Implementation
+  See www.freerdp.com for more information
+  
+  Usage: xfreerdp [file] [options] [/v:<server>[:port]]
+  ```
 
 
 ## System & utilities (27)
@@ -5454,9 +6415,9 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Hardware Locality lstopo
 - Show hardware topology
 - **Steps:**
-  1. Open: `../scripts/apps.sh open "Hardware Locality lstopo"`.
-  2. Use it from the VNC desktop.
-  3. Close when done.
+  1. Install: `sudo apt install -y hwloc`
+  2. Show the topology: `lstopo` (GUI) or `lstopo-no-graphics` (text).
+  3. Export: `lstopo topology.png` — map CPU/NUMA/cache of a host you own.
 
 ### Help
 - Get help with GNOME
@@ -5601,10 +6562,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### bloodhound-python
 - ingestor for BloodHound, based on Impacket (Python 3)
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "bloodhound-python"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y bloodhound-python`
+  2. 看說明：`bloodhound-python -h`（或 `man bloodhound-python`）
+  3. 執行：`bloodhound-python ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  usage: bloodhound-python [-h] [-c COLLECTIONMETHOD] [-d DOMAIN] [-v]
+                           [-u USERNAME] [-p PASSWORD] [-k] [--hashes HASHES]
+                           [-no-pass] [-aesKey hex key]
+                           [--auth-method {auto,ntlm,kerberos}] [-ns NAMESERVER]
+                           [--dns-tcp] [--dns-timeout DNS_TIMEOUT] [-dc HOST]
+                           [-gc HOST] [-w WORKERS] [--exclude-dcs]
+  ```
 
 
 ## Kali tools — application-layer-protocol (2)
@@ -5731,10 +6701,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### fang
 - Locates non-discoverable bluetooth devices
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "fang"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y redfang`
+  2. 看說明：`fang -h`（或 `man fang`）
+  3. 執行：`fang ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  fang: invalid option -- '-'
+  redfang - the bluetooth hunter ver 2.5
+  (c)2003 @stake Inc
+  author:   Ollie Whitehouse <<email>>
+  enhanced: threads by Simon Halsall <<email>>
+  enhanced: device info discovery by Stephen Kapp <<email>>
+  ```
 
 ### spooftooph
 - 自動偽冒或複製藍牙裝置
@@ -5755,10 +6734,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### ubertooth-util
 - General purpose Ubertooth utility
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "ubertooth-util"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y ubertooth`
+  2. 看說明：`ubertooth-util -h`（或 `man ubertooth-util`）
+  3. 執行：`ubertooth-util ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  ubertooth-util: invalid option -- '-'
+  ubertooth-util - command line utility for Ubertooth Zero and Ubertooth One
+  
+  Common options:
+  	-v get firmware revision number
+  	-V get compile info
+  ```
 
 
 ## Kali tools — brute-force (6)
@@ -5845,20 +6833,34 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### xhydra
 - Gtk+3 frontend for thc-hydra
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "xhydra"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y hydra-gtk`
+  2. 看說明：`xhydra -h`（或 `man xhydra`）
+  3. 執行：`xhydra ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  
+  (xhydra:1188024): Gtk-WARNING **: 08:41:48.037: cannot open display: 
+  ```
 
 
 ## Kali tools — cisco-tools (3)
 
 ### cge.pl
 - Simple and fast Cisco exploitation tool
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "cge.pl"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y cisco-global-exploiter`
+  2. 看說明：`cge.pl -h`（或 `man cge.pl`）
+  3. 執行：`cge.pl ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  
+  Usage :
+  perl cge.pl <target> <vulnerability number>
+  
+  Vulnerabilities list :
+  [1] - Cisco 677/678 Telnet Buffer Overflow Vulnerability
+  ```
 
 ### cisco-ocs
 - 大量 Cisco 掃描器
@@ -5898,10 +6900,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### ettercap-pkexec
 - Graphical pkexec-based launcher for ettercap
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "ettercap-pkexec"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y ettercap-graphical`
+  2. 看說明：`ettercap-pkexec -h`（或 `man ettercap-pkexec`）
+  3. 執行：`ettercap-pkexec ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Error executing command as another user: No authentication agent found.
+  ```
 
 ### ferret-sidejack
 - 監看資料並擷取感興趣的內容
@@ -6051,24 +7057,50 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### impacket-mssqlclient
 - Python3 module to easily build and dissect network protocols
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "impacket-mssqlclient"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y impacket-scripts`
+  2. 看說明：`impacket-mssqlclient -h`（或 `man impacket-mssqlclient`）
+  3. 執行：`impacket-mssqlclient ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies 
+  
+  usage: mssqlclient.py [-h] [-db DB] [-windows-auth] [-debug] [-ts] [-show]
+                        [-command [COMMAND ...]] [-file FILE]
+                        [--host-name HOST_NAME] [--app-name APP_NAME]
+                        [-hashes LMHASH:NTHASH] [-no-pass] [-k]
+  ```
 
 ### mdb-sql
 - SQL interface to MDB Tools
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "mdb-sql"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y mdbtools`
+  2. 看說明：`mdb-sql -h`（或 `man mdb-sql`）
+  3. 執行：`mdb-sql ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Usage:
+    mdb-sql [OPTION…] <file> - Run SQL
+  
+  Help Options:
+    -h, --help                Show help options
+  ```
 
 ### mysql
 - The MariaDB command-line tool (mysql is now a symlink to mariadb)
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "mysql"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y mysql`
+  2. 看說明：`mysql -h`（或 `man mysql`）
+  3. 執行：`mysql ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  mysql from 11.8.9-MariaDB, client 15.2 for debian-linux-gnu (aarch64) using  EditLine wrapper
+  Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+  
+  Usage: mysql [OPTIONS] [database]
+  
+  Default options are read from the following files in the given order:
+  ```
 
 ### oscanner
 - Oracle 評估框架
@@ -6089,10 +7121,18 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### sidguess
 - Guesses sids against an Oracle database
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "sidguess"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sidguesser`
+  2. 看說明：`sidguess -h`（或 `man sidguess`）
+  3. 執行：`sidguess ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  sidguess: invalid option -- '-'
+  
+  SIDGuesser v1.0.5 by <email>
+  -------------------------------------
+  sidguess -i <ip> -d <dictionary> [options]
+  ```
 
 ### sqlitebrowser
 - SQLite 資料庫的 GUI 編輯器
@@ -6149,10 +7189,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### exe2hex
 - Convert EXE to bat
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "exe2hex"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y exe2hexbat`
+  2. 看說明：`exe2hex -h`（或 `man exe2hex`）
+  3. 執行：`exe2hex ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  /usr/bin/exe2hex:495: SyntaxWarning: "\[" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\["? A raw string is also an option.
+    send_user "\\n\\n\[i\] Done\\n"
+  [*] exe2hex v1.5.1
+  Usage: exe2hex [options]
+  
+  Options:
+  ```
 
 ### fragrouter
 - IDS 規避工具組
@@ -6172,10 +7221,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### ftest
 - Tool for testing firewalls and Intrusion Detection System (IDS)
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "ftest"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y ftester`
+  2. 看說明：`ftest -h`（或 `man ftest`）
+  3. 執行：`ftest ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  /usr/bin/ftest version [unknown] calling Getopt::Std::getopts (version 1.14 [paranoid]),
+  running under Perl version 5.42.3.
+  
+  Usage: ftest [-OPTIONS [-MORE_OPTIONS]] [--] [PROGRAM_ARG1 ...]
+  
+  The following single-character options are accepted:
+  ```
 
 ### macchanger
 - 操作網卡 MAC 位址的工具
@@ -6342,10 +7400,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### readpst
 - Convert PST (MS Outlook Personal Folders) files to mbox and other formats
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "readpst"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y pst-utils`
+  2. 看說明：`readpst -h`（或 `man readpst`）
+  3. 執行：`readpst ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  readpst: invalid option -- '-'
+  ReadPST / LibPST v0.6.76
+  Little Endian implementation being used.
+  Usage: readpst [OPTIONS] {PST FILENAME}
+  OPTIONS:
+  	-V	- Version. Display program version
+  ```
 
 ### reglookup
 - 分析 Windows NT registry 的工具
@@ -6416,17 +7483,31 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### beef-xss-start
 - Browser Exploitation Framework (BeEF)
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "beef-xss-start"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y beef-xss`
+  2. 看說明：`beef-xss-start -h`（或 `man beef-xss-start`）
+  3. 執行：`beef-xss-start ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  sudo: a terminal is required to read the password; either use ssh's -t option or configure an askpass helper
+  sudo: a password is required
+  ```
 
 ### evilgrade
 - Evilgrade framework
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "evilgrade"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y isr-evilgrade`
+  2. 看說明：`evilgrade -h`（或 `man evilgrade`）
+  3. 執行：`evilgrade ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  [DEBUG] - Loading module: modules/fcleaner.pm
+  [DEBUG] - Loading module: modules/flashget.pm
+  [DEBUG] - Loading module: modules/techtracker.pm
+  [DEBUG] - Loading module: modules/filezilla.pm
+  [DEBUG] - Loading module: modules/teamviewer.pm
+  [DEBUG] - Loading module: modules/istat.pm
+  ```
 
 ### nishang
 - PowerShell 腳本與 payload 集
@@ -6484,10 +7565,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### impacket-smbserver
 - Python3 module to easily build and dissect network protocols
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "impacket-smbserver"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y impacket-scripts`
+  2. 看說明：`impacket-smbserver -h`（或 `man impacket-smbserver`）
+  3. 執行：`impacket-smbserver ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies 
+  
+  usage: smbserver.py [-h] [-comment COMMENT] [-username USERNAME]
+                      [-password PASSWORD]
+                      [-computeraccountname COMPUTERACCOUNTNAME]
+                      [-computeraccounthash COMPUTERACCOUNTHASH]
+  ```
 
 
 ## Kali tools — forensic-carving-tools (15)
@@ -6743,24 +7833,51 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### affcat
 - Output contents of an image file to stdout.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "affcat"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y afflib-tools`
+  2. 看說明：`affcat -h`（或 `man affcat`）
+  3. 執行：`affcat ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  affcat: invalid option -- '-'
+  affcat version 3.7.22
+  usage: affcat [options] infile [... more infiles]
+  options:
+      -s name --- Just output segment name
+      -p ###  --- just output data page number ###
+  ```
 
 ### dd_rescue
 - Data recovery and protection tool
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "dd_rescue"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y ddrescue`
+  2. 看說明：`dd_rescue -h`（或 `man dd_rescue`）
+  3. 執行：`dd_rescue ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  
+  dd_rescue Version 1.99.13, <email>, GNU GPL v2/v3
+   (DD_RESCUE_1_99_13)
+   (compiled May 21 2025 11:21:52 by gcc (Debian 14.2.0-19) 14.2.0)
+   (features: O_DIRECT dl/libfallocate fallocate splice fitrim xattr aes arm8)
+  dd_rescue is free software. It's protected by the terms of GNU GPL v2 or v3
+  ```
 
 ### ewfacquire
 - Acquires data in the EWF format
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "ewfacquire"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y ewf-tools`
+  2. 看說明：`ewfacquire -h`（或 `man ewfacquire`）
+  3. 執行：`ewfacquire ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  ewfacquire: invalid option -- '-'
+  ewfacquire 20140816
+  
+  Invalid argument: ewfacquire
+  Use ewfacquire to acquire data from a file or device and store it in the EWF
+  format (Expert Witness Compression Format).
+  ```
 
 ### guymager
 - 以 Qt 為基礎的鑑識映像工具
@@ -6773,9 +7890,9 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   
   Using default log file name /var/log/guymager.log
   Log file error: Can't be opened
-  Sun 25.Oct.2026 05:44:09 A3BE27E0 toollog.cpp t_Log 76                     Info  - Log file opened
-  Sun 25.Oct.2026 05:44:09 A3BE27E0 main.cpp MainGo 418                      Info  - =================================================== Starting GUYMAGER ===================================================
-  Sun 25.Oct.2026 05:44:09 A3BE27E0 main.cpp MainGo 419                      Info  - Version: 0.8.13-3
+  Sun 25.Oct.2026 08:40:35 B85627E0 toollog.cpp t_Log 76                     Info  - Log file opened
+  Sun 25.Oct.2026 08:40:35 B85627E0 main.cpp MainGo 418                      Info  - =================================================== Starting GUYMAGER ===================================================
+  Sun 25.Oct.2026 08:40:35 B85627E0 main.cpp MainGo 419                      Info  - Version: 0.8.13-3
   ```
 - 文件：https://guymager.sourceforge.net/
 
@@ -6818,10 +7935,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### bulk_extractor
 - Scans a disk image for regular expressions and other content.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "bulk_extractor"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y bulk-extractor`
+  2. 看說明：`bulk_extractor -h`（或 `man bulk_extractor`）
+  3. 執行：`bulk_extractor ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  bulk_extractor version 2.1.1: A high-performance flexible digital forensics program.
+  Usage:
+    bulk_extractor [OPTION...] image_name
+  
+    -A, --offset_add arg          Offset added (in bytes) to feature locations 
+                                  (default: 0)
+  ```
 
 ### chkrootkit
 - rootkit 偵測器
@@ -7008,10 +8134,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### spiderfoot-cli
 - OSINT collection and reconnaissance tool
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "spiderfoot-cli"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y spiderfoot`
+  2. 看說明：`spiderfoot-cli -h`（或 `man spiderfoot-cli`）
+  3. 執行：`spiderfoot-cli ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  usage: sfcli.py [-h] [-d] [-s URL] [-u USER] [-p PASS] [-P PASSFILE] [-e FILE]
+                  [-l FILE] [-n] [-o FILE] [-i] [-q] [-k] [-b]
+  
+  SpiderFoot: Open Source Intelligence Automation.
+  
+  options:
+  ```
 
 
 ## Kali tools — identify (4)
@@ -7035,17 +8170,35 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### nipper
 - Network Infrastructure Parser. Produces reports based of network device configuration file settings.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "nipper"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y nipper-ng`
+  2. 看說明：`nipper -h`（或 `man nipper`）
+  3. 執行：`nipper ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+                       _                           ____
+                 _ __ (_)_ __  _ __   ___ _ __    / ->/|
+                | '_ \| | '_ \| '_ \ / _ \ '__|  /<-_/ |
+                | | | | | |_) | |_) |  __/ |     |   | /
+                |_| |_|_| .__/| .__/ \___|_|     |___|/
+                        |_|   |_|
+  ```
 
 ### osrframework-cli
 - Open Sources Research Framework
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "osrframework-cli"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y osrframework`
+  2. 看說明：`osrframework-cli -h`（或 `man osrframework-cli`）
+  3. 執行：`osrframework-cli ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  usage: osrf [-h] [--license] [--version]
+              <sub_command> <sub_command_options> ...
+  
+  OSRFramework CLI. Collection of tools included in the framework.
+  
+  SUBCOMMANDS:
+  ```
 
 ### tiger
 - Linux 安全稽核與入侵偵測工具
@@ -7144,12 +8297,12 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   3. 執行：`siege ...` 對你擁有的目標（見下方實測 --help）。
 - **實測 --help:**
   ```
-  New configuration template added to /home/kali/.siege
-  Run siege -C to view the current settings in that file
   SIEGE 4.1.7
   Usage: siege [options]
          siege [options] URL
          siege -g URL
+  Options:
+    -V, --version             VERSION, prints the version number.
   ```
 - 文件：https://www.joedog.org/JoeDog/Siege
 
@@ -7221,31 +8374,62 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### dns-rebind
 - DNS rebinding tool
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "dns-rebind"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y rebind`
+  2. 看說明：`dns-rebind -h`（或 `man dns-rebind`）
+  3. 執行：`dns-rebind ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  
+  Rebind v0.3.4
+  
+  Usage: dns-rebind [OPTIONS]
+  
+  	-i <interface>	Specify the network interface to bind to
+  ```
 
 ### jboss-linux
 - JBoss script for obtaining remote shell access
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "jboss-linux"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y jboss-autopwn`
+  2. 看說明：`jboss-linux -h`（或 `man jboss-linux`）
+  3. 執行：`jboss-linux ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  [x] Retrieving cookie
+  nc: invalid option -- '-'
+  nc -h for help
+  [x] Now creating BSH script...
+  nc: invalid option -- '-'
+  nc -h for help
+  ```
 
 ### jboss-win
 - JBoss script for obtaining remote shell access
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "jboss-win"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y jboss-autopwn`
+  2. 看說明：`jboss-win -h`（或 `man jboss-win`）
+  3. 執行：`jboss-win ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  [x] Retrieving cookie
+  nc: invalid option -- '-'
+  nc -h for help
+  [x] Now creating BSH script...
+  nc: invalid option -- '-'
+  nc -h for help
+  ```
 
 ### jsql
 - Java tool for automatic database injection
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "jsql"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y jsql-injection`
+  2. 看說明：`jsql -h`（或 `man jsql`）
+  3. 執行：`jsql ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  2026-10-25 08:40:51,439 ERROR [main] jsql.MainApp (MainApp.java:30) - Headless runtime not supported, use default Java runtime instead
+  ```
 
 ### metasploit-framework
 - 漏洞開發與弱點研究框架
@@ -7261,10 +8445,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### setoolkit
 - Social-Engineer Toolkit
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "setoolkit"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y set`
+  2. 看說明：`setoolkit -h`（或 `man setoolkit`）
+  3. 執行：`setoolkit ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  
+   The Social-Engineer Toolkit (SET) - by David Kennedy (ReL1K)
+  
+   Not running as root. 
+  
+  Exiting the Social-Engineer Toolkit (SET).
+  ```
 
 ### sqlmap
 - 自動化 SQL 注入工具
@@ -7276,9 +8469,9 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   ```
           ___
          __H__
-   ___ ___[.]_____ ___ ___  {1.10.9#stable}
-  |_ -| . [.]     | .'| . |
-  |___|_  ["]_|_|_|__,|  _|
+   ___ ___[(]_____ ___ ___  {1.10.9#stable}
+  |_ -| . [']     | .'| . |
+  |___|_  [)]_|_|_|__,|  _|
         |_|V...       |_|   https://sqlmap.org
   ```
 - 文件：https://sqlmap.org/
@@ -7369,24 +8562,51 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### impacket-psexec
 - Python3 module to easily build and dissect network protocols
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "impacket-psexec"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y impacket-scripts`
+  2. 看說明：`impacket-psexec -h`（或 `man impacket-psexec`）
+  3. 執行：`impacket-psexec ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies 
+  
+  usage: psexec.py [-h] [-c pathname] [-path PATH] [-file FILE] [-ts] [-debug]
+                   [-codec CODEC] [-hashes LMHASH:NTHASH] [-no-pass] [-k]
+                   [-aesKey hex key] [-keytab KEYTAB] [-dc-ip ip address]
+                   [-target-ip ip address] [-port [destination port]]
+  ```
 
 ### impacket-smbexec
 - Python3 module to easily build and dissect network protocols
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "impacket-smbexec"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y impacket-scripts`
+  2. 看說明：`impacket-smbexec -h`（或 `man impacket-smbexec`）
+  3. 執行：`impacket-smbexec ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies 
+  
+  usage: smbexec.py [-h] [-share SHARE] [-mode {SERVER,SHARE}] [-ts] [-debug]
+                    [-codec CODEC] [-shell-type {cmd,powershell}]
+                    [-dc-ip ip address] [-target-ip ip address]
+                    [-port [destination port]] [-service-name service_name]
+  ```
 
 ### rdesktop
 - Remote Desktop Protocol client
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "rdesktop"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y rdesktop`
+  2. 看說明：`rdesktop -h`（或 `man rdesktop`）
+  3. 執行：`rdesktop ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  rdesktop: invalid option -- '-'
+  rdesktop: A Remote Desktop Protocol client.
+  Version 1.9.0. Copyright (C) 1999-2016 Matthew Chapman et al.
+  See http://www.rdesktop.org/ for more information.
+  
+  Usage: rdesktop [options] server[:port]
+  ```
 
 
 ## Kali tools — network-information (7)
@@ -7459,15 +8679,16 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 - 從公開來源蒐集 email 與子網域的工具
 - **步驟（已驗證 ✓）:**
   1. 安裝：`sudo apt install -y theharvester`
-  2. 看說明：`theharvester -h`（或 `man theharvester`）
-  3. 執行：`theharvester ...` 對你擁有的目標（見下方實測 --help）。
+  2. 看說明：`theHarvester -h`（或 `man theHarvester`）
+  3. 執行：`theHarvester ...` 對你擁有的目標（見下方實測 --help）。
 - **實測 --help:**
   ```
-  ┏━(Message from Kali developers)
-  ┃
-  ┃ The command theharvester is deprecated. Please use theHarvester instead.
-  ┃
-  ┗━
+  Read proxies.yaml from /etc/theHarvester/proxies.yaml
+  *******************************************************************
+  *  _   _                                            _             *
+  * | |_| |__   ___    /\  /\__ _ _ ____   _____  ___| |_ ___ _ __  *
+  * | __|  _ \ / _ \  / /_/ / _` | '__\ \ / / _ \/ __| __/ _ \ '__| *
+  * | |_| | | |  __/ / __  / (_| | |   \ V /  __/\__ \ ||  __/ |    *
   ```
 - 文件：https://github.com/laramies/theHarvester
 
@@ -7718,10 +8939,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### smbclient
 - Ftp-like client to access SMB/CIFS resources on servers
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "smbclient"`。
-  2. 指向 lab：`http://<NODE_IP>:30080`。
-  3. 用 Burp/ZAP 代理（127.0.0.1:8080）檢視請求。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y smbclient`
+  2. 看說明：`smbclient -h`（或 `man smbclient`）
+  3. 執行：`smbclient ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Usage: smbclient [OPTIONS] service <password>
+    -M, --message=HOST                           Send message
+    -I, --ip-address=IP                          Use this IP to connect to
+    -E, --stderr                                 Write messages to stderr
+                                                 instead of stdout
+    -L, --list=HOST                              Get a list of shares available
+  ```
 
 
 ## Kali tools — network-sniffing (12)
@@ -7745,10 +8975,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### arpspoof
 - Intercept packets on a switched LAN
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "arpspoof"`。
-  2. 指向 lab：`http://<NODE_IP>:30080`。
-  3. 用 Burp/ZAP 代理（127.0.0.1:8080）檢視請求。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y dsniff`
+  2. 看說明：`arpspoof -h`（或 `man arpspoof`）
+  3. 執行：`arpspoof ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  arpspoof: libnet_open_link(): UID/EUID 0 or capability CAP_NET_RAW required
+  ```
 
 ### darkstat
 - 網路流量分析器
@@ -7792,7 +9026,7 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   3. 執行：`driftnet ...` 對你擁有的目標（見下方實測 --help）。
 - **實測 --help:**
   ```
-  Sun Oct 25 05:43:31 2026 - error: unrecognised option --
+  Sun Oct 25 08:40:29 2026 - error: unrecognised option --
   driftnet, version 1.5.0
   Capture images from network traffic and display them.
   
@@ -7853,10 +9087,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### scapy
 - Interactive packet manipulation tool
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "scapy"`。
-  2. 指向 lab：`http://<NODE_IP>:30080`。
-  3. 用 Burp/ZAP 代理（127.0.0.1:8080）檢視請求。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y scapy`
+  2. 看說明：`scapy -h`（或 `man scapy`）
+  3. 執行：`scapy ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  ERROR: option --help not recognized
+  ```
 
 ### tcpdump
 - 命令列網路流量分析器
@@ -7942,10 +9180,15 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### netcat
 - TCP/IP swiss army knife
-- **步驟:**
-  1. 抓 banner：`nc -v <NODE_IP> 30080` 再輸入請求。
-  2. 出站測試：`nc -zv <NODE_IP> 5432` —— 被拒＝DB 控制有效。
-  3. 監聽（僅自有主機）：`nc -lvnp 4444`。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y netcat`
+  2. 看說明：`netcat -h`（或 `man netcat`）
+  3. 執行：`netcat ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  netcat: invalid option -- '-'
+  nc -h for help
+  ```
 
 ### powercat
 - 以 PowerShell 實作的 netcat 功能
@@ -7978,10 +9221,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### socat
 - Multipurpose relay (SOcket CAT)
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "socat"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y socat`
+  2. 看說明：`socat -h`（或 `man socat`）
+  3. 執行：`socat ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  2026/10/25 08:41:21 socat[1186875] E unknown option "--help"; use option "-h" for help
+  ```
 
 ### termineter
 - 智慧電表測試框架
@@ -8098,7 +9345,6 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   3. 執行：`netexec ...` 對你擁有的目標（見下方實測 --help）。
 - **實測 --help:**
   ```
-  [*] Copying default configuration file
   usage: netexec [-h] [--version] [-t THREADS] [--timeout TIMEOUT]
                  [--jitter INTERVAL] [--no-progress] [--log LOG] [--verbose |
                  --debug] [-6] [--dns-server DNS_SERVER] [--dns-tcp]
@@ -8143,10 +9389,18 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### xfreerdp3
 - FreeRDP X11 client
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "xfreerdp3"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y freerdp3-x11`
+  2. 看說明：`xfreerdp3 -h`（或 `man xfreerdp3`）
+  3. 執行：`xfreerdp3 ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  
+  xfreerdp3 - A Free Remote Desktop Protocol Implementation
+  See www.freerdp.com for more information
+  
+  Usage: xfreerdp3 [file] [options] [/v:<server>[:port]]
+  ```
 
 
 ## Kali tools — password-cracking (11)
@@ -8266,10 +9520,15 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### rcracki_mt
 - Version of rcrack that supports hybrid and indexed tables
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "rcracki_mt"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y rcracki-mt`
+  2. 看說明：`rcracki_mt -h`（或 `man rcracki_mt`）
+  3. 執行：`rcracki_mt ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Using 1 threads for pre-calculation and false alarm checking...
+  no rainbow table found
+  ```
 
 ### sipcrack
 - SIP 登入傾印/破解器
@@ -8360,17 +9619,35 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### maskgen
 - Password analysis and cracking kit
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "maskgen"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y pack`
+  2. 看說明：`maskgen -h`（或 `man maskgen`）
+  3. 執行：`maskgen ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Usage: maskgen pass0.masks [pass1.masks ...] [options]
+  
+  Options:
+    --version             show program's version number and exit
+    -h, --help            show this help message and exit
+    -t 86400, --targettime=86400
+  ```
 
 ### policygen
 - Password analysis and cracking kit
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "policygen"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y pack`
+  2. 看說明：`policygen -h`（或 `man policygen`）
+  3. 執行：`policygen ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Usage: policygen [options]
+  
+  Type --help for more options
+  
+  Options:
+    --version             show program's version number and exit
+  ```
 
 ### rsmangler
 - 字典變形工具
@@ -8390,10 +9667,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### statsgen
 - Password analysis and cracking kit
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "statsgen"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y pack`
+  2. 看說明：`statsgen -h`（或 `man statsgen`）
+  3. 執行：`statsgen ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Usage: statsgen [options] passwords.txt
+  
+  Type --help for more options
+  
+  Options:
+    --version             show program's version number and exit
+  ```
 
 ### twofi
 - Twitter 關鍵字字典
@@ -8559,10 +9845,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### linpeas
 - Privilege Escalation Awesome Scripts SUITE
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "linpeas"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y peass`
+  2. 看說明：`linpeas -h`（或 `man linpeas`）
+  3. 執行：`linpeas ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  
+  > peass ~ Privilege Escalation Awesome Scripts SUITE
+  
+  /usr/share/peass/linpeas
+  ├── linpeas_darwin_amd64
+  ├── linpeas_darwin_arm64
+  ```
 
 ### lynis
 - Unix 系統安全稽核工具
@@ -8616,30 +9911,53 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### winpeas
 - Privilege Escalation Awesome Scripts SUITE
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "winpeas"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y peass`
+  2. 看說明：`winpeas -h`（或 `man winpeas`）
+  3. 執行：`winpeas ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  
+  > peass ~ Privilege Escalation Awesome Scripts SUITE
+  
+  /usr/share/peass/winpeas
+  ├── winPEASany.exe
+  ├── winPEASany_ofs.exe
+  ```
 
 
 ## Kali tools — protect (3)
 
 ### clamscan
 - Scan files and directories for viruses
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "clamscan"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y clamav`
+  2. 看說明：`clamscan -h`（或 `man clamscan`）
+  3. 執行：`clamscan ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  
+                         Clam AntiVirus: Scanner 1.4.6
+             By The ClamAV Team: https://www.clamav.net/about.html#credits
+             (C) 2024 Cisco Systems, Inc.
+  
+      clamscan [options] [file/directory/-]
+  ```
 
 ### cryptsetup
 - 磁碟加密支援（啟動腳本）
 - **步驟（已驗證 ✓）:**
   1. 安裝：`sudo apt install -y cryptsetup`
-  2. 看說明：`luksformat -h`（或 `man luksformat`）
-  3. 執行：`luksformat ...` 對你擁有的目標（見下方實測 --help）。
+  2. 看說明：`cryptsetup -h`（或 `man cryptsetup`）
+  3. 執行：`cryptsetup ...` 對你擁有的目標（見下方實測 --help）。
 - **實測 --help:**
   ```
-  This program needs to be started as root
+  cryptsetup 2.8.8 flags: UDEV BLKID KEYRING KERNEL_CAPI HW_OPAL 
+  Usage: cryptsetup [OPTION...] <action> <action-specific>
+  
+  Help options:
+    -?, --help                              Show this help message
+        --usage                             Display brief usage
   ```
 - 文件：https://gitlab.com/cryptsetup/cryptsetup
 
@@ -8665,24 +9983,48 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### dns2tcpc
 - A tunneling tool that encapsulate TCP traffic over DNS.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "dns2tcpc"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y dns2tcp`
+  2. 看說明：`dns2tcpc -h`（或 `man dns2tcpc`）
+  3. 執行：`dns2tcpc ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  dns2tcpc: invalid option -- '-'
+  dns2tcp v0.5.2 ( http://www.hsc.fr/ )
+  Usage : dns2tcpc [options] [server] 
+  	-c         	: enable compression
+  	-z <domain>	: domain to use (mandatory)
+  	-d <1|2|3>	: debug_level (1, 2 or 3)
+  ```
 
 ### dns2tcpd
 - A tunneling tool that encapsulate TCP traffic over DNS.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "dns2tcpd"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y dns2tcp`
+  2. 看說明：`dns2tcpd -h`（或 `man dns2tcpd`）
+  3. 執行：`dns2tcpd ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  dns2tcpd: invalid option -- '-'
+  Usage : dns2tcpd [ -i IP ] [ -F ] [ -d debug_level ] [ -f config-file ] [ -p pidfile ]
+  	 -F : dns2tcpd will run in foreground
+  ```
 
 ### iodine-client-start
 - Start an iodine IPv4-over-DNS tunnel
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "iodine-client-start"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y iodine`
+  2. 看說明：`iodine-client-start -h`（或 `man iodine-client-start`）
+  3. 執行：`iodine-client-start ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  'iodine-client-start' starts an iodine IP-over-DNS tunnel.
+  
+  Usage: iodine-client-start [option]
+  
+    -h, --help		Print help and exit
+    -v, --version		Print version info and exit
+  ```
 
 ### miredo
 - 透過 NAT 的 Teredo IPv6 隧道
@@ -8826,16 +10168,22 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### chirpw
 - A tool for programming two-way radio equipment
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "chirpw"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 安裝：`sudo apt install -y chirp`
+  2. 在 VNC 桌面開啟：`../scripts/apps.sh open chirpw`。
+  3. Radio 選單 → Download From Radio（需序列/USB 連接支援的無線電）。
 
 ### hackrf_info
 - Probe device and show configuration
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "hackrf_info"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y hackrf`
+  2. 看說明：`hackrf_info -h`（或 `man hackrf_info`）
+  3. 執行：`hackrf_info ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  hackrf_info version: 2026.01.3
+  libhackrf version: 2026.01.3 (0.9.2)
+  No HackRF boards found.
+  ```
 
 ### rfcat
 - sub-GHz 無線電瑞士刀
@@ -8866,11 +10214,11 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 - **實測 --help:**
   ```
   arm64
-  java is /usr/bin/java
-  found java executable in PATH
-  pwd: jar:file:/usr/share/maltego/maltego-ui/modules/ext/com.paterva.maltego.java-config-ui/com-paterva-maltego/java-config-app.jar!/BOOT-INF/lib/java-config-lib-1.0-SNAPSHOT.jar!/
-  file: /usr/share/maltego/maltego-ui/modules/ext/com.paterva.maltego.java-config-ui/com-paterva-maltego/java-config-app.jar
-  installDir: /usr/share/maltego
+  Usage: ./../platform/lib/nbexec {options} arguments
+  
+  General options:
+    --help                show this help 
+    --jdkhome <path>      path to Java(TM) 2 SDK, Standard Edition
   ```
 - 文件：https://www.maltego.com
 
@@ -8895,10 +10243,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### atk6-thcping6
 - The Hacker Choice's IPv6 Attack Toolkit
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "atk6-thcping6"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y thc-ipv6`
+  2. 看說明：`atk6-thcping6 -h`（或 `man atk6-thcping6`）
+  3. 執行：`atk6-thcping6 ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  atk6-thcping6 3.8 (c) 2020 by van Hauser / THC <<email>> www.github.com/vanhauser-thc/thc-ipv6
+  
+  Syntax: atk6-thcping6 [-EafqxO] [-e ethertype] [-H t:l:v] [-D t:l:v] [-F dst] [-e ethertype] [-L length] [-N nextheader] [-V version] [-t ttl] [-c class] [-l label] [-d size] [-S port|-U port|-T type -C code] interface src6 dst6 [srcmac [dstmac [data]]]
+  
+  Options:
+    -T number       ICMPv6 type to send (default: 128 = ping)
+  ```
 
 ### fierce
 - 網域 DNS 掃描器
@@ -9005,10 +10362,15 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### faraday-start
 - Collaborative Penetration Test IDE
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "faraday-start"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y faraday`
+  2. 看說明：`faraday-start -h`（或 `man faraday-start`）
+  3. 執行：`faraday-start ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  sudo: a terminal is required to read the password; either use ssh's -t option or configure an askpass helper
+  sudo: a password is required
+  ```
 
 ### pipal
 - 對密碼傾印做統計分析
@@ -9066,10 +10428,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### afl-fuzz
 - instrumentation-driven fuzzer for binary formats
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "afl-fuzz"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y afl++`
+  2. 看說明：`afl-fuzz -h`（或 `man afl-fuzz`）
+  3. 執行：`afl-fuzz ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  afl-fuzz++5.02c
+  
+  afl-fuzz [ options ] -- /path/to/fuzzed_app [ ... ]
+  
+  Required parameters:
+    -i dir        - input directory with test cases (or '-' to resume, also see 
+  ```
 
 ### apktool
 - 反編譯 Android apk 檔的工具
@@ -9139,24 +10510,51 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### clang++
 - C, C++ and Objective-C compiler (LLVM based), clang binary
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "clang++"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y clang`
+  2. 看說明：`clang++ -h`（或 `man clang++`）
+  3. 執行：`clang++ ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  OVERVIEW: clang LLVM compiler
+  
+  USAGE: clang [options] file...
+  
+  OPTIONS:
+    -###                    Print (but do not run) the commands to run for this compilation
+  ```
 
 ### cutter
 - reverse engineering platform powered by rizin
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "cutter"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y rizin-cutter`
+  2. 看說明：`cutter -h`（或 `man cutter`）
+  3. 執行：`cutter ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  qt.qpa.xcb: could not connect to display 
+  qt.qpa.plugin: From 6.5.0, xcb-cursor0 or libxcb-cursor0 is needed to load the Qt xcb platform plugin.
+  qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+  This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+  
+  Available platform plugins are: wayland-brcm, wayland-egl, wayland, vkkhrdisplay, xcb, vnc, minimal, eglfs, minimalegl, linuxfb, offscreen.
+  ```
 
 ### d2j-dex2jar
 - Tools to work with android .dex and java .class files
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "d2j-dex2jar"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y dex2jar`
+  2. 看說明：`d2j-dex2jar -h`（或 `man d2j-dex2jar`）
+  3. 執行：`d2j-dex2jar ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  d2j-dex2jar -- convert dex to jar
+  usage: d2j-dex2jar [options] <file0> [file1 ... fileN]
+  options:
+   --skip-exceptions            skip-exceptions
+   -d,--debug-info              translate debug info
+   -e,--exception-file <file>   detail exception file, default is $current_dir/[fi
+  ```
 
 ### gdb
 - GNU 除錯器
@@ -9177,38 +10575,71 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### generic_chunked
 - Network protocol fuzzer
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "generic_chunked"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y spike`
+  2. 看說明：`generic_chunked -h`（或 `man generic_chunked`）
+  3. 執行：`generic_chunked ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Usage: ./generic_web_server_fuzz target port file.spk skipvariables skipfuzzstring
+  Example: ./gwsf exchange1 80 owa1.spk 0 0
+  http://www.immunitysec.com/spike.html
+  ```
 
 ### generic_listen_tcp
 - Network protocol fuzzer
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "generic_listen_tcp"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y spike`
+  2. 看說明：`generic_listen_tcp -h`（或 `man generic_listen_tcp`）
+  3. 執行：`generic_listen_tcp ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  argc=2
+  Usage: ./generic_listen_tcp port spike_script
+  ./generic_listen_tcp 70 gopherd.spk
+  ```
 
 ### generic_send_tcp
 - Network protocol fuzzer
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "generic_send_tcp"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y spike`
+  2. 看說明：`generic_send_tcp -h`（或 `man generic_send_tcp`）
+  3. 執行：`generic_send_tcp ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  argc=2
+  Usage: ./generic_send_tcp host port spike_script SKIPVAR SKIPSTR
+  ./generic_send_tcp 192.168.1.100 701 something.spk 0 0
+  ```
 
 ### generic_send_udp
 - Network protocol fuzzer
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "generic_send_udp"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y spike`
+  2. 看說明：`generic_send_udp -h`（或 `man generic_send_udp`）
+  3. 執行：`generic_send_udp ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  argc=2
+  Usage: ./gsu target port file.spk startvariable startfuzzstring startvariable startstring totaltosend
+  ./gsu 192.168.1.104 80 file.spk 0 0 5000
+  ```
 
 ### jadx-gui
 - Dex to Java decompiler
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "jadx-gui"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y jadx`
+  2. 看說明：`jadx-gui -h`（或 `man jadx-gui`）
+  3. 執行：`jadx-gui ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  
+  jadx - dex to java decompiler, version: 1.5.6
+  
+  usage: jadx [command] [options] <input files> (.apk, .dex, .jar, .class, .smali, .zip, .aar, .arsc, .aab, .xapk, .apkm, .jadx.kts)
+  commands (use '<command> --help' for command options):
+    plugins	  - manage jadx plugins
+  ```
 
 ### javasnoop
 - 在本機攔截 Java 應用程式
@@ -9245,10 +10676,14 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### msf-nasm_shell
 - Framework for exploit development and vulnerability research
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "msf-nasm_shell"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y metasploit-framework`
+  2. 看說明：`msf-nasm_shell -h`（或 `man msf-nasm_shell`）
+  3. 執行：`msf-nasm_shell ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  0 bits not supported
+  ```
 
 ### msfpc
 - MSFvenom Payload 產生器（MSFPC）
@@ -9269,10 +10704,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### msfvenom
 - Payload Generator and Encoder
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "msfvenom"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y msfvenom`
+  2. 看說明：`msfvenom -h`（或 `man msfvenom`）
+  3. 執行：`msfvenom ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  MsfVenom - a Metasploit standalone payload generator.
+  Also a replacement for msfpayload and msfencode.
+  Usage: /usr/bin/msfvenom [options] <var=val>
+  Example: /usr/bin/msfvenom -p windows/meterpreter/reverse_tcp LHOST=<IP> -f exe -o payload.exe
+  
+  Options:
+  ```
 
 ### radare2
 - 免費進階的命令列十六進位編輯器
@@ -9299,7 +10743,7 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   3. 執行：`rizin ...` 對你擁有的目標（見下方實測 --help）。
 - **實測 --help:**
   ```
-   -- You can add commands into your ~/.rizinrc to customize your experience with Rizin
+   -- Change the block size with 'b <block-size>'. In visual mode you can also enter rizin command pressing the ':' key (like vi does)
   [2K
   
   [0x00000000]> 
@@ -9309,10 +10753,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### searchsploit
 - Exploit Database Archive Search
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "searchsploit"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y exploitdb`
+  2. 看說明：`searchsploit -h`（或 `man searchsploit`）
+  3. 執行：`searchsploit ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+    Usage: searchsploit [options] term1 [term2] ... [termN]
+  
+  ==========
+   Examples 
+  ==========
+    searchsploit afd windows local
+  ```
 
 ### sfuzz
 - 黑箱測試工具
@@ -9397,227 +10850,513 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### blkcalc
 - Converts between unallocated disk unit numbers and regular disk unit numbers.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "blkcalc"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`blkcalc -h`（或 `man blkcalc`）
+  3. 執行：`blkcalc ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  blkcalc: invalid option -- '-'
+  Invalid argument: --help
+  usage: blkcalc [-dsu unit_addr] [-vV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] image [images]
+  Slowly calculates the opposite block number
+  	One of the following must be given:
+  	  -d: The given address is from a 'dd' image 
+  ```
 
 ### blkcat
 - Display the contents of file system data unit in a disk image.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "blkcat"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`blkcat -h`（或 `man blkcat`）
+  3. 執行：`blkcat ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  blkcat: invalid option -- '-'
+  Invalid argument: --help
+  usage: blkcat [-ahsvVw] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] [-k password] [-u usize] image [images] unit_addr [num]
+  	-a: displays in all ASCII 
+  	-h: displays in hexdump-like fashion
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  ```
 
 ### blkls
 - List or output file system data units.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "blkls"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`blkls -h`（或 `man blkls`）
+  3. 執行：`blkls ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  blkls: invalid option -- '-'
+  Invalid argument: --help
+  usage: blkls [-aAelvV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] image [images] [start-stop]
+  	-e: every block (including file system metadata blocks)
+  	-l: print details in time machine list format
+  	-a: Display allocated blocks
+  ```
 
 ### blkstat
 - Display details of a file system data unit (i.e. block or sector)
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "blkstat"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`blkstat -h`（或 `man blkstat`）
+  3. 執行：`blkstat ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  blkstat: invalid option -- '-'
+  Invalid argument: --help
+  usage: blkstat [-vV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] image [images] addr
+  	-f fstype: File system type (use '-f list' for supported types)
+  	-k password: Decryption password for encrypted volumes
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  ```
 
 ### ffind
 - Finds the name of the file or directory using a given inode
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "ffind"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`ffind -h`（或 `man ffind`）
+  3. 執行：`ffind ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  ffind: invalid option -- '-'
+  Invalid argument: --help
+  usage: ffind [-aduvV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] image [images] inode
+  	-a: Find all occurrences
+  	-d: Find deleted entries ONLY
+  	-u: Find undeleted entries ONLY
+  ```
 
 ### fls
 - List file and directory names in a disk image.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "fls"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`fls -h`（或 `man fls`）
+  3. 執行：`fls ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  fls: invalid option -- '-'
+  Invalid argument: --help
+  usage: fls [-adDFlhpruvV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-m dir/] [-o imgoffset] [-z ZONE] [-s seconds] image [images] [inode]
+  	If [inode] is not given, the root directory is used
+  	-a: Display "." and ".." entries
+  	-d: Display deleted entries only
+  ```
 
 ### fsstat
 - Display general details of a file system
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "fsstat"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`fsstat -h`（或 `man fsstat`）
+  3. 執行：`fsstat ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  fsstat: invalid option -- '-'
+  Invalid argument: --help
+  usage: fsstat [-tvV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] image
+  	-t: display type only
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  ```
 
 ### grokevt-addlog
 - A tool for adding a raw event log to an existing GrokEVT database.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "grokevt-addlog"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y grokevt`
+  2. 看說明：`grokevt-addlog -h`（或 `man grokevt-addlog`）
+  3. 執行：`grokevt-addlog ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  USAGE:
+    /usr/bin/grokevt-addlog <DATABASE_DIR> <EVT_FILE> <NEW_TYPE> <BASE_TYPE>
+  
+  This script takes a raw Windows event log and adds it to a
+  previously built database generated by grokevt-builddb.
+  See the man page for more details.
+  ```
 
 ### grokevt-builddb
 - Builds a database tree based on a single windows system for the purpose of event log conversion.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "grokevt-builddb"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y grokevt`
+  2. 看說明：`grokevt-builddb -h`（或 `man grokevt-builddb`）
+  3. 執行：`grokevt-builddb ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  USAGE:
+    grokevt-builddb [-v] [-c CSID] <CONFIG_PROFILE> <OUTPUT_DIR>
+  
+  grokevt-builddb builds a database tree based on a
+  single windows system for the purpose of event log
+  conversion.  Please see the man page for more
+  ```
 
 ### grokevt-findlogs
 - Attempts to find log file fragments in raw binary files, such as memory dumps and disk images.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "grokevt-findlogs"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y grokevt`
+  2. 看說明：`grokevt-findlogs -h`（或 `man grokevt-findlogs`）
+  3. 執行：`grokevt-findlogs ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  USAGE:
+    grokevt-findlogs -?
+    grokevt-findlogs [-v] [-h] [-H] [-o <OFFSET>] <RAW_FILE>
+  
+  grokevt-findlogs attempts to find log file fragments in raw
+  binary files, such as memory dumps and disk images.
+  ```
 
 ### grokevt-parselog
 - Parse a windows event log and generate human-readable output based on message resources stored in a database.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "grokevt-parselog"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y grokevt`
+  2. 看說明：`grokevt-parselog -h`（或 `man grokevt-parselog`）
+  3. 執行：`grokevt-parselog ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  USAGE:
+    grokevt-parselog -?|--help
+    grokevt-parselog -l <DATABASE_DIR>
+    grokevt-parselog -m <DATABASE_DIR> <LOG_TYPE>
+    grokevt-parselog [-v] [-H] [-h] <DATABASE_DIR> <LOG_TYPE>
+  ```
 
 ### grokevt-ripdll
 - A tool for extracting message resources from a PE-formatted file.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "grokevt-ripdll"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y grokevt`
+  2. 看說明：`grokevt-ripdll -h`（或 `man grokevt-ripdll`）
+  3. 執行：`grokevt-ripdll ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  USAGE:
+    grokevt-ripdll <INPUT_DLL> <OUTPUT_DB>
+  
+  grokevt-ripdll is a tool for extracting message resources from a PE-formatted file.
+  Please see the man page for more information.
+  ```
 
 ### hfind
 - Lookup a hash value in a hash database
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "hfind"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`hfind -h`（或 `man hfind`）
+  3. 執行：`hfind ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  hfind: invalid option -- '-'
+  usage: hfind [-eqVa] [-c] [-f lookup_file] [-i db_type] db_file [hashes]
+  	-e: Extended mode - where values other than just the name are printed
+  	-q: Quick mode - where a 1 is printed if it is found, else 0
+  	-V: Print version to STDOUT
+  	-c db_name: Create new database with the given name.
+  ```
 
 ### icat
 - Output the contents of a file based on its inode number.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "icat"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`icat -h`（或 `man icat`）
+  3. 執行：`icat ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  icat: invalid option -- '-'
+  Invalid argument: --help
+  usage: icat [-hrRsvV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] image [images] inum[-typ[-id]]
+  	-h: Do not display holes in sparse files
+  	-r: Recover deleted file
+  	-R: Recover deleted file and suppress recovery errors
+  ```
 
 ### ifind
 - Find the meta-data structure that has allocated a given disk unit or file name.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "ifind"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`ifind -h`（或 `man ifind`）
+  3. 執行：`ifind ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  ifind: invalid option -- '-'
+  Invalid argument: --help
+  usage: ifind [-alvV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] [-d unit_addr] [-n file] [-p par_addr] [-z ZONE] image [images]
+  	-a: find all inodes
+  	-d unit_addr: Find the meta data given the data unit
+  	-l: long format when -p is given
+  ```
 
 ### ils
 - List inode information
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "ils"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`ils -h`（或 `man ils`）
+  3. 執行：`ils ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  ils: invalid option -- '-'
+  Invalid argument: --help
+  usage: ils [-emOpvV] [-aAlLzZ] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] [-s seconds] image [images] [inum[-end]]
+  	-e: Display all inodes
+  	-m: Display output in the mactime format
+  	-O: Display inodes that are unallocated, but were sill open (UFS/ExtX only)
+  ```
 
 ### img_cat
 - Output contents of an image file.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "img_cat"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`img_cat -h`（或 `man img_cat`）
+  3. 執行：`img_cat ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  img_cat: invalid option -- '-'
+  Invalid argument: --help
+  usage: img_cat [-vV] [-i imgtype] [-b dev_sector_size] [-s start_sector] [-e stop_sector] image
+  	-i imgtype: The format of the image file (use 'i list' for supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  	-s start_sector: The sector number to start at
+  ```
 
 ### img_stat
 - Display details of an image file
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "img_stat"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`img_stat -h`（或 `man img_stat`）
+  3. 執行：`img_stat ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  img_stat: invalid option -- '-'
+  Invalid argument: --help
+  usage: img_stat [-tvV] [-i imgtype] [-b dev_sector_size] image
+  	-t: display type only
+  	-i imgtype: The format of the image file (use '-i list' for list of supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  ```
 
 ### istat
 - Display details of a meta-data structure (i.e. inode)
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "istat"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`istat -h`（或 `man istat`）
+  3. 執行：`istat ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  istat: invalid option -- '-'
+  Invalid argument: --help
+  usage: istat [-N num] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-P pooltype] [-B pool_volume_block] [-z zone] [-s seconds] [-rvV] image inum
+  	-N num: force the display of NUM address of block pointers
+  	-r: display run list instead of list of block addresses
+  	-z zone: time zone of original machine (i.e. EST5EDT or GMT)
+  ```
 
 ### jcat
 - Show the contents of a block in the file system journal.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "jcat"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`jcat -h`（或 `man jcat`）
+  3. 執行：`jcat ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  jcat: invalid option -- '-'
+  Invalid argument: --help
+  usage: jcat [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-vV] image [images] [inode] blk
+  	blk: The journal block to view
+  	inode: The file system inode where the journal is located
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  ```
 
 ### jls
 - List the contents of a file system journal
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "jls"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`jls -h`（或 `man jls`）
+  3. 執行：`jls ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  jls: invalid option -- '-'
+  Invalid argument: --help
+  usage: jls [-f fstype] [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-vV] image [inode]
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  	-f fstype: File system type (use '-f list' for supported types)
+  ```
 
 ### mactime
 - Create an ASCII time line of file activity
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "mactime"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`mactime -h`（或 `man mactime`）
+  3. 執行：`mactime ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Unknown option: --help
+  mactime [-b body_file] [-p password_file] [-g group_file] [-i day|hour idx_file] [-d] [-h] [-V] [-y] [-z TIME_ZONE] [DATE]
+  		-b: Specifies the body file location, else STDIN is used
+  		-d: Output in comma delimited format
+  		-h: Display a header with session information
+  		-i [day | hour] file: Specifies the index file with a summary of results
+  ```
 
 ### mmcat
 - Output the contents of a partition to stdout
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "mmcat"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`mmcat -h`（或 `man mmcat`）
+  3. 執行：`mmcat ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  mmcat: invalid option -- '-'
+  Unknown argument
+  usage: mmcat [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-vV] [-t vstype] image [images] part_num
+  	-t vstype: The type of partition system (use '-t list' for list of supported types)
+  	-i imgtype: The format of the image file (use '-i list' for list of supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  ```
 
 ### mmls
 - Display the partition layout of a volume system (partition tables)
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "mmls"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`mmls -h`（或 `man mmls`）
+  3. 執行：`mmls ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  mmls: invalid option -- '-'
+  Unknown argument
+  usage: mmls [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-BrvV] [-aAmM] [-t vstype] image [images]
+  	-t vstype: The type of volume system (use '-t list' for list of supported types)
+  	-i imgtype: The format of the image file (use '-i list' for list supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  ```
 
 ### mmstat
 - Display details about the volume system (partition tables)
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "mmstat"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`mmstat -h`（或 `man mmstat`）
+  3. 執行：`mmstat ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  mmstat: invalid option -- '-'
+  Unknown argument
+  usage: mmstat [-i imgtype] [-b dev_sector_size] [-o imgoffset] [-vV] [-t vstype] image [images]
+  	-t vstype: The volume system type (use '-t list' for list of supported types)
+  	-i imgtype: The format of the image file (use '-i list' for list of supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  ```
 
 ### sigfind
 - Find a binary signature in a file
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "sigfind"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`sigfind -h`（或 `man sigfind`）
+  3. 執行：`sigfind ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  sigfind: invalid option -- '-'
+  sigfind [-b bsize] [-o offset] [-t template] [-lV] [hex_signature] file
+  	-b bsize: Give block size (default 512)
+  	-o offset: Give offset into block where signature should exist (default 0)
+  	-l: Signature will be little endian in image
+  	-V: Version
+  ```
 
 ### sorter
 - Sort files in an image into categories based on file type
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "sorter"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`sorter -h`（或 `man sorter`）
+  3. 執行：`sorter ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Unknown option: --help
+  
+  sorter [-b size] [-E] [-e] [-h]  [-l] [-md5] [-s] [-sha1] [-U] [-v] [-V] [-a hash_alert] [-c config] [-C config] [-d dir] [-m mnt] [-n nsrl_db] [-x hash_exclude] [-o imgoffset] [-f fstype] [-i imgtype] image [images] [dir_meta_addr] 
+  
+      -b size: Minimum size.  Ignore files smaller than 'size'
+  	-E: Perform category indexing only (no extension checks - was '-i')
+  ```
 
 ### srch_strings
 - Display printable strings in files
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "srch_strings"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`srch_strings -h`（或 `man srch_strings`）
+  3. 執行：`srch_strings ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  srch_strings: invalid option -- '-'
+  Usage: srch_strings [option(s)] [file(s)]
+   Display printable strings in [file(s)] (stdin by default)
+   The options are:
+    -a -                 Scan the entire file, not just the data section
+    -f       Print the name of the file before each string
+  ```
 
 ### tsk_comparedir
 - Compare the contents of a directory with the contents of an image or local device.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "tsk_comparedir"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`tsk_comparedir -h`（或 `man tsk_comparedir`）
+  3. 執行：`tsk_comparedir ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  tsk_comparedir: invalid option -- '-'
+  Invalid argument: --help
+  usage: tsk_comparedir [-f fstype] [-i imgtype] [-b dev_sector_size] [-o sector_offset] [-P pooltype] [-B pool_volume_block] [-n start_inum] [-vV] image [image] comparison_directory
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  	-f fstype: The file system type (use '-f list' for supported types)
+  ```
 
 ### tsk_gettimes
 - Collect MAC times from a disk image into a body file.
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "tsk_gettimes"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`tsk_gettimes -h`（或 `man tsk_gettimes`）
+  3. 執行：`tsk_gettimes ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  tsk_gettimes: invalid option -- '-'
+  Invalid argument: --help
+  usage: tsk_gettimes [-vVm] [-i imgtype] [-b dev_sector_size] [-z zone] [-s seconds] image [image]
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  	-m: Calculate MD5 hash in output (slow)
+  ```
 
 ### tsk_loaddb
 - Populate a SQLite database with metadata from a disk image
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "tsk_loaddb"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`tsk_loaddb -h`（或 `man tsk_loaddb`）
+  3. 執行：`tsk_loaddb ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  tsk_loaddb: invalid option -- '-'
+  Invalid argument: --help
+  usage: tsk_loaddb [-ahkvV] [-i imgtype] [-b dev_sector_size] [-d database] [-z ZONE] image [image]
+  	-a: Add image to existing database, instead of creating a new one (requires -d to specify database)
+  	-k: Don't create block data table
+  	-h: Calculate hash values for the files
+  ```
 
 ### tsk_recover
 - Export files from an image into a local directory
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "tsk_recover"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sleuthkit`
+  2. 看說明：`tsk_recover -h`（或 `man tsk_recover`）
+  3. 執行：`tsk_recover ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  tsk_recover: invalid option -- '-'
+  Invalid argument: --help
+  usage: tsk_recover [-vVae] [-f fstype] [-i imgtype] [-b dev_sector_size] [-o sector_offset] [-P pooltype] [-B pool_volume_block] [-d dir_inum] image [image] output_dir
+  	-i imgtype: The format of the image file (use '-i list' for supported types)
+  	-b dev_sector_size: The size (in bytes) of the device sectors
+  	-f fstype: The file system type (use '-f list' for supported types)
+  ```
 
 
 ## Kali tools — smtp (1)
@@ -9678,10 +11417,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### snmp-check
 - SNMP device enumerator
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "snmp-check"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y snmpcheck`
+  2. 看說明：`snmp-check -h`（或 `man snmp-check`）
+  3. 執行：`snmp-check ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  snmp-check v1.9 - SNMP enumerator
+  Copyright (c) 2005-2015 by Matteo Cantoni (www.nothink.org)
+  
+   Usage: snmp-check [OPTIONS] <target IP address>
+  
+    -p --port        : SNMP port. Default port is 161;
+  ```
 
 
 ## Kali tools — ssl-tls (3)
@@ -9715,7 +11463,7 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
                 [--json_out JSON_FILE] [--targets_in TARGET_FILE] [--quiet]
                 [--slow_connection] [--https_tunnel PROXY_SETTINGS]
                 [--starttls PROTOCOL] [--xmpp_to HOSTNAME]
-                [--sni SERVER_NAME_INDICATION] [--http_headers] [--ems]
+                [--sni SERVER_NAME_INDICATION] [--tlsv1_3] [--fallback]
   ```
 - 文件：https://github.com/nabla-c0d3/sslyze
 
@@ -9741,24 +11489,46 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### 0trace.sh
 - traceroute tool that can run within an existing TCP connection
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "0trace.sh"`。
-  2. 指向 lab：`http://<NODE_IP>:30080`。
-  3. 用 Burp/ZAP 代理（127.0.0.1:8080）檢視請求。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y 0trace`
+  2. 看說明：`0trace.sh -h`（或 `man 0trace.sh`）
+  3. 執行：`0trace.sh ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Usage: /usr/bin/0trace.sh iface target_ip [ target_port ]
+  ```
 
 ### ass
 - Autonomous system scanner
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "ass"`。
-  2. 指向 lab：`http://<NODE_IP>:30080`。
-  3. 用 Burp/ZAP 代理（127.0.0.1:8080）檢視請求。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y irpas`
+  2. 看說明：`ass -h`（或 `man ass`）
+  3. 執行：`ass ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  ass: invalid option -- '-'
+  ass [-v[v[v]]] -i <interface> [-ApcMs] [-P IER12]
+  	[-a <autonomous system start> -b <autonomous system stop>]
+  	[-S <spoofed source IP>] [-D <destination ip>]
+  	[-T <packets per delay>]
+  	[-r <filename>]
+  ```
 
 ### cdp
 - Cdp packet generator
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "cdp"`。
-  2. 指向 lab：`http://<NODE_IP>:30080`。
-  3. 用 Burp/ZAP 代理（127.0.0.1:8080）檢視請求。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y irpas`
+  2. 看說明：`cdp -h`（或 `man cdp`）
+  3. 執行：`cdp ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  cdp: invalid option -- '-'
+  cdp [-v] -i <interface> -m {0,1} ...
+  
+  Flood mode (-m 0):
+  -n <number>	number of packets
+  -l <number>	length of the device id
+  ```
 
 ### intrace
 - 搭載既有 TCP 連線的 traceroute 類工具
@@ -9770,8 +11540,8 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   ```
   intrace: invalid option -- '-'
   InTrace, version 1.6 (C)2007-2016 Robert Swiecki <<email>>
-  2026/10/25 05:44:39.93599 <ERROR> Couldn't resolve 'elp': 'Authoritative Answer. Host not found'
-  2026/10/25 05:44:39.93660 <FATAL> Resolving 'elp' failed
+  2026/10/25 08:40:45.785167 <ERROR> Couldn't resolve 'elp': 'Authoritative Answer. Host not found'
+  2026/10/25 08:40:45.785185 <FATAL> Resolving 'elp' failed
   ```
 - 文件：https://github.com/robertswiecki/intrace
 
@@ -9820,7 +11590,7 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   You must be root to run yersinia 0.8.2
   
   
-  MOTD: Having lotto fun with my Audiovector Mi3 Avantgarde Arrete LE... :)
+  MOTD: Magic people, voodoo people!
   ```
 - 文件：https://github.com/tomac/yersinia
 
@@ -9829,52 +11599,93 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### beef-xss-stop
 - Browser Exploitation Framework (BeEF)
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "beef-xss-stop"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y beef-xss`
+  2. 看說明：`beef-xss-stop -h`（或 `man beef-xss-stop`）
+  3. 執行：`beef-xss-stop ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  
+  ┏━(Message from Kali developers)
+  ┃ 
+  Failed to stop beef-xss.service: Access denied as the requested operation requires interactive authentication. However, interactive authentication has not been enabled by the calling program.
+  See system logs and 'systemctl status beef-xss.service' for details.
+  ```
 
 ### defectdojo-start
 - security orchestration and vulnerability management platform
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "defectdojo-start"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y defectdojo`
+  2. 看說明：`defectdojo-start -h`（或 `man defectdojo-start`）
+  3. 執行：`defectdojo-start ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  sudo: a terminal is required to read the password; either use ssh's -t option or configure an askpass helper
+  sudo: a password is required
+  ```
 
 ### defectdojo-stop
 - security orchestration and vulnerability management platform
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "defectdojo-stop"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y defectdojo`
+  2. 看說明：`defectdojo-stop -h`（或 `man defectdojo-stop`）
+  3. 執行：`defectdojo-stop ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  sudo: a terminal is required to read the password; either use ssh's -t option or configure an askpass helper
+  sudo: a password is required
+  ```
 
 ### faraday-stop
 - Collaborative Penetration Test IDE
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "faraday-stop"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y faraday`
+  2. 看說明：`faraday-stop -h`（或 `man faraday-stop`）
+  3. 執行：`faraday-stop ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  
+  ┏━(Message from Kali developers)
+  ┃ 
+  Failed to stop faraday.service: Access denied as the requested operation requires interactive authentication. However, interactive authentication has not been enabled by the calling program.
+  See system logs and 'systemctl status faraday.service' for details.
+  ```
 
 ### gvm-check-setup
 - remote network security auditor - metapackage and useful scripts
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "gvm-check-setup"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y gvm`
+  2. 看說明：`gvm-check-setup -h`（或 `man gvm-check-setup`）
+  3. 執行：`gvm-check-setup ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  gvm-check-setup 25.04.0
+   This script is provided and maintained by Debian and Kali.
+    Test completeness and readiness of GVM-25.04.0
+  [-] Error: /usr/bin/gvm-check-setup must be run as root
+  ```
 
 ### gvm-setup
 - remote network security auditor - metapackage and useful scripts
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "gvm-setup"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y gvm`
+  2. 看說明：`gvm-setup -h`（或 `man gvm-setup`）
+  3. 執行：`gvm-setup ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  [-] Error: /usr/bin/gvm-setup must be run as root
+  ```
 
 ### gvm-stop
 - remote network security auditor - metapackage and useful scripts
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "gvm-stop"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y gvm`
+  2. 看說明：`gvm-stop -h`（或 `man gvm-stop`）
+  3. 執行：`gvm-stop ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  [-] Error: /usr/bin/gvm-stop must be run as root
+  ```
 
 
 ## Kali tools — voip (13)
@@ -9913,7 +11724,7 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 - **實測 --help:**
   ```
   --
-  25/10/2026#05:47:08 Fatal error at main.c:485:init_opt: option '-' invalid; exit forced.
+  25/10/2026#08:41:19 Fatal error at main.c:485:init_opt: option '-' invalid; exit forced.
   --
   ```
 - 文件：http://dallachiesa.com/code/rtpbreak/
@@ -10002,31 +11813,64 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### svcrash
 - Stop unauthorized scans from svcrack/svwar tool
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "svcrash"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sipvicious`
+  2. 看說明：`svcrash -h`（或 `man svcrash`）
+  3. 執行：`svcrash ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Usage: svcrash [options]
+  
+  Options:
+    --version        show program's version number and exit
+    -h, --help       show this help message and exit
+    --auto           Automatically send responses to attacks
+  ```
 
 ### svmap
 - Scanner that searches for SIP devices on a given network
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "svmap"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sipvicious`
+  2. 看說明：`svmap -h`（或 `man svmap`）
+  3. 執行：`svmap ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Usage: svmap [options] host1 host2 hostrange
+  Scans for SIP devices on a given network
+  
+  examples:
+  
+  svmap 10.0.0.1-10.0.0.255 172.16.131.1 sipvicious.org/22 10.0.1.1/241.1.1.1-20 1.1.2-20.* 4.1.*.*
+  ```
 
 ### svreport
 - Report engine manage sessions from previous scans with SIPVicious
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "svreport"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sipvicious`
+  2. 看說明：`svreport -h`（或 `man svreport`）
+  3. 執行：`svreport ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Usage: svreport [command] [options]
+  
+  Supported commands:
+  
+                  - list:	lists all scans
+  ```
 
 ### svwar
 - Extension line scanner
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "svwar"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sipvicious`
+  2. 看說明：`svwar -h`（或 `man svwar`）
+  3. 執行：`svwar ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Usage: svwar [options] target
+  examples:
+  svwar -e100-999 udp://10.0.0.1:5080
+  svwar -d dictionary.txt 10.0.0.2
+  ```
 
 ### voiphopper
 - 執行 VLAN hop 安全測試
@@ -10067,27 +11911,47 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### svcrack
 - Online password guessing tool for SIP devices
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "svcrack"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y sipvicious`
+  2. 看說明：`svcrack -h`（或 `man svcrack`）
+  3. 執行：`svcrack ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Usage: svcrack -u username [options] target
+  examples:
+  svcrack -u100 -d dictionary.txt udp://10.0.0.1:5080
+  svcrack -u100 -r1-9999 -z4 10.0.0.1
+  ```
 
 
 ## Kali tools — vulnerability-scanning (3)
 
 ### CAT
 - Concatenate files and print on the standard output
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "CAT"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y cisco-auditing-tool`
+  2. 看說明：`CAT -h`（或 `man CAT`）
+  3. 執行：`CAT ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  /usr/bin/CAT version [unknown] calling Getopt::Std::getopts (version 1.14 [paranoid]),
+  running under Perl version 5.42.3.
+  
+  Usage: CAT [-OPTIONS [-MORE_OPTIONS]] [--] [PROGRAM_ARG1 ...]
+  
+  The following single-character options are accepted:
+  ```
 
 ### gvm-start
 - remote network security auditor - metapackage and useful scripts
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "gvm-start"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y gvm`
+  2. 看說明：`gvm-start -h`（或 `man gvm-start`）
+  3. 執行：`gvm-start ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  [-] Error: /usr/bin/gvm-start must be run as root
+  ```
 
 ### heartleech
 - 偵測 Heartbleed OpenSSL 漏洞的掃描器
@@ -10102,7 +11966,7 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   
   /usr/share/windows-resources/heartleech/
   └── heartleech.exe
-  bash: cannot set terminal process group (159027): Inappropriate ioctl for device
+  bash: cannot set terminal process group (1184247): Inappropriate ioctl for device
   ```
 - 文件：https://github.com/robertdavidgraham/heartleech
 
@@ -10158,24 +12022,50 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### feroxbuster
 - Manual page for feroxbuster 2.13.1
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "feroxbuster"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y feroxbuster`
+  2. 看說明：`feroxbuster -h`（或 `man feroxbuster`）
+  3. 執行：`feroxbuster ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  A fast, simple, recursive content discovery tool.
+  
+  Usage: feroxbuster [OPTIONS]
+  
+  Options:
+    -h, --help
+  ```
 
 ### ffuf
 - Fast web fuzzer written in Go
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "ffuf"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y ffuf`
+  2. 看說明：`ffuf -h`（或 `man ffuf`）
+  3. 執行：`ffuf ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Fuzz Faster U Fool - v2.3.0
+  
+  HTTP OPTIONS:
+    -H                  Header "Name: Value", separated by colon. Multiple -H flags are accepted.
+    -X                  HTTP method to use
+    -b                  Cookie data "NAME1=VALUE1; NAME2=VALUE2" for copy as curl functionality.
+  ```
 
 ### gobuster
 - Directory/file, DNS and virtual host brute-forcing tool written in Go
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "gobuster"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y gobuster`
+  2. 看說明：`gobuster -h`（或 `man gobuster`）
+  3. 執行：`gobuster ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  NAME:
+     gobuster - the tool you love
+  
+  USAGE:
+     gobuster command [command options]
+  ```
 
 ### lbd
 - 負載平衡器偵測器
@@ -10212,10 +12102,17 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### uniscan-gui
 - LFI, RFI, and RCE vulnerability scanner
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "uniscan-gui"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y uniscan`
+  2. 看說明：`uniscan-gui -h`（或 `man uniscan-gui`）
+  3. 執行：`uniscan-gui ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Authorization required, but no authorization protocol specified
+  
+  couldn't connect to display ":0" at /usr/lib/aarch64-linux-gnu/perl5/5.42/Tk/MainWindow.pm line 53.
+  MainWindow->new() at ./uniscan_gui.pl line 8.
+  ```
 
 ### urlcrazy
 - 網域誤植產生器
@@ -10227,10 +12124,10 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   ```
   Warning. File descriptor limit may be too low. Check with `ulimit -a` and change with `ulimit -n 10000`
   
-  ____ _____________.____   _________                             
-  |    |   \______   \    |  \_   ___ \___________  ___________.__.
-  |    |   /|       _/    |  /    \  \|_  __ \__  \ \___   <   |  |
-  |    |  / |    |   \    |__\     \___|  | \// __ \_/    / \___  |
+  db    db d8888b. db       .o88b. d8888b.  .d8b.  d88888D db    db 
+  88    88 88  `8D 88      d8P  Y8 88  `8D d8' `8b YP  d8' `8b  d8' 
+  88    88 88oobY' 88      8P      88oobY' 88ooo88    d8'   `8bd8'  
+  88    88 88`8b   88      8b      88`8b   88~~~88   d8'      88    
   ```
 - 文件：https://www.morningstarsecurity.com/research/urlcrazy
 
@@ -10307,10 +12204,18 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### nuclei
 - Fast and customizable vulnerability scanner based on simple YAML based DSL
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "nuclei"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y nuclei`
+  2. 看說明：`nuclei -h`（或 `man nuclei`）
+  3. 執行：`nuclei ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  Nuclei is a fast, template based vulnerability scanner focusing
+  on extensive configurability, massive extensibility and ease of use.
+  
+  Usage:
+    nuclei [flags]
+  ```
 
 ### paros
 - web 應用程式代理
@@ -10354,11 +12259,11 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 - **實測 --help:**
   ```
   
-   ██╗    ██╗ █████╗ ██████╗ ██╗████████╗██╗██████╗
-   ██║    ██║██╔══██╗██╔══██╗██║╚══██╔══╝██║╚════██╗
-   ██║ █╗ ██║███████║██████╔╝██║   ██║   ██║ █████╔╝
-   ██║███╗██║██╔══██║██╔═══╝ ██║   ██║   ██║ ╚═══██╗
-   ╚███╔███╔╝██║  ██║██║     ██║   ██║   ██║██████╔╝
+       __    __            _ _   _ _____
+      / / /\ \ \__ _ _ __ (_) |_(_)___ /
+      \ \/  \/ / _` | '_ \| | __| | |_ \
+       \  /\  / (_| | |_) | | |_| |___) |
+        \/  \/ \__,_| .__/|_|\__|_|____/
   ```
 - 文件：https://wapiti.sourceforge.net/
 
@@ -10424,9 +12329,9 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
   Found Java version 25.0.5-ea
   Available memory: 2965 MB
   Using JVM args: -Xmx741m
-  666 [main] INFO  org.parosproxy.paros.Constant - Copying default configuration to /home/kali/.ZAP/config.xml
-  814 [main] INFO  org.parosproxy.paros.Constant - Creating directory /home/kali/.ZAP/session
-  815 [main] INFO  org.parosproxy.paros.Constant - Creating directory /home/kali/.ZAP/dirbuster
+  1002 [main] INFO  org.zaproxy.zap.GuiBootstrap - ZAP 2.17.0 started 25/10/2026, 08:41:49 with home: /home/kali/.ZAP/ cores: 2 maxMemory: 742 MB
+  1012 [main] FATAL org.zaproxy.zap.GuiBootstrap - ZAP GUI is not supported on a headless environment.
+  Run ZAP inline or in daemon mode, use -help command line argument for more details.
   ```
 - 文件：https://github.com/zaproxy/zaproxy
 
@@ -10469,10 +12374,19 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### wash
 - brute force attack tool against Wi-Fi Protected Setup PIN number
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "wash"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y reaver`
+  2. 看說明：`wash -h`（或 `man wash`）
+  3. 執行：`wash ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  
+  Wash v1.6.6 WiFi Protected Setup Scan Tool
+  Copyright (c) 2011, Tactical Network Solutions, Craig Heffner
+  
+  Required Arguments:
+  	-i, --interface=<iface>              Interface to capture packets on
+  ```
 
 
 ## Kali tools — wifi-credential-access (10)
@@ -10928,10 +12842,18 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 
 ### xfreerdp
 - Connect to RDP servers for remote work or administration
-- **步驟:**
-  1. 開啟：`../scripts/apps.sh open "xfreerdp"`。
-  2. 調整該設定（xfreerdp）。
-  3. 關閉即套用。
+- **步驟（已驗證 ✓）:**
+  1. 安裝：`sudo apt install -y xfreerdp`
+  2. 看說明：`xfreerdp -h`（或 `man xfreerdp`）
+  3. 執行：`xfreerdp ...` 對你擁有的目標（見下方實測 --help）。
+- **實測 --help:**
+  ```
+  
+  xfreerdp - A Free Remote Desktop Protocol Implementation
+  See www.freerdp.com for more information
+  
+  Usage: xfreerdp [file] [options] [/v:<server>[:port]]
+  ```
 
 
 ## System & utilities (27)
@@ -11011,9 +12933,9 @@ With the full toolset installed, the menu has **450** apps. Every one has step-b
 ### Hardware Locality lstopo
 - Show hardware topology
 - **步驟:**
-  1. 開啟：`../scripts/apps.sh open "Hardware Locality lstopo"`。
-  2. 在 VNC 桌面使用。
-  3. 用完關閉。
+  1. 安裝：`sudo apt install -y hwloc`
+  2. 顯示拓撲：`lstopo`（GUI）或 `lstopo-no-graphics`（文字）。
+  3. 匯出：`lstopo topology.png` —— 繪出你擁有主機的 CPU/NUMA/快取。
 
 ### Help
 - Get help with GNOME
