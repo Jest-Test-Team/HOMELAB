@@ -8,7 +8,15 @@ from the Kali VM. **Authorized, operator-owned targets only** — see
 |---|---|
 | [`attack-tutorial.en.md`](attack-tutorial.en.md) | Step-by-step tutorial (English) |
 | [`attack-tutorial.zh-TW.md`](attack-tutorial.zh-TW.md) | 教學（繁體中文） |
-| `scripts/_common.sh` | Shared config + helpers (sourced, not run) |
+| [`docs/tutorials.en.md`](docs/tutorials.en.md) / [`.zh-TW.md`](docs/tutorials.zh-TW.md) | **Per-tool step-by-step for all 382 tools** (EN + 繁中) — real binaries + install/help/run steps |
+| [`docs/catalogue.en.md`](docs/catalogue.en.md) / [`.zh-TW.md`](docs/catalogue.zh-TW.md) | Compact index of all 382 Kali tools by category, from the VM's apt metadata |
+| [`docs/`](docs/README.md) | Doc index: catalogue + per-app tutorials (`installed-apps.md`) + deep-dives |
+| [`scripts/README.md`](scripts/README.md) | How to install, drive, and **chain** the tools |
+| [`scripts/tool.sh`](scripts/tool.sh) | Run **any** installed tool with ROE banner + evidence |
+| [`scripts/apps.sh`](scripts/apps.sh) | Launch **any** GUI app on the VNC desktop |
+| [`scripts/install-tools.sh`](scripts/install-tools.sh) | Install by group or whole category (`cat:<slug>`) |
+| [`scripts/toolkit.sh`](scripts/toolkit.sh) | Orchestrate/chain the common workflow → combined report |
+| `scripts/_common.sh` | Shared config + helpers (sourced, not run; `TARGET` required) |
 | `scripts/00-recon.sh` | Port-exposure recon |
 | `scripts/10-api-test.sh` | API health + optional OWASP ZAP baseline |
 | `scripts/20-mcp-auth.sh` | MCP bearer-token + Host-allowlist checks |
@@ -20,9 +28,9 @@ from the Kali VM. **Authorized, operator-owned targets only** — see
 
 ```bash
 git clone <this-repo> && cd HOMELAB/lab/kali/scripts   # or scp the scripts over
-TARGET=192.168.64.4 ./run-all.sh                        # Shared-net node address
+TARGET=<NODE_IP> ./run-all.sh                        # Shared-net node address
 # with the valid MCP token (fetched on the node), to exercise the auth-pass path:
-MCP_TOKEN=<token> TARGET=192.168.64.4 ./run-all.sh
+MCP_TOKEN=<token> TARGET=<NODE_IP> ./run-all.sh
 ```
 
 Evidence is written to `~/lab-evidence/kali-attack-<timestamp>.md`. Copy it off
@@ -33,6 +41,8 @@ the VM with the `scp -o ProxyJump=...` line in [`../ROE.md`](../ROE.md).
 - `lab/tests/*` are the same checks wired for the **isolated** lab segment
   (`10.66.6.10:30080/30081`) and the Ansible/Terraform bring-up.
 - These `lab/kali/scripts/*` are the **hands-on, VM-run** version: parameterized
-  by `TARGET`, safe to point at either the Shared-net node (`192.168.64.x`) or the
+  by `TARGET`, safe to point at either the Shared-net node (`<NODE_IP>`) or the
   isolated gateway (`10.66.6.10`) once that segment is up.
+- Beyond the fixed Phase-1 suite, [`scripts/toolkit.sh`](scripts/toolkit.sh) drives the
+  broader Kali toolset (nmap, nuclei, nikto, ffuf, …) documented in [`docs/`](docs/README.md).
 - The expected PASS/FAIL baseline and a worked run are in the tutorials.

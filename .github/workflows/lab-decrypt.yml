@@ -3,7 +3,7 @@ name: lab-decrypt
 # SEALED manual decryption. You asked for a workflow where you input your key once
 # to reveal the reports. On a PUBLIC runner, emitting plaintext would leak it, so
 # this instead: decrypts with your archive private key (provided just-in-time as the
-# masked secret LAB_DECRYPT_IDENTITY) and RE-ENCRYPTS the result to a one-time
+# masked `LAB_DECRYPT_IDENTITY` secret) and RE-ENCRYPTS the result to a one-time
 # passphrase you supply, into a 1-day artifact. You download it and open it locally
 # with that passphrase. Plaintext never leaves the runner, never hits the logs.
 #

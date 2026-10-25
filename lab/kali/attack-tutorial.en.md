@@ -50,12 +50,12 @@ your Mac:
 
 ```bash
 # from the Mac (adjust the Kali IP)
-scp -r lab/kali/scripts kali@192.168.64.7:~/kali-scripts
+scp -r lab/kali/scripts kali@<KALI_IP>:~/kali-scripts
 ```
 
 Decide your `TARGET`:
 
-- **Shared network (current setup):** the homelab node, e.g. `192.168.64.4`.
+- **Shared network (current setup):** the homelab node, e.g. `<NODE_IP>`.
 - **Isolated lab segment (after `lab/` bring-up):** the gateway `10.66.6.10`.
 
 ---
@@ -66,7 +66,7 @@ Decide your `TARGET`:
 
 ```bash
 cd ~/kali-scripts
-TARGET=192.168.64.4 ./run-all.sh
+TARGET=<NODE_IP> ./run-all.sh
 ```
 
 This runs every step and writes `~/lab-evidence/kali-attack-<timestamp>.md`.
@@ -74,11 +74,11 @@ This runs every step and writes `~/lab-evidence/kali-attack-<timestamp>.md`.
 ### Step by step
 
 ```bash
-TARGET=192.168.64.4 ./00-recon.sh          # which ports are open
-TARGET=192.168.64.4 ./10-api-test.sh       # api healthy, no info leak
-TARGET=192.168.64.4 ./20-mcp-auth.sh       # MCP auth + Host allow-list
-TARGET=192.168.64.4 ./30-segmentation.sh   # DB / 6443 must be blocked
-TARGET=192.168.64.4 ./40-rate-limit.sh 30  # controlled burst
+TARGET=<NODE_IP> ./00-recon.sh          # which ports are open
+TARGET=<NODE_IP> ./10-api-test.sh       # api healthy, no info leak
+TARGET=<NODE_IP> ./20-mcp-auth.sh       # MCP auth + Host allow-list
+TARGET=<NODE_IP> ./30-segmentation.sh   # DB / 6443 must be blocked
+TARGET=<NODE_IP> ./40-rate-limit.sh 30  # controlled burst
 ```
 
 ### Exercising the valid-token MCP path
@@ -90,7 +90,7 @@ accepted, fetch the token on the node and pass it in:
 # on the homelab node (over SSH):
 sudo k3s kubectl -n homelab get secret mcp-auth -o jsonpath='{.data.token}' | base64 -d; echo
 # then from Kali:
-MCP_TOKEN='<paste-token>' TARGET=192.168.64.4 ./20-mcp-auth.sh
+MCP_TOKEN='<paste-token>' TARGET=<NODE_IP> ./20-mcp-auth.sh
 ```
 
 Expected with a valid token: forged `Host` → `403`, correct `Host` → not `401`
@@ -129,7 +129,7 @@ scp -o ProxyJump=<vm-user>@utm-homelab \
   kali@10.66.6.20:lab-evidence/'*' /Volumes/HOMELAB/Backups/lab-evidence/
 ```
 
-(On the Shared network, `scp -i ~/.ssh/homelab_utm_ed25519 kali@192.168.64.7:lab-evidence/'*' …`.)
+(On the Shared network, `scp -i ~/.ssh/homelab_utm_ed25519 kali@<KALI_IP>:lab-evidence/'*' …`.)
 
 ---
 

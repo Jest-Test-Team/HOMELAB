@@ -49,12 +49,12 @@ sudo apt update && sudo apt install -y nmap curl   # zaproxy 選用
 
 ```bash
 # 在 Mac 上執行（請改成你的 Kali IP）
-scp -r lab/kali/scripts kali@192.168.64.7:~/kali-scripts
+scp -r lab/kali/scripts kali@<KALI_IP>:~/kali-scripts
 ```
 
 決定你的 `TARGET`：
 
-- **Shared 網路（目前設定）：** homelab 節點，例如 `192.168.64.4`。
+- **Shared 網路（目前設定）：** homelab 節點，例如 `<NODE_IP>`。
 - **隔離實驗室網段（跑完 `lab/` 佈署後）：** 閘道 `10.66.6.10`。
 
 ---
@@ -65,7 +65,7 @@ scp -r lab/kali/scripts kali@192.168.64.7:~/kali-scripts
 
 ```bash
 cd ~/kali-scripts
-TARGET=192.168.64.4 ./run-all.sh
+TARGET=<NODE_IP> ./run-all.sh
 ```
 
 這會依序執行每個步驟，並寫入
@@ -74,11 +74,11 @@ TARGET=192.168.64.4 ./run-all.sh
 ### 逐步執行
 
 ```bash
-TARGET=192.168.64.4 ./00-recon.sh          # 哪些連接埠開著
-TARGET=192.168.64.4 ./10-api-test.sh       # api 健康、不洩漏資訊
-TARGET=192.168.64.4 ./20-mcp-auth.sh       # MCP 驗證 + Host 白名單
-TARGET=192.168.64.4 ./30-segmentation.sh   # DB / 6443 必須被阻擋
-TARGET=192.168.64.4 ./40-rate-limit.sh 30  # 受控爆量
+TARGET=<NODE_IP> ./00-recon.sh          # 哪些連接埠開著
+TARGET=<NODE_IP> ./10-api-test.sh       # api 健康、不洩漏資訊
+TARGET=<NODE_IP> ./20-mcp-auth.sh       # MCP 驗證 + Host 白名單
+TARGET=<NODE_IP> ./30-segmentation.sh   # DB / 6443 必須被阻擋
+TARGET=<NODE_IP> ./40-rate-limit.sh 30  # 受控爆量
 ```
 
 ### 驗證「正確 token」的 MCP 路徑
@@ -90,7 +90,7 @@ TARGET=192.168.64.4 ./40-rate-limit.sh 30  # 受控爆量
 # 在 homelab 節點（透過 SSH）：
 sudo k3s kubectl -n homelab get secret mcp-auth -o jsonpath='{.data.token}' | base64 -d; echo
 # 接著在 Kali 上：
-MCP_TOKEN='<貼上 token>' TARGET=192.168.64.4 ./20-mcp-auth.sh
+MCP_TOKEN='<貼上 token>' TARGET=<NODE_IP> ./20-mcp-auth.sh
 ```
 
 使用有效 token 的預期結果：偽造 `Host` → `403`；正確 `Host` → 非 `401`
@@ -128,7 +128,7 @@ scp -o ProxyJump=<vm-user>@utm-homelab \
   kali@10.66.6.20:lab-evidence/'*' /Volumes/HOMELAB/Backups/lab-evidence/
 ```
 
-（在 Shared 網路上：`scp -i ~/.ssh/homelab_utm_ed25519 kali@192.168.64.7:lab-evidence/'*' …`。）
+（在 Shared 網路上：`scp -i ~/.ssh/homelab_utm_ed25519 kali@<KALI_IP>:lab-evidence/'*' …`。）
 
 ---
 

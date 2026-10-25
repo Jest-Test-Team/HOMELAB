@@ -5,7 +5,7 @@
 # Do not run against anything you do not own.
 #
 # Configuration (override via the environment):
-#   TARGET          node/gateway to test        (default 192.168.64.4)
+#   TARGET          node/gateway to test        (REQUIRED, e.g. your node IP)
 #   API_PORT        api NodePort                 (default 30080)
 #   MCP_PORT        mcp NodePort                 (default 30081)
 #   DASH_PORT       dashboard NodePort           (default 30300)
@@ -17,7 +17,7 @@
 #   EVIDENCE_DIR    where run-all.sh writes       (default ~/lab-evidence)
 set -Eeuo pipefail
 
-TARGET="${TARGET:-192.168.64.4}"
+TARGET="${TARGET:?set TARGET to the target IP, e.g. TARGET=<node-ip> ./run-all.sh}"
 API_PORT="${API_PORT:-30080}"
 MCP_PORT="${MCP_PORT:-30081}"
 DASH_PORT="${DASH_PORT:-30300}"
