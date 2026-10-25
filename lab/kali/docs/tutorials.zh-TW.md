@@ -6465,7 +6465,7 @@
 - **類型:** 鑑識日期時間函式庫（plaso 使用）
 - **步驟:**
   1. 安裝：`sudo apt install -y python3-dfdatetime`
-  2. VM 已驗證：版本 20260730
+  2. VM 實測：`PosixTime(1700000000)` → `2023-11-14 22:13:20`（v20260730）
   3. 由 log2timeline/plaso 使用的函式庫，不直接執行
 - 文件｜Docs: https://github.com/log2timeline/dfdatetime
 
@@ -6474,7 +6474,7 @@
 - **類型:** 數位鑑識虛擬檔案系統（函式庫）
 - **步驟:**
   1. 安裝：`sudo apt install -y python3-dfvfs`
-  2. VM 已驗證：版本 20251019
+  2. VM 實測：`dfvfs.path.factory.Factory` 載入成功（v20251019）
   3. 讓鑑識工具統一讀取磁碟映像/分割區
 - 文件｜Docs: https://github.com/log2timeline/dfvfs
 
@@ -6483,7 +6483,7 @@
 - **類型:** Windows Registry 鑑識函式庫
 - **步驟:**
   1. 安裝：`sudo apt install -y python3-dfwinreg`
-  2. VM 已驗證：版本 20260411
+  2. VM 實測：`dfwinreg.registry.WinRegistry` 載入成功（v20260411）
   3. 供 plaso 與自訂腳本解析 Registry hive
 - 文件｜Docs: https://github.com/log2timeline/dfwinreg
 
@@ -6493,7 +6493,7 @@
 - **步驟:**
   1. 安裝：`sudo apt install -y python3-distorm3`
   2. 在 Python 中使用反組譯位元組
-  3. 函式庫（用 import，非直接執行）—— 記憶體鑑識工具會用到
+  3. 本 arm64 VM 實測：原生模組無法載入 —— distorm3 針對 x86/AMD64；arm64 上請改用 `python3-capstone`。
 - 文件｜Docs: https://github.com/gdabah/distorm
 
 ### `radare2` ✓ verified on VM

@@ -6465,7 +6465,7 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 - **Type:** Forensic date/time library (used by plaso)
 - **Steps:**
   1. Install: `sudo apt install -y python3-dfdatetime`
-  2. Verified on VM: version 20260730; `python3 -c "import dfdatetime"`
+  2. Verified run on VM: `PosixTime(1700000000).CopyToDateTimeString()` → `2023-11-14 22:13:20` (v20260730)
   3. A library consumed by log2timeline/plaso, not run directly
 - Docs: https://github.com/log2timeline/dfdatetime
 
@@ -6474,7 +6474,7 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 - **Type:** Digital-forensics virtual file system (library)
 - **Steps:**
   1. Install: `sudo apt install -y python3-dfvfs`
-  2. Verified on VM: version 20251019; `python3 -c "import dfvfs"`
+  2. Verified run on VM: `dfvfs.path.factory.Factory` loaded (v20251019)
   3. Lets forensic tools read disk images/partitions uniformly
 - Docs: https://github.com/log2timeline/dfvfs
 
@@ -6483,7 +6483,7 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 - **Type:** Windows Registry forensics library
 - **Steps:**
   1. Install: `sudo apt install -y python3-dfwinreg`
-  2. Verified on VM: version 20260411; `python3 -c "import dfwinreg"`
+  2. Verified run on VM: `dfwinreg.registry.WinRegistry` loaded (v20260411)
   3. Parses Registry hives for plaso and custom scripts
 - Docs: https://github.com/log2timeline/dfwinreg
 
@@ -6493,7 +6493,7 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 - **Steps:**
   1. Install: `sudo apt install -y python3-distorm3`
   2. Use in Python: `python3 -c "import distorm3; print(distorm3.Decode(0x1000, b'\x55\x8b\xec'))"`
-  3. A library (imported, not run) — used by memory-forensics tools
+  3. Note (verified on this arm64 VM): the native module fails to load here — distorm3 targets x86/AMD64; use `python3-capstone` on arm64.
 - Docs: https://github.com/gdabah/distorm
 
 ### `radare2` ✓ verified on VM
