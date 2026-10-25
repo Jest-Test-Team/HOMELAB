@@ -17,7 +17,7 @@ Kali 選單中工具的參考：每個是什麼、逐步教學，全部限於操
 
 **Three views, on purpose:**
 - `catalogue.*.md` = the **exhaustive list of every Kali tool by category** (installed or not) — this is "all applications in Kali".
-- `installed-apps.md` = what is **on this VM right now** (a minimal install), with a tutorial per app.
+- `installed-apps.md` = what is **on this VM right now** (450 apps after the full toolset install), each with an intro, a launch command, and a tutorial link.
 - `applications.*.md` = **deeper walkthroughs** for the handful of tools you use most against this lab.
 
 Install any category with `../scripts/install-tools.sh cat:<slug>`, drive any tool with
