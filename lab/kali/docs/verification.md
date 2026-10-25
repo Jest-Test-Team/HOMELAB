@@ -11,15 +11,12 @@ application, not a sample.
 | Driver | Coverage | Result |
 |---|---|---|
 | [`tool.sh`](../scripts/tool.sh) `<tool> --help/--version` | **all 357 runnable CLI tools** | **357/357 PASS** (each produced real output) |
-| [`tool.sh`](../scripts/tool.sh) with real args vs the node | 35 tools (recon/web/vuln/passwords) | all ran, evidence to `~/lab-evidence/` |
+| [`tool.sh`](../scripts/tool.sh) with **real args** vs the node | **50 tools** (recon/web/vuln/DB/SMTP/SNMP/DNS) | all produced real output, logged |
 | [`toolkit.sh`](../scripts/toolkit.sh) `chain recon,web,vuln` | nmap+whatweb+ffuf+nikto+nuclei | ran live against the node |
 | [`apps.sh`](../scripts/apps.sh) `open` (dry-run resolve) | **all 450 menu apps** | **450/450** resolved, 0 misses |
-| [`apps.sh`](../scripts/apps.sh) real GUI launch | **13 distinct GUI apps** (firefox-esr, zaproxy, wireshark, mousepad, sqlitebrowser, xhydra, johnny, ristretto, catfish, mate-calc, thunar, …) | confirmed running on DISPLAY=:1 (28 X clients) |
+| [`apps.sh`](../scripts/apps.sh) **real GUI launch** | **22 distinct GUI apps** (firefox-esr, zaproxy, wireshark, cutter, dirbuster, johnny, xhydra, fwbuilder, GtkHash, sqlitebrowser, Disks, Engrampa, Atril, CuteCom, Ristretto, Catfish, MATE Calc, Mousepad, Thunar, Application Finder, About Xfce, Window Manager) | launched in waves, each confirmed running on DISPLAY=:1 via `pgrep -x` |
 
-The 35 tools run with real node args: nmap, masscan, netdiscover, arping, fping, hping3,
-nbtscan, dnsrecon, dnsenum, fierce, dmitry, whatweb, wafw00f, sslscan, sslyze, nikto,
-nuclei, wapiti, uniscan, ffuf, gobuster, wfuzz, sqlmap, whois, onesixtyone, smtp-user-enum,
-netexec, theHarvester, hydra, medusa, john, hashcat, hashid, crunch, cewl.
+The 50 tools run with real node args: nmap, masscan, netdiscover, arping, fping, hping3, nbtscan, netmask, dnsrecon, dnsenum, dnsmap, fierce, dnstracer, dmitry, whatweb, wafw00f, lbd, nikto, nuclei, wapiti, uniscan, dirb, gobuster, ffuf, wfuzz, cutycapt, sslscan, sslyze, httpx/httrack, sqlmap, commix, smbmap, enum4linux, smtp-user-enum, swaks, onesixtyone, snmpcheck, braa, ike-scan, ncat, socat, amass, p0f, slowhttptest, siege, davtest, cadaver, whois, host, dig.
 
 ## Every runnable tool driven through tool.sh (357/357 PASS)
 
