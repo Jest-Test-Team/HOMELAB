@@ -108,6 +108,12 @@ and `lab/crypto/README.md`.
 are the VM-run, `TARGET`-parameterized version usable against either the Shared-net
 node or the isolated gateway. See `lab/kali/README.md`.
 
+`lab/kali/docs/applications.{en,zh-TW}.md` catalogue the full Kali toolset (by whisker-menu
+category) with per-tool intros + step-by-step tutorials. `lab/kali/scripts/install-tools.sh`
+installs them (the VM is a minimal install); `lab/kali/scripts/toolkit.sh` runs and **chains**
+them (`toolkit.sh chain recon,web,vuln`) into a single encrypted-pipeline-ready evidence report.
+See `lab/kali/scripts/README.md`.
+
 ## `docs/`
 
 | File | Contents |

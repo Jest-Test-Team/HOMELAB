@@ -8,7 +8,11 @@ from the Kali VM. **Authorized, operator-owned targets only** — see
 |---|---|
 | [`attack-tutorial.en.md`](attack-tutorial.en.md) | Step-by-step tutorial (English) |
 | [`attack-tutorial.zh-TW.md`](attack-tutorial.zh-TW.md) | 教學（繁體中文） |
-| `scripts/_common.sh` | Shared config + helpers (sourced, not run) |
+| [`docs/`](docs/README.md) | Full tool **catalogue** + per-tool tutorials (EN + 繁中) |
+| [`scripts/README.md`](scripts/README.md) | How to install, drive, and **chain** the tools |
+| [`scripts/install-tools.sh`](scripts/install-tools.sh) | Install the catalogue's tools (this VM is minimal) |
+| [`scripts/toolkit.sh`](scripts/toolkit.sh) | One entry point to run/chain tools → combined report |
+| `scripts/_common.sh` | Shared config + helpers (sourced, not run; `TARGET` required) |
 | `scripts/00-recon.sh` | Port-exposure recon |
 | `scripts/10-api-test.sh` | API health + optional OWASP ZAP baseline |
 | `scripts/20-mcp-auth.sh` | MCP bearer-token + Host-allowlist checks |
@@ -33,6 +37,8 @@ the VM with the `scp -o ProxyJump=...` line in [`../ROE.md`](../ROE.md).
 - `lab/tests/*` are the same checks wired for the **isolated** lab segment
   (`10.66.6.10:30080/30081`) and the Ansible/Terraform bring-up.
 - These `lab/kali/scripts/*` are the **hands-on, VM-run** version: parameterized
-  by `TARGET`, safe to point at either the Shared-net node (`192.168.64.x`) or the
+  by `TARGET`, safe to point at either the Shared-net node (`<NODE_IP>`) or the
   isolated gateway (`10.66.6.10`) once that segment is up.
+- Beyond the fixed Phase-1 suite, [`scripts/toolkit.sh`](scripts/toolkit.sh) drives the
+  broader Kali toolset (nmap, nuclei, nikto, ffuf, …) documented in [`docs/`](docs/README.md).
 - The expected PASS/FAIL baseline and a worked run are in the tutorials.
