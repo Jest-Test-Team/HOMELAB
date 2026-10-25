@@ -8,10 +8,13 @@ from the Kali VM. **Authorized, operator-owned targets only** — see
 |---|---|
 | [`attack-tutorial.en.md`](attack-tutorial.en.md) | Step-by-step tutorial (English) |
 | [`attack-tutorial.zh-TW.md`](attack-tutorial.zh-TW.md) | 教學（繁體中文） |
-| [`docs/`](docs/README.md) | Full tool **catalogue** + per-tool tutorials (EN + 繁中) |
+| [`docs/catalogue.en.md`](docs/catalogue.en.md) / [`.zh-TW.md`](docs/catalogue.zh-TW.md) | **All 382 Kali tools by menu category** (EN + 繁中), from the VM's apt metadata |
+| [`docs/`](docs/README.md) | Doc index: catalogue + per-app tutorials (`installed-apps.md`) + deep-dives |
 | [`scripts/README.md`](scripts/README.md) | How to install, drive, and **chain** the tools |
-| [`scripts/install-tools.sh`](scripts/install-tools.sh) | Install the catalogue's tools (this VM is minimal) |
-| [`scripts/toolkit.sh`](scripts/toolkit.sh) | One entry point to run/chain tools → combined report |
+| [`scripts/tool.sh`](scripts/tool.sh) | Run **any** installed tool with ROE banner + evidence |
+| [`scripts/apps.sh`](scripts/apps.sh) | Launch **any** GUI app on the VNC desktop |
+| [`scripts/install-tools.sh`](scripts/install-tools.sh) | Install by group or whole category (`cat:<slug>`) |
+| [`scripts/toolkit.sh`](scripts/toolkit.sh) | Orchestrate/chain the common workflow → combined report |
 | `scripts/_common.sh` | Shared config + helpers (sourced, not run; `TARGET` required) |
 | `scripts/00-recon.sh` | Port-exposure recon |
 | `scripts/10-api-test.sh` | API health + optional OWASP ZAP baseline |

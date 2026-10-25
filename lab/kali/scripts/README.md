@@ -19,13 +19,23 @@ export TARGET=<NODE_IP>          # the homelab node you own
 
 | Script | Purpose |
 |---|---|
-| [`apps.sh`](apps.sh) | Generic launcher — `open`/`info`/`list` **any** of the installed desktop apps (reads live `.desktop` entries). |
+| [`tool.sh`](tool.sh) | Run **any** installed Kali CLI tool with the ROE banner + evidence capture (`tool.sh <name> [args]`). |
+| [`apps.sh`](apps.sh) | Generic launcher — `open`/`info`/`list` **any** installed desktop (GUI) app (reads live `.desktop` entries). |
+| [`toolkit.sh`](toolkit.sh) | Orchestrate & **chain** the common workflow (recon/web/vuln/…) into one report. |
+| [`install-tools.sh`](install-tools.sh) | Install tools by group or **whole category** (`cat:<slug>`), or `--all`. |
 | [`list-apps.sh`](list-apps.sh) | Enumerate **every** installed app on the VM → regenerates `../docs/installed-apps.md`. |
-| [`install-tools.sh`](install-tools.sh) | Install the tools from the catalogue (this VM is a minimal install). |
-| [`toolkit.sh`](toolkit.sh) | One entry point to run, **chain**, and `launch` the tools; writes a combined report. |
-| [`run-all.sh`](run-all.sh) | The fixed Phase-1 control suite (api/mcp/segmentation/rate). |
-| `00-recon.sh … 40-rate-limit.sh` | The individual Phase-1 steps `run-all.sh` calls. |
-| [`_common.sh`](_common.sh) | Shared config + helpers (sourced; `TARGET` is **required**). |
+| [`run-all.sh`](run-all.sh) + `00–40` | The fixed Phase-1 control suite and its steps. |
+
+### Three ways to drive tools — pick by need
+
+| You want to… | Use | Covers |
+|---|---|---|
+| Run **one specific tool** (any of the 382) | `./tool.sh nmap -Pn -sV "$TARGET"` | the whole catalogue |
+| Open a **GUI app** | `./apps.sh open "Wireshark"` | every desktop app |
+| Run a **standard multi-tool sweep** | `./toolkit.sh chain recon,web,vuln` | the common workflow |
+
+Install first: `./install-tools.sh cat:web` (a whole category) or `./install-tools.sh --all`.
+(`_common.sh` holds the shared config/helpers the Phase-1 steps source; `TARGET` is **required**.)
 
 ### List what's actually installed
 

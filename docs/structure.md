@@ -112,7 +112,7 @@ node or the isolated gateway. See `lab/kali/README.md`.
 category) with per-tool intros + step-by-step tutorials. `lab/kali/scripts/install-tools.sh`
 installs them (the VM is a minimal install); `lab/kali/scripts/toolkit.sh` runs and **chains**
 them (`toolkit.sh chain recon,web,vuln`) into a single encrypted-pipeline-ready evidence report.
-See `lab/kali/scripts/README.md`.
+See `lab/kali/scripts/README.md`. `lab/kali/docs/catalogue.{en,zh-TW}.md` list **all 382 Kali tools by menu category** (from apt metadata); `scripts/tool.sh` runs any one tool, `scripts/apps.sh` launches any GUI app, `scripts/install-tools.sh cat:<slug>` installs a whole category.
 
 ## `docs/`
 

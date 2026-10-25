@@ -7,14 +7,19 @@ Kali 選單中工具的參考：每個是什麼、逐步教學，全部限於操
 
 | Document | Language | Contents |
 |---|---|---|
-| [`installed-apps.md`](installed-apps.md) | EN + 繁中 | **Every application on this VM (78), each with an intro + step-by-step tutorial**, grouped; the app set is enumerated from the VM by [`../scripts/list-apps.sh`](../scripts/list-apps.sh) |
-| [`applications.en.md`](applications.en.md) | English | Offensive-tool catalogue by menu category (01-Reconnaissance … 16-Services), intro + step-by-step per tool |
-| [`applications.zh-TW.md`](applications.zh-TW.md) | 繁體中文 | 攻擊工具依選單分類的清單，每個工具的介紹＋逐步教學 |
+| [`catalogue.en.md`](catalogue.en.md) | English | **The complete Kali toolset — all 382 tools across 29 menu categories**, each with its description + a universal 4-step how-to. Generated from the VM's apt metadata. |
+| [`catalogue.zh-TW.md`](catalogue.zh-TW.md) | 繁體中文 | **完整 Kali 工具集 —— 29 個分類共 382 個工具**，每個附說明與通用 4 步驟用法。 |
+| [`installed-apps.md`](installed-apps.md) | EN + 繁中 | Every application **currently on this VM** (78), each with an intro + step-by-step; enumerated by [`../scripts/list-apps.sh`](../scripts/list-apps.sh) |
+| [`applications.en.md`](applications.en.md) | English | Hand-written deep-dive tutorials for the core offensive tools |
+| [`applications.zh-TW.md`](applications.zh-TW.md) | 繁體中文 | 核心攻擊工具的詳細教學 |
 
-**Two views, on purpose:** `installed-apps.md` is the *complete inventory of what is on the
-VM right now* (mostly the Xfce desktop + Kali links on a minimal install); `applications.*.md`
-are the *tutorials for the offensive toolset you install and use*. Install tools →
-`../scripts/install-tools.sh`, then re-run `list-apps.sh` and the inventory grows.
+**Three views, on purpose:**
+- `catalogue.*.md` = the **exhaustive list of every Kali tool by category** (installed or not) — this is "all applications in Kali".
+- `installed-apps.md` = what is **on this VM right now** (a minimal install), with a tutorial per app.
+- `applications.*.md` = **deeper walkthroughs** for the handful of tools you use most against this lab.
+
+Install any category with `../scripts/install-tools.sh cat:<slug>`, drive any tool with
+`../scripts/tool.sh <name>`, then re-run `list-apps.sh` to refresh `installed-apps.md`.
 
 ## Related / 相關
 
