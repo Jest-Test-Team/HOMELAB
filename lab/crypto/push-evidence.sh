@@ -7,8 +7,9 @@
 #
 # Nothing plaintext leaves the Mac: the evidence is tar+zstd'd and encrypted to the
 # transport public key (lab/crypto/transport.recipient) before it is pushed. The
-# inbox branch is force-pushed as a single orphan commit, so the repo history does
-# not grow. Override EVIDENCE_DIR to point elsewhere.
+# inbox branch is force-pushed (one commit on top of HEAD, so it carries the
+# workflow + pipeline code + blob), so the repo history does not grow. Override
+# EVIDENCE_DIR to point elsewhere.
 set -Eeuo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 # shellcheck source=deploy/scripts/lib.sh
