@@ -250,8 +250,11 @@ dispatch_module() {
 }
 
 # Combine modules: run each in order, in THIS shell, under one report.
+# IFS=, is scoped to the read only (prefix assignment) so it does not leak into the
+# modules' own word-splitting / command echoing.
 run_chain() {
-  local IFS=,; local mods m; read -r -a mods <<<"$1"
+  local mods m
+  IFS=',' read -r -a mods <<<"$1"
   for m in "${mods[@]}"; do dispatch_module "$m"; done
 }
 

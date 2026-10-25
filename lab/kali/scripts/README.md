@@ -140,3 +140,29 @@ scp -i ~/.ssh/homelab_utm_ed25519 "kali@<KALI_IP>:lab-evidence/*" /Volumes/HOMEL
 ```
 
 Never commit raw evidence to git — it's git-ignored for a reason.
+
+## Worked example — the drivers running real tools (captured on the VM)
+
+Installed `nmap`+`whatweb` on the Kali VM and drove them through the scripts against the
+lab node (`<NODE_IP>`); the controls held (6443 filtered, 5432 closed, only 22/30080/30081 open):
+
+```text
+# tool.sh driving real nmap
+$ TARGET=<NODE_IP> ./tool.sh nmap -Pn -T4 -p 22,30080,30081,5432,6443 <NODE_IP>
+PORT      STATE    SERVICE
+22/tcp    open     ssh
+5432/tcp  closed   postgresql        # DB control holds
+6443/tcp  filtered sun-sr-https      # k3s API control holds
+30080/tcp open     unknown           # api NodePort
+30081/tcp open     unknown           # mcp NodePort
+log: /home/kali/lab-evidence/tool-nmap-20261025T045108Z.md
+
+# toolkit.sh chain recon,web — real nmap + whatweb, one combined report
+$ TARGET=<NODE_IP> ./toolkit.sh chain recon,web
+### recon …  22/tcp open ssh (OpenSSH 10.5p1), 30080/30081 open, 30300 filtered
+### web   …  whatweb fingerprint of http://<NODE_IP>:30080
+report: ~/lab-evidence/toolkit-chain-<ts>.md
+```
+
+So `tool.sh` drives any single tool, `toolkit.sh` chains several, and both write evidence
+to `~/lab-evidence/`. `apps.sh open "<Name>"` launches any GUI app the same way.
