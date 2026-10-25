@@ -20,9 +20,9 @@ from the Kali VM. **Authorized, operator-owned targets only** — see
 
 ```bash
 git clone <this-repo> && cd HOMELAB/lab/kali/scripts   # or scp the scripts over
-TARGET=192.168.64.4 ./run-all.sh                        # Shared-net node address
+TARGET=<NODE_IP> ./run-all.sh                        # Shared-net node address
 # with the valid MCP token (fetched on the node), to exercise the auth-pass path:
-MCP_TOKEN=<token> TARGET=192.168.64.4 ./run-all.sh
+MCP_TOKEN=<token> TARGET=<NODE_IP> ./run-all.sh
 ```
 
 Evidence is written to `~/lab-evidence/kali-attack-<timestamp>.md`. Copy it off
