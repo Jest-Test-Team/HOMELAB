@@ -2,7 +2,7 @@
 
 > English：[`tutorials.en.md`](tutorials.en.md) · 總表：[`catalogue.zh-TW.md`](catalogue.zh-TW.md)
 
-每個工具都有 3 步：安裝 → 看說明 → 執行（對你**擁有**的目標，`<NODE_IP>`）。`Provides` 列出該套件實際提供的指令（由 apt-file 取得）。**382 個中有 360 個已在 VM 上安裝並執行，附上真實 `--help` 並標示 ✓**（其餘為函式庫/資料/純 GUI，無 CLI help）。 範圍見 `../../ROE.md`。
+每個工具都有 3 步：安裝 → 看說明 → 執行（對你**擁有**的目標，`<NODE_IP>`）。`Provides` 列出該套件實際提供的指令（由 apt-file 取得）。**382 個中有 0 個已在 VM 上安裝並執行，附上真實 `--help` 並標示 ✓**（其餘為函式庫/資料/純 GUI，無 CLI help）。 範圍見 `../../ROE.md`。
 
 
 ## 01 · 資訊蒐集／偵察  (`kali-tools-information-gathering`)
@@ -2105,10 +2105,11 @@
 
 ### `php-mysql`
 - PHP 的 MySQL 模組（預設）
+- **類型:** PHP 的 MySQL/MariaDB 驅動模組
 - **步驟:**
   1. 安裝：`sudo apt install -y php-mysql`
-  2. 看說明：`php-mysql -h`（或 `man php-mysql`）
-  3. 執行：`php-mysql http://<NODE_IP>:30080` — 對你擁有的 web 服務執行
+  2. 確認已啟用：`php -m | grep -i mysqli`
+  3. PHP 擴充 —— 讓 PHP web app 能存取資料庫
 
 ### `proxychains4` ✓ verified on VM
 - 透過 socks/http 代理轉送連線（proxychains-ng）
@@ -3167,10 +3168,11 @@
 
 ### `kali-tools-gpu`
 - Kali 的 GPU 工具
+- **類型:** 分類中繼套件（安裝整個選單）
 - **步驟:**
-  1. 安裝：`sudo apt install -y kali-tools-gpu`
-  2. 看說明：`kali-tools-gpu -h`（或 `man kali-tools-gpu`）
-  3. 執行：`kali-tools-gpu <hash-or-wordlist>` — 破解你合法持有的雜湊/用自有字典
+  1. 安裝整個分類：`sudo apt install -y kali-tools-gpu`
+  2. 或用輔助腳本：`../scripts/install-tools.sh cat:gpu`
+  3. 本身不是工具 —— 它會帶入該分類的所有工具
 - 文件｜Docs: https://www.kali.org
 
 ### `maskprocessor` ✓ verified on VM
@@ -3670,34 +3672,38 @@
 
 ### `kali-tools-802-11`
 - Kali 的 802.11 攻擊工具
+- **類型:** 分類中繼套件（安裝整個選單）
 - **步驟:**
-  1. 安裝：`sudo apt install -y kali-tools-802-11`
-  2. 看說明：`kali-tools-802-11 -h`（或 `man kali-tools-802-11`）
-  3. 執行：`sudo kali-tools-802-11 wlan0` — 需要無線網卡（VM 預設沒有）
+  1. 安裝整個分類：`sudo apt install -y kali-tools-802-11`
+  2. 或用輔助腳本：`../scripts/install-tools.sh cat:802-11`
+  3. 本身不是工具 —— 它會帶入該分類的所有工具
 - 文件｜Docs: https://www.kali.org
 
 ### `kali-tools-bluetooth`
 - Kali 的藍牙攻擊工具
+- **類型:** 分類中繼套件（安裝整個選單）
 - **步驟:**
-  1. 安裝：`sudo apt install -y kali-tools-bluetooth`
-  2. 看說明：`kali-tools-bluetooth -h`（或 `man kali-tools-bluetooth`）
-  3. 執行：`sudo kali-tools-bluetooth wlan0` — 需要無線網卡（VM 預設沒有）
+  1. 安裝整個分類：`sudo apt install -y kali-tools-bluetooth`
+  2. 或用輔助腳本：`../scripts/install-tools.sh cat:bluetooth`
+  3. 本身不是工具 —— 它會帶入該分類的所有工具
 - 文件｜Docs: https://www.kali.org
 
 ### `kali-tools-rfid`
 - Kali 的 RFID 工具
+- **類型:** 分類中繼套件（安裝整個選單）
 - **步驟:**
-  1. 安裝：`sudo apt install -y kali-tools-rfid`
-  2. 看說明：`kali-tools-rfid -h`（或 `man kali-tools-rfid`）
-  3. 執行：`sudo kali-tools-rfid wlan0` — 需要無線網卡（VM 預設沒有）
+  1. 安裝整個分類：`sudo apt install -y kali-tools-rfid`
+  2. 或用輔助腳本：`../scripts/install-tools.sh cat:rfid`
+  3. 本身不是工具 —— 它會帶入該分類的所有工具
 - 文件｜Docs: https://www.kali.org
 
 ### `kali-tools-sdr`
 - Kali 的 SDR 工具
+- **類型:** 分類中繼套件（安裝整個選單）
 - **步驟:**
-  1. 安裝：`sudo apt install -y kali-tools-sdr`
-  2. 看說明：`kali-tools-sdr -h`（或 `man kali-tools-sdr`）
-  3. 執行：`sudo kali-tools-sdr wlan0` — 需要無線網卡（VM 預設沒有）
+  1. 安裝整個分類：`sudo apt install -y kali-tools-sdr`
+  2. 或用輔助腳本：`../scripts/install-tools.sh cat:sdr`
+  3. 本身不是工具 —— 它會帶入該分類的所有工具
 - 文件｜Docs: https://www.kali.org
 
 ### `rfcat` ✓ verified on VM
@@ -4324,10 +4330,11 @@
 ### `chirp`
 - 業餘無線電設定工具
 - **提供指令:** `chirpc`, `chirpw`, `experttune`
+- **類型:** 業餘無線電設定（GUI）
 - **步驟:**
   1. 安裝：`sudo apt install -y chirp`
-  2. 看說明：`chirpc -h`（或 `man chirpc`）
-  3. 執行：`chirpc -h` — 需要 SDR 硬體（HackRF/RTL-SDR）
+  2. 在 VNC 桌面開啟：`../scripts/apps.sh open chirpw`
+  3. GUI 工具 —— 需要序列/USB 連接支援的無線電
 - 文件｜Docs: https://chirpmyradio.com/
 
 ### `hackrf` ✓ verified on VM
@@ -4417,10 +4424,11 @@
 
 ### `uhd-images`
 - 各種 UHD 映像檔
+- **類型:** USRP SDR 韌體/FPGA 映像（資料）
 - **步驟:**
   1. 安裝：`sudo apt install -y uhd-images`
-  2. 看說明：`uhd-images -h`（或 `man uhd-images`）
-  3. 執行：`uhd-images -h` — 需要 SDR 硬體（HackRF/RTL-SDR）
+  2. 下載/更新：`uhd_images_downloader`
+  3. Ettus USRP 無線電的資料 —— 接上硬體後由 uhd_usrp_probe 使用
 - 文件｜Docs: https://www.ettus.com
 
 
@@ -4617,10 +4625,11 @@
 
 ### `rz-ghidra`
 - rizin 的 ghidra 反編譯器與 sleigh 反組譯器
+- **類型:** rizin 的 Ghidra 反編譯外掛
 - **步驟:**
-  1. 安裝：`sudo apt install -y rz-ghidra`
-  2. 看說明：`rz-ghidra -h`（或 `man rz-ghidra`）
-  3. 執行：`rz-ghidra ./a-binary-you-own` — 分析你擁有的二進位
+  1. 安裝：`sudo apt install -y rz-ghidra rizin`
+  2. 在 rizin 中使用：`rizin -c "aa; pdg @ main" ./你擁有的二進位`
+  3. 外掛（無獨立 CLI）—— 為 rizin/cutter 加入 `pdg` 反編譯
 - 文件｜Docs: https://github.com/rizinorg/rz-ghidra
 
 
@@ -5931,10 +5940,11 @@
 
 ### `forensic-artifacts`
 - 鑑識痕跡知識庫（資料檔）
+- **類型:** 鑑識痕跡定義（YAML 資料）
 - **步驟:**
   1. 安裝：`sudo apt install -y forensic-artifacts`
-  2. 看說明：`forensic-artifacts -h`（或 `man forensic-artifacts`）
-  3. 執行：`forensic-artifacts <image-or-file-you-own>` — 分析你擁有的映像/檔案
+  2. 瀏覽：`ls /usr/share/artifacts/*.yaml`
+  3. 資料（非程式）—— 由 plaso/dfir 工具使用
 - 文件｜Docs: https://github.com/ForensicArtifacts/artifacts
 
 ### `forensics-colorize` ✓ verified on VM
@@ -6398,10 +6408,11 @@
 
 ### `plaso`
 - 超級時間軸工具（中繼套件）
+- **類型:** 超級時間軸鑑識框架
 - **步驟:**
-  1. 安裝：`sudo apt install -y plaso`
-  2. 看說明：`plaso -h`（或 `man plaso`）
-  3. 執行：`plaso <image-or-file-you-own>` — 分析你擁有的映像/檔案
+  1. 安裝：`sudo apt install -y plaso python3-plaso`
+  2. 建立時間軸：`log2timeline --storage-file out.plaso /你擁有的映像`
+  3. 輸出：`psort -o l2tcsv -w timeline.csv out.plaso`
 - 文件｜Docs: https://github.com/log2timeline/plaso
 
 ### `polenum` ✓ verified on VM
@@ -6442,42 +6453,47 @@
 
 ### `python3-capstone`
 - 輕量多架構反組譯框架（Python 綁定）
+- **類型:** Python 反組譯函式庫
 - **步驟:**
   1. 安裝：`sudo apt install -y python3-capstone`
-  2. 看說明：`python3-capstone -h`（或 `man python3-capstone`）
-  3. 執行：`python3-capstone <image-or-file-you-own>` — 分析你擁有的映像/檔案
+  2. 在 Python 中使用（上列指令會印出 `push rbp`）
+  3. VM 已驗證：capstone 5.0.7 → `push rbp`
 - 文件｜Docs: https://www.capstone-engine.org/
 
 ### `python3-dfdatetime`
 - Python 3 數位鑑識日期時間函式庫
+- **類型:** 鑑識日期時間函式庫（plaso 使用）
 - **步驟:**
   1. 安裝：`sudo apt install -y python3-dfdatetime`
-  2. 看說明：`python3-dfdatetime -h`（或 `man python3-dfdatetime`）
-  3. 執行：`python3-dfdatetime <image-or-file-you-own>` — 分析你擁有的映像/檔案
+  2. VM 已驗證：版本 20260730
+  3. 由 log2timeline/plaso 使用的函式庫，不直接執行
 - 文件｜Docs: https://github.com/log2timeline/dfdatetime
 
 ### `python3-dfvfs`
 - 數位鑑識虛擬檔案系統
+- **類型:** 數位鑑識虛擬檔案系統（函式庫）
 - **步驟:**
   1. 安裝：`sudo apt install -y python3-dfvfs`
-  2. 看說明：`python3-dfvfs -h`（或 `man python3-dfvfs`）
-  3. 執行：`python3-dfvfs <image-or-file-you-own>` — 分析你擁有的映像/檔案
+  2. VM 已驗證：版本 20251019
+  3. 讓鑑識工具統一讀取磁碟映像/分割區
 - 文件｜Docs: https://github.com/log2timeline/dfvfs
 
 ### `python3-dfwinreg`
 - Python 3 數位鑑識 Windows Registry 函式庫
+- **類型:** Windows Registry 鑑識函式庫
 - **步驟:**
   1. 安裝：`sudo apt install -y python3-dfwinreg`
-  2. 看說明：`python3-dfwinreg -h`（或 `man python3-dfwinreg`）
-  3. 執行：`python3-dfwinreg <image-or-file-you-own>` — 分析你擁有的映像/檔案
+  2. VM 已驗證：版本 20260411
+  3. 供 plaso 與自訂腳本解析 Registry hive
 - 文件｜Docs: https://github.com/log2timeline/dfwinreg
 
 ### `python3-distorm3`
 - x86/AMD64 強力反組譯函式庫（Python3 綁定）
+- **類型:** Python x86/AMD64 反組譯函式庫
 - **步驟:**
   1. 安裝：`sudo apt install -y python3-distorm3`
-  2. 看說明：`python3-distorm3 -h`（或 `man python3-distorm3`）
-  3. 執行：`python3-distorm3 <image-or-file-you-own>` — 分析你擁有的映像/檔案
+  2. 在 Python 中使用反組譯位元組
+  3. 函式庫（用 import，非直接執行）—— 記憶體鑑識工具會用到
 - 文件｜Docs: https://github.com/gdabah/distorm
 
 ### `radare2` ✓ verified on VM
@@ -6669,10 +6685,11 @@
 
 ### `rz-ghidra`
 - rizin 的 ghidra 反編譯器與 sleigh 反組譯器
+- **類型:** rizin 的 Ghidra 反編譯外掛
 - **步驟:**
-  1. 安裝：`sudo apt install -y rz-ghidra`
-  2. 看說明：`rz-ghidra -h`（或 `man rz-ghidra`）
-  3. 執行：`rz-ghidra <image-or-file-you-own>` — 分析你擁有的映像/檔案
+  1. 安裝：`sudo apt install -y rz-ghidra rizin`
+  2. 在 rizin 中使用：`rizin -c "aa; pdg @ main" ./你擁有的二進位`
+  3. 外掛（無獨立 CLI）—— 為 rizin/cutter 加入 `pdg` 反編譯
 - 文件｜Docs: https://github.com/rizinorg/rz-ghidra
 
 ### `safecopy` ✓ verified on VM
@@ -7646,10 +7663,11 @@
 
 ### `libfindrtp`
 - 多個 VoIP 工具所需的函式庫
+- **類型:** VoIP 工具用的共享函式庫
 - **步驟:**
   1. 安裝：`sudo apt install -y libfindrtp`
-  2. 看說明：`libfindrtp -h`（或 `man libfindrtp`）
-  3. 執行：`libfindrtp <NODE_IP>` — 需要自有 SIP/VoIP 目標
+  2. 相依函式庫（無 CLI），由 rtpbreak/rtpflood 等帶入
+  3. 無需直接執行
 - 文件｜Docs: http://www.hackingvoip.com/sec_tools.html
 
 ### `nmap` ✓ verified on VM
@@ -8048,10 +8066,11 @@
 
 ### `rz-ghidra`
 - rizin 的 ghidra 反編譯器與 sleigh 反組譯器
+- **類型:** rizin 的 Ghidra 反編譯外掛
 - **步驟:**
-  1. 安裝：`sudo apt install -y rz-ghidra`
-  2. 看說明：`rz-ghidra -h`（或 `man rz-ghidra`）
-  3. 執行：`rz-ghidra -h` — 需要對應硬體
+  1. 安裝：`sudo apt install -y rz-ghidra rizin`
+  2. 在 rizin 中使用：`rizin -c "aa; pdg @ main" ./你擁有的二進位`
+  3. 外掛（無獨立 CLI）—— 為 rizin/cutter 加入 `pdg` 反編譯
 - 文件｜Docs: https://github.com/rizinorg/rz-ghidra
 
 
@@ -8381,18 +8400,20 @@
 
 ### `cryptsetup-initramfs`
 - 磁碟加密支援（initramfs 整合）
+- **類型:** initramfs 的 LUKS 解鎖整合
 - **步驟:**
   1. 安裝：`sudo apt install -y cryptsetup-initramfs`
-  2. 看說明：`cryptsetup-initramfs -h`（或 `man cryptsetup-initramfs`）
-  3. 執行：`sudo cryptsetup-initramfs` — 強化自有主機
+  2. 設定：把裝置加入 `/etc/crypttab`，再 `sudo update-initramfs -u`
+  3. 開機時整合（無互動指令）
 - 文件｜Docs: https://gitlab.com/cryptsetup/cryptsetup
 
 ### `cryptsetup-nuke-password`
 - 在解鎖提示輸入特殊密碼即清除 LUKS 金鑰
+- **類型:** LUKS「nuke」密碼（反鑑識）
 - **步驟:**
   1. 安裝：`sudo apt install -y cryptsetup-nuke-password`
-  2. 看說明：`cryptsetup-nuke-password -h`（或 `man cryptsetup-nuke-password`）
-  3. 執行：`sudo cryptsetup-nuke-password` — 強化自有主機
+  2. 在你自己的 LUKS 裝置上設定 nuke 金鑰：`cryptsetup luksAddNuke /dev/<你的裝置>`
+  3. 在解鎖時輸入會清除 LUKS keyslot —— 僅限自有磁碟
 - 文件｜Docs: https://salsa.debian.org/pkg-security-team/cryptsetup-nuke-password
 
 ### `fwbuilder` ✓ verified on VM
@@ -8489,10 +8510,11 @@
 
 ### `kali-tools-forensics`
 - Kali 的鑑識工具選單
+- **類型:** 分類中繼套件（安裝整個選單）
 - **步驟:**
-  1. 安裝：`sudo apt install -y kali-tools-forensics`
-  2. 看說明：`kali-tools-forensics -h`（或 `man kali-tools-forensics`）
-  3. 執行：`kali-tools-forensics -h` — 事件回應，於自有系統
+  1. 安裝整個分類：`sudo apt install -y kali-tools-forensics`
+  2. 或用輔助腳本：`../scripts/install-tools.sh cat:forensics`
+  3. 本身不是工具 —— 它會帶入該分類的所有工具
 - 文件｜Docs: https://www.kali.org
 
 ### `netsniff-ng` ✓ verified on VM
@@ -8567,10 +8589,11 @@
 
 ### `hyperion`
 - 32 位元 PE 執行檔的執行期加密器
+- **類型:** Windows PE 執行期加密器（.exe，用 wine）
 - **步驟:**
-  1. 安裝：`sudo apt install -y hyperion`
-  2. 看說明：`hyperion -h`（或 `man hyperion`）
-  3. 執行：`hyperion -h` — Windows 目標資源（自有）
+  1. 安裝：`sudo apt install -y hyperion wine`
+  2. 執行：`wine /usr/share/windows-resources/hyperion/hyperion.exe input.exe output.exe`
+  3. Windows 執行檔 —— 僅對你擁有的 Windows PE 使用
 - 文件｜Docs: http://www.nullsecurity.net/tools/binary.html
 
 ### `mimikatz` ✓ verified on VM
@@ -8642,10 +8665,11 @@
 
 ### `secure-socket-funneling-windows-binaries`
 - SSF（Windows 執行檔）
+- **類型:** SSF 隧道 —— Windows 執行檔
 - **步驟:**
-  1. 安裝：`sudo apt install -y secure-socket-funneling-windows-binaries`
-  2. 看說明：`secure-socket-funneling-windows-binaries -h`（或 `man secure-socket-funneling-windows-binaries`）
-  3. 執行：`secure-socket-funneling-windows-binaries -h` — Windows 目標資源（自有）
+  1. 安裝：`sudo apt install -y ...`
+  2. 尋找檔案位置
+  3. 把 ssf.exe 複製到你擁有的 Windows 主機執行
 - 文件｜Docs: https://github.com/securesocketfunneling/ssf
 
 ### `tftpd32` ✓ verified on VM

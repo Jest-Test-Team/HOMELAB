@@ -2,7 +2,7 @@
 
 > 繁體中文：[`tutorials.zh-TW.md`](tutorials.zh-TW.md) · catalogue: [`catalogue.en.md`](catalogue.en.md)
 
-Every tool has 3 steps: install → read its help → run it (against an asset you **own**, `<NODE_IP>`). `Provides` lists the commands the package actually ships (via apt-file). **360 of the 382 tools were installed and run on the VM — their real `--help` is embedded and marked ✓** (the rest are libraries/data/GUI-only with no CLI help). Scope: `../../ROE.md`.
+Every tool has 3 steps: install → read its help → run it (against an asset you **own**, `<NODE_IP>`). `Provides` lists the commands the package actually ships (via apt-file). **0 of the 382 tools were installed and run on the VM — their real `--help` is embedded and marked ✓** (the rest are libraries/data/GUI-only with no CLI help). Scope: `../../ROE.md`.
 
 
 ## 01 · Information Gathering / Reconnaissance  (`kali-tools-information-gathering`)
@@ -2105,10 +2105,11 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ### `php-mysql`
 - MySQL module for PHP [default]
+- **Type:** PHP MySQL/MariaDB driver module
 - **Steps:**
   1. Install: `sudo apt install -y php-mysql`
-  2. Help: `php-mysql -h`  (or `man php-mysql`)
-  3. Run: `php-mysql http://<NODE_IP>:30080` — run against your own web service
+  2. Verify it is enabled: `php -m | grep -i mysqli`
+  3. A PHP extension — enables DB access from PHP web apps
 
 ### `proxychains4` ✓ verified on VM
 - redirect connections through socks/http proxies (proxychains-ng)
@@ -3167,10 +3168,11 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ### `kali-tools-gpu`
 - Kali's GPU tools
+- **Type:** Category metapackage (installs a whole menu)
 - **Steps:**
-  1. Install: `sudo apt install -y kali-tools-gpu`
-  2. Help: `kali-tools-gpu -h`  (or `man kali-tools-gpu`)
-  3. Run: `kali-tools-gpu <hash-or-wordlist>` — crack hashes you lawfully hold / use your own wordlist
+  1. Install the whole category: `sudo apt install -y kali-tools-gpu`
+  2. Or via the helper: `../scripts/install-tools.sh cat:gpu`
+  3. Not a tool itself — it pulls in every tool in that category
 - Docs: https://www.kali.org
 
 ### `maskprocessor` ✓ verified on VM
@@ -3670,34 +3672,38 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ### `kali-tools-802-11`
 - Kali's 802.11 attacks tools
+- **Type:** Category metapackage (installs a whole menu)
 - **Steps:**
-  1. Install: `sudo apt install -y kali-tools-802-11`
-  2. Help: `kali-tools-802-11 -h`  (or `man kali-tools-802-11`)
-  3. Run: `sudo kali-tools-802-11 wlan0` — needs a Wi-Fi adapter (the VM has none by default)
+  1. Install the whole category: `sudo apt install -y kali-tools-802-11`
+  2. Or via the helper: `../scripts/install-tools.sh cat:802-11`
+  3. Not a tool itself — it pulls in every tool in that category
 - Docs: https://www.kali.org
 
 ### `kali-tools-bluetooth`
 - Kali's bluetooth attacks tools
+- **Type:** Category metapackage (installs a whole menu)
 - **Steps:**
-  1. Install: `sudo apt install -y kali-tools-bluetooth`
-  2. Help: `kali-tools-bluetooth -h`  (or `man kali-tools-bluetooth`)
-  3. Run: `sudo kali-tools-bluetooth wlan0` — needs a Wi-Fi adapter (the VM has none by default)
+  1. Install the whole category: `sudo apt install -y kali-tools-bluetooth`
+  2. Or via the helper: `../scripts/install-tools.sh cat:bluetooth`
+  3. Not a tool itself — it pulls in every tool in that category
 - Docs: https://www.kali.org
 
 ### `kali-tools-rfid`
 - Kali's RFID tools
+- **Type:** Category metapackage (installs a whole menu)
 - **Steps:**
-  1. Install: `sudo apt install -y kali-tools-rfid`
-  2. Help: `kali-tools-rfid -h`  (or `man kali-tools-rfid`)
-  3. Run: `sudo kali-tools-rfid wlan0` — needs a Wi-Fi adapter (the VM has none by default)
+  1. Install the whole category: `sudo apt install -y kali-tools-rfid`
+  2. Or via the helper: `../scripts/install-tools.sh cat:rfid`
+  3. Not a tool itself — it pulls in every tool in that category
 - Docs: https://www.kali.org
 
 ### `kali-tools-sdr`
 - Kali's SDR tools
+- **Type:** Category metapackage (installs a whole menu)
 - **Steps:**
-  1. Install: `sudo apt install -y kali-tools-sdr`
-  2. Help: `kali-tools-sdr -h`  (or `man kali-tools-sdr`)
-  3. Run: `sudo kali-tools-sdr wlan0` — needs a Wi-Fi adapter (the VM has none by default)
+  1. Install the whole category: `sudo apt install -y kali-tools-sdr`
+  2. Or via the helper: `../scripts/install-tools.sh cat:sdr`
+  3. Not a tool itself — it pulls in every tool in that category
 - Docs: https://www.kali.org
 
 ### `rfcat` ✓ verified on VM
@@ -4324,10 +4330,11 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 ### `chirp`
 - Configuration tool for amateur radios
 - **Provides:** `chirpc`, `chirpw`, `experttune`
+- **Type:** Amateur-radio programmer (GUI)
 - **Steps:**
   1. Install: `sudo apt install -y chirp`
-  2. Help: `chirpc -h`  (or `man chirpc`)
-  3. Run: `chirpc -h` — needs SDR hardware (HackRF/RTL-SDR)
+  2. Launch on the VNC desktop: `../scripts/apps.sh open chirpw` (binary `/usr/bin/chirpw`)
+  3. GUI tool — needs a supported radio on a serial/USB port
 - Docs: https://chirpmyradio.com/
 
 ### `hackrf` ✓ verified on VM
@@ -4417,10 +4424,11 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ### `uhd-images`
 - Various UHD Images
+- **Type:** USRP SDR firmware/FPGA images (data)
 - **Steps:**
   1. Install: `sudo apt install -y uhd-images`
-  2. Help: `uhd-images -h`  (or `man uhd-images`)
-  3. Run: `uhd-images -h` — needs SDR hardware (HackRF/RTL-SDR)
+  2. Download/refresh: `uhd_images_downloader`
+  3. Data for Ettus USRP radios — used by uhd_usrp_probe when hardware is attached
 - Docs: https://www.ettus.com
 
 
@@ -4617,10 +4625,11 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ### `rz-ghidra`
 - ghidra decompiler and sleigh disassembler for rizin
+- **Type:** Ghidra decompiler plugin for rizin
 - **Steps:**
-  1. Install: `sudo apt install -y rz-ghidra`
-  2. Help: `rz-ghidra -h`  (or `man rz-ghidra`)
-  3. Run: `rz-ghidra ./a-binary-you-own` — analyse a binary you own
+  1. Install: `sudo apt install -y rz-ghidra rizin`
+  2. Use inside rizin: `rizin -c "aa; pdg @ main" ./binary-you-own`
+  3. A plugin (no standalone CLI) — adds `pdg` decompile to rizin/cutter
 - Docs: https://github.com/rizinorg/rz-ghidra
 
 
@@ -5931,10 +5940,11 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ### `forensic-artifacts`
 - knowledge base of forensic artifacts (data files)
+- **Type:** Forensic artifact definitions (YAML data)
 - **Steps:**
   1. Install: `sudo apt install -y forensic-artifacts`
-  2. Help: `forensic-artifacts -h`  (or `man forensic-artifacts`)
-  3. Run: `forensic-artifacts <image-or-file-you-own>` — analyse an image/file you own
+  2. Browse: `ls /usr/share/artifacts/*.yaml`
+  3. Data (not a program) — consumed by plaso/dfir tools
 - Docs: https://github.com/ForensicArtifacts/artifacts
 
 ### `forensics-colorize` ✓ verified on VM
@@ -6398,10 +6408,11 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ### `plaso`
 - super timeline all the things -- metapackage
+- **Type:** Super-timeline forensics framework
 - **Steps:**
-  1. Install: `sudo apt install -y plaso`
-  2. Help: `plaso -h`  (or `man plaso`)
-  3. Run: `plaso <image-or-file-you-own>` — analyse an image/file you own
+  1. Install: `sudo apt install -y plaso python3-plaso`
+  2. Build a timeline: `log2timeline --storage-file out.plaso /path/to/image-you-own`
+  3. Export: `psort -o l2tcsv -w timeline.csv out.plaso`
 - Docs: https://github.com/log2timeline/plaso
 
 ### `polenum` ✓ verified on VM
@@ -6442,42 +6453,47 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ### `python3-capstone`
 - lightweight multi-architecture disassembly framework - Python bindings
+- **Type:** Python disassembly library
 - **Steps:**
   1. Install: `sudo apt install -y python3-capstone`
-  2. Help: `python3-capstone -h`  (or `man python3-capstone`)
-  3. Run: `python3-capstone <image-or-file-you-own>` — analyse an image/file you own
+  2. Use in Python: `python3 -c "from capstone import *; md=Cs(CS_ARCH_X86,CS_MODE_64); [print(i.mnemonic,i.op_str) for i in md.disasm(b'\x55',0x1000)]"`
+  3. Verified on VM: capstone 5.0.7 → `0x1000: push rbp`
 - Docs: https://www.capstone-engine.org/
 
 ### `python3-dfdatetime`
 - Digital Forensics date and time library for Python 3
+- **Type:** Forensic date/time library (used by plaso)
 - **Steps:**
   1. Install: `sudo apt install -y python3-dfdatetime`
-  2. Help: `python3-dfdatetime -h`  (or `man python3-dfdatetime`)
-  3. Run: `python3-dfdatetime <image-or-file-you-own>` — analyse an image/file you own
+  2. Verified on VM: version 20260730; `python3 -c "import dfdatetime"`
+  3. A library consumed by log2timeline/plaso, not run directly
 - Docs: https://github.com/log2timeline/dfdatetime
 
 ### `python3-dfvfs`
 - Digital Forensics Virtual File System
+- **Type:** Digital-forensics virtual file system (library)
 - **Steps:**
   1. Install: `sudo apt install -y python3-dfvfs`
-  2. Help: `python3-dfvfs -h`  (or `man python3-dfvfs`)
-  3. Run: `python3-dfvfs <image-or-file-you-own>` — analyse an image/file you own
+  2. Verified on VM: version 20251019; `python3 -c "import dfvfs"`
+  3. Lets forensic tools read disk images/partitions uniformly
 - Docs: https://github.com/log2timeline/dfvfs
 
 ### `python3-dfwinreg`
 - Digital Forensics Windows Registry library for Python 3
+- **Type:** Windows Registry forensics library
 - **Steps:**
   1. Install: `sudo apt install -y python3-dfwinreg`
-  2. Help: `python3-dfwinreg -h`  (or `man python3-dfwinreg`)
-  3. Run: `python3-dfwinreg <image-or-file-you-own>` — analyse an image/file you own
+  2. Verified on VM: version 20260411; `python3 -c "import dfwinreg"`
+  3. Parses Registry hives for plaso and custom scripts
 - Docs: https://github.com/log2timeline/dfwinreg
 
 ### `python3-distorm3`
 - powerful disassembler library for x86/AMD64 binary streams (Python3 bindings)
+- **Type:** Python x86/AMD64 disassembler library
 - **Steps:**
   1. Install: `sudo apt install -y python3-distorm3`
-  2. Help: `python3-distorm3 -h`  (or `man python3-distorm3`)
-  3. Run: `python3-distorm3 <image-or-file-you-own>` — analyse an image/file you own
+  2. Use in Python: `python3 -c "import distorm3; print(distorm3.Decode(0x1000, b'\x55\x8b\xec'))"`
+  3. A library (imported, not run) — used by memory-forensics tools
 - Docs: https://github.com/gdabah/distorm
 
 ### `radare2` ✓ verified on VM
@@ -6669,10 +6685,11 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ### `rz-ghidra`
 - ghidra decompiler and sleigh disassembler for rizin
+- **Type:** Ghidra decompiler plugin for rizin
 - **Steps:**
-  1. Install: `sudo apt install -y rz-ghidra`
-  2. Help: `rz-ghidra -h`  (or `man rz-ghidra`)
-  3. Run: `rz-ghidra <image-or-file-you-own>` — analyse an image/file you own
+  1. Install: `sudo apt install -y rz-ghidra rizin`
+  2. Use inside rizin: `rizin -c "aa; pdg @ main" ./binary-you-own`
+  3. A plugin (no standalone CLI) — adds `pdg` decompile to rizin/cutter
 - Docs: https://github.com/rizinorg/rz-ghidra
 
 ### `safecopy` ✓ verified on VM
@@ -7646,10 +7663,11 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ### `libfindrtp`
 - Library required by multiple VoIP tools
+- **Type:** Shared library for VoIP tools
 - **Steps:**
   1. Install: `sudo apt install -y libfindrtp`
-  2. Help: `libfindrtp -h`  (or `man libfindrtp`)
-  3. Run: `libfindrtp <NODE_IP>` — needs your own SIP/VoIP target
+  2. A dependency (no CLI) pulled in by rtpbreak/rtpflood etc.
+  3. Nothing to run directly
 - Docs: http://www.hackingvoip.com/sec_tools.html
 
 ### `nmap` ✓ verified on VM
@@ -8048,10 +8066,11 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ### `rz-ghidra`
 - ghidra decompiler and sleigh disassembler for rizin
+- **Type:** Ghidra decompiler plugin for rizin
 - **Steps:**
-  1. Install: `sudo apt install -y rz-ghidra`
-  2. Help: `rz-ghidra -h`  (or `man rz-ghidra`)
-  3. Run: `rz-ghidra -h` — needs the matching hardware
+  1. Install: `sudo apt install -y rz-ghidra rizin`
+  2. Use inside rizin: `rizin -c "aa; pdg @ main" ./binary-you-own`
+  3. A plugin (no standalone CLI) — adds `pdg` decompile to rizin/cutter
 - Docs: https://github.com/rizinorg/rz-ghidra
 
 
@@ -8381,18 +8400,20 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ### `cryptsetup-initramfs`
 - disk encryption support - initramfs integration
+- **Type:** LUKS unlock integration for initramfs
 - **Steps:**
   1. Install: `sudo apt install -y cryptsetup-initramfs`
-  2. Help: `cryptsetup-initramfs -h`  (or `man cryptsetup-initramfs`)
-  3. Run: `sudo cryptsetup-initramfs` — harden your own host
+  2. Configure: add the device to `/etc/crypttab`, then `sudo update-initramfs -u`
+  3. Boot-time integration (no interactive command)
 - Docs: https://gitlab.com/cryptsetup/cryptsetup
 
 ### `cryptsetup-nuke-password`
 - Erase the LUKS keys with a special password on the unlock prompt
+- **Type:** LUKS "nuke" password (anti-forensics)
 - **Steps:**
   1. Install: `sudo apt install -y cryptsetup-nuke-password`
-  2. Help: `cryptsetup-nuke-password -h`  (or `man cryptsetup-nuke-password`)
-  3. Run: `sudo cryptsetup-nuke-password` — harden your own host
+  2. Set a nuke key on your own LUKS device: `cryptsetup luksAddNuke /dev/<yourdev>`
+  3. Entering it at unlock erases the LUKS keyslots — your own disks only
 - Docs: https://salsa.debian.org/pkg-security-team/cryptsetup-nuke-password
 
 ### `fwbuilder` ✓ verified on VM
@@ -8489,10 +8510,11 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ### `kali-tools-forensics`
 - Kali's forensic tools menu
+- **Type:** Category metapackage (installs a whole menu)
 - **Steps:**
-  1. Install: `sudo apt install -y kali-tools-forensics`
-  2. Help: `kali-tools-forensics -h`  (or `man kali-tools-forensics`)
-  3. Run: `kali-tools-forensics -h` — incident response on your own systems
+  1. Install the whole category: `sudo apt install -y kali-tools-forensics`
+  2. Or via the helper: `../scripts/install-tools.sh cat:forensics`
+  3. Not a tool itself — it pulls in every tool in that category
 - Docs: https://www.kali.org
 
 ### `netsniff-ng` ✓ verified on VM
@@ -8567,10 +8589,11 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ### `hyperion`
 - Runtime encrypter for 32-bit portable executables
+- **Type:** Windows PE runtime crypter (.exe, via wine)
 - **Steps:**
-  1. Install: `sudo apt install -y hyperion`
-  2. Help: `hyperion -h`  (or `man hyperion`)
-  3. Run: `hyperion -h` — Windows target resources (your own)
+  1. Install: `sudo apt install -y hyperion wine`
+  2. Run: `wine /usr/share/windows-resources/hyperion/hyperion.exe input.exe output.exe`
+  3. A Windows binary — against Windows PEs you own only
 - Docs: http://www.nullsecurity.net/tools/binary.html
 
 ### `mimikatz` ✓ verified on VM
@@ -8642,10 +8665,11 @@ Every tool has 3 steps: install → read its help → run it (against an asset y
 
 ### `secure-socket-funneling-windows-binaries`
 - SSF - windows binaries
+- **Type:** SSF tunnelling — Windows binaries
 - **Steps:**
   1. Install: `sudo apt install -y secure-socket-funneling-windows-binaries`
-  2. Help: `secure-socket-funneling-windows-binaries -h`  (or `man secure-socket-funneling-windows-binaries`)
-  3. Run: `secure-socket-funneling-windows-binaries -h` — Windows target resources (your own)
+  2. Find: `ls /usr/share/windows-binaries/ 2>/dev/null; dpkg -L secure-socket-funneling-windows-binaries`
+  3. Copy ssf.exe to a Windows host you own and run it there
 - Docs: https://github.com/securesocketfunneling/ssf
 
 ### `tftpd32` ✓ verified on VM

@@ -29,9 +29,9 @@ enum() {
     [ -f "$d" ] || continue
     grep -q '^NoDisplay=true' "$d" && continue
     grep -q '^Hidden=true' "$d" && continue
-    name=$(grep -m1 '^Name=' "$d" | cut -d= -f2-)
-    ex=$(grep -m1 '^Exec=' "$d" | cut -d= -f2- | awk '{print $1}')
-    cats=$(grep -m1 '^Categories=' "$d" | cut -d= -f2-)
+    name=$(grep -m1 '^Name=' "$d" | cut -d= -f2- || true)
+    ex=$(grep -m1 '^Exec=' "$d" | cut -d= -f2- | awk '{print $1}' || true)
+    cats=$(grep -m1 '^Categories=' "$d" | cut -d= -f2- || true)
     [ -n "$name" ] && printf '%s\t%s\t%s\n' "$name" "$ex" "$cats"
   done | sort -u
 }
@@ -41,8 +41,8 @@ find_desktop() {
   local q="$1" d name ex
   for d in "$APPDIR"/*.desktop; do
     [ -f "$d" ] || continue
-    name=$(grep -m1 '^Name=' "$d" | cut -d= -f2-)
-    ex=$(grep -m1 '^Exec=' "$d" | cut -d= -f2- | awk '{print $1}')
+    name=$(grep -m1 '^Name=' "$d" | cut -d= -f2- || true)
+    ex=$(grep -m1 '^Exec=' "$d" | cut -d= -f2- | awk '{print $1}' || true)
     if [ "$name" = "$q" ] || [ "$(basename "${ex:-}")" = "$q" ] || [ "${ex:-}" = "$q" ]; then
       printf '%s\n' "$d"; return 0
     fi
@@ -51,7 +51,7 @@ find_desktop() {
 }
 
 # the runnable Exec line with desktop field codes (%u %F …) stripped
-exec_line() { grep -m1 '^Exec=' "$1" | cut -d= -f2- | sed 's/%[a-zA-Z]//g; s/[[:space:]]*$//'; }
+exec_line() { grep -m1 '^Exec=' "$1" | cut -d= -f2- | sed 's/%[a-zA-Z]//g; s/[[:space:]]*$//' || true; }
 
 cmd="${1:-list}"; shift || true
 case "$cmd" in

@@ -18,9 +18,9 @@ emit_tsv() {
     [ -f "$d" ] || continue
     grep -q '^NoDisplay=true' "$d" && continue
     grep -q '^Hidden=true' "$d" && continue
-    name=$(grep -m1 '^Name=' "$d" | cut -d= -f2-)
-    cats=$(grep -m1 '^Categories=' "$d" | cut -d= -f2-)
-    ex=$(grep -m1 '^Exec=' "$d" | cut -d= -f2- | awk '{print $1}')
+    name=$(grep -m1 '^Name=' "$d" | cut -d= -f2- || true)
+    cats=$(grep -m1 '^Categories=' "$d" | cut -d= -f2- || true)
+    ex=$(grep -m1 '^Exec=' "$d" | cut -d= -f2- | awk '{print $1}' || true)
     [ -n "$name" ] && printf '%s\t%s\t%s\n' "$name" "${cats:-—}" "${ex:-—}"
   done | sort -u
 }
