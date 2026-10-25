@@ -17,7 +17,7 @@ Kali 選單中工具的參考：每個是什麼、逐步教學，全部限於操
 
 **Three views, on purpose:**
 - `catalogue.*.md` = the **exhaustive list of every Kali tool by category** (installed or not) — this is "all applications in Kali".
-- `installed-apps.md` = what is **on this VM right now** (450 apps after the full toolset install), each with an intro, a launch command, and a tutorial link.
+- `installed-apps.md` = what is **on this VM right now** (450 apps after the full toolset install), each with an intro and **step-by-step** (tools include their verified `--help`).
 - `applications.*.md` = **deeper walkthroughs** for the handful of tools you use most against this lab.
 
 Install any category with `../scripts/install-tools.sh cat:<slug>`, drive any tool with
@@ -34,12 +34,13 @@ Install any category with `../scripts/install-tools.sh cat:<slug>`, drive any to
 - Rules of engagement: [`../../ROE.md`](../../ROE.md)
 - Encrypted evidence pipeline: [`../../crypto/README.md`](../../crypto/README.md)
 
-## This VM is a minimal install / 這台 VM 是最小安裝
+## Installing tools / 安裝工具
 
-Only a handful of categories are populated out of the box. Install the offensive
-toolset with:
+The full toolset is now installed on `Kali-Red5` (all 29 `kali-tools-*` categories, 450
+menu apps). On a fresh/minimal VM, install with:
 
 ```bash
-lab/kali/scripts/install-tools.sh            # groups: recon web vuln pass exploit sniff
-lab/kali/scripts/install-tools.sh --all      # or the full kali-linux-default metapackage
+lab/kali/scripts/install-tools.sh            # curated groups: recon web vuln pass exploit sniff
+lab/kali/scripts/install-tools.sh cat:web    # a whole menu category (any of the 29 slugs)
+lab/kali/scripts/install-tools.sh --all      # the full kali-linux-default metapackage
 ```
