@@ -20,6 +20,7 @@ export TARGET=<NODE_IP>          # the homelab node you own
 | Script | Purpose |
 |---|---|
 | [`tool.sh`](tool.sh) | Run **any** installed Kali CLI tool with the ROE banner + evidence capture (`tool.sh <name> [args]`). |
+| [`exercise-all.sh`](exercise-all.sh) | **Use ALL applications in one command** — drives every installed tool via `tool.sh` and every GUI via `apps.sh`, writes a coverage report. |
 | [`apps.sh`](apps.sh) | Generic launcher — `open`/`info`/`list` **any** installed desktop (GUI) app (reads live `.desktop` entries). |
 | [`toolkit.sh`](toolkit.sh) | Orchestrate & **chain** the common workflow (recon/web/vuln/…) into one report. |
 | [`install-tools.sh`](install-tools.sh) | Install tools by group or **whole category** (`cat:<slug>`), or `--all`. |
@@ -35,6 +36,16 @@ export TARGET=<NODE_IP>          # the homelab node you own
 | Run a **standard multi-tool sweep** | `./toolkit.sh chain recon,web,vuln` | the common workflow |
 
 Install first: `./install-tools.sh cat:web` (a whole category) or `./install-tools.sh --all`.
+
+### Use *all* applications at once — `exercise-all.sh`
+
+```bash
+./exercise-all.sh            # drive every runnable tool via tool.sh (safe --help/--version)
+./exercise-all.sh --real     # run node-targetable tools with REAL args (needs TARGET)
+./exercise-all.sh --gui      # launch every GUI app via apps.sh in waves, verify, close
+./exercise-all.sh --all      # CLI + GUI
+```
+Writes a PASS/total coverage report to `~/lab-evidence/`. This is the single script that exercises the whole installed toolset; the latest verified run is summarised in [`../docs/verification.md`](../docs/verification.md).
 (`_common.sh` holds the shared config/helpers the Phase-1 steps source; `TARGET` is **required**.)
 
 ### List what's actually installed
