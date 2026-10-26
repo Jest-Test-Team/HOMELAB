@@ -37,29 +37,42 @@ jobs:
           echo "$HOME/julia/bin" >> "$GITHUB_PATH"
 
       - name: Decrypt evidence into a temp dir (never the checkout)
+        id: decrypt
         env:
           LAB_ANALYSIS_KEY: ${{ secrets.LAB_ANALYSIS_KEY }}
         run: |
           set -Eeuo pipefail
           set +x
-          [ -n "${LAB_ANALYSIS_KEY:-}" ] || { echo "LAB_ANALYSIS_KEY secret not set"; exit 1; }
           WORK="$RUNNER_TEMP/work"; mkdir -p "$WORK/evidence" "$WORK/out"
           echo "WORK=$WORK" >> "$GITHUB_ENV"
-          # keep the transport identity out of logs
+          # The encrypted blob only exists on the evidence-inbox branch, put there by
+          # lab/crypto/push-evidence.sh. A manual workflow_dispatch on another ref (e.g.
+          # main), or an inbox with no fresh evidence, legitimately has nothing to
+          # analyse — skip cleanly (green) instead of failing the run.
+          if [ ! -f inbox/evidence.tar.zst.age ]; then
+            echo "no inbox/evidence.tar.zst.age on this ref — nothing to analyse; skipping."
+            echo "  activate the pipeline from the Mac with lab/crypto/push-evidence.sh,"
+            echo "  which encrypts lab-evidence and pushes it to the evidence-inbox branch."
+            echo "have=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Evidence is present, so the transport key is genuinely required now.
           # LAB_ANALYSIS_KEY is a registered secret, so GitHub auto-masks its value
           # in logs; set +x above keeps the key out of command traces too.
+          [ -n "${LAB_ANALYSIS_KEY:-}" ] || { echo "evidence present but LAB_ANALYSIS_KEY secret not set"; exit 1; }
           ID="$RUNNER_TEMP/t.key"; umask 077
           printf '%s' "$LAB_ANALYSIS_KEY" > "$ID"
-          # the encrypted blob is in the checkout at inbox/evidence.tar.zst.age
-          [ -f inbox/evidence.tar.zst.age ] || { echo "no inbox/evidence.tar.zst.age on this ref"; exit 1; }
           age -d -i "$ID" inbox/evidence.tar.zst.age | zstd -dq | tar -C "$WORK/evidence" -xf -
           shred -u "$ID" 2>/dev/null || rm -f "$ID"
           echo "decrypted $(find "$WORK/evidence" -type f | wc -l) evidence file(s)"
+          echo "have=1" >> "$GITHUB_OUTPUT"
 
       - name: Analyse with Julia
+        if: steps.decrypt.outputs.have == '1'
         run: julia --project=lab/analysis lab/analysis/analyze.jl "$WORK/evidence" "$WORK/out"
 
       - name: Bundle + encrypt outputs to the archive public key
+        if: steps.decrypt.outputs.have == '1'
         run: |
           set -Eeuo pipefail
           OUT="$RUNNER_TEMP/reports-${GITHUB_SHA}.tar.zst.age"
@@ -71,6 +84,7 @@ jobs:
             || { echo "unencrypted bundle present; aborting"; exit 1; }
 
       - name: Upload encrypted reports (only ciphertext leaves the runner)
+        if: steps.decrypt.outputs.have == '1'
         uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
         with:
           name: reports-${{ github.sha }}
