@@ -1,0 +1,3 @@
+# Encrypted lab-evidence drop. Decrypt only inside lab-analysis.yml with LAB_ANALYSIS_KEY.
+stamp=20261026T051550Z
+sha256=7544acbbc61cceaea6584555590c4fcf2c98463bdbe9013919027e8049b02178
