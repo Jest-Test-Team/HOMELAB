@@ -32,7 +32,10 @@ STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
 BLOB="$WORK/evidence-$STAMP.tar.zst.age"
 
 info "packing + encrypting $EVIDENCE_DIR"
-tar -C "$EVIDENCE_DIR" -cf - . | zstd -q -19 | age -R "$T_RECIPIENT" -o "$BLOB"
+# Exclude macOS AppleDouble sidecars (._*) and .DS_Store — the external HFS/exFAT
+# drive creates them, and they'd otherwise be parsed as empty analysis runs.
+tar -C "$EVIDENCE_DIR" --exclude='._*' --exclude='.DS_Store' -cf - . \
+  | zstd -q -19 | age -R "$T_RECIPIENT" -o "$BLOB"
 SZ=$(du -h "$BLOB" | cut -f1)
 pass "encrypted evidence -> $BLOB ($SZ)"
 
@@ -62,7 +65,10 @@ EOF
   git add -f inbox/   # *.tar.zst.age is gitignored; force it into this one commit
   git -c user.name='homelab-bot' -c user.email='homelab-bot@users.noreply.github.com' \
     commit -q -m "evidence drop $STAMP (encrypted)"
-  git push -q --force "$REMOTE_URL" "HEAD:$INBOX_BRANCH"
+  # Fully-qualify the destination: the worktree is detached (HEAD is a commit
+  # object, not a branch), and evidence-inbox may not exist on the remote yet,
+  # so git cannot infer the ref type without the refs/heads/ prefix.
+  git push -q --force "$REMOTE_URL" "HEAD:refs/heads/$INBOX_BRANCH"
 )
 pass "pushed $INBOX_BRANCH; lab-analysis.yml will run"
 info "watch it: gh run watch  (or: gh run list --workflow=lab-analysis.yml)"

@@ -54,3 +54,5 @@ local.env
 docs/operations.zh-TW.md
 triggers
 2048
+#lab/crypto/recipients.txt
+#lab/crypto/transport.recipient
